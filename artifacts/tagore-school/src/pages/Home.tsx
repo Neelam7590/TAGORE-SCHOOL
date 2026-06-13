@@ -43,40 +43,45 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-primary px-4 py-24 text-center md:px-8">
         <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat"></div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+        <div className="absolute inset-0 z-0 bg-[#0F4C81]/10"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
         
-        <motion.div 
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="show"
           className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-8"
         >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-secondary backdrop-blur-sm">
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm font-medium text-secondary backdrop-blur-sm border border-secondary/30">
             <GraduationCap size={18} />
             <span>Admissions Open for 2025-26</span>
           </motion.div>
           
-          <motion.h1 variants={fadeUp} className="font-serif text-5xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl">
+          <motion.h1 variants={fadeUp} className="font-serif text-5xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl drop-shadow-lg">
             Nurturing Minds, <br className="hidden sm:block" />
             <span className="text-secondary">Shaping Futures</span>
           </motion.h1>
           
-          <motion.p variants={fadeUp} className="max-w-2xl text-lg text-blue-100 md:text-xl">
+          <motion.p variants={fadeUp} className="max-w-2xl text-lg text-white/90 md:text-xl drop-shadow-md">
             Empowering students with knowledge, values, creativity and confidence to thrive in a rapidly changing world.
           </motion.p>
           
           <motion.div variants={fadeUp} className="mt-4 flex flex-col gap-4 sm:flex-row">
-            <Button size="lg" className="h-14 bg-secondary px-8 text-base text-primary hover:bg-secondary/90" asChild>
-              <Link href="/admissions">Apply for Admission</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="h-14 border-white/30 bg-white/10 px-8 text-base text-white hover:bg-white hover:text-primary" asChild>
-              <Link href="/about">Explore School</Link>
-            </Button>
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
+              <Button size="lg" className="h-14 bg-secondary px-8 text-base text-primary hover:bg-secondary/90 shadow-lg shadow-secondary/20" asChild>
+                <Link href="/admissions">Apply for Admission</Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
+              <Button size="lg" variant="outline" className="h-14 border-white/50 bg-white/10 px-8 text-base text-white hover:bg-white hover:text-primary shadow-lg" asChild>
+                <Link href="/about">Explore School</Link>
+              </Button>
+            </motion.div>
           </motion.div>
         </motion.div>
 
         {/* Floating Stats */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
@@ -88,10 +93,24 @@ export default function Home() {
             { label: "Board Results", value: "100%" },
             { label: "Acres Campus", value: "15" }
           ].map((stat, i) => (
-            <div key={i} className="flex flex-col items-center justify-center rounded-2xl bg-white/10 p-6 backdrop-blur-md border border-white/10">
-              <span className="text-3xl font-bold text-secondary md:text-4xl">{stat.value}</span>
-              <span className="mt-2 text-sm font-medium text-white/80 text-center">{stat.label}</span>
-            </div>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.8 + i * 0.15, duration: 0.5, type: "spring" }}
+              whileHover={{ scale: 1.08, y: -6, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.3)" }}
+              className="flex flex-col items-center justify-center rounded-2xl bg-primary/80 p-6 backdrop-blur-md border border-secondary/30 cursor-default"
+            >
+              <motion.span
+                initial={{ scale: 0.5 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 1 + i * 0.15, type: "spring", stiffness: 200 }}
+                className="text-3xl font-bold text-secondary md:text-4xl"
+              >
+                {stat.value}
+              </motion.span>
+              <span className="mt-2 text-sm font-medium text-white/90 text-center">{stat.label}</span>
+            </motion.div>
           ))}
         </motion.div>
       </section>
