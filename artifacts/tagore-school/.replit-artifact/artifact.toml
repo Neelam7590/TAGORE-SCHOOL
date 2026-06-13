@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Tagore Global School"
+version = "1.0.0"
+id = "artifacts/tagore-school"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22306
+
+[services.development]
+run = "pnpm --filter @workspace/tagore-school run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tagore-school", "run", "build" ]
+publicDir = "artifacts/tagore-school/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22306"
+BASE_PATH = "/"

@@ -1,0 +1,307 @@
+Build a premium multi-page school website for "Tagore Global School" using React, Vite, Tailwind CSS, React Router and Framer Motion.
+
+Theme:
+- Royal Blue (#0F4C81)
+- Gold (#FFD700)
+- White background
+- Dark gray text (#1F2937)
+
+Design Style:
+- Premium
+- Modern
+- Professional
+- Fully Responsive
+- Mobile First
+- SEO Optimized
+- Fast Loading
+- Smooth Animations
+
+IMPORTANT:
+Create separate pages with routing.
+Do NOT create a single-page website.
+
+Pages Required:
+
+1. Home (/)
+2. About Us (/about)
+3. Principal Message (/principal-message)
+4. Academics (/academics)
+5. Facilities (/facilities)
+6. Gallery (/gallery)
+7. Admissions (/admissions)
+8. Contact Us (/contact)
+
+-------------------------------------------------
+HEADER
+-------------------------------------------------
+
+Create a sticky header.
+
+Left:
+- School Logo Placeholder
+- School Name
+
+Center:
+- Navigation Menu
+
+Right:
+- Apply Now Button
+- Call Now Button
+
+Top Bar:
+- Phone
+- Email
+- School Timing
+
+-------------------------------------------------
+HOME PAGE
+-------------------------------------------------
+
+Hero Section:
+Full screen hero banner.
+
+Headline:
+"Nurturing Minds, Shaping Futures"
+
+Subheadline:
+"Empowering students with knowledge, values, creativity and confidence."
+
+Buttons:
+- Apply for Admission
+- Explore School
+
+Hero image placeholder.
+
+Blue + Gold gradient overlay.
+
+Animated entrance effects.
+
+-------------------------------------------------
+
+WHY CHOOSE US
+
+6 premium cards:
+
+1. Academic Excellence
+2. Holistic Development
+3. Smart Learning Environment
+4. Student-Centered Approach
+5. Future Ready Education
+6. Safe & Caring Campus
+
+Hover animations.
+
+-------------------------------------------------
+
+ABOUT SCHOOL SECTION
+
+Title:
+"Welcome to Tagore Global School"
+
+Text placeholder.
+
+Read More Button linking to About page.
+
+-------------------------------------------------
+
+ACADEMICS PREVIEW
+
+5 cards:
+
+- Early Years
+- Primary
+- Middle School
+- Secondary
+- Senior Secondary
+
+Learn More button.
+
+-------------------------------------------------
+
+FACILITIES PREVIEW
+
+Cards:
+
+- Smart Classrooms
+- Science Labs
+- Computer Labs
+- Library
+- Sports
+- Transport
+
+-------------------------------------------------
+
+GALLERY PREVIEW
+
+Modern gallery grid.
+
+Lightbox functionality.
+
+-------------------------------------------------
+
+ADMISSION CTA
+
+Large section.
+
+Title:
+"Admissions Open"
+
+Button:
+"Apply Now"
+
+-------------------------------------------------
+
+TESTIMONIALS
+
+Slider layout.
+
+3 sample testimonials.
+
+-------------------------------------------------
+
+FOOTER
+
+School logo.
+
+Quick Links.
+
+Useful Links.
+
+Contact Details.
+
+Newsletter.
+
+Social Icons.
+
+-------------------------------------------------
+ABOUT PAGE
+-------------------------------------------------
+
+Hero Banner.
+
+Sections:
+
+- Our Story
+- Vision
+- Mission
+- Core Values
+
+Create premium card layouts.
+
+-------------------------------------------------
+PRINCIPAL MESSAGE PAGE
+-------------------------------------------------
+
+Large principal photo placeholder.
+
+Professional message layout.
+
+Quote section.
+
+-------------------------------------------------
+ACADEMICS PAGE
+-------------------------------------------------
+
+Curriculum Section.
+
+Teaching Methodology.
+
+Co-Curricular Activities.
+
+Academic Excellence section.
+
+Modern card design.
+
+-------------------------------------------------
+FACILITIES PAGE
+-------------------------------------------------
+
+Create 8 premium facility cards:
+
+- Smart Classrooms
+- Science Lab
+- Computer Lab
+- Library
+- Sports
+- Transport
+- Safety & Security
+- Activity Rooms
+
+-------------------------------------------------
+GALLERY PAGE
+-------------------------------------------------
+
+Gallery categories:
+
+- Campus
+- Events
+- Sports
+- Celebrations
+- Activities
+
+Filtering functionality.
+
+Lightbox gallery.
+
+-------------------------------------------------
+ADMISSIONS PAGE
+-------------------------------------------------
+
+Admission Process timeline.
+
+Required Documents section.
+
+Admission Inquiry Form.
+
+-------------------------------------------------
+CONTACT PAGE
+-------------------------------------------------
+
+Contact Form.
+
+Google Map Placeholder.
+
+Phone.
+
+Email.
+
+Address.
+
+WhatsApp button.
+
+-------------------------------------------------
+
+GLOBAL REQUIREMENTS
+
+Use:
+- React Router
+- Tailwind CSS
+- Framer Motion
+- Lucide Icons
+
+Add:
+- Scroll animations
+- Hover animations
+- Page transitions
+- Back To Top button
+- WhatsApp floating button
+
+Remove:
+- Toppers Section
+- Result Section
+
+Use placeholder images everywhere.
+
+Create professional folder structure.
+
+Generate complete project files.
+
+Generate all pages.
+
+Generate all components.
+
+Generate all routing.
+
+Generate responsive design.
+
+Generate production-ready code.
