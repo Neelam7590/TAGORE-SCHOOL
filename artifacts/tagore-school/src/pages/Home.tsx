@@ -43,7 +43,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-primary px-4 py-24 text-center md:px-8">
         <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat"></div>
-        <div className="absolute inset-0 z-0 bg-[#0F4C81]/10"></div>
+        <div className="absolute inset-0 z-0 bg-[#0F4C81]/40"></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
         
         <motion.div
