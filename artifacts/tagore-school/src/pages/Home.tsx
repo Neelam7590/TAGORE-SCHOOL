@@ -42,8 +42,9 @@ export default function Home() {
     >
       {/* Hero Section */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-primary px-4 py-24 text-center md:px-8">
-        <div className="absolute inset-0 z-0 bg-[url('https://picsum.photos/seed/school-bg/1920/1080')] bg-cover bg-center bg-no-repeat opacity-20 mix-blend-overlay"></div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-t from-primary via-primary/80 to-transparent"></div>
+        <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat"></div>
+        <div className="absolute inset-0 z-0 bg-primary/75"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-primary via-primary/50 to-transparent"></div>
         
         <motion.div 
           variants={staggerContainer}
