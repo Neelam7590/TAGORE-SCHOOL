@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
-  Heart, Laptop, Users, Rocket, Globe, Award,
+  Heart, Laptop, Users, Rocket, Globe, Award, MapPin, Sparkles, Zap,
   ArrowRight, CheckCircle2, ChevronRight, GraduationCap
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -186,53 +186,67 @@ export default function Home() {
       </section>
 
       {/* About Preview */}
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
+      <section className="relative py-24 overflow-hidden bg-white">
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary to-white"></div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="mb-6 font-serif text-3xl font-bold text-primary md:text-4xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                <Sparkles size={16} />
+                <span>About Our School</span>
+              </div>
+              <h2 className="mb-2 font-serif text-3xl font-bold text-primary md:text-4xl">
                 Welcome to Tagore Global School
               </h2>
-              <div className="mb-8 flex flex-col gap-4 text-lg text-gray-600">
+              <h3 className="mb-6 font-serif text-xl font-semibold text-secondary md:text-2xl">
+                Shaping Young Minds for a Bright Future
+              </h3>
+              <div className="mb-8 flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
                 <p>
-                  Established in 1998, Tagore Global School has been a beacon of quality education, 
-                  committed to fostering intellectual, social, and personal growth in every student.
+                  Tagore Global School is committed to providing quality education in a nurturing, innovative, and student-centered environment. Affiliated with CBSE, New Delhi, the school focuses on academic excellence, character development, creativity, and holistic growth.
                 </p>
                 <p>
-                  We believe that education goes beyond textbooks. Our philosophy integrates traditional 
-                  values with modern pedagogy, ensuring our students grow into responsible global citizens 
-                  capable of leading tomorrow.
+                  We believe that every child possesses unique potential, and our mission is to inspire students to become confident, responsible, and lifelong learners.
+                </p>
+                <p>
+                  With dedicated educators, modern learning approaches, co-curricular opportunities, and a strong value-based foundation, we prepare students to face future challenges with confidence and integrity. At Tagore Global School, education goes beyond textbooks, empowering young minds to achieve excellence in every aspect of life.
                 </p>
               </div>
-              <ul className="mb-8 flex flex-col gap-3">
-                {["World-class infrastructure", "Experienced faculty", "Comprehensive sports programs"].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 font-medium text-gray-800">
-                    <CheckCircle2 className="text-secondary" size={20} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Button size="lg" className="group text-base" asChild>
+              <div className="mb-8 flex flex-wrap gap-3">
+                <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+                  <GraduationCap size={16} />
+                  <span>CBSE Affiliated</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-full bg-secondary/20 px-4 py-2 text-sm font-semibold text-primary">
+                  <Zap size={16} />
+                  <span>Holistic Development</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+                  <Globe size={16} />
+                  <span>Future-Ready Learning</span>
+                </div>
+              </div>
+              <Button size="lg" className="group text-base bg-primary hover:bg-primary/90 text-white" asChild>
                 <Link href="/about">
                   Read More <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={18} />
                 </Link>
               </Button>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="relative"
             >
               <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
-                <img 
-                  src="https://picsum.photos/seed/school-building/800/600" 
-                  alt="School Campus" 
+                <img
+                  src="/school-building.jpg"
+                  alt="School Campus"
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
