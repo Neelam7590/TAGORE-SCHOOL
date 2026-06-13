@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
-  BookOpen, Heart, Laptop, Users, Rocket, Shield, 
+  Heart, Laptop, Users, Rocket, Globe, Award,
   ArrowRight, CheckCircle2, ChevronRight, GraduationCap
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -19,7 +19,7 @@ const staggerContainer = {
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+  show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 100 } }
 };
 
 export default function Home() {
@@ -45,6 +45,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat"></div>
         <div className="absolute inset-0 z-0 bg-[#0F4C81]/40"></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-t from-primary to-transparent"></div>
         
         <motion.div
           variants={staggerContainer}
@@ -116,43 +117,68 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-gray-50 py-24">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
+      <section className="relative py-24 text-white overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary via-primary to-primary/90"></div>
+        <div className="absolute inset-0 z-0 bg-[url('https://picsum.photos/seed/abstract/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
-            <motion.h2 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-3xl font-bold text-primary md:text-4xl"
+              className="inline-flex items-center gap-2 rounded-full bg-secondary/20 px-4 py-1.5 text-sm font-medium text-secondary mb-4"
+            >
+              <span>Discover Our Excellence</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-serif text-3xl font-bold text-white md:text-4xl lg:text-5xl"
             >
               Why Choose Us
             </motion.h2>
-            <div className="mx-auto mt-4 h-1 w-20 bg-secondary"></div>
+            <div className="mx-auto mt-4 h-1 w-24 bg-secondary rounded-full"></div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="mt-4 mx-auto max-w-2xl text-lg text-white/70"
+            >
+              A learning environment designed to inspire, nurture, and transform young minds into future leaders
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: BookOpen, title: "Academic Excellence", desc: "Proven track record of outstanding board results and achievements." },
-              { icon: Heart, title: "Holistic Development", desc: "Sports, arts, and life skills seamlessly integrated alongside academics." },
-              { icon: Laptop, title: "Smart Environment", desc: "Tech-enabled classrooms and modern labs for interactive learning." },
-              { icon: Users, title: "Student-Centered", desc: "Every child's unique potential is recognized and nurtured individually." },
-              { icon: Rocket, title: "Future Ready", desc: "Equipping students with essential 21st-century skills that matter." },
-              { icon: Shield, title: "Safe Campus", desc: "A highly secure, caring, and nurturing environment for all students." },
+              { num: "01", icon: GraduationCap, title: "Academic Excellence", desc: "We provide a strong academic foundation through the CBSE curriculum, innovative teaching methods, and a learner-centered approach that encourages excellence and lifelong learning." },
+              { num: "02", icon: Rocket, title: "Holistic Development", desc: "We focus on the overall growth of every child by nurturing academic achievement, creativity, leadership, communication skills, sportsmanship, and strong moral values." },
+              { num: "03", icon: Laptop, title: "Smart Learning Environment", desc: "Our technology-enabled classrooms, modern laboratories, digital resources, and experienced faculty create an engaging and future-ready learning experience." },
+              { num: "04", icon: Award, title: "Student-Centered Approach", desc: "Every child is unique. We recognize individual strengths and provide personalized guidance to help students achieve their full potential." },
+              { num: "05", icon: Globe, title: "Future-Ready Education", desc: "We equip students with critical thinking, problem-solving, creativity, and leadership skills needed to thrive in a rapidly evolving global world." },
+              { num: "06", icon: Heart, title: "Safe & Supportive Campus", desc: "A secure campus, disciplined environment, caring educators, and a positive school culture ensure that every student feels valued, respected, and inspired." },
             ].map((feature, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
-                className="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all"
+                transition={{ delay: i * 0.1, duration: 0.5, type: "spring" }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:bg-white/10 hover:shadow-2xl hover:shadow-secondary/10"
               >
-                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-secondary/20 text-primary">
-                  <feature.icon size={28} />
+                <div className="absolute -right-4 -top-4 text-8xl font-bold text-white/5 font-serif leading-none">
+                  {feature.num}
                 </div>
-                <h3 className="mb-3 font-serif text-xl font-bold text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+                <div className="relative z-10">
+                  <div className="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/20 text-secondary transition-all duration-300 group-hover:bg-secondary group-hover:text-primary group-hover:rotate-3">
+                    <feature.icon size={32} />
+                  </div>
+                  <h3 className="mb-3 font-serif text-xl font-bold text-white transition-colors group-hover:text-secondary">{feature.title}</h3>
+                  <p className="text-white/70 leading-relaxed text-sm transition-colors group-hover:text-white/90">{feature.desc}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
               </motion.div>
             ))}
           </div>
