@@ -217,16 +217,22 @@ export default function Home() {
                 </p>
               </div>
               <div className="mb-8 flex flex-wrap gap-3">
-                <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-                  <GraduationCap size={16} />
+                <div className="flex items-center gap-3 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 border border-white/10">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/20">
+                    <GraduationCap size={18} className="text-secondary" />
+                  </div>
                   <span>CBSE Affiliated</span>
                 </div>
-                <div className="flex items-center gap-2 rounded-full bg-secondary/20 px-4 py-2 text-sm font-semibold text-primary">
-                  <Zap size={16} />
+                <div className="flex items-center gap-3 rounded-xl bg-secondary px-5 py-3 text-sm font-bold text-primary shadow-lg shadow-secondary/20 border border-white/10">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                    <Zap size={18} className="text-primary" />
+                  </div>
                   <span>Holistic Development</span>
                 </div>
-                <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-                  <Globe size={16} />
+                <div className="flex items-center gap-3 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary/20 border border-white/10">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/20">
+                    <Globe size={18} className="text-secondary" />
+                  </div>
                   <span>Future-Ready Learning</span>
                 </div>
               </div>
