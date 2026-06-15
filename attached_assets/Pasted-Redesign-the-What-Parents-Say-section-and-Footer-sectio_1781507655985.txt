@@ -1,0 +1,146 @@
+Redesign the "What Parents Say" section and Footer section to look premium, modern, and visually attractive.
+
+=========================
+WHAT PARENTS SAY SECTION
+
+Remove the plain white background.
+
+Create a luxury background using:
+
+- Soft Royal Blue to White gradient
+- Subtle gold glow effects
+- Floating abstract shapes
+- Light glassmorphism elements
+- Smooth animated particles
+
+Section Heading:
+"What Parents Say"
+
+Subtitle:
+"Trusted by families for excellence in education, care, and holistic development."
+
+Display testimonials inside premium glassmorphism cards.
+
+Each card should have:
+
+- Parent Photo Placeholder
+- Parent Name
+- 5-Star Rating
+- Review Text
+- Quote Icon
+
+Add smooth hover effects and carousel slider animation.
+
+Section should feel premium and emotional rather than corporate.
+
+=========================
+CALL TO ACTION SECTION
+
+Replace "Begin Your Child's Journey With Us" with:
+
+Headline:
+"Shape Your Child's Future with Excellence"
+
+Subheadline:
+"Admissions are now open. Join a learning community where every child is inspired to grow, achieve, and succeed."
+
+Buttons:
+
+- Apply Now
+- Schedule a Visit
+
+Use a premium blue and gold background with animated gradients.
+
+=========================
+FOOTER REDESIGN
+
+Create a large premium footer.
+
+Background:
+Deep Royal Blue (#0F4C81)
+
+Add subtle gold accents and glow effects.
+
+Footer should contain 4 columns.
+
+COLUMN 1:
+School Information
+
+Tagore Global School
+
+Short Description:
+"Empowering young minds through quality education, innovation, and values-based learning."
+
+Social Media Icons:
+
+Facebook
+Instagram
+YouTube
+LinkedIn
+
+Use official links when available.
+
+COLUMN 2:
+Quick Links
+
+- Home
+- About Us
+- Principal Message
+- Academics
+- Facilities
+- Gallery
+- Admissions
+- Contact Us
+
+All links should be clickable.
+
+COLUMN 3:
+Contact Information
+
+Address:
+Sector 29, Global City,
+Kurukshetra, Haryana – 136118
+
+Phone:
++91 7082346751
+
+Email:
+info@tagoreglobalschool.in
+
+Working Hours:
+Monday – Saturday
+8:00 AM – 4:00 PM
+
+COLUMN 4:
+Newsletter Subscription
+
+Title:
+"Stay Updated"
+
+Description:
+"Subscribe to receive admission updates, school events, announcements, and important news directly in your inbox."
+
+Add:
+
+- Email Input Field
+- Subscribe Button
+
+Show success message after subscription.
+
+=========================
+BOTTOM BAR
+
+Add a bottom copyright section.
+
+Text:
+
+© 2026 Tagore Global School. All Rights Reserved.
+
+Add:
+
+Privacy Policy
+Terms & Conditions
+
+Make the footer fully responsive and more premium than the current school website.
+
+Add smooth hover animations, modern icons, and elegant spacing throughout.

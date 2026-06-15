@@ -40,9 +40,16 @@ export default function Home() {
           animate="show"
           className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-8"
         >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-primary/80 px-4 py-2 text-sm font-medium text-secondary backdrop-blur-sm border border-secondary/30">
-            <GraduationCap size={18} />
-            <span>Admissions Open for 2025-26</span>
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FFD700] to-[#FFC107] px-6 py-2.5 text-sm font-bold text-[#0F4C81] shadow-[0_0_30px_rgba(255,215,0,0.4)] backdrop-blur-sm border border-[#FFD700]/50"
+          >
+            <span className="text-lg">🎓</span>
+            <span>ADMISSIONS OPEN FOR SESSION 2026-2027</span>
+            <span className="ml-1 flex h-2 w-2">
+              <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-[#0F4C81] opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0F4C81]"></span>
+            </span>
           </motion.div>
           
           <motion.h1 variants={fadeUp} className="font-serif text-5xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl drop-shadow-lg">
@@ -51,18 +58,23 @@ export default function Home() {
           </motion.h1>
           
           <motion.p variants={fadeUp} className="max-w-2xl text-lg text-white/90 md:text-xl drop-shadow-md">
-            Empowering students with knowledge, values, creativity and confidence to thrive in a rapidly changing world.
+            Empowering students with knowledge, values, creativity, and confidence to thrive in a rapidly evolving world.
           </motion.p>
           
           <motion.div variants={fadeUp} className="mt-4 flex flex-col gap-4 sm:flex-row">
-            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
-              <Button size="lg" className="h-14 bg-secondary px-8 text-base text-primary hover:bg-secondary/90 shadow-lg shadow-secondary/20" asChild>
-                <Link href="/admissions">Apply for Admission</Link>
+            <motion.div
+              whileHover={{ scale: 1.08, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative"
+            >
+              <Button size="lg" className="h-14 bg-[#FFD700] px-10 text-base font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full" asChild>
+                <Link href="/admissions">Apply Now</Link>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
               <Button size="lg" variant="outline" className="h-14 border-white/50 bg-white/10 px-8 text-base text-white hover:bg-white hover:text-primary shadow-lg" asChild>
-                <Link href="/about">Explore School</Link>
+                <Link href="/about">Explore Our School</Link>
               </Button>
             </motion.div>
           </motion.div>
@@ -413,8 +425,14 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="pt-24 pb-44 bg-gray-50" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
+      <section className="relative overflow-hidden pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)', background: 'linear-gradient(180deg, #0F4C81 0%, #E8F0F8 100%)' }}>
+        {/* Floating Abstract Shapes */}
+        <div className="absolute top-20 left-10 h-40 w-40 rounded-full bg-[#FFD700]/10 blur-3xl"></div>
+        <div className="absolute top-40 right-20 h-60 w-60 rounded-full bg-[#FFD700]/5 blur-3xl"></div>
+        <div className="absolute bottom-40 left-1/4 h-32 w-32 rounded-full bg-white/10 blur-2xl"></div>
+        <div className="absolute bottom-20 right-1/3 h-48 w-48 rounded-full bg-[#0F4C81]/20 blur-3xl"></div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -422,10 +440,10 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="font-serif text-3xl font-bold text-[#0F4C81] md:text-4xl">What Parents Say</h2>
+              <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">What Parents Say</h2>
               <div className="mx-auto mt-4 h-1 w-20 bg-[#FFD700] rounded-full"></div>
-              <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-                Trusted by parents for quality education, holistic development, and student success.
+              <p className="mt-4 text-blue-100 max-w-2xl mx-auto">
+                Trusted by families for excellence in education, care, and holistic development.
               </p>
             </motion.div>
           </div>
@@ -435,15 +453,32 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-primary pt-20 pb-20 text-center text-white" style={{ marginTop: '-80px' }}>
+      <section className="relative overflow-hidden bg-primary pt-24 pb-24 text-center text-white" style={{ marginTop: '-80px' }}>
         <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-secondary/20 blur-3xl"></div>
         <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-secondary/20 blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-[#0F4C81] to-[#0A3A66]"></div>
         <div className="relative z-10 mx-auto max-w-3xl px-4">
-          <h2 className="mb-6 font-serif text-4xl font-bold">Begin Your Child's Journey With Us</h2>
-          <p className="mb-10 text-xl text-blue-100">Admissions for the upcoming academic year are now open. Spaces are limited.</p>
-          <Button size="lg" className="h-14 bg-secondary px-10 text-lg text-primary hover:bg-secondary/90" asChild>
-            <Link href="/admissions">Apply Now</Link>
-          </Button>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="mb-6 font-serif text-4xl font-bold md:text-5xl">Shape Your Child's Future with Excellence</h2>
+            <p className="mb-10 text-xl text-blue-100">Admissions are now open. Join a learning community where every child is inspired to grow, achieve, and succeed.</p>
+            <div className="flex flex-col gap-4 sm:flex-row justify-center">
+              <motion.div whileHover={{ scale: 1.08, y: -3 }} whileTap={{ scale: 0.95 }}>
+                <Button size="lg" className="h-14 bg-[#FFD700] px-10 text-lg font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full" asChild>
+                  <Link href="/admissions">Apply Now</Link>
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
+                <Button size="lg" variant="outline" className="h-14 border-white/50 bg-white/10 px-10 text-lg text-white hover:bg-white hover:text-primary rounded-full" asChild>
+                  <Link href="/contact">Schedule a Visit</Link>
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </motion.div>

@@ -71,9 +71,20 @@ export function Header() {
             <Button variant="outline" className="border-primary text-primary hover:bg-primary/5" asChild>
               <Link href="/contact">Call Now</Link>
             </Button>
-            <Button className="bg-secondary text-primary hover:bg-secondary/90" asChild>
-              <Link href="/admissions">Apply Now</Link>
-            </Button>
+            <div className="relative">
+              <Button className="bg-[#FFD700] text-[#0F4C81] font-semibold hover:bg-[#FFD700]/90 hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:scale-105 transition-all duration-300 rounded-full px-6" asChild>
+                <Link href="/admissions">Apply Now</Link>
+              </Button>
+              {/* Pulsing Notification Badge */}
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFD700] opacity-75"></span>
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-[#FFD700]"></span>
+              </span>
+              {/* Admissions Open Label */}
+              <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-medium text-[#0F4C81] bg-[#FFD700]/20 px-2 py-0.5 rounded-full">
+                Admissions Open
+              </span>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -113,7 +124,7 @@ export function Header() {
                 <Button variant="outline" className="w-full border-primary text-primary" asChild>
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Call Now</Link>
                 </Button>
-                <Button className="w-full bg-secondary text-primary hover:bg-secondary/90" asChild>
+                <Button className="w-full bg-[#FFD700] text-[#0F4C81] font-semibold hover:bg-[#FFD700]/90 rounded-full" asChild>
                   <Link href="/admissions" onClick={() => setMobileMenuOpen(false)}>Apply Now</Link>
                 </Button>
               </div>

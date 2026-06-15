@@ -1,8 +1,19 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "EXCAu9IhQqamHsOMTACJJ"
 uri = "file://artifacts/tagore-school/public/principal.png"
 type = "image"
 title = "School principal portrait"
+
+[[outputs]]
+id = "FIP7KQXGkiXQY2ccVYog4"
+uri = "file://screenshots/homepage-final.jpg"
+type = "image"
+title = "Homepage Preview"
+
+[[outputs]]
+id = "xdqpM7tyLRfrxhYktLQW_"
+uri = "file://screenshots/academics-page.jpg"
+type = "image"
+title = "Academics Page Preview"
