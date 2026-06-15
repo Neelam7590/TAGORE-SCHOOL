@@ -272,6 +272,74 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Principal Message */}
+      <section className="relative bg-gray-50 py-24 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-gray-50"></div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative mx-auto max-w-md">
+                <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
+                  <img
+                    src="/principal.png"
+                    alt="Principal Ms. Shalini Malhotra"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 rounded-xl bg-secondary px-6 py-3 shadow-lg">
+                  <div className="text-center">
+                    <div className="text-sm font-bold text-primary">Principal</div>
+                    <div className="text-xs text-primary/70">Tagore Global School</div>
+                  </div>
+                </div>
+                <div className="absolute -top-4 -left-4 h-16 w-16 rounded-full border-4 border-secondary/30"></div>
+                <div className="absolute top-8 -left-8 h-10 w-10 rounded-full border-4 border-primary/20"></div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                <Sparkles size={16} />
+                <span>Leadership</span>
+              </div>
+              <h2 className="mb-6 font-serif text-3xl font-bold text-primary md:text-4xl">
+                Principal's Message
+              </h2>
+              <div className="mb-6 flex flex-col gap-4 text-base text-gray-600 leading-relaxed">
+                <p>
+                  At Tagore Global School, we believe that education is the foundation of a successful and meaningful life. Our goal is to nurture young minds through quality education, strong values, and a supportive learning environment. We encourage our students to explore their potential, develop confidence, and become responsible citizens who contribute positively to society.
+                </p>
+                <p>
+                  Together, let us inspire a love for learning and prepare our children for a bright and successful future.
+                </p>
+              </div>
+              <div className="rounded-xl border-l-4 border-secondary bg-secondary/10 p-6">
+                <p className="font-serif text-lg font-semibold text-primary">
+                  - Ms. Shalini Malhotra
+                </p>
+                <p className="mt-1 text-sm text-gray-500">Principal, Tagore Global School</p>
+              </div>
+              <div className="mt-8">
+                <Button size="lg" className="group text-base bg-primary hover:bg-primary/90 text-white" asChild>
+                  <Link href="/principal-message">
+                    Read Full Message <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={18} />
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Academics Preview */}
       <section className="bg-primary py-24 text-white">
         <div className="mx-auto max-w-7xl px-4 md:px-8">

@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "EXCAu9IhQqamHsOMTACJJ"
+uri = "file://artifacts/tagore-school/public/principal.png"
+type = "image"
+title = "School principal portrait"
