@@ -118,7 +118,8 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <section className="relative py-24 text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary via-primary to-primary/90"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary via-primary to-primary"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-0"></div>
         <div className="absolute inset-0 z-0 bg-[url('https://picsum.photos/seed/abstract/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
@@ -275,6 +276,7 @@ export default function Home() {
       {/* Principal Message */}
       <section className="relative bg-gray-50 py-24 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-gray-50"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent z-0"></div>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <motion.div
@@ -341,37 +343,91 @@ export default function Home() {
       </section>
 
       {/* Academics Preview */}
-      <section className="bg-primary py-24 text-white">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="mb-16 flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div>
-              <h2 className="font-serif text-3xl font-bold md:text-4xl">Our Academic Programs</h2>
-              <p className="mt-4 max-w-xl text-blue-100">A progressive curriculum tailored for every stage of development.</p>
-            </div>
-            <Button variant="outline" className="border-white text-primary hover:bg-white" asChild>
-              <Link href="/academics">View All Programs</Link>
-            </Button>
+      <section id="academic-programs" className="relative overflow-hidden bg-primary py-24 text-white">
+        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-gray-50 to-primary"></div>
+        <div className="absolute inset-0 z-0 bg-[url('https://picsum.photos/seed/abstract2/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+          <div className="mb-16 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 rounded-full bg-secondary/20 px-4 py-1.5 text-sm font-medium text-secondary mb-4"
+            >
+              <span>Explore Our Academic Programs</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-serif text-3xl font-bold text-white md:text-4xl lg:text-5xl"
+            >
+              Academic Programs
+            </motion.h2>
+            <div className="mx-auto mt-4 h-1 w-24 bg-secondary rounded-full"></div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="mt-4 mx-auto max-w-2xl text-lg text-white/70"
+            >
+              At Tagore Global School, we provide a well-structured academic journey that nurtures curiosity, creativity, confidence, and excellence at every stage of learning.
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {["Early Years", "Primary", "Middle School", "Secondary", "Senior Secondary"].map((prog, i) => (
-              <motion.div 
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { icon: "🌱", title: "Early Years Program", grades: "Pre-Nursery to UKG", desc: "A joyful and engaging learning environment where young learners develop foundational skills through play-based and activity-oriented education.", link: "/academics#early-years", color: "border-t-secondary" },
+              { icon: "📚", title: "Primary School", grades: "Classes I - V", desc: "Building strong academic foundations while encouraging creativity, communication, and critical thinking skills.", link: "/academics#primary-school", color: "border-t-blue-400" },
+              { icon: "🔬", title: "Middle School", grades: "Classes VI - VIII", desc: "Developing analytical thinking, problem-solving abilities, and independent learning through a balanced curriculum.", link: "/academics#middle-school", color: "border-t-secondary" },
+              { icon: "🎯", title: "Secondary School", grades: "Classes IX - X", desc: "Preparing students for academic success through structured learning, practical exposure, and skill development.", link: "/academics#secondary-school", color: "border-t-blue-400" },
+              { icon: "🚀", title: "Senior Secondary School", grades: "Classes XI - XII", desc: "Providing advanced subject knowledge, career guidance, and future-ready skills for higher education and professional success.", link: "/academics#senior-secondary", color: "border-t-secondary" },
+            ].map((prog, i) => (
+              <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`group relative overflow-hidden rounded-xl bg-white/10 p-6 backdrop-blur-sm transition-colors hover:bg-white ${i % 2 === 0 ? 'border-t-4 border-t-secondary' : 'border-t-4 border-t-blue-400'}`}
+                transition={{ delay: i * 0.1, duration: 0.5, type: "spring" }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:border-secondary/40 hover:bg-white/10 hover:shadow-2xl hover:shadow-secondary/10 ${prog.color} border-t-4`}
               >
-                <h3 className="mb-2 font-serif text-xl font-bold group-hover:text-primary">{prog}</h3>
-                <p className="text-sm text-blue-100 group-hover:text-gray-600">Nurturing foundation for lifelong learning.</p>
-                <div className="mt-6 flex items-center text-sm font-medium text-secondary group-hover:text-primary">
-                  Learn More <ChevronRight size={16} className="ml-1" />
+                <div className="absolute -right-4 -top-4 text-7xl font-bold text-white/5 leading-none">
+                  {prog.icon}
                 </div>
-                <Link href="/academics" className="absolute inset-0 z-10"><span className="sr-only">View {prog}</span></Link>
+                <div className="relative z-10 flex flex-1 flex-col">
+                  <div className="mb-2 text-4xl">{prog.icon}</div>
+                  <h3 className="mb-1 font-serif text-xl font-bold text-white transition-colors group-hover:text-secondary">{prog.title}</h3>
+                  <p className="mb-3 text-sm font-medium text-secondary">{prog.grades}</p>
+                  <p className="mb-6 text-sm text-white/70 leading-relaxed transition-colors group-hover:text-white/90">{prog.desc}</p>
+                  <div className="mt-auto">
+                    <Button
+                      size="sm"
+                      className="group/btn bg-secondary/20 text-secondary hover:bg-secondary hover:text-primary border border-secondary/30"
+                      asChild
+                    >
+                      <Link href={prog.link}>
+                        Learn More <ArrowRight className="ml-2 transition-transform group-hover/btn:translate-x-1" size={14} />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <Button size="lg" variant="outline" className="h-14 border-white/50 bg-white/10 px-8 text-base text-white hover:bg-white hover:text-primary shadow-lg" asChild>
+              <Link href="/academics">View All Programs</Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 

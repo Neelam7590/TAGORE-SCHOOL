@@ -1,21 +1,29 @@
 import { motion } from "framer-motion";
 import { ChevronRight, BrainCircuit, Globe, FlaskConical, Laptop, Music, Dumbbell, Palette, Medal, Star } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
 };
 
-const programs = [
-  { level: "Early Years", grades: "Pre-Nursery to KG", color: "border-blue-400", desc: "A play-based approach focusing on motor skills, social interaction, and basic cognitive development in a safe, colorful environment." },
-  { level: "Primary", grades: "Classes I to V", color: "border-secondary", desc: "Building strong foundations in literacy and numeracy while encouraging curiosity through interactive and experiential learning." },
-  { level: "Middle School", grades: "Classes VI to VIII", color: "border-blue-500", desc: "Fostering independent thinking and critical analysis. Introduction to specialized subjects and project-based assessments." },
-  { level: "Secondary", grades: "Classes IX to X", color: "border-primary", desc: "Rigorous academic preparation for board examinations with a focus on comprehensive understanding and application of concepts." },
-  { level: "Senior Secondary", grades: "Classes XI to XII", color: "border-secondary", desc: "Specialized streams (Science, Commerce, Humanities) designed to prepare students for higher education and professional careers." }
-];
 
 export default function Academics() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const hash = location.split("#")[1];
+    if (hash) {
+      const el = document.getElementById(hash);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   return (
     <motion.div
       initial="hidden"
@@ -64,18 +72,36 @@ export default function Academics() {
           <div className="mb-12">
             <h2 className="font-serif text-3xl font-bold text-primary mb-4">Our Curriculum Journey</h2>
             <div className="w-20 h-1 bg-secondary"></div>
+            <p className="mt-6 text-gray-600 max-w-3xl text-lg">
+              At Tagore Global School, we provide a well-structured academic journey that nurtures curiosity, creativity, confidence, and excellence at every stage of learning.
+            </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.map((prog, idx) => (
-              <motion.div 
-                key={idx} 
+
+          <div className="flex flex-col gap-8">
+            {[
+              { id: "early-years", level: "Early Years Program", grades: "Pre-Nursery to UKG", icon: "🌱", color: "border-blue-400", desc: "A joyful and engaging learning environment where young learners develop foundational skills through play-based and activity-oriented education. We focus on motor skills, social interaction, and basic cognitive development in a safe, colorful environment." },
+              { id: "primary-school", level: "Primary School", grades: "Classes I - V", icon: "📚", color: "border-secondary", desc: "Building strong academic foundations while encouraging creativity, communication, and critical thinking skills. We focus on literacy and numeracy through interactive and experiential learning." },
+              { id: "middle-school", level: "Middle School", grades: "Classes VI - VIII", icon: "🔬", color: "border-blue-500", desc: "Developing analytical thinking, problem-solving abilities, and independent learning through a balanced curriculum. Introduction to specialized subjects and project-based assessments." },
+              { id: "secondary-school", level: "Secondary School", grades: "Classes IX - X", icon: "🎯", color: "border-primary", desc: "Preparing students for academic success through structured learning, practical exposure, and skill development. Rigorous preparation for board examinations with a focus on comprehensive understanding." },
+              { id: "senior-secondary", level: "Senior Secondary School", grades: "Classes XI - XII", icon: "🚀", color: "border-secondary", desc: "Providing advanced subject knowledge, career guidance, and future-ready skills for higher education and professional success. Specialized streams in Science, Commerce, and Humanities." }
+            ].map((prog, idx) => (
+              <motion.div
+                key={idx}
+                id={prog.id}
                 variants={fadeUp}
-                className={`bg-white rounded-xl shadow-sm border border-gray-100 p-8 border-t-4 ${prog.color} hover:shadow-md transition-shadow`}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className={`bg-white rounded-xl shadow-sm border border-gray-100 p-8 border-t-4 ${prog.color} hover:shadow-md transition-shadow scroll-mt-24`}
               >
-                <h3 className="font-serif text-2xl font-bold text-gray-900 mb-1">{prog.level}</h3>
-                <p className="text-sm font-medium text-secondary mb-4">{prog.grades}</p>
-                <p className="text-gray-600 leading-relaxed">{prog.desc}</p>
+                <div className="flex flex-col md:flex-row md:items-start gap-6">
+                  <div className="text-5xl shrink-0">{prog.icon}</div>
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-gray-900 mb-1">{prog.level}</h3>
+                    <p className="text-sm font-medium text-secondary mb-4">{prog.grades}</p>
+                    <p className="text-gray-600 leading-relaxed text-base">{prog.desc}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
