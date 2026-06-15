@@ -175,7 +175,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-900 mb-1">Campus Address</h4>
-                      <p className="text-gray-600">123 Education Boulevard,<br />Knowledge City, State 456789</p>
+                      <p className="text-gray-600">Sector 29, Global City,<br />Kurukshetra, Haryana – 136118</p>
                     </div>
                   </div>
                   

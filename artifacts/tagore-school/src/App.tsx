@@ -18,6 +18,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <div className="flex min-h-screen flex-col">
+            <ScrollToTop />
             <Header />
             <main className="flex-1">
               <Router />

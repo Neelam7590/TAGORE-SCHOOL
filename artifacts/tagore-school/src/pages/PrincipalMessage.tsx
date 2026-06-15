@@ -36,11 +36,11 @@ export default function PrincipalMessage() {
               <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-secondary shadow-xl mb-6">
                 <img 
                   src="https://picsum.photos/seed/principal/400/400" 
-                  alt="Mrs. Priya Sharma, Principal" 
+                  alt="Ms. Shalini Malhotra, Principal" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="font-serif text-2xl font-bold text-primary">Mrs. Priya Sharma</h3>
+              <h3 className="font-serif text-2xl font-bold text-primary">Ms. Shalini Malhotra</h3>
               <p className="text-secondary font-medium">Principal</p>
               <p className="text-sm text-gray-500 mt-2">M.A., M.Ed., Ph.D.</p>
             </motion.div>
@@ -68,7 +68,7 @@ export default function PrincipalMessage() {
 
               <div className="pt-8">
                 <img src="https://picsum.photos/seed/signature/200/80" alt="Signature" className="h-16 opacity-80 mix-blend-multiply" />
-                <p className="mt-2 font-bold text-primary">Mrs. Priya Sharma</p>
+                <p className="mt-2 font-bold text-primary">Ms. Shalini Malhotra</p>
               </div>
             </motion.div>
 

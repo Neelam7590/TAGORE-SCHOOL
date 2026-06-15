@@ -73,7 +73,7 @@ export default function Admissions() {
             <ChevronRight size={14} />
             <span className="text-secondary">Admissions</span>
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold">Admissions Open 2025-26</h1>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold">Admissions Open 2026-2027</h1>
           <p className="mt-4 max-w-2xl text-lg text-blue-100">
             Join the Tagore Global family. Discover a world of opportunities for your child.
           </p>

@@ -1,0 +1,307 @@
+REDESIGN THE ENTIRE ABOUT US PAGE AND WEBSITE NAVIGATION TO LOOK PREMIUM, MODERN, AND PROFESSIONAL.
+
+================================================
+HEADER FIXES
+
+Remove the yellow dot above the "Apply Now" button.
+
+Remove the "Admissions Open" text shown below the Apply Now button.
+
+Remove the yellow tinted background behind that area.
+
+Keep the header background completely white.
+
+Header Layout:
+
+- School Logo
+- School Name
+- Navigation Menu
+- Apply Now Button
+
+Apply Now Button:
+
+Background: Gold (#FFD700)
+Text: Royal Blue (#0F4C81)
+Rounded Corners
+Premium Hover Effect
+
+================================================
+IMPORTANT WEBSITE NAVIGATION UPDATE
+
+Convert the website into a TRUE MULTI-PAGE WEBSITE.
+
+Do NOT use a single-page scrolling layout.
+
+Every navigation item must open its own dedicated page.
+
+Navigation Structure:
+
+Home → /
+About Us → /about
+Principal Message → /principal-message
+Academics → /academics
+Facilities → /facilities
+Gallery → /gallery
+Admissions → /admissions
+Contact Us → /contact
+
+When a user clicks any menu item:
+
+- Open the respective page.
+- Do not scroll to a section on the current page.
+- Load a completely separate page.
+
+Example:
+
+If the user is at the bottom of About Us page and clicks Academics from the header,
+
+the website should instantly open the Academics page from the top.
+
+Enable:
+
+- Scroll Restoration
+- Active Menu Highlight
+- Smooth Page Transitions
+- Framer Motion Page Animation
+
+Every page must have:
+
+- Dedicated Hero Section
+- Dedicated Content
+- Dedicated URL
+
+================================================
+ABOUT PAGE HERO SECTION
+
+Create a premium hero banner.
+
+Background:
+Royal Blue Gradient with subtle gold accents.
+
+Heading:
+
+About Tagore Global School
+
+Subheading:
+
+Inspiring Excellence, Nurturing Values, and Shaping Future Leaders.
+
+Add a modern school campus image on the right side.
+
+Add smooth entrance animations.
+
+================================================
+OUR JOURNEY SECTION
+
+Create a dedicated "Our Journey" section.
+
+Layout:
+
+Left Side:
+Large School Building Image
+
+Right Side:
+Timeline Design
+
+Timeline Points:
+
+🏫 School Foundation
+
+📚 Academic Growth
+
+🌟 Student Achievements
+
+🚀 Modern Learning Environment
+
+🎓 Future Expansion
+
+Use premium timeline cards with animations.
+
+================================================
+WHO WE ARE SECTION
+
+Title:
+
+Who We Are
+
+Description:
+
+Tagore Global School is committed to providing quality education through innovation, academic excellence, and holistic development. We nurture young minds in a safe and inspiring environment where students are encouraged to explore their full potential.
+
+Add image beside content.
+
+================================================
+VISION SECTION
+
+Create a premium card.
+
+Title:
+
+Our Vision
+
+Content:
+
+To empower students with knowledge, values, and skills that prepare them to become responsible global citizens and lifelong learners.
+
+Use light blue gradient background.
+
+================================================
+MISSION SECTION
+
+Create a premium card.
+
+Title:
+
+Our Mission
+
+Content:
+
+To provide quality education through innovative teaching, character development, and holistic growth while fostering excellence, creativity, and leadership.
+
+Use soft gold gradient background.
+
+================================================
+CORE VALUES SECTION
+
+Create 6 premium cards.
+
+⭐ Excellence
+
+⭐ Integrity
+
+⭐ Respect
+
+⭐ Responsibility
+
+⭐ Innovation
+
+⭐ Compassion
+
+Add hover animations.
+
+================================================
+PRINCIPAL MESSAGE PREVIEW
+
+Add Principal Photo.
+
+Heading:
+
+Message from the Principal
+
+Display a short message preview.
+
+Add button:
+
+Read Full Message
+
+Link to Principal Message Page.
+
+================================================
+WHY PARENTS CHOOSE US
+
+Create 4 premium cards.
+
+🎓 Academic Excellence
+
+🌟 Holistic Development
+
+💻 Smart Learning
+
+🛡 Safe Campus
+
+================================================
+OUR STRENGTHS
+
+Create animated counters.
+
+1000+ Students
+
+50+ Educators
+
+25+ Classrooms
+
+100% Commitment
+
+Use count-up animations.
+
+================================================
+ABOUT PAGE UPDATE
+
+Remove the Photo Gallery Preview section completely from the About Page.
+
+================================================
+HOME PAGE UPDATE
+
+Move Gallery Preview section to the Home Page.
+
+Final Home Page Structure:
+
+1. Hero Section
+
+2. Welcome to Tagore Global School
+
+3. Principal Message
+
+4. Academic Programs
+
+5. Why Choose Us
+
+6. Facilities
+
+7. Student Life @ TGS
+
+8. Gallery Preview
+
+9. What Parents Say
+
+10. Admissions Open CTA
+
+11. Contact Preview
+
+12. Footer
+
+================================================
+CALL TO ACTION SECTION
+
+Create a premium Blue and Gold CTA section.
+
+Heading:
+
+Shape Your Child's Future with Excellence
+
+Text:
+
+Join a learning community dedicated to academic success, character building, and lifelong learning.
+
+Buttons:
+
+Apply Now
+
+Contact Us
+
+================================================
+DESIGN REQUIREMENTS
+
+Color Palette:
+
+Primary:
+Royal Blue (#0F4C81)
+
+Accent:
+Gold (#FFD700)
+
+Background:
+White (#FFFFFF)
+
+Use:
+
+- SVG Wave Dividers
+- Glassmorphism Cards
+- Premium Shadows
+- Smooth Hover Effects
+- Framer Motion Animations
+- Modern Typography
+- Large White Space
+- Premium Card Layouts
+
+Make the About Page and entire website visually rich, professional, modern, and significantly better than the current school website.
