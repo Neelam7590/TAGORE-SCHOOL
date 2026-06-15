@@ -5,9 +5,7 @@ import {
   Heart, Laptop, Users, Rocket, Globe, Award, MapPin, Sparkles, Zap,
   ArrowRight, CheckCircle2, ChevronRight, GraduationCap
 } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
-import { useEffect } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import TestimonialSlider from "@/components/TestimonialSlider";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -23,16 +21,6 @@ const fadeUp = {
 };
 
 export default function Home() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    const autoplay = setInterval(() => {
-      emblaApi.scrollNext();
-    }, 5000);
-    return () => clearInterval(autoplay);
-  }, [emblaApi]);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -45,7 +33,6 @@ export default function Home() {
         <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat"></div>
         <div className="absolute inset-0 z-0 bg-[#0F4C81]/40"></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-t from-primary to-transparent"></div>
         
         <motion.div
           variants={staggerContainer}
@@ -117,10 +104,8 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="relative py-24 text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary via-primary to-primary"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-0"></div>
-        <div className="absolute inset-0 z-0 bg-[url('https://picsum.photos/seed/abstract/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+      <section className="relative bg-primary pt-24 pb-44 text-white overflow-hidden" style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
+        <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/abstract/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
@@ -187,9 +172,8 @@ export default function Home() {
       </section>
 
       {/* About Preview */}
-      <section className="relative py-24 overflow-hidden bg-white">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary to-white"></div>
-        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+      <section className="bg-white pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -274,10 +258,8 @@ export default function Home() {
       </section>
 
       {/* Principal Message */}
-      <section className="relative bg-gray-50 py-24 overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-gray-50"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent z-0"></div>
-        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+      <section className="bg-gray-50 pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -343,9 +325,8 @@ export default function Home() {
       </section>
 
       {/* Academics Preview */}
-      <section id="academic-programs" className="relative overflow-hidden bg-primary py-24 text-white">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-gray-50 to-primary"></div>
-        <div className="absolute inset-0 z-0 bg-[url('https://picsum.photos/seed/abstract2/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+      <section id="academic-programs" className="overflow-hidden bg-primary pt-24 pb-44 text-white" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
+        <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/abstract2/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
@@ -432,43 +413,29 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-gray-50">
+      <section className="pt-24 pb-44 bg-gray-50" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
-            <h2 className="font-serif text-3xl font-bold text-primary md:text-4xl">What Parents Say</h2>
-            <div className="mx-auto mt-4 h-1 w-20 bg-secondary"></div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="font-serif text-3xl font-bold text-[#0F4C81] md:text-4xl">What Parents Say</h2>
+              <div className="mx-auto mt-4 h-1 w-20 bg-[#FFD700] rounded-full"></div>
+              <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+                Trusted by parents for quality education, holistic development, and student success.
+              </p>
+            </motion.div>
           </div>
 
-          <div className="overflow-hidden px-4 py-8" ref={emblaRef}>
-            <div className="flex gap-8">
-              {[
-                { name: "Rahul Verma", role: "Parent of Class VIII student", quote: "The school's focus on both academics and extracurriculars is exactly what we wanted for our child. The teachers are incredibly supportive." },
-                { name: "Priya Sharma", role: "Parent of Class IV student", quote: "Seeing my daughter's confidence grow over the past three years has been wonderful. Tagore Global truly lives up to its name." },
-                { name: "Amit Patel", role: "Parent of Class X student", quote: "The board exam preparation and guidance provided by the faculty is unmatched. They genuinely care about each student's future." }
-              ].map((testimonial, i) => (
-                <div key={i} className="min-w-0 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-4">
-                  <div className="flex h-full flex-col justify-between rounded-2xl bg-white p-8 shadow-sm border border-gray-100">
-                    <p className="mb-8 text-lg italic text-gray-600">"{testimonial.quote}"</p>
-                    <div className="flex items-center gap-4">
-                      <Avatar className="h-12 w-12 border-2 border-secondary">
-                        <AvatarImage src={`https://i.pravatar.cc/150?u=${i}`} />
-                        <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h4 className="font-bold text-primary">{testimonial.name}</h4>
-                        <p className="text-sm text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TestimonialSlider />
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-primary py-20 text-center text-white">
+      <section className="relative overflow-hidden bg-primary pt-20 pb-20 text-center text-white" style={{ marginTop: '-80px' }}>
         <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-secondary/20 blur-3xl"></div>
         <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-secondary/20 blur-3xl"></div>
         <div className="relative z-10 mx-auto max-w-3xl px-4">
