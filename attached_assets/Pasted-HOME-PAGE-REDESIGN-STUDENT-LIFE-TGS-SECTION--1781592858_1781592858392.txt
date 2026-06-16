@@ -1,0 +1,170 @@
+HOME PAGE REDESIGN
+
+================================================
+STUDENT LIFE @ TGS SECTION
+
+Create a premium section titled:
+
+"Student Life @ TGS"
+
+Subtitle:
+
+At Tagore Global School, learning extends beyond the classroom. Students explore their talents, build confidence, and create unforgettable experiences through sports, arts, leadership activities, and cultural events.
+
+Background:
+
+Use a soft Royal Blue to White gradient background.
+
+Add subtle floating shapes and light gold accents.
+
+Use smooth wave divider from the previous section.
+
+================================================
+FEATURED STUDENT LIFE CARDS
+
+Create 4 large premium cards.
+
+⚽ Sports & Athletics
+
+Description:
+
+Encouraging teamwork, discipline, fitness, and sportsmanship through various indoor and outdoor sports activities.
+
+🎵 Music & Dance
+
+Description:
+
+Providing students opportunities to express themselves creatively through music, dance, and performing arts.
+
+🎨 Art & Creativity
+
+Description:
+
+Inspiring imagination and innovation through drawing, painting, crafts, and creative projects.
+
+🎉 Clubs & Events
+
+Description:
+
+Developing leadership, communication, and social skills through clubs, competitions, celebrations, and school events.
+
+Card Features:
+
+- Large image
+- Glassmorphism effect
+- Hover animation
+- Gold border highlight
+- Smooth lift effect on hover
+
+================================================
+STUDENT LIFE HIGHLIGHTS
+
+Create a horizontal highlight section.
+
+🏆 Competitions
+
+🎭 Cultural Programs
+
+🎤 Talent Shows
+
+🌍 Educational Trips
+
+🏅 Annual Sports Day
+
+🎨 Creative Workshops
+
+Use premium icon cards.
+
+================================================
+GALLERY PREVIEW SECTION
+
+Create a visually stunning gallery preview.
+
+Section Title:
+
+"Moments That Inspire"
+
+Subtitle:
+
+Explore the vibrant life, achievements, celebrations, and unforgettable memories of our students.
+
+Background:
+
+Use a clean white background with soft gold glow effects.
+
+Layout:
+
+Display 6 premium images in an asymmetrical masonry grid.
+
+Image Categories:
+
+Campus Life
+
+Sports Activities
+
+Cultural Events
+
+Classroom Learning
+
+Celebrations
+
+Student Achievements
+
+================================================
+GALLERY HOVER EFFECTS
+
+On image hover:
+
+- Slight zoom effect
+- Soft shadow
+- Gold border glow
+- Category label appears
+
+================================================
+VIEW GALLERY BUTTON
+
+Add a large premium button below the gallery.
+
+Button Text:
+
+"View Full Gallery"
+
+Button Style:
+
+Background:
+Royal Blue (#0F4C81)
+
+Text:
+White
+
+Hover:
+Gold Background (#FFD700)
+Royal Blue Text
+
+When clicked:
+
+Navigate to:
+
+/gallery
+
+Open Gallery Page from the top.
+
+Do not scroll to gallery section.
+
+================================================
+DESIGN IMPROVEMENTS
+
+Use:
+
+- SVG Wave Dividers
+- Glassmorphism Cards
+- Smooth Hover Animations
+- Framer Motion Effects
+- Premium Shadows
+- Royal Blue and Gold Color Palette
+- Large White Space
+- Modern Typography
+
+Make Student Life @ TGS and Gallery Preview the most visually attractive sections on the homepage.
+
+The design should feel similar to premium international school websites and create a strong emotional connection with parents and students.

@@ -1,0 +1,175 @@
+FACILITIES PAGE PREMIUM REDESIGN
+
+================================================
+FACILITIES HERO SECTION
+
+Create a premium hero banner.
+
+Heading:
+
+World-Class Facilities for Future-Ready Learning
+
+Subheading:
+
+Providing students with a safe, modern, and inspiring environment where learning, creativity, and personal growth thrive every day.
+
+Add a modern school campus image.
+
+Use Royal Blue and Gold gradient overlay.
+
+================================================
+FEATURED FACILITIES SECTION
+
+Display 4 premium facility cards.
+
+🏫 Smart Classrooms
+
+Modern technology-enabled classrooms designed to make learning interactive, engaging, and effective.
+
+🍽 Modern Cafeteria
+
+A clean, hygienic, and student-friendly dining space offering nutritious meals and refreshments.
+
+🚌 Safe Transport
+
+Reliable transportation with trained drivers, safety protocols, and student security measures.
+
+⚽ Sports Ground
+
+Spacious sports facilities encouraging physical fitness, teamwork, and sportsmanship.
+
+Add:
+"View All Facilities" Button
+
+================================================
+ALL FACILITIES SECTION
+
+Create premium icon cards with hover effects.
+
+📚 Smart Classrooms
+
+🧪 Science Laboratory
+
+💻 Computer Labs
+
+📖 Library
+
+🏆 Sports Complex
+
+🚌 Transport Facility
+
+🛡 Safety & Security
+
+🎨 Activity Rooms
+
+Add modern icons and subtle animations.
+
+================================================
+NEW SECTION: WHY OUR FACILITIES STAND OUT
+
+Create 3 premium feature cards.
+
+⭐ Modern Infrastructure
+
+Designed to support innovative and future-focused learning.
+
+⭐ Student Safety First
+
+Comprehensive safety measures and secure campus environment.
+
+⭐ Learning Beyond Classrooms
+
+Facilities that encourage creativity, exploration, and personal growth.
+
+================================================
+GREEN CAMPUS SECTION REDESIGN
+
+Rename:
+
+"Our Green Campus"
+
+Heading:
+
+A Campus Designed for Learning, Nature & Growth
+
+Layout:
+
+Left Side:
+Large Premium Campus Image
+
+Right Side:
+Content
+
+Text:
+
+Our beautifully maintained campus provides students with a peaceful, safe, and environmentally conscious learning environment. Open spaces, greenery, modern infrastructure, and student-friendly facilities create the perfect setting for academic excellence and holistic development.
+
+Add 4 Highlight Cards:
+
+🌳 Eco-Friendly Environment
+
+🏫 Modern Infrastructure
+
+🌞 Open Learning Spaces
+
+💚 Healthy & Safe Campus
+
+Use glassmorphism cards.
+
+================================================
+CAMPUS HIGHLIGHTS COUNTER
+
+Add animated statistics.
+
+🏫 Spacious Campus
+
+🌳 Green Open Areas
+
+📚 Learning Zones
+
+⚽ Sports Facilities
+
+Use count-up animations.
+
+================================================
+CALL TO ACTION
+
+Premium Blue and Gold Section.
+
+Heading:
+
+Experience the Difference at Tagore Global School
+
+Text:
+
+Discover facilities designed to inspire learning, creativity, and success.
+
+Buttons:
+
+Schedule a Visit
+
+Apply Now
+
+================================================
+DESIGN IMPROVEMENTS
+
+Use:
+
+- Wave Dividers
+- Glassmorphism Cards
+- Hover Animations
+- Gold Accent Borders
+- Premium Shadows
+- Framer Motion Effects
+
+Avoid plain white sections.
+
+Alternate backgrounds:
+
+White
+Light Blue Gradient
+Soft Gold Gradient
+
+Create visual separation between every section.
+
+Make the Facilities Page look like a premium international school website rather than a basic information page.
