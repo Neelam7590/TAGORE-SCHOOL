@@ -13,6 +13,7 @@ export function Header() {
     { href: "/about", label: "About" },
     { href: "/academics", label: "Academics" },
     { href: "/facilities", label: "Facilities" },
+    { href: "/kindergarten", label: "Kindergarten" },
     { href: "/gallery", label: "Gallery" },
     { href: "/admissions", label: "Admissions" },
     { href: "/contact", label: "Contact" },

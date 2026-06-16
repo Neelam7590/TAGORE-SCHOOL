@@ -5,31 +5,45 @@ import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 const testimonials = [
   {
     name: "Mrs. Anjali Sharma",
-    role: "Parent of Class VI Student",
-    quote: "Tagore Global School has provided an excellent learning environment for my child. The teachers are supportive, caring, and dedicated to helping every student grow academically and personally.",
-    image: "https://i.pravatar.cc/150?u=anjali",
+    role: "Parent of Class VI",
+    quote: "The teachers are incredibly supportive and caring. Our child's academic growth and personal development have been remarkable. We couldn't have asked for a better environment.",
     initials: "AS",
+    rating: 5,
   },
   {
     name: "Mr. Rajesh Kumar",
-    role: "Parent of Class IX Student",
-    quote: "We are impressed with the school's focus on both academics and character development. The positive atmosphere and modern teaching methods have made a significant difference in our child's confidence.",
-    image: "https://i.pravatar.cc/150?u=rajesh",
+    role: "Parent of Class IX",
+    quote: "The perfect balance between academics and character development. The modern teaching methods and positive atmosphere have transformed our child's confidence.",
     initials: "RK",
+    rating: 5,
   },
   {
     name: "Mrs. Pooja Verma",
-    role: "Parent of Class IV Student",
-    quote: "From academics to extracurricular activities, the school offers a balanced approach to education. We truly appreciate the efforts of the faculty in nurturing young minds.",
-    image: "https://i.pravatar.cc/150?u=pooja",
+    role: "Parent of Class IV",
+    quote: "From academics to extracurriculars, everything is thoughtfully designed. The faculty's dedication to nurturing young minds is truly commendable.",
     initials: "PV",
+    rating: 5,
   },
   {
     name: "Mr. Amit Gupta",
-    role: "Parent of Class VII Student",
-    quote: "The safe campus, experienced teachers, and student-centered approach make Tagore Global School an excellent choice for quality education.",
-    image: "https://i.pravatar.cc/150?u=amit",
+    role: "Parent of Class VII",
+    quote: "The safe campus, experienced teachers, and student-centered approach make this an excellent choice. We have complete peace of mind.",
     initials: "AG",
+    rating: 5,
+  },
+  {
+    name: "Dr. Sunita Reddy",
+    role: "Parent of Class X",
+    quote: "Outstanding preparation for competitive exams. The mentorship program and career guidance have helped our daughter set clear goals for the future.",
+    initials: "SR",
+    rating: 5,
+  },
+  {
+    name: "Mr. Vikram Patel",
+    role: "Parent of Class VIII",
+    quote: "The sports facilities and coaching are world-class. Our son has grown not just academically but also as a team player and leader.",
+    initials: "VP",
+    rating: 5,
   },
 ];
 
@@ -79,9 +93,18 @@ export default function TestimonialSlider() {
     }),
   };
 
+  // Get visible testimonials for each breakpoint
+  const getVisible = (start: number, count: number) => {
+    const result = [];
+    for (let i = 0; i < count; i++) {
+      result.push(testimonials[(start + i) % testimonials.length]);
+    }
+    return result;
+  };
+
   return (
     <div
-      className="relative w-full max-w-6xl mx-auto px-4"
+      className="relative w-full max-w-7xl mx-auto px-4"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -102,20 +125,18 @@ export default function TestimonialSlider() {
             }}
             className="w-full"
           >
-            {/* Desktop Grid */}
-            <div className="hidden lg:grid grid-cols-3 gap-6">
-              {[0, 1, 2].map((offset) => {
-                const idx = (currentIndex + offset) % testimonials.length;
-                return <TestimonialCard key={idx} testimonial={testimonials[idx]} />;
-              })}
+            {/* Desktop Grid - 3 cards */}
+            <div className="hidden lg:grid grid-cols-3 gap-8">
+              {getVisible(currentIndex, 3).map((t, i) => (
+                <TestimonialCard key={`${currentIndex}-${i}`} testimonial={t} />
+              ))}
             </div>
 
-            {/* Tablet Grid */}
-            <div className="hidden md:grid lg:hidden grid-cols-2 gap-6">
-              {[0, 1].map((offset) => {
-                const idx = (currentIndex + offset) % testimonials.length;
-                return <TestimonialCard key={idx} testimonial={testimonials[idx]} />;
-              })}
+            {/* Tablet Grid - 2 cards */}
+            <div className="hidden md:grid lg:hidden grid-cols-2 gap-8">
+              {getVisible(currentIndex, 2).map((t, i) => (
+                <TestimonialCard key={`${currentIndex}-${i}`} testimonial={t} />
+              ))}
             </div>
 
             {/* Mobile Single */}
@@ -126,39 +147,45 @@ export default function TestimonialSlider() {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Arrows */}
-      <div className="flex items-center justify-center gap-6 mt-8">
-        <button
+      {/* Navigation Controls */}
+      <div className="flex items-center justify-center gap-8 mt-10">
+        {/* Prev Arrow */}
+        <motion.button
           onClick={prevSlide}
-          className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-[#0F4C81]/20 bg-white hover:bg-[#0F4C81] hover:border-[#0F4C81] transition-all duration-300 shadow-md hover:shadow-lg"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="group flex items-center justify-center w-14 h-14 rounded-full border-2 border-white/30 bg-white/10 hover:bg-[#FFD700] hover:border-[#FFD700] transition-all duration-300 shadow-lg backdrop-blur-sm"
           aria-label="Previous testimonial"
         >
-          <ChevronLeft className="w-5 h-5 text-[#0F4C81] group-hover:text-white transition-colors duration-300" />
-        </button>
+          <ChevronLeft className="w-6 h-6 text-white group-hover:text-[#0F4C81] transition-colors duration-300" />
+        </motion.button>
 
         {/* Pagination Dots */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`relative rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? "bg-[#0F4C81] w-8"
-                  : "bg-[#0F4C81]/20 hover:bg-[#0F4C81]/40"
+                  ? "bg-[#FFD700] w-10 h-3 shadow-[0_0_10px_rgba(255,215,0,0.5)]"
+                  : "bg-white/30 hover:bg-white/60 w-3 h-3"
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
         </div>
 
-        <button
+        {/* Next Arrow */}
+        <motion.button
           onClick={nextSlide}
-          className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-[#0F4C81]/20 bg-white hover:bg-[#0F4C81] hover:border-[#0F4C81] transition-all duration-300 shadow-md hover:shadow-lg"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="group flex items-center justify-center w-14 h-14 rounded-full border-2 border-white/30 bg-white/10 hover:bg-[#FFD700] hover:border-[#FFD700] transition-all duration-300 shadow-lg backdrop-blur-sm"
           aria-label="Next testimonial"
         >
-          <ChevronRight className="w-5 h-5 text-[#0F4C81] group-hover:text-white transition-colors duration-300" />
-        </button>
+          <ChevronRight className="w-6 h-6 text-white group-hover:text-[#0F4C81] transition-colors duration-300" />
+        </motion.button>
       </div>
     </div>
   );
@@ -167,54 +194,53 @@ export default function TestimonialSlider() {
 function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] }) {
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -10, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="relative group"
+      className="relative group h-full"
     >
-      <div className="relative overflow-hidden rounded-2xl bg-white/60 backdrop-blur-xl border border-white/50 shadow-[0_8px_32px_-8px_rgba(15,76,129,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(15,76,129,0.25)] transition-all duration-500">
-        {/* Quote Icon Background */}
-        <div className="absolute top-4 right-4 opacity-10">
-          <Quote className="w-16 h-16 text-[#0F4C81]" />
+      {/* Card with premium glassmorphism */}
+      <div className="relative h-full overflow-hidden rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-[#F8FAFF]/95 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_-8px_rgba(15,76,129,0.2)] hover:shadow-[0_20px_60px_-12px_rgba(15,76,129,0.35)] transition-all duration-500">
+        {/* Gold top accent bar */}
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FFD700] via-[#FFC107] to-[#FFD700] rounded-t-3xl" />
+
+        {/* Decorative elements */}
+        <div className="absolute top-4 right-6 opacity-[0.05]">
+          <Quote className="w-24 h-24 text-[#0F4C81]" />
         </div>
 
-        {/* Gold Accent Top Border */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FFD700] via-[#FFD700]/80 to-[#FFD700] rounded-t-2xl" />
+        <div className="absolute top-0 left-0 w-40 h-40 bg-[#FFD700]/5 rounded-full -translate-x-20 -translate-y-20" />
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#0F4C81]/3 rounded-full translate-x-16 translate-y-16" />
 
-        <div className="relative p-8">
+        {/* Card content */}
+        <div className="relative p-7 pt-9 flex flex-col h-full">
           {/* Star Rating */}
           <div className="flex items-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className="w-4 h-4 fill-[#FFD700] text-[#FFD700]"
-              />
+            {[...Array(testimonial.rating)].map((_, i) => (
+              <Star key={i} className="w-4 h-4 fill-[#FFD700] text-[#FFD700]" />
             ))}
+            <span className="ml-2 text-[10px] font-bold text-[#0F4C81]/40 uppercase tracking-widest">Verified</span>
           </div>
 
-          {/* Quote Text */}
-          <p className="text-gray-700 text-base leading-relaxed mb-6 italic relative z-10">
+          {/* Quote */}
+          <p className="text-gray-700 text-sm leading-[1.7] mb-6 flex-grow">
             "{testimonial.quote}"
           </p>
 
-          {/* Parent Info */}
-          <div className="flex items-center gap-4 pt-4 border-t border-gray-100/50">
+          {/* Author Info */}
+          <div className="flex items-center gap-3 pt-4 border-t border-[#0F4C81]/8">
             <div className="relative">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0F4C81] to-[#0F4C81]/80 flex items-center justify-center text-white font-bold text-lg shadow-md">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0F4C81] to-[#1a5a9e] flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-[#FFD700]/20 ring-offset-2 ring-offset-white">
                 {testimonial.initials}
               </div>
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#FFD700] flex items-center justify-center shadow-sm">
-                <svg className="w-3 h-3 text-[#0F4C81]" fill="currentColor" viewBox="0 0 20 20">
+              <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#FFD700] flex items-center justify-center shadow-sm border-2 border-white">
+                <svg className="w-2.5 h-2.5 text-[#0F4C81]" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
             </div>
             <div>
-              <h4 className="font-bold text-[#0F4C81] text-lg">
-                {testimonial.name}
-              </h4>
-              <p className="text-sm text-gray-500">
-                {testimonial.role}
-              </p>
+              <h4 className="font-bold text-[#0F4C81] text-sm">{testimonial.name}</h4>
+              <p className="text-xs text-gray-500 font-medium">{testimonial.role}</p>
             </div>
           </div>
         </div>

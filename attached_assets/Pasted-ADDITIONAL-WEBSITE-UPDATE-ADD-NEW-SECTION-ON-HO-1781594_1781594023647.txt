@@ -1,0 +1,280 @@
+ADDITIONAL WEBSITE UPDATE
+
+================================================
+ADD NEW SECTION ON HOME PAGE
+
+Create a new premium section below Academic Programs and above Why Choose Us.
+
+Section Title:
+
+Kindergarten @ TGS
+
+Subtitle:
+
+Where Little Learners Begin Their Journey of Discovery, Creativity, and Growth.
+
+Description:
+
+Our Kindergarten Program provides a joyful, safe, and nurturing environment where children develop confidence, curiosity, communication skills, and a love for learning through play-based and activity-oriented education.
+
+Add:
+
+Large Premium Image on Left
+
+Content on Right
+
+Button:
+
+Check Out Kindergarten
+
+Button Style:
+
+Background:
+Gold (#FFD700)
+
+Text:
+Royal Blue (#0F4C81)
+
+Hover Effect:
+Scale Up + Glow Effect
+
+================================================
+KINDERGARTEN DEDICATED PAGE
+
+Create a completely separate page.
+
+URL:
+
+/kindergarten
+
+When user clicks:
+
+Check Out Kindergarten
+
+Open:
+
+Kindergarten Page
+
+Do NOT scroll.
+
+Open a completely separate page.
+
+================================================
+KINDERGARTEN HERO SECTION
+
+Left Side:
+
+Large Premium Kindergarten Image
+
+Right Side:
+
+Heading:
+
+Kindergarten @ TGS
+
+Subheading:
+
+Building Strong Foundations for Lifelong Learning
+
+Description:
+
+At Tagore Global School, our Kindergarten Program is designed to create a joyful and engaging learning environment where children explore, discover, and grow with confidence. Through interactive activities, creative experiences, and caring guidance, we nurture every child's unique potential.
+
+Buttons:
+
+Admissions Open
+
+Schedule a Visit
+
+================================================
+ABOUT OUR KINDERGARTEN
+
+Create a premium content section.
+
+Heading:
+
+Why Choose Our Kindergarten?
+
+Feature Cards:
+
+🎨 Creative Learning
+
+📚 Early Literacy Development
+
+🧩 Activity-Based Learning
+
+🎵 Music & Movement
+
+🤝 Social Skill Development
+
+🌈 Safe & Caring Environment
+
+================================================
+PHOTO GALLERY SECTION
+
+Add 8–10 large kindergarten photos.
+
+Layout:
+
+Premium Masonry Grid
+
+Animations:
+
+- Zoom Effect
+- Fade In
+- Hover Glow
+- Smooth Transitions
+
+Image Categories:
+
+Classroom Activities
+
+Play Area
+
+Art Activities
+
+Learning Sessions
+
+Celebrations
+
+Outdoor Activities
+
+Creative Projects
+
+Student Interaction
+
+================================================
+LEARNING HIGHLIGHTS
+
+Create animated cards.
+
+🧠 Cognitive Development
+
+🗣 Communication Skills
+
+🎨 Creativity & Imagination
+
+🤝 Social Development
+
+🌱 Emotional Growth
+
+🏃 Physical Development
+
+================================================
+KINDERGARTEN CTA SECTION
+
+Background:
+
+Royal Blue Gradient
+
+Heading:
+
+Give Your Child the Best Start
+
+Text:
+
+Join a nurturing learning environment designed to inspire confidence, curiosity, and lifelong success.
+
+Buttons:
+
+Apply Now
+
+Contact Us
+
+================================================
+KINDERGARTEN PAGE FOOTER
+
+Create a premium footer.
+
+Left Side:
+
+School Logo
+
+Tagore Global School
+
+Address:
+
+Sector 29, Global City,
+Kurukshetra, Haryana – 136118
+
+Social Media Icons:
+
+Facebook
+
+Instagram
+
+YouTube
+
+LinkedIn
+
+================================================
+CENTER SECTION
+
+About TGS
+
+Quick Links:
+
+Home
+
+About Us
+
+Academics
+
+Facilities
+
+Gallery
+
+Admissions
+
+Contact Us
+
+Kindergarten
+
+================================================
+RIGHT SIDE
+
+Location Map
+
+Embed Google Map
+
+Heading:
+
+Find Us Here
+
+Show School Location
+
+================================================
+BOTTOM BAR
+
+Text:
+
+Follow Us On
+
+Display Social Media Icons
+
+Copyright:
+
+© 2026 Tagore Global School. All Rights Reserved.
+
+================================================
+DESIGN REQUIREMENTS
+
+Use:
+
+Royal Blue (#0F4C81)
+
+Gold (#FFD700)
+
+White (#FFFFFF)
+
+Add:
+
+- Glassmorphism Cards
+- SVG Wave Dividers
+- Hover Animations
+- Framer Motion Effects
+- Premium Shadows
+- Responsive Layout
+- Smooth Page Transitions
+
+Make the Kindergarten section and page feel warm, colorful, engaging, child-friendly, and premium while maintaining the overall professional school branding.

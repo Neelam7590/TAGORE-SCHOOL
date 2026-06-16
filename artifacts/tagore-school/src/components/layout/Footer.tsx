@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { GraduationCap, Facebook, Instagram, Youtube, Linkedin, MapPin, Phone, Mail, Clock, ArrowRight, Heart } from "lucide-react";
+import { GraduationCap, Facebook, Instagram, Youtube, Linkedin, MapPin, Phone, Mail, Clock, ArrowRight, Heart, Star, Award, Users, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -24,6 +24,7 @@ export function Footer() {
     { href: "/principal-message", label: "Principal Message" },
     { href: "/academics", label: "Academics" },
     { href: "/facilities", label: "Facilities" },
+    { href: "/kindergarten", label: "Kindergarten" },
     { href: "/gallery", label: "Gallery" },
     { href: "/admissions", label: "Admissions" },
     { href: "/contact", label: "Contact Us" },
@@ -36,17 +37,61 @@ export function Footer() {
     { icon: Linkedin, href: "#", label: "LinkedIn" },
   ];
 
-  return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-[#0F4C81] to-[#0A3A66] text-white">
-      {/* Decorative Gold Accent Line */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"></div>
+  const stats = [
+    { icon: Award, value: "25+", label: "Years of Excellence", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
+    { icon: Users, value: "5000+", label: "Students Enrolled", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
+    { icon: TrendingUp, value: "100%", label: "Board Results", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
+    { icon: Heart, value: "98%", label: "Parent Satisfaction", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
+  ];
 
-      {/* Floating Gold Glow Effects */}
+  return (
+    <footer className="relative overflow-hidden bg-gradient-to-b from-[#0F4C81] via-[#0A3A66] to-[#062a4a] text-white">
+      {/* Decorative Top Wave */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
+        <svg className="relative block w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="white" />
+        </svg>
+      </div>
+
+      {/* Gold Accent Line */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#FFD700] to-transparent mt-16"></div>
+
+      {/* Floating Glow Effects */}
       <div className="absolute -top-40 left-1/4 h-80 w-80 rounded-full bg-[#FFD700]/8 blur-3xl"></div>
       <div className="absolute -bottom-20 right-1/4 h-80 w-80 rounded-full bg-[#FFD700]/8 blur-3xl"></div>
       <div className="absolute top-1/2 left-1/2 h-64 w-64 rounded-full bg-white/3 blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-20 pb-8 md:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-16 pb-8 md:px-8">
+        {/* Stats Row - Bento Grid Style */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 pb-12 border-b border-white/10"
+        >
+          {stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="flex items-center gap-4 group bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-5 hover:bg-white/10 hover:border-[#FFD700]/30 transition-all duration-300"
+            >
+              <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} border border-[#FFD700]/20 group-hover:from-[#FFD700] group-hover:to-[#FFC107] transition-all duration-300`}>
+                <stat.icon size={22} className="text-[#FFD700] group-hover:text-[#0F4C81] transition-colors duration-300" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-[#FFD700] tracking-tight">{stat.value}</div>
+                <div className="text-xs text-blue-100/60 font-medium">{stat.label}</div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Main Footer Grid */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: School Information */}
           <div className="flex flex-col gap-6">
@@ -196,7 +241,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-blue-200/50 sm:flex-row">
           <p className="flex items-center gap-1">
-            © 2026 Tagore Global School. All Rights Reserved. Made with <Heart size={12} className="text-[#FFD700] inline" /> for Education
+            &copy; 2026 Tagore Global School. All Rights Reserved. Made with <Heart size={12} className="text-[#FFD700] inline" /> for Education
           </p>
           <div className="flex gap-6">
             <a href="#" className="transition-all duration-300 hover:text-[#FFD700] hover:underline underline-offset-4">Privacy Policy</a>

@@ -13,6 +13,7 @@ import Facilities from "@/pages/Facilities";
 import Gallery from "@/pages/Gallery";
 import Admissions from "@/pages/Admissions";
 import Contact from "@/pages/Contact";
+import Kindergarten from "@/pages/Kindergarten";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/gallery" component={Gallery} />
         <Route path="/admissions" component={Admissions} />
         <Route path="/contact" component={Contact} />
+        <Route path="/kindergarten" component={Kindergarten} />
         <Route component={NotFound} />
       </Switch>
     </AnimatePresence>

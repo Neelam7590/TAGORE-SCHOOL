@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import {
   Heart, Laptop, Users, Rocket, Globe, Award, MapPin, Sparkles, Zap,
   ArrowRight, CheckCircle2, GraduationCap, Camera, Music, Palette,
-  Trophy, Utensils, Bus, Phone, Mail, Clock, Flame, Mic2, Flower2
+  Trophy, Utensils, Bus, Phone, Mail, Clock, Flame, Mic2, Flower2,
+  Baby
 } from "lucide-react";
 import TestimonialSlider from "@/components/TestimonialSlider";
 
@@ -346,6 +347,61 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Kindergarten @ TGS Section */}
+      <section className="relative bg-[#0F4C81] pt-24 pb-44 text-white overflow-hidden" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
+        <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/kgpattern/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
+        <div className="absolute top-20 left-10 h-40 w-40 rounded-full bg-[#FFD700]/10 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 h-60 w-60 rounded-full bg-[#FFD700]/5 blur-3xl"></div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl border border-white/10">
+                <img src="https://picsum.photos/seed/kghome/800/600" alt="Kindergarten at TGS" className="h-full w-full object-cover" />
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-[#FFD700] text-[#0F4C81] px-6 py-3 rounded-xl font-bold shadow-lg flex items-center gap-2">
+                <Sparkles size={18} fill="currentColor" />
+                <span>Pre-Nursery to UKG</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/20 px-4 py-1.5 text-sm font-medium text-[#FFD700] mb-4">
+                <Heart size={14} />
+                <span>Early Years Education</span>
+              </div>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                Kindergarten <span className="text-[#FFD700]">@ TGS</span>
+              </h2>
+              <p className="text-xl text-blue-100/80 font-medium mb-4">
+                Where Little Learners Begin Their Journey of Discovery, Creativity, and Growth.
+              </p>
+              <p className="text-lg text-blue-100/70 leading-relaxed mb-8">
+                Our Kindergarten Program provides a joyful, safe, and nurturing environment where children develop confidence, curiosity, communication skills, and a love for learning through play-based and activity-oriented education.
+              </p>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-8 h-14 text-base shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_40px_rgba(255,215,0,0.5)] transition-all duration-300" asChild>
+                  <Link href="/kindergarten">
+                    Check Out Kindergarten <ArrowRight size={18} className="ml-2" />
+                  </Link>
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us */}
       <section className="relative bg-[#0F4C81] pt-24 pb-44 text-white overflow-hidden" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
         <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/abstract/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
@@ -673,9 +729,12 @@ export default function Home() {
       </section>
 
       {/* Testimonials - What Parents Say */}
-      <section className="relative overflow-hidden pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)', background: 'linear-gradient(180deg, #0F4C81 0%, #E8F0F8 100%)' }}>
+      <section className="relative overflow-hidden pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)', background: 'linear-gradient(180deg, #0F4C81 0%, #1a5a9e 50%, #E8F0F8 100%)' }}>
+        {/* Floating decorative elements */}
         <div className="absolute top-20 left-10 h-40 w-40 rounded-full bg-[#FFD700]/10 blur-3xl"></div>
-        <div className="absolute top-40 right-20 h-60 w-60 rounded-full bg-[#FFD700]/5 blur-3xl"></div>
+        <div className="absolute top-40 right-20 h-60 w-60 rounded-full bg-[#FFD700]/8 blur-3xl"></div>
+        <div className="absolute bottom-32 left-1/4 h-32 w-32 rounded-full bg-[#FFD700]/5 blur-2xl"></div>
+        <div className="absolute top-32 right-1/3 h-24 w-24 rounded-full bg-white/5 blur-2xl"></div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
@@ -684,10 +743,31 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="space-y-4"
             >
+              {/* Premium Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/15 border border-[#FFD700]/20 px-4 py-2 backdrop-blur-sm">
+                <svg className="w-4 h-4 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#FFD700] uppercase tracking-wider">Parent Testimonials</span>
+                <svg className="w-4 h-4 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </div>
+
               <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">What Parents Say</h2>
-              <div className="mx-auto mt-4 h-1 w-20 bg-[#FFD700] rounded-full"></div>
-              <p className="mt-4 text-blue-100 max-w-2xl mx-auto">
+
+              {/* Decorative Gold Divider */}
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#FFD700]/60"></div>
+                <div className="h-1.5 w-1.5 rounded-full bg-[#FFD700]"></div>
+                <div className="h-1 w-8 rounded-full bg-[#FFD700]"></div>
+                <div className="h-1.5 w-1.5 rounded-full bg-[#FFD700]"></div>
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#FFD700]/60"></div>
+              </div>
+
+              <p className="text-blue-100/90 max-w-2xl mx-auto text-lg leading-relaxed">
                 Trusted by families for excellence in education, care, and holistic development.
               </p>
             </motion.div>
