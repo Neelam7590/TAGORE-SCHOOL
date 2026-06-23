@@ -41,7 +41,7 @@ export function Header() {
 
       {/* Main Header */}
       <div className="border-b shadow-sm">
-        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-8 px-4 md:px-8">
+        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(310px,auto)_1fr_auto] items-center gap-4 px-4 md:px-8">
           {/* Logo + Name */}
           <Link href="/" className="flex items-center gap-3 group shrink-0">
             <img
@@ -49,7 +49,7 @@ export function Header() {
               alt="Tagore Global School Logo"
               className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
             />
-            <span className="font-serif text-xl font-bold tracking-tight text-primary whitespace-nowrap">
+            <span className="font-serif text-2xl font-bold tracking-tight text-primary whitespace-nowrap">
               Tagore Global School
             </span>
           </Link>
