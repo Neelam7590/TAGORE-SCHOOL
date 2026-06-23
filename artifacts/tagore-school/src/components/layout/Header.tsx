@@ -56,6 +56,7 @@ export function Header() {
 
           {/* Desktop Nav — centered */}
           <nav className="hidden items-center justify-center gap-6 lg:flex">
+            <div className="h-8 w-px bg-gray-200 mr-2"></div>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
