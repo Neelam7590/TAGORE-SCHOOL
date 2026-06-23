@@ -266,56 +266,161 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── OUR JOURNEY TIMELINE ─── */}
-      <section className="bg-gray-50 py-24 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-[#0F4C81]/4 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FFD700]/5 rounded-full blur-3xl" />
+      {/* ─── OUR JOURNEY (Compact 2-col) ─── */}
+      <section className="bg-gray-50 py-20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#0F4C81]/4 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#FFD700]/5 rounded-full blur-3xl" />
 
-        <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 items-center">
+
+            {/* Left — Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-2xl border-2 border-[#FFD700]/30">
+                <img src="/school-building2.jpg" alt="School Building" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F4C81]/60 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/15 backdrop-blur-md rounded-2xl px-5 py-4 border border-white/20 text-white">
+                    <div className="text-2xl font-bold text-[#FFD700]">Est. 2001</div>
+                    <div className="text-sm text-white/80 mt-0.5">25+ Years of Excellence</div>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -top-3 -right-3 w-16 h-16 rounded-2xl bg-[#FFD700] flex items-center justify-center shadow-lg">
+                <BookOpen size={24} className="text-[#0F4C81]" />
+              </div>
+            </motion.div>
+
+            {/* Right — Content + Compact Timeline */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-sm font-semibold text-[#0F4C81] mb-3">
+                <Sparkles size={13} />
+                Our Story
+              </div>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-1">Our Journey</h2>
+              <p className="text-[#FFD700] font-semibold text-sm mb-3">A Legacy of Learning, Growth, and Excellence</p>
+              <div className="h-1 w-16 bg-[#FFD700] rounded-full mb-5" />
+              <p className="text-gray-600 text-sm leading-relaxed mb-7 max-w-lg">
+                Since its inception, Tagore Global School has been dedicated to nurturing young minds through quality education, strong values, and holistic development. Our journey reflects our commitment to excellence and innovation in education.
+              </p>
+
+              {/* Compact vertical timeline */}
+              <div className="relative border-l-2 border-[#0F4C81]/15 pl-0 space-y-4">
+                {[
+                  { icon: "🏫", title: "Foundation", desc: "Building a strong educational foundation for future generations." },
+                  { icon: "📚", title: "Academic Excellence", desc: "Maintaining high standards in teaching and learning across all levels." },
+                  { icon: "🌟", title: "Student Development", desc: "Focusing on confidence, leadership, and character building every day." },
+                  { icon: "🚀", title: "Future Vision", desc: "Preparing students for tomorrow's opportunities and challenges ahead." },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.5 }}
+                    className="group relative flex items-start gap-4 ml-4"
+                  >
+                    <div className="absolute -left-[29px] top-3 w-3 h-3 rounded-full bg-[#FFD700] border-2 border-white shadow-sm" />
+                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#0F4C81] flex items-center justify-center text-lg shadow-md group-hover:bg-[#FFD700] transition-all duration-300">
+                      <span>{item.icon}</span>
+                    </div>
+                    <div className="flex-1 bg-white rounded-xl border border-gray-100 px-4 py-3 shadow-sm group-hover:shadow-md group-hover:border-[#FFD700]/30 transition-all duration-300 hover:-translate-y-0.5">
+                      <h4 className="font-bold text-[#0F4C81] text-sm mb-0.5">{item.title}</h4>
+                      <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── MEET OUR FACULTY ─── */}
+      <section className="relative py-20 overflow-hidden" style={{ background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 40%, #EFF6FF 100%)" }}>
+        <div className="absolute top-0 left-0 w-72 h-72 bg-[#0F4C81]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#FFD700]/8 rounded-full blur-3xl" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-4"
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-5 py-2 text-sm font-semibold text-[#0F4C81] mb-4">
-              <Sparkles size={14} />
-              Our Story
+              <Users size={14} />
+              Our Team
             </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-4">Our Journey</h2>
-            <div className="mx-auto h-1 w-20 bg-[#FFD700] rounded-full" />
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-3">Meet Our Faculty</h2>
+            <div className="mx-auto h-1 w-20 bg-[#FFD700] rounded-full mb-4" />
+            <p className="text-gray-500 text-sm max-w-lg mx-auto">Dedicated Educators Inspiring Excellence Every Day</p>
           </motion.div>
 
-          <div className="relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#0F4C81]/15 -translate-x-1/2 hidden md:block" />
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-center text-gray-600 max-w-2xl mx-auto mb-12 text-sm leading-relaxed"
+          >
+            Our dedicated team of educators brings experience, passion, and innovation to the classroom. They are committed to nurturing every student's potential and creating a supportive environment where learning thrives.
+          </motion.p>
 
-            <div className="space-y-10">
-              {timelineData.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className={`flex flex-col md:flex-row items-center gap-6 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-                >
-                  <div className={`flex-1 ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                      <span className="inline-block text-xs font-bold text-[#FFD700] bg-[#0F4C81] px-3 py-1 rounded-full mb-3">{item.year}</span>
-                      <h3 className="font-serif text-lg font-bold text-[#0F4C81] mb-2">{item.title}</h3>
-                      <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-                    </div>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5"
+          >
+            {[
+              { name: "Ms. Shalini Malhotra", role: "Principal", subject: "School Leadership", emoji: "👩‍🏫", color: "from-[#0F4C81] to-[#1a6bb5]" },
+              { name: "Mr. Rajesh Kumar", role: "Sr. Teacher", subject: "Mathematics", emoji: "👨‍🏫", color: "from-[#1a6bb5] to-[#0F4C81]" },
+              { name: "Ms. Pooja Sharma", role: "Sr. Teacher", subject: "English Language", emoji: "👩‍🏫", color: "from-[#0F4C81] to-[#1a6bb5]" },
+              { name: "Mr. Amit Verma", role: "Sr. Teacher", subject: "Science Department", emoji: "👨‍🏫", color: "from-[#1a5a9e] to-[#0F4C81]" },
+              { name: "Ms. Priya Gupta", role: "Teacher", subject: "Social Studies", emoji: "👩‍🏫", color: "from-[#0F4C81] to-[#1a6bb5]" },
+              { name: "Mr. Suresh Patel", role: "Teacher", subject: "Computer Science", emoji: "👨‍🏫", color: "from-[#1a6bb5] to-[#0d3d6e]" },
+              { name: "Ms. Kavita Singh", role: "Teacher", subject: "Hindi Language", emoji: "👩‍🏫", color: "from-[#0d3d6e] to-[#0F4C81]" },
+              { name: "Mr. Deepak Joshi", role: "Teacher", subject: "Physical Education", emoji: "👨‍🏫", color: "from-[#0F4C81] to-[#1a5a9e]" },
+            ].map((faculty, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl bg-white/70 backdrop-blur-sm border border-white/60 shadow-md hover:shadow-xl hover:border-[#FFD700]/40 hover:shadow-[#FFD700]/10 transition-all duration-300 cursor-pointer"
+              >
+                {/* Top gradient band */}
+                <div className={`h-20 bg-gradient-to-br ${faculty.color} relative overflow-hidden`}>
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-white shadow-lg border-2 border-[#FFD700]/30 flex items-center justify-center text-3xl">
+                    {faculty.emoji}
                   </div>
+                </div>
 
-                  <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-[#0F4C81] border-4 border-white shadow-xl flex items-center justify-center text-2xl">
-                    {item.icon}
-                  </div>
+                {/* Content */}
+                <div className="pt-8 pb-5 px-4 text-center">
+                  <h4 className="font-bold text-[#0F4C81] text-sm leading-tight mb-1">{faculty.name}</h4>
+                  <div className="text-xs font-semibold text-[#FFD700] bg-[#0F4C81] inline-block px-2 py-0.5 rounded-full mb-2">{faculty.role}</div>
+                  <p className="text-xs text-gray-500">{faculty.subject}</p>
+                </div>
 
-                  <div className="flex-1 hidden md:block" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                {/* Gold glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1.5px rgba(255,215,0,0.35)" }} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 

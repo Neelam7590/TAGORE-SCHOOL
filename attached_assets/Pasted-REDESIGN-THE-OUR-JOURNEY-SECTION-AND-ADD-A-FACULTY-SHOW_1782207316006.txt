@@ -1,0 +1,159 @@
+REDESIGN THE "OUR JOURNEY" SECTION AND ADD A FACULTY SHOWCASE SECTION.
+
+The current Our Journey section feels too spacious and empty.
+
+Make it more compact, professional, and visually engaging.
+
+================================================
+OUR JOURNEY SECTION
+
+Use a balanced 2-column layout.
+
+Left Side (40%)
+
+- Large School Building Image
+- Rounded Corners
+- Premium Shadow
+- Gold Accent Border
+
+Right Side (60%)
+
+Heading:
+
+Our Journey
+
+Subtitle:
+
+A Legacy of Learning, Growth, and Excellence
+
+Short Introduction:
+
+Since its inception, Tagore Global School has been dedicated to nurturing young minds through quality education, strong values, and holistic development. Our journey reflects our commitment to excellence and innovation in education.
+
+================================================
+COMPACT TIMELINE
+
+Replace large timeline blocks with compact cards.
+
+🏫 Foundation
+
+Building a strong educational foundation for future generations.
+
+📚 Academic Excellence
+
+Maintaining high standards in teaching and learning.
+
+🌟 Student Development
+
+Focusing on confidence, leadership, and character building.
+
+🚀 Future Vision
+
+Preparing students for tomorrow's opportunities and challenges.
+
+================================================
+DESIGN IMPROVEMENTS
+
+Reduce excessive white space.
+
+Reduce card height.
+
+Keep timeline cards close together.
+
+Use a vertical connecting line.
+
+Add hover effects.
+
+Alternate blue and gold accent elements.
+
+Maximum height should fit comfortably on one desktop screen.
+
+================================================
+MEET OUR FACULTY SECTION
+
+Add a completely new section below Our Journey.
+
+Section Title:
+
+Meet Our Faculty
+
+Subtitle:
+
+Dedicated Educators Inspiring Excellence Every Day
+
+Background:
+
+Light Blue Gradient
+
+================================================
+FACULTY SHOWCASE LAYOUT
+
+Create a modern faculty grid.
+
+Display 6–8 faculty cards.
+
+Each card should contain:
+
+- Faculty Photo
+- Faculty Name
+- Designation
+- Subject Specialization
+
+Example:
+
+👩‍🏫 Ms. Shalini Malhotra
+Principal
+
+👨‍🏫 Mr. Rajesh Kumar
+Mathematics Department
+
+👩‍🏫 Ms. Pooja Sharma
+English Department
+
+================================================
+FACULTY CARD DESIGN
+
+Use:
+
+- Glassmorphism Cards
+- Rounded Corners
+- Premium Shadows
+- Gold Accent Borders
+- Hover Lift Effect
+- Smooth Animation
+
+On Hover:
+
+- Slight Zoom
+- Shadow Increase
+- Gold Glow Border
+
+================================================
+FACULTY MESSAGE
+
+Add a short content block above the faculty cards.
+
+Content:
+
+Our dedicated team of educators brings experience, passion, and innovation to the classroom. They are committed to nurturing every student's potential and creating a supportive environment where learning thrives.
+
+================================================
+DESIGN REQUIREMENTS
+
+Use:
+
+Royal Blue (#0F4C81)
+
+Gold (#FFD700)
+
+White (#FFFFFF)
+
+Add:
+
+- Smooth Animations
+- Framer Motion Effects
+- Premium Typography
+- Responsive Layout
+- Professional Spacing
+
+The Our Journey and Faculty sections should feel modern, premium, compact, and visually balanced without excessive empty space.
