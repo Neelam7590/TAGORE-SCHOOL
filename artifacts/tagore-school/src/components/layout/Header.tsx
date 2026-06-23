@@ -41,20 +41,21 @@ export function Header() {
 
       {/* Main Header */}
       <div className="border-b shadow-sm">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-8">
-          <Link href="/" className="flex items-center gap-3 group">
+        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-8 px-4 md:px-8">
+          {/* Logo + Name */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
             <img
               src="/logo.png"
               alt="Tagore Global School Logo"
               className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
             />
-            <span className="font-serif text-2xl font-bold tracking-tight text-primary">
+            <span className="font-serif text-xl font-bold tracking-tight text-primary whitespace-nowrap">
               Tagore Global School
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden items-center gap-7 lg:flex">
+          {/* Desktop Nav — centered */}
+          <nav className="hidden items-center justify-center gap-6 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -76,18 +77,21 @@ export function Header() {
           </nav>
 
           {/* Desktop CTAs */}
-          <div className="hidden items-center gap-4 lg:flex">
-            <Button variant="outline" className="border-primary text-primary font-semibold hover:bg-primary/5" asChild>
-              <Link href="/contact">Call Now</Link>
-            </Button>
-            <Button className="bg-[#FFD700] text-[#0F4C81] font-semibold hover:bg-[#FFC107] hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:scale-105 transition-all duration-300 rounded-full px-6" asChild>
-              <Link href="/admissions">Apply Now</Link>
-            </Button>
+          <div className="hidden items-center lg:flex shrink-0">
+            <div className="h-8 w-px bg-gray-200 mr-6"></div>
+            <div className="flex items-center gap-3">
+              <Button variant="outline" className="border-primary text-primary font-semibold hover:bg-primary/5" asChild>
+                <Link href="/contact">Call Now</Link>
+              </Button>
+              <Button className="bg-[#FFD700] text-[#0F4C81] font-semibold hover:bg-[#FFC107] hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:scale-105 transition-all duration-300 rounded-full px-6" asChild>
+                <Link href="/admissions">Apply Now</Link>
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-md text-primary lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-md text-primary lg:hidden col-start-3"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
