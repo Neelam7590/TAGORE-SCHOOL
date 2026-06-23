@@ -1,13 +1,64 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Heart, Laptop, Users, Rocket, Globe, Award, MapPin, Sparkles, Zap,
-  ArrowRight, CheckCircle2, GraduationCap, Camera, Music, Palette,
-  Trophy, Utensils, Bus, Phone, Mail, Clock, Flame, Mic2, Flower2,
-  Baby
+  ArrowRight, GraduationCap, Camera, Music, Palette,
+  Trophy, Utensils, Bus, Phone, Mail, Clock
 } from "lucide-react";
 import TestimonialSlider from "@/components/TestimonialSlider";
+
+function useCountUp(target: number, duration = 2000, start = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration, start]);
+  return count;
+}
+
+function AnimatedStat({ value, label }: { value: string; label: string }) {
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const numMatch = value.match(/^(\d+)(.*)$/);
+  const numPart = numMatch ? parseInt(numMatch[1]) : 0;
+  const suffix = numMatch ? numMatch[2] : value;
+  const counted = useCountUp(numPart, 2000, started);
+
+  return (
+    <div ref={ref} className="flex flex-col items-center justify-center rounded-2xl bg-[#0F4C81]/80 p-6 backdrop-blur-md border border-[#FFD700]/30 cursor-default">
+      <motion.span
+        initial={{ scale: 0.5 }}
+        animate={{ scale: started ? 1 : 0.5 }}
+        transition={{ type: "spring", stiffness: 200 }}
+        className="text-3xl font-bold text-[#FFD700] md:text-4xl"
+      >
+        {numPart > 0 ? `${counted}${suffix}` : value}
+      </motion.span>
+      <span className="mt-2 text-sm font-medium text-white/90 text-center">{label}</span>
+    </div>
+  );
+}
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -101,17 +152,8 @@ export default function Home() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.8 + i * 0.15, duration: 0.5, type: "spring" }}
               whileHover={{ scale: 1.08, y: -6, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.3)" }}
-              className="flex flex-col items-center justify-center rounded-2xl bg-[#0F4C81]/80 p-6 backdrop-blur-md border border-[#FFD700]/30 cursor-default"
             >
-              <motion.span
-                initial={{ scale: 0.5 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 1 + i * 0.15, type: "spring", stiffness: 200 }}
-                className="text-3xl font-bold text-[#FFD700] md:text-4xl"
-              >
-                {stat.value}
-              </motion.span>
-              <span className="mt-2 text-sm font-medium text-white/90 text-center">{stat.label}</span>
+              <AnimatedStat value={stat.value} label={stat.label} />
             </motion.div>
           ))}
         </motion.div>
@@ -178,7 +220,7 @@ export default function Home() {
               className="relative"
             >
               <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
-                <img src="/school-building.jpg" alt="School Campus" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+                <img src="/school-building2.jpg" alt="School Campus" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-xl bg-[#0F4C81] p-6 shadow-xl hidden md:block">
                 <div className="flex items-center gap-4">
@@ -208,7 +250,7 @@ export default function Home() {
             >
               <div className="relative mx-auto max-w-md">
                 <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
-                  <img src="/principal.png" alt="Principal Ms. Shalini Malhotra" className="h-full w-full object-cover" />
+                  <img src="/principal2.png" alt="Principal Ms. Shalini Malhotra" className="h-full w-full object-cover" />
                 </div>
                 <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#FFD700] px-6 py-3 shadow-lg">
                   <div className="text-center">
@@ -348,11 +390,7 @@ export default function Home() {
       </section>
 
       {/* Kindergarten @ TGS Section */}
-      <section className="relative bg-[#0F4C81] pt-24 pb-44 text-white overflow-hidden" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
-        <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/kgpattern/1920/1080')] bg-cover bg-center opacity-5 mix-blend-overlay"></div>
-        <div className="absolute top-20 left-10 h-40 w-40 rounded-full bg-[#FFD700]/10 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 h-60 w-60 rounded-full bg-[#FFD700]/5 blur-3xl"></div>
-
+      <section className="relative bg-white pt-24 pb-44 overflow-hidden" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -362,8 +400,8 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="relative"
             >
-              <div className="aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl border border-white/10">
-                <img src="https://picsum.photos/seed/kghome/800/600" alt="Kindergarten at TGS" className="h-full w-full object-cover" />
+              <div className="aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl border border-[#0F4C81]/10">
+                <img src="/kindergarten2.png" alt="Kindergarten at TGS" className="h-full w-full object-cover" />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-[#FFD700] text-[#0F4C81] px-6 py-3 rounded-xl font-bold shadow-lg flex items-center gap-2">
                 <Sparkles size={18} fill="currentColor" />
@@ -377,21 +415,21 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/20 px-4 py-1.5 text-sm font-medium text-[#FFD700] mb-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-sm font-medium text-[#0F4C81] mb-4">
                 <Heart size={14} />
                 <span>Early Years Education</span>
               </div>
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-[#0F4C81]">
                 Kindergarten <span className="text-[#FFD700]">@ TGS</span>
               </h2>
-              <p className="text-xl text-blue-100/80 font-medium mb-4">
+              <p className="text-xl text-gray-600 font-medium mb-4">
                 Where Little Learners Begin Their Journey of Discovery, Creativity, and Growth.
               </p>
-              <p className="text-lg text-blue-100/70 leading-relaxed mb-8">
+              <p className="text-lg text-gray-500 leading-relaxed mb-8">
                 Our Kindergarten Program provides a joyful, safe, and nurturing environment where children develop confidence, curiosity, communication skills, and a love for learning through play-based and activity-oriented education.
               </p>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-8 h-14 text-base shadow-[0_0_30px_rgba(255,215,0,0.3)] hover:shadow-[0_0_40px_rgba(255,215,0,0.5)] transition-all duration-300" asChild>
+                <Button className="bg-[#0F4C81] text-white font-bold hover:bg-[#0F4C81]/90 rounded-full px-8 h-14 text-base shadow-lg transition-all duration-300" asChild>
                   <Link href="/kindergarten">
                     Check Out Kindergarten <ArrowRight size={18} className="ml-2" />
                   </Link>
@@ -539,110 +577,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Student Life @ TGS - Premium */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0F4C81] via-[#0F4C81]/90 to-white pt-24 pb-44 text-white" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
-        {/* Floating shapes */}
-        <div className="absolute top-20 left-10 h-40 w-40 rounded-full bg-[#FFD700]/10 blur-3xl"></div>
-        <div className="absolute top-40 right-20 h-60 w-60 rounded-full bg-[#FFD700]/5 blur-3xl"></div>
-        <div className="absolute bottom-40 left-1/3 h-32 w-32 rounded-full bg-white/5 blur-2xl"></div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
-          <div className="mb-16 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/20 px-4 py-1.5 text-sm font-medium text-[#FFD700] mb-4"
-            >
-              <Heart size={14} />
-              <span>Beyond Academics</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-serif text-3xl font-bold text-white md:text-4xl lg:text-5xl"
-            >
-              Student Life @ TGS
-            </motion.h2>
-            <div className="mx-auto mt-4 h-1 w-24 bg-[#FFD700] rounded-full"></div>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="mt-4 mx-auto max-w-3xl text-lg text-blue-100/80"
-            >
-              At Tagore Global School, learning extends beyond the classroom. Students explore their talents, build confidence, and create unforgettable experiences through sports, arts, leadership activities, and cultural events.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Trophy, title: "Sports & Athletics", desc: "Encouraging teamwork, discipline, fitness, and sportsmanship through various indoor and outdoor sports activities." },
-              { icon: Music, title: "Music & Dance", desc: "Providing students opportunities to express themselves creatively through music, dance, and performing arts." },
-              { icon: Palette, title: "Art & Creativity", desc: "Inspiring imagination and innovation through drawing, painting, crafts, and creative projects." },
-              { icon: Camera, title: "Clubs & Events", desc: "Developing leadership, communication, and social skills through clubs, competitions, celebrations, and school events." },
-            ].map((activity, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12, duration: 0.5, type: "spring" }}
-                whileHover={{ y: -12, scale: 1.03 }}
-                className="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-8 transition-all duration-500 hover:bg-white/10 hover:border-[#FFD700]/40 hover:shadow-2xl hover:shadow-[#FFD700]/10"
-              >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FFD700] via-[#FFC107] to-[#FFD700] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -right-6 -top-6 w-24 h-24 bg-[#FFD700]/5 rounded-full blur-2xl group-hover:bg-[#FFD700]/10 transition-all duration-500"></div>
-                <div className="w-16 h-16 bg-[#FFD700]/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#FFD700] transition-all duration-300 group-hover:rotate-3">
-                  <activity.icon size={32} className="text-[#FFD700] group-hover:text-[#0F4C81] transition-colors duration-300" />
-                </div>
-                <h4 className="font-serif text-xl font-bold text-white mb-3 group-hover:text-[#FFD700] transition-colors duration-300">{activity.title}</h4>
-                <p className="text-sm text-blue-100/70 leading-relaxed group-hover:text-blue-100/90 transition-colors duration-300">{activity.desc}</p>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Student Life Highlights */}
-      <section className="bg-white pt-16 pb-16" style={{ marginTop: '-80px' }}>
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-            {[
-              { icon: Trophy, label: "Competitions" },
-              { icon: Mic2, label: "Cultural Programs" },
-              { icon: Flame, label: "Talent Shows" },
-              { icon: Flower2, label: "Educational Trips" },
-              { icon: Award, label: "Annual Sports Day" },
-              { icon: Palette, label: "Creative Workshops" },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -6, scale: 1.05 }}
-                className="group flex flex-col items-center text-center p-6 rounded-xl bg-[#0F4C81]/5 border border-[#0F4C81]/10 transition-all duration-300 hover:bg-[#0F4C81] hover:border-[#0F4C81] hover:shadow-lg"
-              >
-                <div className="w-12 h-12 rounded-full bg-[#0F4C81]/10 flex items-center justify-center mb-3 group-hover:bg-[#FFD700] transition-all duration-300">
-                  <item.icon size={22} className="text-[#0F4C81] group-hover:text-[#0F4C81]" />
-                </div>
-                <span className="text-xs font-semibold text-[#0F4C81] group-hover:text-white transition-colors duration-300">{item.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Gallery Preview - Premium */}
-      <section className="relative bg-white pt-24 pb-44 overflow-hidden" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
-        {/* Gold glow effects */}
+      <section className="relative bg-[#0F4C81] pt-24 pb-44 overflow-hidden" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
         <div className="absolute top-20 left-1/4 w-64 h-64 bg-[#FFD700]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-[#FFD700]/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-40 right-10 h-32 w-32 bg-[#0F4C81]/5 rounded-full blur-2xl"></div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
@@ -650,7 +588,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-sm font-semibold text-[#0F4C81] mb-4"
+              className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/20 px-4 py-1.5 text-sm font-semibold text-[#FFD700] mb-4"
             >
               <Camera size={14} />
               <span>Glimpses of Our School</span>
@@ -659,7 +597,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-3xl font-bold text-[#0F4C81] md:text-4xl lg:text-5xl"
+              className="font-serif text-3xl font-bold text-white md:text-4xl lg:text-5xl"
             >
               Moments That <span className="text-[#FFD700]">Inspire</span>
             </motion.h2>
@@ -668,7 +606,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mt-4 mx-auto max-w-2xl text-lg text-gray-500"
+              className="mt-4 mx-auto max-w-2xl text-lg text-white/70"
             >
               Explore the vibrant life, achievements, celebrations, and unforgettable memories of our students.
             </motion.p>
@@ -677,12 +615,13 @@ export default function Home() {
           {/* Masonry Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
             {[
-              { id: 1, url: "https://picsum.photos/seed/campus/600/800", title: "Campus Life", span: "col-span-2 row-span-2" },
+              { id: 1, url: "/campus-life.jpg", title: "Campus Life", span: "col-span-2 row-span-2" },
               { id: 2, url: "https://picsum.photos/seed/sports/600/400", title: "Sports Activities", span: "col-span-1 row-span-1" },
               { id: 3, url: "https://picsum.photos/seed/cultural/600/400", title: "Cultural Events", span: "col-span-1 row-span-1" },
               { id: 4, url: "https://picsum.photos/seed/classroom/600/400", title: "Classroom Learning", span: "col-span-1 row-span-1" },
               { id: 5, url: "https://picsum.photos/seed/celebration/600/800", title: "Celebrations", span: "col-span-1 row-span-2" },
               { id: 6, url: "https://picsum.photos/seed/achieve/600/400", title: "Student Achievements", span: "col-span-2 row-span-1" },
+              { id: 7, url: "https://picsum.photos/seed/tgsmoment/600/400", title: "School Events", span: "col-span-1 row-span-1" },
             ].map((img, i) => (
               <motion.div
                 key={img.id}
@@ -698,9 +637,7 @@ export default function Home() {
                   alt={img.title}
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                 />
-                {/* Gold border glow on hover */}
                 <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#FFD700]/60 transition-all duration-500 shadow-none group-hover:shadow-[0_0_30px_rgba(255,215,0,0.3)]"></div>
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-[#0F4C81]/50 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                   <span className="bg-[#FFD700] text-[#0F4C81] px-5 py-2.5 rounded-full font-bold text-sm shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     {img.title}
@@ -716,11 +653,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="mt-12 text-center"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button size="lg" className="h-14 bg-[#0F4C81] px-10 text-lg font-bold text-white hover:bg-[#FFD700] hover:text-[#0F4C81] shadow-lg transition-all duration-300 rounded-full" asChild>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="lg" className="h-14 bg-[#FFD700] px-10 text-lg font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full" asChild>
                 <Link href="/gallery">View Full Gallery</Link>
               </Button>
             </motion.div>
@@ -729,13 +663,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials - What Parents Say */}
-      <section className="relative overflow-hidden pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)', background: 'linear-gradient(180deg, #0F4C81 0%, #1a5a9e 50%, #E8F0F8 100%)' }}>
-        {/* Floating decorative elements */}
-        <div className="absolute top-20 left-10 h-40 w-40 rounded-full bg-[#FFD700]/10 blur-3xl"></div>
-        <div className="absolute top-40 right-20 h-60 w-60 rounded-full bg-[#FFD700]/8 blur-3xl"></div>
-        <div className="absolute bottom-32 left-1/4 h-32 w-32 rounded-full bg-[#FFD700]/5 blur-2xl"></div>
-        <div className="absolute top-32 right-1/3 h-24 w-24 rounded-full bg-white/5 blur-2xl"></div>
-
+      <section className="relative overflow-hidden bg-white pt-24 pb-44" style={{ marginTop: '-80px', clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)' }}>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
             <motion.div
@@ -745,20 +673,18 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="space-y-4"
             >
-              {/* Premium Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/15 border border-[#FFD700]/20 px-4 py-2 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 border border-[#0F4C81]/15 px-4 py-2">
                 <svg className="w-4 h-4 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="text-sm font-semibold text-[#FFD700] uppercase tracking-wider">Parent Testimonials</span>
+                <span className="text-sm font-semibold text-[#0F4C81] uppercase tracking-wider">Parent Testimonials</span>
                 <svg className="w-4 h-4 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
 
-              <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">What Parents Say</h2>
+              <h2 className="font-serif text-3xl font-bold text-[#0F4C81] md:text-4xl">What Parents Say</h2>
 
-              {/* Decorative Gold Divider */}
               <div className="flex items-center justify-center gap-3">
                 <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#FFD700]/60"></div>
                 <div className="h-1.5 w-1.5 rounded-full bg-[#FFD700]"></div>
@@ -767,7 +693,7 @@ export default function Home() {
                 <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#FFD700]/60"></div>
               </div>
 
-              <p className="text-blue-100/90 max-w-2xl mx-auto text-lg leading-relaxed">
+              <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
                 Trusted by families for excellence in education, care, and holistic development.
               </p>
             </motion.div>
@@ -807,93 +733,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Preview */}
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-sm font-semibold text-[#0F4C81]">
-                <Phone size={14} />
-                <span>Get in Touch</span>
-              </div>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-4">
-                Contact Us
-              </h2>
-              <div className="h-1 w-20 bg-[#FFD700] rounded-full mb-8"></div>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Have questions about admissions, academics, or our school? We are here to help. Reach out to us and our team will respond promptly.
-              </p>
-
-              <div className="space-y-6">
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-[#0F4C81]/10 rounded-full flex items-center justify-center text-[#0F4C81] shrink-0">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#0F4C81] mb-1">Campus Address</h4>
-                    <p className="text-gray-600 text-sm">Sector 29, Global City, Kurukshetra, Haryana – 136118</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-[#0F4C81]/10 rounded-full flex items-center justify-center text-[#0F4C81] shrink-0">
-                    <Phone size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#0F4C81] mb-1">Phone</h4>
-                    <p className="text-gray-600 text-sm">+91 7082346751</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-[#0F4C81]/10 rounded-full flex items-center justify-center text-[#0F4C81] shrink-0">
-                    <Mail size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#0F4C81] mb-1">Email</h4>
-                    <p className="text-gray-600 text-sm">info@tagoreglobalschool.in</p>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 bg-[#0F4C81]/10 rounded-full flex items-center justify-center text-[#0F4C81] shrink-0">
-                    <Clock size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-[#0F4C81] mb-1">Office Hours</h4>
-                    <p className="text-gray-600 text-sm">Monday – Saturday: 8:00 AM – 4:00 PM</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <Button className="bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 rounded-full px-8" asChild>
-                  <Link href="/contact">
-                    Contact Us <ArrowRight className="ml-2" size={18} />
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100 h-[400px] relative bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin size={48} className="text-[#0F4C81] mx-auto mb-4" />
-                  <p className="font-serif font-bold text-xl text-[#0F4C81]">Tagore Global School</p>
-                  <p className="text-sm text-gray-500 mt-2">Sector 29, Global City, Kurukshetra</p>
-                  <p className="text-sm text-[#FFD700] mt-1 font-medium">📍 View on Map</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
     </motion.div>
   );
 }

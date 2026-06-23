@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { GraduationCap, Facebook, Instagram, Youtube, Linkedin, MapPin, Phone, Mail, Clock, ArrowRight, Heart, Star, Award, Users, TrendingUp } from "lucide-react";
+import { GraduationCap, Facebook, Instagram, Youtube, Linkedin, MapPin, Phone, Mail, Clock, ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -28,6 +28,7 @@ export function Footer() {
     { href: "/gallery", label: "Gallery" },
     { href: "/admissions", label: "Admissions" },
     { href: "/contact", label: "Contact Us" },
+    { href: "/privacy-policy", label: "Privacy Policy" },
   ];
 
   const socialLinks = [
@@ -37,12 +38,6 @@ export function Footer() {
     { icon: Linkedin, href: "#", label: "LinkedIn" },
   ];
 
-  const stats = [
-    { icon: Award, value: "25+", label: "Years of Excellence", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
-    { icon: Users, value: "5000+", label: "Students Enrolled", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
-    { icon: TrendingUp, value: "100%", label: "Board Results", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
-    { icon: Heart, value: "98%", label: "Parent Satisfaction", color: "from-[#FFD700]/30 to-[#FFD700]/10" },
-  ];
 
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-[#0F4C81] via-[#0A3A66] to-[#062a4a] text-white">
@@ -62,35 +57,6 @@ export function Footer() {
       <div className="absolute top-1/2 left-1/2 h-64 w-64 rounded-full bg-white/3 blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 pt-16 pb-8 md:px-8">
-        {/* Stats Row - Bento Grid Style */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 pb-12 border-b border-white/10"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              whileHover={{ y: -4, scale: 1.02 }}
-              className="flex items-center gap-4 group bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-5 hover:bg-white/10 hover:border-[#FFD700]/30 transition-all duration-300"
-            >
-              <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} border border-[#FFD700]/20 group-hover:from-[#FFD700] group-hover:to-[#FFC107] transition-all duration-300`}>
-                <stat.icon size={22} className="text-[#FFD700] group-hover:text-[#0F4C81] transition-colors duration-300" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#FFD700] tracking-tight">{stat.value}</div>
-                <div className="text-xs text-blue-100/60 font-medium">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: School Information */}
