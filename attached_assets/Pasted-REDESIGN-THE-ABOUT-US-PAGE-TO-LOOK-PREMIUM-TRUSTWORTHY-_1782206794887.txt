@@ -1,0 +1,242 @@
+REDESIGN THE ABOUT US PAGE TO LOOK PREMIUM, TRUSTWORTHY, MODERN, AND PROFESSIONAL.
+
+================================================
+ABOUT PAGE HERO SECTION
+
+Create a stunning hero section.
+
+Background:
+Royal Blue Gradient (#0F4C81)
+
+Add:
+
+- School Building Image
+- Gold Accent Elements
+- Smooth Entrance Animation
+
+Heading:
+
+About Tagore Global School
+
+Subheading:
+
+Empowering Young Minds, Inspiring Excellence, and Building Future Leaders.
+
+================================================
+ABOUT THE SCHOOL
+
+Create a premium two-column layout.
+
+Left Side:
+Large School Building Image
+
+Right Side:
+
+Heading:
+
+Welcome to Tagore Global School
+
+Content:
+
+Tagore Global School is dedicated to providing quality education in a nurturing and inspiring environment. We focus on academic excellence, character development, creativity, leadership, and holistic growth. Our mission is to empower students with the knowledge, values, and skills required to succeed in an ever-changing world.
+
+Add:
+
+Learn More Button
+
+================================================
+OUR JOURNEY
+
+Create an interactive timeline section.
+
+Timeline Events:
+
+🏫 Foundation of the School
+
+📚 Academic Excellence Milestones
+
+🌟 Student Achievements
+
+💻 Technology Integration
+
+🚀 Future Growth & Innovation
+
+Use premium timeline cards with animations.
+
+================================================
+WHO WE ARE
+
+Heading:
+
+Who We Are
+
+Content:
+
+We are a community of learners, educators, and families working together to create a positive educational experience. Our school fosters curiosity, confidence, responsibility, and lifelong learning through innovative teaching and value-based education.
+
+Add supporting image.
+
+================================================
+OUR VISION
+
+Create a premium card.
+
+Title:
+
+Our Vision
+
+Content:
+
+To inspire and empower students to become confident, responsible, and compassionate global citizens who contribute positively to society and excel in all areas of life.
+
+Icon:
+Eye Icon
+
+================================================
+OUR MISSION
+
+Create a premium card.
+
+Title:
+
+Our Mission
+
+Content:
+
+To provide a nurturing, innovative, and inclusive learning environment that promotes academic excellence, character building, creativity, leadership, and lifelong learning.
+
+Icon:
+Target Icon
+
+================================================
+CORE VALUES
+
+Create 6 premium cards.
+
+⭐ Excellence
+
+⭐ Integrity
+
+⭐ Respect
+
+⭐ Responsibility
+
+⭐ Innovation
+
+⭐ Compassion
+
+Add hover animations.
+
+================================================
+WHY CHOOSE TAGORE GLOBAL SCHOOL
+
+Create 6 feature cards.
+
+🎓 Academic Excellence
+
+👩‍🏫 Experienced Faculty
+
+💻 Smart Learning Environment
+
+🌟 Holistic Development
+
+🛡 Safe & Secure Campus
+
+🚀 Future-Ready Education
+
+================================================
+OUR STRENGTHS
+
+Create animated counters.
+
+🏫 1000+ Students
+
+👨‍🏫 50+ Educators
+
+📚 25+ Classrooms
+
+⭐ 100% Commitment
+
+Counters should animate from 0 when visible.
+
+================================================
+ACADEMIC EXCELLENCE
+
+Heading:
+
+Excellence in Education
+
+Content:
+
+Our academic programs are designed to nurture critical thinking, creativity, problem-solving abilities, and a passion for lifelong learning while maintaining the highest educational standards.
+
+================================================
+FUTURE-READY LEARNING
+
+Heading:
+
+Preparing Students for Tomorrow
+
+Content:
+
+We equip students with modern skills through technology integration, experiential learning, collaboration, communication, and leadership development.
+
+================================================
+PRINCIPAL MESSAGE PREVIEW
+
+Add Principal Photo.
+
+Heading:
+
+Message from the Principal
+
+Display short message preview.
+
+Button:
+
+Read Full Message
+
+Open dedicated Principal Message Page.
+
+================================================
+CALL TO ACTION
+
+Premium Blue and Gold Section.
+
+Heading:
+
+Join a Community of Excellence
+
+Text:
+
+Discover an educational journey that inspires achievement, character, and lifelong success.
+
+Buttons:
+
+Apply Now
+
+Contact Us
+
+================================================
+DESIGN REQUIREMENTS
+
+Use:
+
+Royal Blue (#0F4C81)
+
+Gold (#FFD700)
+
+White (#FFFFFF)
+
+Add:
+
+- Glassmorphism Cards
+- SVG Wave Dividers
+- Premium Hover Effects
+- Framer Motion Animations
+- Responsive Design
+- Modern Typography
+- Large White Spaces
+- Professional Layout
+
+Make the About Page visually rich, emotionally engaging, and better than most modern school websites.
