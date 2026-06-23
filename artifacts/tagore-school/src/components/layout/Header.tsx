@@ -41,22 +41,22 @@ export function Header() {
 
       {/* Main Header */}
       <div className="border-b shadow-sm">
-        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(310px,auto)_1fr_auto] items-center gap-4 px-4 md:px-8">
+        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 md:px-6">
           {/* Logo + Name */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
             <img
               src="/logo.png"
               alt="Tagore Global School Logo"
-              className="h-12 w-12 object-contain transition-transform group-hover:scale-105"
+              className="h-11 w-11 object-contain transition-transform group-hover:scale-105"
             />
-            <span className="font-serif text-2xl font-bold tracking-tight text-primary whitespace-nowrap">
+            <span className="font-serif text-xl font-bold tracking-tight text-primary whitespace-nowrap">
               Tagore Global School
             </span>
           </Link>
 
           {/* Desktop Nav — centered */}
-          <nav className="hidden items-center justify-center gap-6 lg:flex">
-            <div className="h-8 w-px bg-gray-200 mr-2"></div>
+          <nav className="hidden items-center justify-center gap-4 lg:flex">
+            <div className="h-8 w-px bg-gray-200 mx-2"></div>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
