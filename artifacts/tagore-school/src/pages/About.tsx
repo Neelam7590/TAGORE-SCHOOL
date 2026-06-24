@@ -720,6 +720,70 @@ export default function About() {
         </div>
       </section>
 
+      {/* ─── DIRECTOR'S MESSAGE ─── */}
+      <section className="bg-white py-24 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-80 h-80 bg-[#FFD700]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#0F4C81]/5 rounded-full blur-3xl" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-5 py-2 text-sm font-semibold text-[#0F4C81] mb-4">
+                <Users size={14} />
+                Director's Message
+              </div>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-4">Message from the Director</h2>
+              <div className="h-1 w-20 bg-[#FFD700] rounded-full mb-6" />
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  Tagore Global School stands as a testament to the belief that every child deserves the best possible start in life. Since our founding, we have been guided by a singular vision — to create an institution where academic excellence and human values walk hand in hand.
+                </p>
+                <p>
+                  We have built an environment where curiosity is celebrated, ambitions are nurtured, and every student is empowered to discover their unique potential. Our dedicated faculty, modern infrastructure, and holistic approach ensure that every child who enters our doors leaves better prepared for the world.
+                </p>
+              </div>
+              <div className="mt-5 rounded-2xl border-l-4 border-[#FFD700] bg-gradient-to-r from-[#FFD700]/8 to-transparent p-6">
+                <p className="font-serif text-lg font-bold text-[#0F4C81]">— Mr. Ashok Kumar Sharma</p>
+                <p className="text-sm text-gray-500 mt-1">Director, Tagore Global School</p>
+              </div>
+              <div className="mt-8">
+                <Button className="bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 rounded-full px-8 font-semibold" asChild>
+                  <Link href="/director-message">
+                    Read Full Message <ArrowRight className="ml-2" size={18} />
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative"
+            >
+              <div className="relative mx-auto max-w-sm">
+                <div className="absolute -inset-4 rounded-3xl bg-[#FFD700]/10 blur-2xl" />
+                <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-2xl border-4 border-white">
+                  <img src="/principal2.png" alt="Director" className="h-full w-full object-cover object-top" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F4C81]/30 to-transparent" />
+                </div>
+                <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#FFD700] px-6 py-3 shadow-xl">
+                  <div className="text-sm font-bold text-[#0F4C81]">Director</div>
+                  <div className="text-xs text-[#0F4C81]/70">Tagore Global School</div>
+                </div>
+                <div className="absolute -top-4 -left-4 h-16 w-16 rounded-full border-4 border-[#0F4C81]/20 bg-[#0F4C81]/8" />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── PRINCIPAL MESSAGE PREVIEW ─── */}
       <section className="bg-gray-50 py-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#FFD700]/5 rounded-full blur-3xl" />

@@ -1,0 +1,309 @@
+WEBSITE STRUCTURE & PAGE IMPROVEMENTS
+
+================================================
+GLOBAL NAVIGATION UPDATE
+========================
+
+Add dropdown menus in the header navigation.
+
+ABOUT US Dropdown:
+
+* About School
+* Our Journey
+* Director's Message
+* Principal's Message
+* Vision & Mission
+* Core Values
+* Meet Our Faculty
+
+ACADEMICS Dropdown:
+
+* Curriculum Overview
+* Academic Programs
+* Streams & Subjects
+* Teaching Methodology
+* Assessment System
+* Co-Curricular Activities
+* Achievements & Results
+
+FACILITIES Dropdown:
+
+* Learning Facilities
+* Sports Facilities
+* Transport Facility
+* Safety & Security
+* Green Campus
+
+================================================
+ABOUT PAGE UPDATE
+=================
+
+Add a new section above Principal Message.
+
+DIRECTOR'S MESSAGE
+
+Display:
+
+* Director Photo
+* Director Name
+* Director Designation
+* Message Content
+
+Layout:
+
+Photo Left
+Message Right
+
+Use premium card design.
+
+Add:
+
+Read Full Message Button
+
+================================================
+ACADEMICS PAGE COMPLETE REDESIGN
+================================
+
+HERO SECTION
+
+Title:
+
+Academic Excellence
+
+Subtitle:
+
+Empowering students through knowledge, innovation, and lifelong learning.
+
+Add:
+
+Premium Academic Banner Image
+
+================================================
+CURRICULUM OVERVIEW
+===================
+
+Display curriculum structure.
+
+Include:
+
+* Kindergarten
+* Primary
+* Middle School
+* Secondary
+* Senior Secondary
+
+Use timeline or progression cards.
+
+================================================
+STREAMS & SUBJECTS
+==================
+
+Create separate cards.
+
+Science Stream
+
+Commerce Stream
+
+Humanities Stream
+
+Display subjects under each stream.
+
+================================================
+TEACHING METHODOLOGY
+====================
+
+Improve this section.
+
+Add:
+
+* Smart Learning
+* Experiential Learning
+* Activity-Based Learning
+* Project-Based Learning
+* Technology Integration
+* Collaborative Learning
+
+Use icon cards.
+
+================================================
+ASSESSMENT SYSTEM
+=================
+
+Create a new section.
+
+Include:
+
+* Formative Assessment
+* Summative Assessment
+* Practical Evaluation
+* Continuous Performance Monitoring
+
+================================================
+CO-CURRICULAR ACTIVITIES
+========================
+
+Redesign this section.
+
+Add:
+
+🎨 Art & Craft
+
+🎵 Music
+
+💃 Dance
+
+🎭 Drama
+
+🏆 Competitions
+
+🎤 Public Speaking
+
+🌍 Educational Tours
+
+Use large visual cards.
+
+================================================
+ACHIEVEMENTS & RESULTS
+======================
+
+Create premium statistics and achievements section.
+
+Display:
+
+* Board Results
+* Student Achievements
+* Competition Awards
+* Sports Achievements
+
+Use counters and achievement cards.
+
+================================================
+FACILITIES PAGE COMPLETE REDESIGN
+=================================
+
+Remove:
+
+Featured Facilities Section
+
+Remove:
+
+View All Facilities Button
+
+================================================
+PREMIUM LEARNING FACILITIES
+===========================
+
+Merge all facility cards into one premium section.
+
+Include:
+
+🏫 Smart Classrooms
+
+🧪 Science Laboratories
+
+💻 Computer Labs
+
+📚 Library
+
+🏆 Sports Complex
+
+🎨 Activity Rooms
+
+Each facility should contain:
+
+* Description
+* 2 to 3 Images
+* Hover Effects
+* Premium Layout
+
+================================================
+TRANSPORT FACILITY
+==================
+
+Create separate section.
+
+Include:
+
+* School Buses
+* Student Safety
+* Trained Drivers
+* Route Coverage
+
+Add 2-3 transport images.
+
+================================================
+SAFETY & SECURITY
+=================
+
+Create separate section.
+
+Include:
+
+* CCTV Surveillance
+* Secure Campus
+* First Aid Support
+* Safety Protocols
+
+Add 2-3 images.
+
+================================================
+WHY OUR FACILITIES STAND OUT
+============================
+
+Keep existing section.
+
+Improve card design and animations.
+
+================================================
+GREEN CAMPUS
+============
+
+Keep:
+
+A Campus Designed for Learning, Nature & Growth
+
+This section is already good.
+
+Improve:
+
+* Image Quality
+* Hover Effects
+* Content Spacing
+
+================================================
+IMAGE REQUIREMENTS
+==================
+
+Every major section should contain:
+
+Minimum 2–3 images.
+
+Apply:
+
+* Zoom Effect
+* Hover Animation
+* Soft Shadow
+* Gold Border Glow
+
+================================================
+DESIGN REQUIREMENTS
+===================
+
+Theme:
+
+Royal Blue (#0F4C81)
+
+Gold (#FFD700)
+
+White (#FFFFFF)
+
+Use:
+
+* Glassmorphism Cards
+* SVG Wave Dividers
+* Framer Motion Animations
+* Smooth Hover Effects
+* Premium Typography
+* Responsive Design
+
+The website should look like a premium international school website with separate pages, dropdown navigation, rich visuals, modern layouts, and professional user experience.
