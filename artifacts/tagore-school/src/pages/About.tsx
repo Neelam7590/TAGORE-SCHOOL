@@ -735,26 +735,41 @@ export default function About() {
             >
               <div className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-5 py-2 text-sm font-semibold text-[#0F4C81] mb-4">
                 <Users size={14} />
-                Director's Message
+                From the Desk of Our Director
               </div>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-4">Message from the Director</h2>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#0F4C81] mb-4">Message from the Managing Director</h2>
               <div className="h-1 w-20 bg-[#FFD700] rounded-full mb-6" />
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+
+              {/* Decorative quote mark */}
+              <div className="text-6xl font-serif text-[#FFD700]/30 leading-none mb-2 select-none">"</div>
+
+              <div className="space-y-4 text-gray-600 leading-relaxed text-[0.95rem]">
                 <p>
-                  Tagore Global School stands as a testament to the belief that every child deserves the best possible start in life. Since our founding, we have been guided by a singular vision — to create an institution where academic excellence and human values walk hand in hand.
+                  At Tagore Global School, we believe that every child possesses unique talents, limitless potential, and the ability to achieve excellence. Education is not merely about acquiring knowledge; it is about nurturing curiosity, building character, and developing the confidence to face future challenges with determination.
                 </p>
                 <p>
-                  We have built an environment where curiosity is celebrated, ambitions are nurtured, and every student is empowered to discover their unique potential. Our dedicated faculty, modern infrastructure, and holistic approach ensure that every child who enters our doors leaves better prepared for the world.
+                  Inspired by the words of renowned astronaut Kalpana Chawla, we encourage our students to explore deeply, think creatively, and discover the extraordinary potential within themselves. Every child has hidden strengths waiting to be identified, nurtured, and transformed into meaningful achievements.
+                </p>
+                <p>
+                  Our commitment is to provide a dynamic and caring learning environment where academic excellence is balanced with personal growth, innovation, leadership, and strong values.
                 </p>
               </div>
-              <div className="mt-5 rounded-2xl border-l-4 border-[#FFD700] bg-gradient-to-r from-[#FFD700]/8 to-transparent p-6">
-                <p className="font-serif text-lg font-bold text-[#0F4C81]">— Mr. Ashok Kumar Sharma</p>
-                <p className="text-sm text-gray-500 mt-1">Director, Tagore Global School</p>
+
+              <div className="mt-7 flex items-center gap-4 rounded-2xl border border-[#FFD700]/30 bg-gradient-to-r from-[#FFD700]/8 via-[#FFD700]/4 to-transparent p-5 shadow-sm">
+                <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full border-3 border-[#FFD700] shadow-md">
+                  <img src="/director.png" alt="K. L. Watta" className="h-full w-full object-cover object-top" />
+                </div>
+                <div>
+                  <p className="font-serif text-base font-bold text-[#0F4C81]">K. L. Watta</p>
+                  <p className="text-sm text-[#FFD700] font-semibold">Managing Director</p>
+                  <p className="text-xs text-gray-500">Tagore Global School</p>
+                </div>
               </div>
-              <div className="mt-8">
-                <Button className="bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 rounded-full px-8 font-semibold" asChild>
+
+              <div className="mt-6">
+                <Button className="bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 hover:shadow-lg rounded-full px-8 font-semibold transition-all" asChild>
                   <Link href="/director-message">
-                    Read Full Message <ArrowRight className="ml-2" size={18} />
+                    Read Full Message <ArrowRight className="ml-2" size={16} />
                   </Link>
                 </Button>
               </div>
@@ -770,14 +785,18 @@ export default function About() {
               <div className="relative mx-auto max-w-sm">
                 <div className="absolute -inset-4 rounded-3xl bg-[#FFD700]/10 blur-2xl" />
                 <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-2xl border-4 border-white">
-                  <img src="/principal2.png" alt="Director" className="h-full w-full object-cover object-top" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F4C81]/30 to-transparent" />
+                  <img src="/director.png" alt="K. L. Watta - Managing Director" className="h-full w-full object-cover object-top" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F4C81]/50 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <p className="font-serif text-white font-bold text-lg">K. L. Watta</p>
+                    <p className="text-[#FFD700] text-sm font-semibold">Managing Director</p>
+                  </div>
                 </div>
-                <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#FFD700] px-6 py-3 shadow-xl">
-                  <div className="text-sm font-bold text-[#0F4C81]">Director</div>
-                  <div className="text-xs text-[#0F4C81]/70">Tagore Global School</div>
+                <div className="absolute -bottom-4 -right-4 rounded-2xl bg-[#FFD700] px-5 py-3 shadow-xl">
+                  <div className="text-xs font-bold text-[#0F4C81]">Happy Learning</div>
+                  <div className="text-xs text-[#0F4C81]/70">Our Mission</div>
                 </div>
-                <div className="absolute -top-4 -left-4 h-16 w-16 rounded-full border-4 border-[#0F4C81]/20 bg-[#0F4C81]/8" />
+                <div className="absolute -top-4 -left-4 h-16 w-16 rounded-full border-4 border-[#FFD700]/30 bg-[#FFD700]/10" />
               </div>
             </motion.div>
           </div>
