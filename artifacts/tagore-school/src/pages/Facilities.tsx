@@ -115,19 +115,17 @@ function Lightbox({ images, title, onClose }: LightboxProps) {
 /* ─── Facility data with images ─── */
 const facilityImages = {
   "Smart Classrooms": [
-    { src: "/school-building2.jpg", caption: "Technology-enabled Smart Classroom" },
-    { src: "/school-building.jpg", caption: "Interactive Digital Learning" },
-    { src: "/campus-life.jpg", caption: "Student Engagement" },
+    { src: "/smart_class.jpg", caption: "Technology-Enabled Smart Classroom" },
   ],
   "Science Laboratories": [
-    { src: "/school-building.jpg", caption: "Modern Science Laboratory" },
-    { src: "/school-building2.jpg", caption: "Practical Experiments" },
-    { src: "/campus-life.jpg", caption: "Lab Activities" },
+    { src: "/lab_1.jpg", caption: "Chemistry Lab — Practical Experiments" },
+    { src: "/lab_2.jpg", caption: "Biology Lab — Anatomy & Life Sciences" },
+    { src: "/lab_3.jpg", caption: "Math Lab — Hands-On Learning" },
   ],
   "Computer Labs": [
-    { src: "/campus-life.jpg", caption: "High-Speed Computer Lab" },
-    { src: "/school-building2.jpg", caption: "Digital Learning Zone" },
-    { src: "/school-building.jpg", caption: "Coding & Robotics" },
+    { src: "/com_lab_1.jpg", caption: "Computer Lab — Digital Learning Sessions" },
+    { src: "/com_lab_2.jpg", caption: "Computer Lab — Students at Work" },
+    { src: "/com_lab_3.jpg", caption: "Computer Lab — Teacher-Student Interaction" },
   ],
   "Library": [
     { src: "/school-building.jpg", caption: "Extensive School Library" },
@@ -135,14 +133,14 @@ const facilityImages = {
     { src: "/campus-life.jpg", caption: "Digital Resources" },
   ],
   "Sports Complex": [
-    { src: "/campus-life.jpg", caption: "Multi-Sport Facilities" },
-    { src: "/school-building2.jpg", caption: "Athletic Track" },
-    { src: "/school-building.jpg", caption: "Sports Ground" },
+    { src: "/sport_1.jpg", caption: "Yoga & Meditation — Mind-Body Wellness" },
+    { src: "/sport_2.jpg", caption: "Roller Skating — Independence Day Celebration" },
+    { src: "/sport_3.jpg", caption: "Football Training — Sports Ground" },
   ],
   "Activity Rooms": [
-    { src: "/campus-life.jpg", caption: "Creative Activity Rooms" },
-    { src: "/school-building.jpg", caption: "Music & Dance Studio" },
-    { src: "/school-building2.jpg", caption: "Art Studio" },
+    { src: "/activity_1.jpg", caption: "Art Room — Drawing & Painting" },
+    { src: "/activity_2.jpg", caption: "Music Room — Instruments & Practice" },
+    { src: "/activity_3.jpg", caption: "Dance Studio — Classical & Contemporary" },
   ],
 };
 
