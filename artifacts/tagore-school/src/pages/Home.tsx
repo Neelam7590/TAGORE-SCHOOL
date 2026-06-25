@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -74,6 +74,7 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const [, navigate] = useLocation();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -429,10 +430,11 @@ export default function Home() {
                 Our Kindergarten Program provides a joyful, safe, and nurturing environment where children develop confidence, curiosity, communication skills, and a love for learning through play-based and activity-oriented education.
               </p>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="bg-[#0F4C81] text-white font-bold hover:bg-[#0F4C81]/90 rounded-full px-8 h-14 text-base shadow-lg transition-all duration-300" asChild>
-                  <Link href="/kindergarten">
-                    Check Out Kindergarten <ArrowRight size={18} className="ml-2" />
-                  </Link>
+                <Button
+                  className="bg-[#0F4C81] text-white font-bold hover:bg-[#0F4C81]/90 rounded-full px-8 h-14 text-base shadow-lg transition-all duration-300"
+                  onClick={() => navigate("/kindergarten")}
+                >
+                  Check Out Kindergarten <ArrowRight size={18} className="ml-2" />
                 </Button>
               </motion.div>
             </motion.div>
