@@ -90,6 +90,18 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
   },
 };
 
+/* href to navigate to when clicking the label of a dropdown item */
+const navLabelHref: Record<string, string> = {
+  About: "/about",
+  Academics: "/academics",
+  Facilities: "/facilities",
+  Gallery: "/gallery",
+  "Student Corner": "/school-timings",
+  Achievements: "/board-results",
+  "School Calendar": "/academic-calendar",
+  Login: "/staff-login",
+};
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -97,55 +109,23 @@ const navLinks = [
   { href: "/facilities", label: "Facilities" },
   { href: "/kindergarten", label: "Kindergarten" },
   { href: "/gallery", label: "Gallery" },
-  { href: "#", label: "Student Corner" },
-  { href: "#", label: "Achievements" },
-  { href: "#", label: "School Calendar" },
-  { href: "#", label: "Login" },
+  { href: "/school-timings", label: "Student Corner" },
+  { href: "/board-results", label: "Achievements" },
+  { href: "/academic-calendar", label: "School Calendar" },
+  { href: "/staff-login", label: "Login" },
   { href: "/admissions", label: "Admissions" },
   { href: "/contact", label: "Contact" },
 ];
 
-function MegaDropdown({ items, onClose }: { items: DropdownItem[]; onClose: () => void }) {
+function DropdownMenu({ items, onClose, mega }: { items: DropdownItem[]; onClose: () => void; mega?: boolean }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 10, scale: 0.98 }}
-      transition={{ duration: 0.18 }}
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 rounded-2xl bg-white shadow-2xl border border-gray-100 p-3 z-50"
-    >
-      <div className="grid grid-cols-1 gap-1">
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={onClose}
-            className="group flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-gray-700 hover:bg-[#0F4C81] hover:text-white transition-all duration-200 font-medium"
-          >
-            {item.emoji && (
-              <span className="text-base w-6 text-center shrink-0">{item.emoji}</span>
-            )}
-            <span className="group-hover:translate-x-0.5 transition-transform duration-200">{item.label}</span>
-            <ChevronDown size={12} className="ml-auto -rotate-90 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-function SimpleDropdown({ items, onClose }: { items: DropdownItem[]; onClose: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8, scale: 0.97 }}
+      initial={{ opacity: 0, y: 10, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8, scale: 0.97 }}
-      transition={{ duration: 0.15 }}
-      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-60 rounded-2xl bg-white shadow-2xl border border-gray-100 p-2 z-50"
+      transition={{ duration: 0.16 }}
+      className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 ${mega ? "w-80" : "w-60"} rounded-2xl bg-white shadow-2xl border border-gray-100 p-2 z-50`}
     >
-      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-2 overflow-hidden">
-        <div className="w-3 h-3 bg-white border-l border-t border-gray-100 rotate-45 mx-auto mt-1" />
-      </div>
       {items.map((item) => (
         <Link
           key={item.href}
@@ -153,8 +133,9 @@ function SimpleDropdown({ items, onClose }: { items: DropdownItem[]; onClose: ()
           onClick={onClose}
           className="group flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-gray-700 hover:bg-[#0F4C81] hover:text-white transition-all duration-200 font-medium"
         >
-          {item.emoji && <span className="text-base w-5 text-center shrink-0">{item.emoji}</span>}
-          <span>{item.label}</span>
+          {item.emoji && <span className="text-base w-6 text-center shrink-0">{item.emoji}</span>}
+          <span className="group-hover:translate-x-0.5 transition-transform duration-200">{item.label}</span>
+          <ChevronDown size={12} className="ml-auto -rotate-90 opacity-0 group-hover:opacity-100 transition-opacity" />
         </Link>
       ))}
     </motion.div>
@@ -167,6 +148,7 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
   const config = menuConfig[link.label];
   const hasDropdown = !!config;
 
+  /* Close when clicking outside */
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
@@ -175,6 +157,7 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  /* Plain nav item — no dropdown */
   if (!hasDropdown) {
     return (
       <Link
@@ -193,22 +176,19 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
     );
   }
 
-  const isMega = config.mega;
+  /* Nav item WITH dropdown — label navigates, arrow toggles */
+  const labelHref = navLabelHref[link.label] ?? link.href;
 
   return (
-    <div
-      ref={ref}
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button
-        onClick={() => setOpen(!open)}
-        className={`flex items-center gap-0.5 text-xs font-bold transition-colors hover:text-[#0F4C81] whitespace-nowrap ${isActive ? "text-[#0F4C81]" : "text-gray-700"}`}
+    <div ref={ref} className="relative flex items-center">
+      {/* Label → navigate to page */}
+      <Link
+        href={labelHref}
+        onClick={() => setOpen(false)}
+        className={`relative text-xs font-bold transition-colors hover:text-[#0F4C81] whitespace-nowrap ${isActive ? "text-[#0F4C81]" : "text-gray-700"}`}
       >
-        {link.label === "Login" && <LogIn size={11} className="mr-0.5" />}
+        {link.label === "Login" && <LogIn size={11} className="inline mr-0.5 align-middle" />}
         {link.label}
-        <ChevronDown size={11} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
         {isActive && (
           <motion.div
             layoutId="navbar-indicator"
@@ -216,13 +196,27 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           />
         )}
+      </Link>
+
+      {/* Arrow → toggle dropdown only */}
+      <button
+        onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
+        aria-label={`Open ${link.label} menu`}
+        className={`ml-0.5 p-0.5 rounded transition-colors hover:text-[#0F4C81] ${open ? "text-[#0F4C81]" : "text-gray-400"}`}
+      >
+        <ChevronDown
+          size={12}
+          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
       </button>
 
       <AnimatePresence>
         {open && (
-          isMega
-            ? <MegaDropdown items={config.items} onClose={() => setOpen(false)} />
-            : <SimpleDropdown items={config.items} onClose={() => setOpen(false)} />
+          <DropdownMenu
+            items={config.items}
+            mega={config.mega}
+            onClose={() => setOpen(false)}
+          />
         )}
       </AnimatePresence>
     </div>
@@ -236,8 +230,7 @@ export function Header() {
 
   const isActive = (link: { href: string; label: string }) => {
     if (link.href === "/") return location === "/";
-    if (link.href === "#") return false;
-    return location === link.href || (location.startsWith(link.href) && link.href !== "/");
+    return location === link.href || location.startsWith(link.href + "/");
   };
 
   return (
@@ -324,19 +317,26 @@ export function Header() {
                 const config = menuConfig[link.label];
                 const hasDropdown = !!config;
                 const isOpen = mobileDropdown === link.label;
+                const labelHref = navLabelHref[link.label] ?? link.href;
+
                 return (
                   <div key={link.label} className="border-b border-gray-100 last:border-0">
                     <div className="flex items-center justify-between">
+                      {/* Label → navigate */}
                       <Link
-                        href={link.href === "#" ? "/" : link.href}
-                        onClick={() => { if (!hasDropdown) setMobileMenuOpen(false); }}
+                        href={hasDropdown ? labelHref : link.href}
+                        onClick={() => setMobileMenuOpen(false)}
                         className={`flex-1 py-3 text-sm font-bold flex items-center gap-2 ${isActive(link) ? "text-[#0F4C81]" : "text-gray-700"}`}
                       >
                         {link.label === "Login" && <LogIn size={14} />}
                         {link.label}
                       </Link>
+                      {/* Arrow → toggle sub-menu */}
                       {hasDropdown && (
-                        <button onClick={() => setMobileDropdown(isOpen ? null : link.label)} className="p-2 text-gray-500">
+                        <button
+                          onClick={() => setMobileDropdown(isOpen ? null : link.label)}
+                          className="p-2 text-gray-400 hover:text-[#0F4C81] transition-colors"
+                        >
                           <ChevronDown size={16} className={`transition-transform duration-200 ${isOpen ? "rotate-180 text-[#0F4C81]" : ""}`} />
                         </button>
                       )}
