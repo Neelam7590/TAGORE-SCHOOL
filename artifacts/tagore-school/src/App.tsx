@@ -14,6 +14,29 @@ import Gallery from "@/pages/Gallery";
 import Admissions from "@/pages/Admissions";
 import Contact from "@/pages/Contact";
 import Kindergarten from "@/pages/Kindergarten";
+import StaffLogin from "@/pages/StaffLogin";
+import ParentLogin from "@/pages/ParentLogin";
+import SchoolTimings from "@/pages/SchoolTimings";
+import SchoolUniform from "@/pages/SchoolUniform";
+import RulesRegulations from "@/pages/RulesRegulations";
+import AttendancePolicy from "@/pages/AttendancePolicy";
+import StudentGuidelines from "@/pages/StudentGuidelines";
+import BoardResults from "@/pages/BoardResults";
+import SchoolResults from "@/pages/SchoolResults";
+import InterSchoolCompetitions from "@/pages/InterSchoolCompetitions";
+import SportsAchievements from "@/pages/SportsAchievements";
+import StudentSuccessStories from "@/pages/StudentSuccessStories";
+import AcademicCalendar from "@/pages/AcademicCalendar";
+import ActivitySchedule from "@/pages/ActivitySchedule";
+import ClubSchedule from "@/pages/ClubSchedule";
+import SchoolHolidays from "@/pages/SchoolHolidays";
+import ExaminationSchedule from "@/pages/ExaminationSchedule";
+import CampusLife from "@/pages/CampusLife";
+import AchievementsGallery from "@/pages/AchievementsGallery";
+import EventsActivities from "@/pages/EventsActivities";
+import SportsGallery from "@/pages/SportsGallery";
+import CulturalPrograms from "@/pages/CulturalPrograms";
+import AnnualFunctions from "@/pages/AnnualFunctions";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -36,6 +59,34 @@ function Router() {
         <Route path="/admissions" component={Admissions} />
         <Route path="/contact" component={Contact} />
         <Route path="/kindergarten" component={Kindergarten} />
+        {/* Login */}
+        <Route path="/staff-login" component={StaffLogin} />
+        <Route path="/parent-login" component={ParentLogin} />
+        {/* Student Corner */}
+        <Route path="/school-timings" component={SchoolTimings} />
+        <Route path="/school-uniform" component={SchoolUniform} />
+        <Route path="/rules-regulations" component={RulesRegulations} />
+        <Route path="/attendance-policy" component={AttendancePolicy} />
+        <Route path="/student-guidelines" component={StudentGuidelines} />
+        {/* Achievements */}
+        <Route path="/board-results" component={BoardResults} />
+        <Route path="/school-results" component={SchoolResults} />
+        <Route path="/inter-school-competitions" component={InterSchoolCompetitions} />
+        <Route path="/sports-achievements" component={SportsAchievements} />
+        <Route path="/student-success-stories" component={StudentSuccessStories} />
+        {/* School Calendar */}
+        <Route path="/academic-calendar" component={AcademicCalendar} />
+        <Route path="/activity-schedule" component={ActivitySchedule} />
+        <Route path="/club-schedule" component={ClubSchedule} />
+        <Route path="/school-holidays" component={SchoolHolidays} />
+        <Route path="/examination-schedule" component={ExaminationSchedule} />
+        {/* Gallery Sub-pages */}
+        <Route path="/campus-life" component={CampusLife} />
+        <Route path="/achievements-gallery" component={AchievementsGallery} />
+        <Route path="/events-activities" component={EventsActivities} />
+        <Route path="/sports-gallery" component={SportsGallery} />
+        <Route path="/cultural-programs" component={CulturalPrograms} />
+        <Route path="/annual-functions" component={AnnualFunctions} />
         <Route component={NotFound} />
       </Switch>
     </AnimatePresence>
