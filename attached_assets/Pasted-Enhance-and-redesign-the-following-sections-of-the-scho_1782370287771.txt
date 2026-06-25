@@ -1,0 +1,140 @@
+Enhance and redesign the following sections of the school website with a premium, modern, interactive, and visually appealing look while keeping the existing color scheme and overall design language consistent.
+
+### 1. Curriculum Overview Section
+
+* Improve the card design for:
+
+  * Pre-Primary (UKG)
+  * Primary School
+  * Middle School
+  * Secondary School
+  * Senior Secondary School
+* Add modern glassmorphism or premium hover effects.
+* Replace current icons with high-quality educational icons.
+* Add smooth animations on scroll and hover.
+* Make the layout more professional and visually balanced.
+
+### 2. Academic Excellence Section
+
+Improve the statistics cards and display the following achievements prominently:
+
+* Board Results
+* Olympiad Medals
+* Competition Winners
+* Strong Student Performance
+* Academic Achievements
+
+Requirements:
+
+* Use animated counters.
+* Add attractive icons.
+* Add number counting animation when section becomes visible.
+* Premium card shadows and hover effects.
+* Make the section look prestigious and achievement-focused.
+
+### 3. Teaching Methodology Section
+
+* Redesign cards completely.
+* Use engaging icons and illustrations.
+* Add interactive hover animations.
+* Create a more dynamic and modern learning-focused appearance.
+* Improve spacing, typography, and visual hierarchy.
+
+### 4. Assessment System Section
+
+* Add modern animations and interactive elements.
+* Use timeline-style or process-flow design.
+* Add animated progress indicators.
+* Make the section visually engaging and easy to understand.
+
+### 5. Gallery Integration
+
+When any curriculum, teaching methodology, or assessment card is clicked:
+
+* Open a lightbox gallery.
+* Show relevant school images.
+* Include smooth zoom animation.
+* Add next/previous image navigation.
+* Ensure mobile responsiveness.
+
+### 6. Facilities Section
+
+Redesign the complete facilities area.
+
+#### Attractive Campus
+
+* Add 4 animated statistics cards.
+* Include animated counters.
+* Add premium entrance animations.
+* Make the section visually rich.
+
+#### Premium Learning Facilities
+
+For:
+
+* Smart Classrooms
+* Science Labs
+* Computer Labs
+* Library
+
+Requirements:
+
+* Each facility card should contain hidden image galleries.
+* Clicking the card should open 2–3 relevant images in a modal popup.
+* Add smooth transitions and premium animations.
+
+#### Transport Facilities
+
+* Keep existing design.
+* Improve icon quality and hover effects.
+
+#### Security & Safety
+
+* Keep existing layout.
+* Add modern animated icons and subtle motion effects.
+
+### 7. Why Our Faculty Stand Out
+
+Current section looks boring.
+
+Redesign with:
+
+* Faculty experience statistics.
+* Achievement highlights.
+* Interactive profile cards.
+* Premium hover animations.
+* Animated icons.
+* Better typography.
+* Professional and trustworthy appearance.
+
+### 8. Campus Designed for Learning & Nature
+
+Completely redesign this section.
+
+Requirements:
+
+* Full-width premium layout.
+* Beautiful nature-themed visuals.
+* Parallax scrolling effect.
+* Animated counters.
+* Modern cards highlighting:
+
+  * Green Campus
+  * Open Learning Spaces
+  * Sports Facilities
+  * Eco-Friendly Environment
+* Add smooth reveal animations.
+* Create a luxurious and modern school website feel.
+
+### General Requirements
+
+* Fully responsive.
+* Modern 2026 UI/UX standards.
+* Smooth GSAP/AOS animations.
+* Premium hover effects.
+* Faster loading.
+* Professional typography.
+* Elegant transitions.
+* Maintain consistency across all sections.
+* Do not break existing functionality.
+* Keep all content editable from the current structure.
