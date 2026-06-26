@@ -40,14 +40,28 @@ export default function Admissions() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Inquiry Submitted Successfully!",
-      description: "Our admissions team will contact you shortly.",
-      duration: 5000,
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await fetch("/api/admission-inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Failed");
+      toast({
+        title: "Inquiry Submitted Successfully!",
+        description: "Our admissions team will contact you shortly.",
+        duration: 5000,
+      });
+      form.reset();
+    } catch {
+      toast({
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again or call us directly.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    }
   }
 
   const steps = [

@@ -38,14 +38,28 @@ export default function Contact() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll reply soon.",
-      duration: 5000,
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Failed");
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll reply soon.",
+        duration: 5000,
+      });
+      form.reset();
+    } catch {
+      toast({
+        title: "Message Failed",
+        description: "Something went wrong. Please try again or call us directly.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    }
   }
 
   return (
