@@ -7,11 +7,12 @@ const RECIPIENT = "neelxm08@gmail.com";
 const SENDER = "neelxm08@gmail.com";
 
 function createTransporter() {
+  const pass = process.env["GMAIL_APP_PASSWORD"]?.replace(/\s+/g, "");
   return nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: SENDER,
-      pass: process.env["GMAIL_APP_PASSWORD"],
+      pass,
     },
   });
 }
