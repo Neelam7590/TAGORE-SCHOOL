@@ -1,20 +1,14 @@
 import { Router } from "express";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 const router = Router();
 
 const RECIPIENT = "neelxm08@gmail.com";
-const SENDER = "neelxm08@gmail.com";
+const SENDER = "Tagore Global School <onboarding@resend.dev>";
 
-function createTransporter() {
-  const pass = process.env["GMAIL_APP_PASSWORD"]?.replace(/\s+/g, "");
-  return nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: SENDER,
-      pass,
-    },
-  });
+function getResend() {
+  const apiKey = process.env["RESEND_API_KEY"];
+  return new Resend(apiKey);
 }
 
 router.post("/contact", async (req, res) => {
@@ -32,9 +26,9 @@ router.post("/contact", async (req, res) => {
   }
 
   try {
-    const transporter = createTransporter();
-    await transporter.sendMail({
-      from: `"Tagore Global School Website" <${SENDER}>`,
+    const resend = getResend();
+    await resend.emails.send({
+      from: SENDER,
       to: RECIPIENT,
       subject: `[Contact Form] ${subject}`,
       html: `
@@ -82,9 +76,9 @@ router.post("/admission-inquiry", async (req, res) => {
   }
 
   try {
-    const transporter = createTransporter();
-    await transporter.sendMail({
-      from: `"Tagore Global School Website" <${SENDER}>`,
+    const resend = getResend();
+    await resend.emails.send({
+      from: SENDER,
       to: RECIPIENT,
       subject: `[Admission Inquiry] ${parentName} – ${childName} (${classApplying})`,
       html: `
@@ -138,9 +132,9 @@ router.post("/admission-form", async (req, res) => {
     value ? `<tr><td style="padding:9px 0;border-bottom:1px solid #f0f0f0;font-weight:bold;color:#0F4C81;width:200px;vertical-align:top">${label}</td><td style="padding:9px 0;border-bottom:1px solid #f0f0f0;color:#333">${value}</td></tr>` : "";
 
   try {
-    const transporter = createTransporter();
-    await transporter.sendMail({
-      from: `"Tagore Global School Website" <${SENDER}>`,
+    const resend = getResend();
+    await resend.emails.send({
+      from: SENDER,
       to: RECIPIENT,
       subject: `[Admission Form] ${studentName} – ${classApplying} (2026-2027)`,
       html: `
@@ -151,7 +145,7 @@ router.post("/admission-form", async (req, res) => {
           </div>
 
           <div style="padding:24px;background:#fff">
-            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:0">🎓 Student Details</h2>
+            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:0">Student Details</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Student Name", studentName)}
               ${row("Date of Birth", dob)}
@@ -161,7 +155,7 @@ router.post("/admission-form", async (req, res) => {
               ${row("Class Applying For", classApplying)}
             </table>
 
-            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">🏫 Previous School</h2>
+            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Previous School</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Previous School", previousSchool || "—")}
               ${row("Last Class Attended", lastClassAttended || "—")}
@@ -169,7 +163,7 @@ router.post("/admission-form", async (req, res) => {
               ${row("Last Result", lastPercentage || "—")}
             </table>
 
-            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">👨‍👩‍👧 Parent / Guardian</h2>
+            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Parent / Guardian</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Father's Name", fatherName)}
               ${row("Father's Occupation", fatherOccupation || "—")}
@@ -177,7 +171,7 @@ router.post("/admission-form", async (req, res) => {
               ${row("Mother's Occupation", motherOccupation || "—")}
             </table>
 
-            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">📞 Contact</h2>
+            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Contact</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Primary Mobile", parentPhone)}
               ${row("Alternate Mobile", alternatePhone || "—")}
@@ -185,7 +179,7 @@ router.post("/admission-form", async (req, res) => {
               ${row("Address", address)}
             </table>
 
-            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">ℹ️ Additional</h2>
+            <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Additional Info</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Transport Required", transportRequired)}
               ${row("Medical Conditions", medicalConditions || "None")}
@@ -194,7 +188,7 @@ router.post("/admission-form", async (req, res) => {
           </div>
 
           <div style="background:#FFF8DC;padding:16px;border-left:4px solid #FFD700;margin:0 24px 24px">
-            <p style="margin:0;font-size:13px;color:#555">⚡ Please follow up with the family within 2 working days.</p>
+            <p style="margin:0;font-size:13px;color:#555">Please follow up with the family within 2 working days.</p>
           </div>
           <div style="background:#f9f9f9;padding:16px;text-align:center;font-size:12px;color:#888">
             Submitted via the Admissions page — Tagore Global School website
