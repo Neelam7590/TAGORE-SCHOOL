@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronRight, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 
 const stories = [
   { name: "Ananya Sharma", batch: "Class XII 2024", achievement: "IIT-JEE Advanced AIR 342 | Now studying Computer Science at IIT Bombay", emoji: "💡", img: "https://picsum.photos/seed/ananya/200/200", quote: "TGS gave me the foundation, discipline, and confidence to achieve my dream. The faculty's dedication and extra classes made all the difference." },
@@ -13,6 +14,7 @@ const stories = [
 ];
 
 export default function StudentSuccessStories() {
+  const { openModal } = useAdmissionModal();
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0F4C81] to-[#0A3260] pt-28 pb-24 text-white">
@@ -64,7 +66,7 @@ export default function StudentSuccessStories() {
               <h3 className="font-serif text-2xl font-bold mb-3">Write Your Success Story</h3>
               <p className="text-blue-100/80 mb-6">Join hundreds of TGS alumni who are making a difference across India and the world.</p>
               <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-12 shadow-[0_0_30px_rgba(255,215,0,0.4)]" asChild>
-                <Link href="/admissions">Apply Now <ArrowRight size={16} className="ml-2" /></Link>
+                <button onClick={openModal} className="inline-flex items-center">Apply Now <ArrowRight size={16} className="ml-2" /></button>
               </Button>
             </div>
           </motion.div>

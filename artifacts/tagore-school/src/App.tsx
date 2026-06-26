@@ -43,6 +43,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { AdmissionModalProvider } from "@/context/AdmissionModalContext";
 
 const queryClient = new QueryClient();
 
@@ -97,19 +98,21 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <div className="flex min-h-screen flex-col">
-            <ScrollToTop />
-            <Header />
-            <main className="flex-1">
-              <Router />
-            </main>
-            <Footer />
-            <BackToTop />
-            <WhatsAppFloat />
-          </div>
-        </WouterRouter>
-        <Toaster />
+        <AdmissionModalProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <div className="flex min-h-screen flex-col">
+              <ScrollToTop />
+              <Header />
+              <main className="flex-1">
+                <Router />
+              </main>
+              <Footer />
+              <BackToTop />
+              <WhatsAppFloat />
+            </div>
+          </WouterRouter>
+          <Toaster />
+        </AdmissionModalProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

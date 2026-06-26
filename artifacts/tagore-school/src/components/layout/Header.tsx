@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Phone, Mail, Menu, X, ChevronDown, LogIn, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 
 type DropdownItem = { href: string; label: string; emoji?: string };
 
@@ -227,6 +228,7 @@ export function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
+  const { openModal } = useAdmissionModal();
 
   const isActive = (link: { href: string; label: string }) => {
     if (link.href === "/") return location === "/";
@@ -287,8 +289,8 @@ export function Header() {
             <Button variant="outline" size="sm" className="border-[#0F4C81] text-[#0F4C81] font-semibold hover:bg-[#0F4C81]/5 h-9 px-4 text-xs" asChild>
               <Link href="/contact">Call Now</Link>
             </Button>
-            <Button size="sm" className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-5 text-xs" asChild>
-              <Link href="/admissions">Apply Now</Link>
+            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-5 text-xs">
+              Apply Now
             </Button>
           </div>
 
@@ -371,8 +373,8 @@ export function Header() {
                 <Button variant="outline" className="w-full border-[#0F4C81] text-[#0F4C81] font-semibold" asChild>
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Call Now</Link>
                 </Button>
-                <Button className="w-full bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFD700]/90 rounded-full" asChild>
-                  <Link href="/admissions" onClick={() => setMobileMenuOpen(false)}>Apply Now</Link>
+                <Button className="w-full bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFD700]/90 rounded-full" onClick={() => { setMobileMenuOpen(false); openModal(); }}>
+                  Apply Now
                 </Button>
               </div>
             </nav>

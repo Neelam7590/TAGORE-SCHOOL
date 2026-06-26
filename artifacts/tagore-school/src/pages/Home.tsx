@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 import {
   Heart, Laptop, Users, Rocket, Globe, Award, MapPin, Sparkles, Zap,
   ArrowRight, GraduationCap, Camera, Music, Palette,
@@ -57,6 +58,7 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transi
 
 export default function Home() {
   const [, navigate] = useLocation();
+  const { openModal } = useAdmissionModal();
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col">
 
@@ -84,8 +86,8 @@ export default function Home() {
           </motion.p>
           <motion.div variants={fadeUp} className="mt-4 flex flex-col gap-4 sm:flex-row">
             <motion.div whileHover={{ scale: 1.08, y: -3 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
-              <Button size="lg" className="h-14 bg-[#FFD700] px-10 text-base font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full" asChild>
-                <Link href="/admissions">Apply Now</Link>
+              <Button size="lg" onClick={openModal} className="h-14 bg-[#FFD700] px-10 text-base font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full">
+                Apply Now
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
@@ -438,7 +440,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { emoji: "🎓", title: "Apply for Admission", desc: "Begin your child's journey at Tagore Global School today.", href: "/admissions", cta: "Apply Now" },
+              { emoji: "🎓", title: "Apply for Admission", desc: "Begin your child's journey at Tagore Global School today.", href: "/admissions", cta: "Apply Now", modal: true },
               { emoji: "📅", title: "School Calendar", desc: "View important dates, events, exams, and holidays.", href: "/academic-calendar", cta: "View Calendar" },
               { emoji: "🏆", title: "Latest Achievements", desc: "Explore our students' recent academic and sports victories.", href: "/board-results", cta: "View Achievements" },
               { emoji: "📸", title: "Photo Gallery", desc: "Browse moments from campus life, events, and celebrations.", href: "/gallery", cta: "Open Gallery" },
@@ -450,9 +452,15 @@ export default function Home() {
                 <div className="text-4xl mb-4">{card.emoji}</div>
                 <h4 className="font-serif text-lg font-bold text-[#0F4C81] mb-2">{card.title}</h4>
                 <p className="text-sm text-gray-500 leading-relaxed mb-6 flex-1">{card.desc}</p>
-                <Button className="w-full bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 rounded-xl h-11 text-sm font-semibold group-hover:bg-[#FFD700] group-hover:text-[#0F4C81] transition-all duration-300" asChild>
-                  <Link href={card.href}>{card.cta} <ArrowRight size={14} className="ml-1" /></Link>
-                </Button>
+                {card.modal ? (
+                  <Button onClick={openModal} className="w-full bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 rounded-xl h-11 text-sm font-semibold group-hover:bg-[#FFD700] group-hover:text-[#0F4C81] transition-all duration-300">
+                    {card.cta} <ArrowRight size={14} className="ml-1" />
+                  </Button>
+                ) : (
+                  <Button className="w-full bg-[#0F4C81] text-white hover:bg-[#0F4C81]/90 rounded-xl h-11 text-sm font-semibold group-hover:bg-[#FFD700] group-hover:text-[#0F4C81] transition-all duration-300" asChild>
+                    <Link href={card.href}>{card.cta} <ArrowRight size={14} className="ml-1" /></Link>
+                  </Button>
+                )}
               </motion.div>
             ))}
           </div>
@@ -472,8 +480,8 @@ export default function Home() {
             <p className="mb-10 text-xl text-blue-100">Admissions are now open. Join a learning community where every child is inspired to grow, achieve, and succeed.</p>
             <div className="flex flex-col gap-4 sm:flex-row justify-center">
               <motion.div whileHover={{ scale: 1.08, y: -3 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" className="h-14 bg-[#FFD700] px-10 text-lg font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button size="lg" onClick={openModal} className="h-14 bg-[#FFD700] px-10 text-lg font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full">
+                  Apply Now
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>

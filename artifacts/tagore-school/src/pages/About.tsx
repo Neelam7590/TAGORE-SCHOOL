@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -66,6 +67,7 @@ const strengths = [
 ];
 
 export default function About() {
+  const { openModal } = useAdmissionModal();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -109,8 +111,8 @@ export default function About() {
                 Empowering Young Minds, Inspiring Excellence, and Building Future Leaders since 2001.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-8 py-3 h-auto text-base" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-8 py-3 h-auto text-base">
+                  Apply Now
                 </Button>
                 <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 py-3 h-auto text-base" asChild>
                   <Link href="/contact">Contact Us</Link>
@@ -623,8 +625,8 @@ export default function About() {
                 Discover an educational journey that inspires achievement, character, and lifelong success.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-10 py-3 h-auto text-base hover:scale-105 transition-all" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-10 py-3 h-auto text-base hover:scale-105 transition-all">
+                  Apply Now
                 </Button>
                 <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-10 py-3 h-auto text-base" asChild>
                   <Link href="/contact">Contact Us</Link>

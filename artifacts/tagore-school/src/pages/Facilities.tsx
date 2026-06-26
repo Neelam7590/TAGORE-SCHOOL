@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 
 /* ─── Variants ─── */
 const fadeUp = {
@@ -145,6 +146,7 @@ const facilityImages = {
 };
 
 export default function Facilities() {
+  const { openModal } = useAdmissionModal();
   const [lightbox, setLightbox] = useState<{ images: { src: string; caption: string }[]; title: string } | null>(null);
 
   const openLightbox = (title: keyof typeof facilityImages) => {
@@ -190,8 +192,8 @@ export default function Facilities() {
                 <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-8 h-auto py-3" asChild>
                   <Link href="/contact">Schedule a Visit</Link>
                 </Button>
-                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 h-auto py-3" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button onClick={openModal} variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 h-auto py-3">
+                  Apply Now
                 </Button>
               </div>
             </motion.div>
@@ -546,8 +548,8 @@ export default function Facilities() {
                 <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-auto py-3" asChild>
                   <Link href="/contact">Schedule a Visit</Link>
                 </Button>
-                <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-10 h-auto py-3" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button onClick={openModal} variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-10 h-auto py-3">
+                  Apply Now
                 </Button>
               </div>
             </div>

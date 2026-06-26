@@ -8,6 +8,7 @@ import {
   X, ChevronLeft, ChevronRight as ChevronRightIcon, ZoomIn
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 import { Button } from "@/components/ui/button";
 
 /* ─── Variants ─── */
@@ -121,6 +122,7 @@ const schoolImages = [
 
 /* ─── Main Component ─── */
 export default function Academics() {
+  const { openModal } = useAdmissionModal();
   const [location] = useLocation();
   const [lightbox, setLightbox] = useState<{ images: typeof schoolImages; title: string } | null>(null);
 
@@ -169,8 +171,8 @@ export default function Academics() {
                 Empowering students through knowledge, innovation, and lifelong learning.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-8 h-auto py-3" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] rounded-full px-8 h-auto py-3">
+                  Apply Now
                 </Button>
                 <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-8 h-auto py-3" asChild>
                   <Link href="/contact">Contact Us</Link>
@@ -543,8 +545,8 @@ export default function Academics() {
               <h2 className="font-serif text-3xl font-bold mb-3">Begin Your Academic Journey</h2>
               <p className="text-blue-100 mb-8 max-w-xl mx-auto">Join Tagore Global School and experience education that inspires, challenges, and transforms.</p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-auto py-3" asChild>
-                  <Link href="/admissions">Apply Now</Link>
+                <Button onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-auto py-3">
+                  Apply Now
                 </Button>
                 <Button variant="outline" className="border-white/40 text-white hover:bg-white/10 rounded-full px-10 h-auto py-3" asChild>
                   <Link href="/contact">Contact Us</Link>

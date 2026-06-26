@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 import {
   ChevronRight, Sparkles, BookOpen, Puzzle, Music, Users,
   Shield, Brain, MessageCircle, Palette, Heart, Footprints,
@@ -150,6 +151,7 @@ const faqs = [
 ];
 
 export default function Kindergarten() {
+  const { openModal } = useAdmissionModal();
   const [, navigate] = useLocation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [galleryFilter, setGalleryFilter] = useState("All");
@@ -216,7 +218,7 @@ export default function Kindergarten() {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
                     className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-14 text-base shadow-[0_0_40px_rgba(255,215,0,0.4)]"
-                    onClick={() => navigate("/admissions")}
+                    onClick={openModal}
                   >
                     Apply Now <ArrowRight size={18} className="ml-2" />
                   </Button>
@@ -764,7 +766,7 @@ export default function Kindergarten() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-12 h-14 text-base shadow-[0_0_40px_rgba(255,215,0,0.4)]"
-                  onClick={() => navigate("/admissions")}
+                  onClick={openModal}
                 >
                   Apply Now <ArrowRight size={18} className="ml-2" />
                 </Button>
