@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, ChevronRight } from "lucide-react";
+import { X, Send, ChevronRight } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
+const robotImg = `${import.meta.env.BASE_URL}chatbot-robot.png`;
 
 const quickQuestions = [
   { text: "Admission process kya hai?", reply: "Hmare admissions session 2026-27 ke liye khule hain! Online form fill karein ya school visit karein. Kya aap aur details chahte hain?" },
@@ -57,7 +58,7 @@ export function ChatWidget() {
             <div className="bg-[#0F4C81] px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="h-10 w-10 rounded-full bg-[#FFD700] flex items-center justify-center font-bold text-[#0F4C81] text-sm">TGS</div>
+                  <img src={robotImg} alt="Chatbot" className="h-10 w-10 rounded-full object-cover bg-white" />
                   <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 border-2 border-[#0F4C81]"></span>
                 </div>
                 <div>
@@ -142,24 +143,24 @@ export function ChatWidget() {
         animate={{ scale: 1 }}
         transition={{ delay: 1.2, type: "spring" }}
         onClick={() => setOpen(!open)}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0F4C81] text-white shadow-lg hover:scale-110 transition-transform focus:outline-none"
+        className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-xl hover:scale-110 transition-transform focus:outline-none overflow-hidden"
         aria-label="Open chat"
-        style={{ boxShadow: "0 4px 20px rgba(15,76,129,0.4)" }}
+        style={{ boxShadow: "0 4px 24px rgba(15,76,129,0.35)" }}
       >
         <AnimatePresence mode="wait">
           {open ? (
-            <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <X size={24} />
+            <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }} className="flex items-center justify-center text-[#0F4C81]">
+              <X size={26} />
             </motion.span>
           ) : (
-            <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <MessageCircle size={24} />
+            <motion.span key="robot" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.15 }}>
+              <img src={robotImg} alt="Chat" className="h-14 w-14 object-cover" />
             </motion.span>
           )}
         </AnimatePresence>
         {/* Unread badge */}
         {!open && (
-          <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#FFD700] text-[#0F4C81] text-xs font-bold flex items-center justify-center">1</span>
+          <span className="absolute top-0 right-0 h-5 w-5 rounded-full bg-[#FFD700] text-[#0F4C81] text-xs font-bold flex items-center justify-center border-2 border-white">1</span>
         )}
       </motion.button>
     </div>
