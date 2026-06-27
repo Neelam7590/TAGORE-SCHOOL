@@ -42,6 +42,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
+import { ChatWidget } from "@/components/ui/ChatWidget";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { AdmissionModalProvider } from "@/context/AdmissionModalContext";
 
@@ -108,6 +109,7 @@ function App() {
               </main>
               <Footer />
               <BackToTop />
+              <ChatWidget />
               <WhatsAppFloat />
             </div>
           </WouterRouter>
