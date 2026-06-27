@@ -2,33 +2,27 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, ChevronRight } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
+
 const robotImg = `${import.meta.env.BASE_URL}chatbot-robot.png`;
 
 const quickQuestions = [
-  { text: "Admission process kya hai?", reply: "Hmare admissions session 2026-27 ke liye khule hain! Online form fill karein ya school visit karein. Kya aap aur details chahte hain?" },
-  { text: "Fees structure batao", reply: "Fees structure class ke hisaab se alag hai. Detailed information ke liye school office se contact karein: +91 93033 50002" },
-  { text: "School timings kya hain?", reply: "School timing: Monday–Saturday\n🕗 Morning: 7:30 AM – 1:30 PM\n📚 Extra classes: 2:00 PM – 4:00 PM" },
-  { text: "Transport available hai?", reply: "Haan! School bus city ke sabhi major routes par available hai. Transport ke liye office se contact karein." },
+  { text: "Admission process kya hai?", reply: "Hmare admissions session 2026-27 ke liye khule hain! Online form fill karein ya school visit karein." },
+  { text: "Fees structure batao", reply: "Fees structure class ke hisaab se alag hai. Details ke liye: +91 93033 50002" },
+  { text: "School timings kya hain?", reply: "Monday–Saturday\n🕗 7:30 AM – 1:30 PM\n📚 Extra classes: 2:00 PM – 4:00 PM" },
+  { text: "Transport available hai?", reply: "Haan! Bus city ke sabhi major routes par available hai. Office se contact karein." },
 ];
 
-type Message = {
-  from: "bot" | "user";
-  text: string;
-};
+type Message = { from: "bot" | "user"; text: string };
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { from: "bot", text: "Namaste! 🙏 Main Tagore Global School ka virtual assistant hun. Aap kaise help kar sakta hun?" },
+    { from: "bot", text: "Namaste! 🙏 Main Tagore Global School ka assistant hun. Kaise help kar sakta hun?" },
   ]);
   const [input, setInput] = useState("");
 
   function handleQuick(q: { text: string; reply: string }) {
-    setMessages((prev) => [
-      ...prev,
-      { from: "user", text: q.text },
-      { from: "bot", text: q.reply },
-    ]);
+    setMessages((prev) => [...prev, { from: "user", text: q.text }, { from: "bot", text: q.reply }]);
   }
 
   function handleSend() {
@@ -37,13 +31,13 @@ export function ChatWidget() {
     setMessages((prev) => [
       ...prev,
       { from: "user", text: trimmed },
-      { from: "bot", text: "Shukriya! Aapke sawaal ke liye humse directly baat karein — WhatsApp ya phone par humse sampark karein: +91 93033 50002 📞" },
+      { from: "bot", text: "Shukriya! Seedha humse baat karein: +91 93033 50002 📞" },
     ]);
     setInput("");
   }
 
   return (
-    <div className="fixed bottom-24 left-6 z-50 flex flex-col items-start gap-3">
+    <div className="fixed bottom-24 left-6 z-50 flex flex-col items-start gap-2">
       <AnimatePresence>
         {open && (
           <motion.div
@@ -58,8 +52,8 @@ export function ChatWidget() {
             <div className="bg-[#0F4C81] px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <img src={robotImg} alt="Chatbot" className="h-10 w-10 rounded-full object-cover bg-white" />
-                  <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 border-2 border-[#0F4C81]"></span>
+                  <img src={robotImg} alt="Bot" className="h-10 w-10 object-contain" />
+                  <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 border-2 border-[#0F4C81]" />
                 </div>
                 <div>
                   <p className="text-white font-semibold text-sm">Tagore Global School</p>
@@ -72,23 +66,21 @@ export function ChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="bg-gray-50 px-3 py-3 flex flex-col gap-2 max-h-60 overflow-y-auto">
+            <div className="bg-gray-50 px-3 py-3 flex flex-col gap-2 max-h-52 overflow-y-auto">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
-                  <div
-                    className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm whitespace-pre-line ${
-                      msg.from === "user"
-                        ? "bg-[#0F4C81] text-white rounded-br-sm"
-                        : "bg-white text-gray-800 shadow-sm rounded-bl-sm"
-                    }`}
-                  >
+                  <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm whitespace-pre-line ${
+                    msg.from === "user"
+                      ? "bg-[#0F4C81] text-white rounded-br-sm"
+                      : "bg-white text-gray-800 shadow-sm rounded-bl-sm"
+                  }`}>
                     {msg.text}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Quick Questions */}
+            {/* Quick questions */}
             {messages.length <= 1 && (
               <div className="bg-gray-50 px-3 pb-2 flex flex-col gap-1">
                 <p className="text-xs text-gray-400 mb-1">Jaldi poochhen:</p>
@@ -137,30 +129,43 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Chat Toggle Button */}
+      {/* Robot button — transparent image only, no background circle */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1.2, type: "spring" }}
         onClick={() => setOpen(!open)}
-        className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-xl hover:scale-110 transition-transform focus:outline-none overflow-hidden"
+        className="relative focus:outline-none hover:scale-110 transition-transform"
         aria-label="Open chat"
-        style={{ boxShadow: "0 4px 24px rgba(15,76,129,0.35)" }}
       >
         <AnimatePresence mode="wait">
           {open ? (
-            <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }} className="flex items-center justify-center text-[#0F4C81]">
+            <motion.span
+              key="x"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0F4C81] text-white shadow-xl"
+            >
               <X size={26} />
             </motion.span>
           ) : (
-            <motion.span key="robot" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <img src={robotImg} alt="Chat" className="h-14 w-14 object-cover" />
-            </motion.span>
+            <motion.img
+              key="robot"
+              src={robotImg}
+              alt="Chat"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="h-20 w-20 object-contain drop-shadow-xl"
+            />
           )}
         </AnimatePresence>
-        {/* Unread badge */}
+        {/* Badge */}
         {!open && (
-          <span className="absolute top-0 right-0 h-5 w-5 rounded-full bg-[#FFD700] text-[#0F4C81] text-xs font-bold flex items-center justify-center border-2 border-white">1</span>
+          <span className="absolute top-1 right-1 h-5 w-5 rounded-full bg-[#FFD700] text-[#0F4C81] text-xs font-bold flex items-center justify-center border-2 border-white shadow">
+            1
+          </span>
         )}
       </motion.button>
     </div>
