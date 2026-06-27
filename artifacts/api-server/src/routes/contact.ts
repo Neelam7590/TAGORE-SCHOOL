@@ -11,6 +11,18 @@ function getResend() {
   return new Resend(apiKey);
 }
 
+async function sendEmail(opts: { subject: string; html: string }) {
+  const resend = getResend();
+  const { data, error } = await resend.emails.send({
+    from: SENDER,
+    to: RECIPIENT,
+    subject: opts.subject,
+    html: opts.html,
+  });
+  if (error) throw new Error(error.message);
+  return data;
+}
+
 router.post("/contact", async (req, res) => {
   const { name, email, phone, subject, message } = req.body as {
     name?: string;
@@ -26,10 +38,7 @@ router.post("/contact", async (req, res) => {
   }
 
   try {
-    const resend = getResend();
-    await resend.emails.send({
-      from: SENDER,
-      to: RECIPIENT,
+    await sendEmail({
       subject: `[Contact Form] ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
@@ -47,12 +56,11 @@ router.post("/contact", async (req, res) => {
             </table>
           </div>
           <div style="background: #f9f9f9; padding: 16px; text-align: center; font-size: 12px; color: #888;">
-            This message was sent from the Contact form on the Tagore Global School website.
+            Tagore Global School website — Contact Form
           </div>
         </div>
       `,
     });
-
     res.json({ success: true });
   } catch (err) {
     req.log.error({ err }, "Failed to send contact email");
@@ -76,10 +84,7 @@ router.post("/admission-inquiry", async (req, res) => {
   }
 
   try {
-    const resend = getResend();
-    await resend.emails.send({
-      from: SENDER,
-      to: RECIPIENT,
+    await sendEmail({
       subject: `[Admission Inquiry] ${parentName} – ${childName} (${classApplying})`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
@@ -101,12 +106,11 @@ router.post("/admission-inquiry", async (req, res) => {
             <p style="margin: 0; font-size: 13px; color: #555;">Please follow up with the parent within 24-48 hours.</p>
           </div>
           <div style="background: #f9f9f9; padding: 16px; text-align: center; font-size: 12px; color: #888;">
-            This inquiry was submitted via the Admissions page on the Tagore Global School website.
+            Tagore Global School website — Admissions Page
           </div>
         </div>
       `,
     });
-
     res.json({ success: true });
   } catch (err) {
     req.log.error({ err }, "Failed to send admission inquiry email");
@@ -132,10 +136,7 @@ router.post("/admission-form", async (req, res) => {
     value ? `<tr><td style="padding:9px 0;border-bottom:1px solid #f0f0f0;font-weight:bold;color:#0F4C81;width:200px;vertical-align:top">${label}</td><td style="padding:9px 0;border-bottom:1px solid #f0f0f0;color:#333">${value}</td></tr>` : "";
 
   try {
-    const resend = getResend();
-    await resend.emails.send({
-      from: SENDER,
-      to: RECIPIENT,
+    await sendEmail({
       subject: `[Admission Form] ${studentName} – ${classApplying} (2026-2027)`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:650px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden">
@@ -143,7 +144,6 @@ router.post("/admission-form", async (req, res) => {
             <h1 style="color:#FFD700;margin:0;font-size:22px">Tagore Global School</h1>
             <p style="color:#fff;margin:4px 0 0;font-size:14px">New Admission Form — Session 2026-2027</p>
           </div>
-
           <div style="padding:24px;background:#fff">
             <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:0">Student Details</h2>
             <table style="width:100%;border-collapse:collapse">
@@ -154,7 +154,6 @@ router.post("/admission-form", async (req, res) => {
               ${row("Category", category)}
               ${row("Class Applying For", classApplying)}
             </table>
-
             <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Previous School</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Previous School", previousSchool || "—")}
@@ -162,7 +161,6 @@ router.post("/admission-form", async (req, res) => {
               ${row("Board", lastBoard || "—")}
               ${row("Last Result", lastPercentage || "—")}
             </table>
-
             <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Parent / Guardian</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Father's Name", fatherName)}
@@ -170,7 +168,6 @@ router.post("/admission-form", async (req, res) => {
               ${row("Mother's Name", motherName)}
               ${row("Mother's Occupation", motherOccupation || "—")}
             </table>
-
             <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Contact</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Primary Mobile", parentPhone)}
@@ -178,7 +175,6 @@ router.post("/admission-form", async (req, res) => {
               ${row("Email", email)}
               ${row("Address", address)}
             </table>
-
             <h2 style="color:#0F4C81;font-size:16px;border-bottom:2px solid #FFD700;padding-bottom:6px;margin-top:24px">Additional Info</h2>
             <table style="width:100%;border-collapse:collapse">
               ${row("Transport Required", transportRequired)}
@@ -186,17 +182,15 @@ router.post("/admission-form", async (req, res) => {
               ${row("How Did You Hear", howDidYouHear || "—")}
             </table>
           </div>
-
           <div style="background:#FFF8DC;padding:16px;border-left:4px solid #FFD700;margin:0 24px 24px">
             <p style="margin:0;font-size:13px;color:#555">Please follow up with the family within 2 working days.</p>
           </div>
           <div style="background:#f9f9f9;padding:16px;text-align:center;font-size:12px;color:#888">
-            Submitted via the Admissions page — Tagore Global School website
+            Submitted via Admissions page — Tagore Global School website
           </div>
         </div>
       `,
     });
-
     res.json({ success: true });
   } catch (err) {
     req.log.error({ err }, "Failed to send admission form email");
