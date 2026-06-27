@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 const router = Router();
 
-const RECIPIENT = "neelxm08@gmail.com";
+const RECIPIENT = "dtc1752@gmail.com";
 const SENDER = "Tagore Global School <onboarding@resend.dev>";
 
 function getResend() {
