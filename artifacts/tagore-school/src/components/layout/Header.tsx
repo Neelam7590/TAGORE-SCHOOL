@@ -16,6 +16,7 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
       { href: "/principal-message", label: "Principal's Message", emoji: "👩‍🏫" },
       { href: "/about#vision", label: "Vision & Mission", emoji: "🎯" },
       { href: "/about#faculty", label: "Meet Our Faculty", emoji: "👨‍🏫" },
+      { href: "/kindergarten", label: "Kindergarten", emoji: "🌱" },
     ],
   },
   Academics: {
@@ -89,7 +90,6 @@ const navLinks = [
   { href: "/about", label: "About" },
   { href: "/academics", label: "Academics" },
   { href: "/facilities", label: "Facilities" },
-  { href: "/kindergarten", label: "Kindergarten" },
   { href: "/gallery", label: "Gallery" },
   { href: "/school-timings", label: "Student Corner" },
   { href: "/board-results", label: "Achievements" },
@@ -494,18 +494,44 @@ export function Header() {
           <div className="hidden xl:block h-8 w-px bg-gray-200 mx-4 shrink-0" />
 
           {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center gap-3 flex-1">
+          <nav className="hidden xl:flex items-center flex-1 gap-x-4 px-3">
             {navLinks.map((link) => (
               <NavItem key={link.label} link={link} isActive={isActive(link)} />
             ))}
           </nav>
 
           {/* Divider before CTAs */}
-          <div className="hidden xl:block h-8 w-px bg-gray-200 mx-3 shrink-0" />
+          <div className="hidden xl:block h-8 w-px bg-gray-200 mx-2 shrink-0" />
 
-          {/* Desktop CTAs */}
-          <div className="hidden xl:flex items-center gap-2 shrink-0">
-            <ContactDropdown />
+          {/* Desktop CTAs — icon buttons for contact, save space */}
+          <div className="hidden xl:flex items-center gap-1.5 shrink-0">
+            {/* Call button */}
+            <a
+              href="tel:+919303350002"
+              title="Call: +91 93033 50002"
+              className="group flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200"
+            >
+              <Phone size={14} />
+            </a>
+            {/* WhatsApp button */}
+            <a
+              href="https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School."
+              target="_blank"
+              rel="noopener noreferrer"
+              title="WhatsApp: +91 93033 50002"
+              className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-green-600 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-200"
+            >
+              <WhatsAppIcon size={14} />
+            </a>
+            {/* Email button */}
+            <a
+              href="mailto:info@tagoreglobalschool.in"
+              title="Email: info@tagoreglobalschool.in"
+              className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200"
+            >
+              <Mail size={14} />
+            </a>
+            <div className="w-px h-6 bg-gray-200 mx-0.5" />
             <LoginDropdown />
             <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-5 text-xs">
               Apply Now
