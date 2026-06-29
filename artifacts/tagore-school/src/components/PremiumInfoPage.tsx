@@ -61,7 +61,7 @@ export default function PremiumInfoPage({
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="flex items-center gap-2 text-sm text-blue-200 mb-6">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <button onClick={() => window.history.back()} className="hover:text-white transition-colors">Home</button>
             <ChevronRight size={14} />
             <span className="text-[#FFD700] font-medium">{breadcrumb}</span>
           </div>

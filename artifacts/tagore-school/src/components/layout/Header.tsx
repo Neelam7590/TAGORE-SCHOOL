@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Phone, Mail, Menu, X, ChevronDown, LogIn, User } from "lucide-react";
+import { Phone, Mail, Menu, X, ChevronDown, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdmissionModal } from "@/context/AdmissionModalContext";
@@ -15,7 +15,6 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
       { href: "/director-message", label: "Director's Message", emoji: "👨‍💼" },
       { href: "/principal-message", label: "Principal's Message", emoji: "👩‍🏫" },
       { href: "/about#vision", label: "Vision & Mission", emoji: "🎯" },
-      { href: "/about#values", label: "Core Values", emoji: "⭐" },
       { href: "/about#faculty", label: "Meet Our Faculty", emoji: "👨‍🏫" },
     ],
   },
@@ -26,20 +25,18 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
       { href: "/academics#streams", label: "Streams & Subjects", emoji: "🧪" },
       { href: "/academics#methodology", label: "Teaching Methodology", emoji: "💡" },
       { href: "/academics#assessment", label: "Assessment System", emoji: "📝" },
-      { href: "/academics#cocurricular", label: "Co-Curricular Activities", emoji: "🎨" },
       { href: "/academics#achievements", label: "Academic Achievements", emoji: "🏆" },
     ],
   },
   Facilities: {
     items: [
-      { href: "/facilities", label: "Learning Facilities", emoji: "🏫" },
-      { href: "/facilities#labs", label: "Science Laboratories", emoji: "🧪" },
+      { href: "/facilities", label: "All Facilities", emoji: "🏫" },
+      { href: "/facilities#labs", label: "Science Labs", emoji: "🧪" },
       { href: "/facilities#computer", label: "Computer Labs", emoji: "💻" },
       { href: "/facilities#library", label: "Library", emoji: "📚" },
       { href: "/facilities#sports", label: "Sports Complex", emoji: "🏆" },
-      { href: "/facilities#transport", label: "Transport Facility", emoji: "🚌" },
-      { href: "/facilities#safety", label: "Safety & Security", emoji: "🛡" },
-      { href: "/facilities#green", label: "Green Campus", emoji: "🌳" },
+      { href: "/facilities#transport", label: "Transport", emoji: "🚌" },
+      { href: "/facilities#safety", label: "Safety & Security", emoji: "🛡️" },
     ],
   },
   Gallery: {
@@ -50,7 +47,6 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
       { href: "/events-activities", label: "Events & Activities", emoji: "🎨" },
       { href: "/sports-gallery", label: "Sports Gallery", emoji: "⚽" },
       { href: "/cultural-programs", label: "Cultural Programs", emoji: "🎭" },
-      { href: "/annual-functions", label: "Annual Functions", emoji: "🎓" },
     ],
   },
   "Student Corner": {
@@ -61,6 +57,10 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
       { href: "/rules-regulations", label: "Rules & Regulations", emoji: "📜" },
       { href: "/attendance-policy", label: "Attendance Policy", emoji: "✅" },
       { href: "/student-guidelines", label: "Student Guidelines", emoji: "🎓" },
+      { href: "/academic-calendar", label: "Academic Calendar", emoji: "📅" },
+      { href: "/school-holidays", label: "School Holidays", emoji: "🏖️" },
+      { href: "/examination-schedule", label: "Exam Schedule", emoji: "📝" },
+      { href: "/activity-schedule", label: "Activity Schedule", emoji: "🎨" },
     ],
   },
   Achievements: {
@@ -68,19 +68,9 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
     items: [
       { href: "/board-results", label: "Board Results", emoji: "🏆" },
       { href: "/school-results", label: "School Results", emoji: "🥇" },
-      { href: "/inter-school-competitions", label: "Inter-School Competitions", emoji: "🎖" },
+      { href: "/inter-school-competitions", label: "Inter-School Competitions", emoji: "🎖️" },
       { href: "/sports-achievements", label: "Sports Achievements", emoji: "⚽" },
-      { href: "/student-success-stories", label: "Student Success Stories", emoji: "🌟" },
-    ],
-  },
-  "School Calendar": {
-    mega: true,
-    items: [
-      { href: "/academic-calendar", label: "Academic Calendar", emoji: "📅" },
-      { href: "/activity-schedule", label: "Activity Schedule", emoji: "🎨" },
-      { href: "/club-schedule", label: "Club Schedule", emoji: "🎭" },
-      { href: "/school-holidays", label: "School Holidays", emoji: "🏖" },
-      { href: "/examination-schedule", label: "Examination Schedule", emoji: "📝" },
+      { href: "/student-success-stories", label: "Success Stories", emoji: "🌟" },
     ],
   },
   Login: {
@@ -91,7 +81,6 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
   },
 };
 
-/* href to navigate to when clicking the label of a dropdown item */
 const navLabelHref: Record<string, string> = {
   About: "/about",
   Academics: "/academics",
@@ -99,7 +88,6 @@ const navLabelHref: Record<string, string> = {
   Gallery: "/gallery",
   "Student Corner": "/school-timings",
   Achievements: "/board-results",
-  "School Calendar": "/academic-calendar",
   Login: "/staff-login",
 };
 
@@ -112,7 +100,6 @@ const navLinks = [
   { href: "/gallery", label: "Gallery" },
   { href: "/school-timings", label: "Student Corner" },
   { href: "/board-results", label: "Achievements" },
-  { href: "/academic-calendar", label: "School Calendar" },
   { href: "/staff-login", label: "Login" },
   { href: "/admissions", label: "Admissions" },
   { href: "/contact", label: "Contact" },
@@ -146,10 +133,10 @@ function DropdownMenu({ items, onClose, mega }: { items: DropdownItem[]; onClose
 function NavItem({ link, isActive }: { link: { href: string; label: string }; isActive: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const config = menuConfig[link.label];
   const hasDropdown = !!config;
 
-  /* Close when clicking outside */
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
@@ -158,7 +145,15 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  /* Plain nav item — no dropdown */
+  function handleMouseEnter() {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+    if (hasDropdown) setOpen(true);
+  }
+
+  function handleMouseLeave() {
+    hoverTimeout.current = setTimeout(() => setOpen(false), 120);
+  }
+
   if (!hasDropdown) {
     return (
       <Link
@@ -167,22 +162,16 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
       >
         {link.label}
         {isActive && (
-          <motion.div
-            layoutId="navbar-indicator"
-            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFD700]"
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          />
+          <motion.div layoutId="navbar-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFD700]" transition={{ type: "spring", stiffness: 300, damping: 30 }} />
         )}
       </Link>
     );
   }
 
-  /* Nav item WITH dropdown — label navigates, arrow toggles */
   const labelHref = navLabelHref[link.label] ?? link.href;
 
   return (
-    <div ref={ref} className="relative flex items-center">
-      {/* Label → navigate to page */}
+    <div ref={ref} className="relative flex items-center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Link
         href={labelHref}
         onClick={() => setOpen(false)}
@@ -191,33 +180,20 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
         {link.label === "Login" && <LogIn size={11} className="inline mr-0.5 align-middle" />}
         {link.label}
         {isActive && (
-          <motion.div
-            layoutId="navbar-indicator"
-            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFD700]"
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          />
+          <motion.div layoutId="navbar-indicator" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#FFD700]" transition={{ type: "spring", stiffness: 300, damping: 30 }} />
         )}
       </Link>
-
-      {/* Arrow → toggle dropdown only */}
       <button
         onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
         aria-label={`Open ${link.label} menu`}
         className={`ml-0.5 p-0.5 rounded transition-colors hover:text-[#0F4C81] ${open ? "text-[#0F4C81]" : "text-gray-400"}`}
       >
-        <ChevronDown
-          size={12}
-          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-        />
+        <ChevronDown size={12} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
 
       <AnimatePresence>
         {open && (
-          <DropdownMenu
-            items={config.items}
-            mega={config.mega}
-            onClose={() => setOpen(false)}
-          />
+          <DropdownMenu items={config.items} mega={config.mega} onClose={() => setOpen(false)} />
         )}
       </AnimatePresence>
     </div>
@@ -239,37 +215,31 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full flex flex-col bg-white">
       {/* Top Bar */}
       <div className="bg-[#0F4C81] px-4 py-2 text-xs font-medium text-white md:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 sm:flex-row">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2">
+          {/* Left: Phone + Email */}
           <div className="flex items-center gap-4">
             <a href="tel:+919303350002" className="flex items-center gap-1.5 hover:text-[#FFD700] transition-colors">
               <Phone size={12} className="text-[#FFD700]" />
-              <span>+91 9303350002</span>
+              <span>+91 93033 50002</span>
             </a>
-            <span className="hidden sm:inline text-white/40">|</span>
+            <span className="hidden sm:inline text-white/30">|</span>
             <a href="mailto:info@tagoreglobalschool.in" className="hidden sm:flex items-center gap-1.5 hover:text-[#FFD700] transition-colors">
               <Mail size={12} className="text-[#FFD700]" />
               <span>info@tagoreglobalschool.in</span>
             </a>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="font-semibold tracking-wide text-[#FFD700]">Affiliation No. 531905</div>
-            <span className="hidden sm:inline text-white/40">|</span>
-            <div className="hidden sm:flex items-center gap-3 text-xs">
-              <Link href="/staff-login" className="hover:text-[#FFD700] transition-colors flex items-center gap-1">
-                <User size={10} /> Staff
-              </Link>
-              <Link href="/parent-login" className="hover:text-[#FFD700] transition-colors flex items-center gap-1">
-                <User size={10} /> Parent
-              </Link>
-            </div>
+          {/* Right: Affiliation only */}
+          <div className="font-semibold tracking-wide text-[#FFD700] text-xs">
+            Affiliation No. 531905
           </div>
         </div>
       </div>
 
       {/* Main Header */}
       <div className="border-b shadow-sm bg-white">
-        <div className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between gap-2 px-4 md:px-6">
-          {/* Logo */}
+        <div className="mx-auto flex h-[68px] max-w-[1400px] items-center gap-0 px-4 md:px-6">
+
+          {/* Logo + Name */}
           <Link href="/" className="flex items-center gap-2 group shrink-0">
             <img src="/logo.png" alt="TGS Logo" className="h-10 w-10 object-contain transition-transform group-hover:scale-105" />
             <span className="font-serif text-lg font-bold tracking-tight text-[#0F4C81] whitespace-nowrap hidden sm:block">
@@ -277,12 +247,18 @@ export function Header() {
             </span>
           </Link>
 
+          {/* Divider between logo and nav */}
+          <div className="hidden xl:block h-8 w-px bg-gray-200 mx-4 shrink-0" />
+
           {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center gap-3 flex-1 justify-center">
+          <nav className="hidden xl:flex items-center gap-3 flex-1">
             {navLinks.map((link) => (
               <NavItem key={link.label} link={link} isActive={isActive(link)} />
             ))}
           </nav>
+
+          {/* Divider before CTAs */}
+          <div className="hidden xl:block h-8 w-px bg-gray-200 mx-3 shrink-0" />
 
           {/* Desktop CTAs */}
           <div className="hidden xl:flex items-center gap-2 shrink-0">
@@ -296,7 +272,7 @@ export function Header() {
 
           {/* Mobile Toggle */}
           <button
-            className="xl:hidden flex h-10 w-10 items-center justify-center rounded-md text-[#0F4C81]"
+            className="xl:hidden ml-auto flex h-10 w-10 items-center justify-center rounded-md text-[#0F4C81]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -324,7 +300,6 @@ export function Header() {
                 return (
                   <div key={link.label} className="border-b border-gray-100 last:border-0">
                     <div className="flex items-center justify-between">
-                      {/* Label → navigate */}
                       <Link
                         href={hasDropdown ? labelHref : link.href}
                         onClick={() => setMobileMenuOpen(false)}
@@ -333,7 +308,6 @@ export function Header() {
                         {link.label === "Login" && <LogIn size={14} />}
                         {link.label}
                       </Link>
-                      {/* Arrow → toggle sub-menu */}
                       {hasDropdown && (
                         <button
                           onClick={() => setMobileDropdown(isOpen ? null : link.label)}

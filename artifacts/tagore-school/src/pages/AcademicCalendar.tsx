@@ -294,8 +294,10 @@ export default function AcademicCalendar() {
               </div>
 
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-8 h-13 text-base shadow-[0_0_30px_rgba(255,215,0,0.4)] h-12">
-                  <Download size={16} className="mr-2" /> Download Academic Calendar PDF
+                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-8 h-13 text-base shadow-[0_0_30px_rgba(255,215,0,0.4)] h-12" asChild>
+                  <a href="/academic-calendar.pdf" download="Tagore_Academic_Calendar_2026-27.pdf">
+                    <Download size={16} className="mr-2" /> Download Academic Calendar PDF
+                  </a>
                 </Button>
               </motion.div>
             </motion.div>
@@ -485,8 +487,10 @@ export default function AcademicCalendar() {
             <p className="text-blue-100/80 mb-8 text-lg">Save or print the complete academic calendar with all phases, exam dates, PTM schedules, and holiday lists.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.97 }}>
-                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-13 text-base shadow-[0_0_30px_rgba(255,215,0,0.4)] h-12">
-                  <Download size={18} className="mr-2" /> Download PDF
+                <Button className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full px-10 h-13 text-base shadow-[0_0_30px_rgba(255,215,0,0.4)] h-12" asChild>
+                  <a href="/academic-calendar.pdf" download="Tagore_Academic_Calendar_2026-27.pdf">
+                    <Download size={18} className="mr-2" /> Download PDF
+                  </a>
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>

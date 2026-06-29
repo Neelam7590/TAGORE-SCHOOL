@@ -293,18 +293,18 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { num: "01", icon: GraduationCap, title: "Academic Excellence", desc: "A strong CBSE curriculum with innovative teaching, a learner-centred approach, and a consistent record of outstanding board results.", color: "from-blue-50 to-indigo-50", border: "border-blue-200" },
-              { num: "02", icon: Rocket, title: "Holistic Development", desc: "Academic achievement, creativity, leadership, sports, and strong moral values — we nurture every dimension of a child's potential.", color: "from-purple-50 to-violet-50", border: "border-purple-200" },
-              { num: "03", icon: Laptop, title: "Smart Learning", desc: "Technology-enabled classrooms, modern laboratories, digital resources, and expert faculty creating a future-ready learning experience.", color: "from-cyan-50 to-blue-50", border: "border-cyan-200" },
-              { num: "04", icon: Award, title: "Student-Centred Approach", desc: "Every child is unique. We recognise individual strengths and provide personalised guidance to help every student achieve their full potential.", color: "from-amber-50 to-yellow-50", border: "border-amber-200" },
-              { num: "05", icon: Globe, title: "Future-Ready Education", desc: "Critical thinking, problem-solving, creativity, and leadership skills that equip students to thrive in an evolving, competitive global world.", color: "from-green-50 to-emerald-50", border: "border-green-200" },
-              { num: "06", icon: Heart, title: "Safe & Caring Campus", desc: "A secure, disciplined, and positive school culture where every student feels valued, respected, safe, and inspired every single day.", color: "from-rose-50 to-pink-50", border: "border-rose-200" },
+              { num: "01", icon: GraduationCap, title: "Academic Excellence", desc: "A strong CBSE curriculum with innovative teaching, a learner-centred approach, and a consistent record of outstanding board results.", color: "from-blue-50 to-indigo-50", border: "border-blue-200", iconBg: "bg-blue-100", iconColor: "text-blue-600" },
+              { num: "02", icon: Rocket, title: "Holistic Development", desc: "Academic achievement, creativity, leadership, sports, and strong moral values — we nurture every dimension of a child's potential.", color: "from-purple-50 to-violet-50", border: "border-purple-200", iconBg: "bg-purple-100", iconColor: "text-purple-600" },
+              { num: "03", icon: Laptop, title: "Smart Learning", desc: "Technology-enabled classrooms, modern laboratories, digital resources, and expert faculty creating a future-ready learning experience.", color: "from-cyan-50 to-blue-50", border: "border-cyan-200", iconBg: "bg-cyan-100", iconColor: "text-cyan-600" },
+              { num: "04", icon: Award, title: "Student-Centred Approach", desc: "Every child is unique. We recognise individual strengths and provide personalised guidance to help every student achieve their full potential.", color: "from-amber-50 to-yellow-50", border: "border-amber-200", iconBg: "bg-amber-100", iconColor: "text-amber-600" },
+              { num: "05", icon: Globe, title: "Future-Ready Education", desc: "Critical thinking, problem-solving, creativity, and leadership skills that equip students to thrive in an evolving, competitive global world.", color: "from-green-50 to-emerald-50", border: "border-green-200", iconBg: "bg-emerald-100", iconColor: "text-emerald-600" },
+              { num: "06", icon: Heart, title: "Safe & Caring Campus", desc: "A secure, disciplined, and positive school culture where every student feels valued, respected, safe, and inspired every single day.", color: "from-rose-50 to-pink-50", border: "border-rose-200", iconBg: "bg-rose-100", iconColor: "text-rose-600" },
             ].map((feature, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5, type: "spring" }} whileHover={{ y: -8, scale: 1.02 }}
                 className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${feature.color} border ${feature.border} p-8 shadow-md transition-all duration-300 hover:shadow-xl`}>
                 <div className="absolute -right-4 -top-4 text-8xl font-bold text-gray-100 font-serif leading-none">{feature.num}</div>
                 <div className="relative z-10">
-                  <div className="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0F4C81]/10 text-[#0F4C81] transition-all duration-300 group-hover:bg-[#0F4C81] group-hover:text-[#FFD700]">
+                  <div className={`mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl ${feature.iconBg} ${feature.iconColor} transition-all duration-300 group-hover:scale-110`}>
                     <feature.icon size={32} />
                   </div>
                   <h3 className="mb-3 font-serif text-xl font-bold text-[#0F4C81]">{feature.title}</h3>
@@ -336,15 +336,15 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Laptop, title: "Smart Classrooms", desc: "Digital learning with interactive panels and multimedia resources." },
-              { icon: Utensils, title: "Modern Cafeteria", desc: "Nutritious meals prepared in a hygienic, spacious dining hall." },
-              { icon: Bus, title: "Safe Transport", desc: "GPS-enabled buses with trained staff for safe commuting." },
-              { icon: Award, title: "Sports Ground", desc: "Large playground for cricket, football, basketball, and athletics." },
+              { icon: Laptop, title: "Smart Classrooms", desc: "Digital learning with interactive panels and multimedia resources.", iconBg: "bg-blue-100", iconColor: "text-blue-600" },
+              { icon: Utensils, title: "Modern Cafeteria", desc: "Nutritious meals prepared in a hygienic, spacious dining hall.", iconBg: "bg-orange-100", iconColor: "text-orange-500" },
+              { icon: Bus, title: "Safe Transport", desc: "GPS-enabled buses with trained staff for safe commuting.", iconBg: "bg-green-100", iconColor: "text-green-600" },
+              { icon: Award, title: "Sports Ground", desc: "Large playground for cricket, football, basketball, and athletics.", iconBg: "bg-yellow-100", iconColor: "text-yellow-600" },
             ].map((fac, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }} whileHover={{ y: -8, scale: 1.02 }}
                 className="group flex flex-col items-center text-center rounded-2xl bg-white border border-[#0F4C81]/10 p-8 shadow-md transition-all hover:shadow-xl hover:border-[#FFD700]/40">
-                <div className="w-16 h-16 bg-[#0F4C81]/10 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-[#0F4C81] transition-all duration-300">
-                  <fac.icon size={28} className="text-[#0F4C81] group-hover:text-[#FFD700] transition-colors duration-300" />
+                <div className={`w-16 h-16 ${fac.iconBg} rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-all duration-300`}>
+                  <fac.icon size={28} className={fac.iconColor} />
                 </div>
                 <h4 className="font-serif text-lg font-bold text-[#0F4C81] mb-2">{fac.title}</h4>
                 <p className="text-sm text-gray-500 leading-relaxed">{fac.desc}</p>
@@ -427,7 +427,7 @@ export default function Home() {
       </section>
 
       {/* S10 — QUICK ACCESS: Very Light Blue Gradient */}
-      <section className="relative pt-24 pb-44 overflow-hidden" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)", background: "linear-gradient(135deg, #EEF4FF 0%, #E8F0FE 50%, #F0F6FF 100%)" }}>
+      <section id="everything-you-need" className="relative pt-24 pb-44 overflow-hidden" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)", background: "linear-gradient(135deg, #EEF4FF 0%, #E8F0FE 50%, #F0F6FF 100%)" }}>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-sm font-medium text-[#0F4C81] mb-4">
