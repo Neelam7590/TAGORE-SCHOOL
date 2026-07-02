@@ -279,9 +279,11 @@
 }
 
 /* Prevent horizontal overflow everywhere */
-section, div, nav, header, footer {
+section, nav, header, footer {
   max-width: 100%;
 }
+/* Dropdowns/overlays must not inherit max-width constraint */
+.absolute, .fixed { max-width: none; }
 
 @layer utilities {
   input[type="search"]::-webkit-search-cancel-button {

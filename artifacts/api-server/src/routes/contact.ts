@@ -226,4 +226,71 @@ router.post("/admission-form", async (req, res) => {
   res.json({ success: true, message: "Application submitted successfully." });
 });
 
+const SCHOOL_SYSTEM_PROMPT = `You are a friendly and helpful AI assistant for Tagore Global School, a CBSE-affiliated school in India.
+
+Key facts about the school:
+- CBSE Affiliation No: 531905
+- Phone: +91 93033 50002
+- Email: info@tagoreglobalschool.in
+- Admissions open for Session 2026-2027
+- Programs: Nursery, Primary (Class 1-5), Middle School (Class 6-8), Secondary (Class 9-10), Senior Secondary (Class 11-12 with Science/Commerce/Arts streams)
+- Timings: Monday to Saturday, 7:30 AM to 1:30 PM. Extra classes: 2:00 PM to 4:00 PM
+- Facilities: Science Labs, Computer Labs, Library, Sports Complex, Transport facility
+- Location: India (CBSE board school)
+
+Guidelines:
+- Be warm, friendly, and professional
+- Respond in the same language the user writes in (Hindi or English)
+- For specific fee details, always ask parents to contact the school directly
+- Always encourage parents to visit the school or call/WhatsApp for urgent queries
+- Keep answers concise but helpful (2-4 sentences usually)
+- For admission queries, mention the online form on the website and phone number
+- If you don't know something specific, suggest contacting the school`;
+
+router.post("/chat", async (req, res) => {
+  const { message, history } = req.body as {
+    message?: string;
+    history?: Array<{ role: "user" | "assistant"; content: string }>;
+  };
+
+  if (!message?.trim()) {
+    res.status(400).json({ error: "Message is required." });
+    return;
+  }
+
+  const apiKey = process.env["OPENAI_API_KEY"];
+  if (!apiKey) {
+    res.json({
+      reply: "Maafi chahta hun! AI service abhi configure nahi hai. Seedha humse contact karein: 📞 +91 93033 50002 ya WhatsApp karein.",
+    });
+    return;
+  }
+
+  try {
+    const OpenAI = (await import("openai")).default;
+    const openai = new OpenAI({ apiKey });
+
+    const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
+      { role: "system", content: SCHOOL_SYSTEM_PROMPT },
+      ...(history ?? []).slice(-10),
+      { role: "user", content: message.trim() },
+    ];
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages,
+      max_tokens: 400,
+      temperature: 0.7,
+    });
+
+    const reply = completion.choices[0]?.message?.content?.trim() ?? "Shukriya! Koi aur sawaal ho toh zaroor poochhen.";
+    res.json({ reply });
+  } catch (err) {
+    req.log.error({ err }, "OpenAI chat error");
+    res.json({
+      reply: "Thodi dikkat aayi. Seedha humse baat karein: 📞 +91 93033 50002",
+    });
+  }
+});
+
 export default router;

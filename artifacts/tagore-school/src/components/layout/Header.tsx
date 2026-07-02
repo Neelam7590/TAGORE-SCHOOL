@@ -491,17 +491,17 @@ export function Header() {
           </Link>
 
           {/* Divider between logo and nav */}
-          <div className="hidden xl:block h-8 w-px bg-gray-200 mx-4 shrink-0" />
+          <div className="hidden xl:block h-10 w-px bg-gray-200 mx-4 shrink-0" />
 
-          {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center flex-1 gap-x-4 px-3">
+          {/* Desktop Nav — centered with dividers on both sides */}
+          <nav className="hidden xl:flex items-center justify-center flex-1 gap-x-5 px-2">
             {navLinks.map((link) => (
               <NavItem key={link.label} link={link} isActive={isActive(link)} />
             ))}
           </nav>
 
-          {/* Divider before CTAs */}
-          <div className="hidden xl:block h-8 w-px bg-gray-200 mx-2 shrink-0" />
+          {/* Divider between nav and CTAs */}
+          <div className="hidden xl:block h-10 w-px bg-gray-200 mx-4 shrink-0" />
 
           {/* Desktop CTAs — icon buttons for contact, save space */}
           <div className="hidden xl:flex items-center gap-1.5 shrink-0">
