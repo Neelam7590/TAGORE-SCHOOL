@@ -313,8 +313,8 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Floating Robot Button */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+      {/* Floating Robot Button — above WhatsApp */}
+      <div className="fixed bottom-24 right-6 z-50 flex flex-col items-end gap-2">
         {!open && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
