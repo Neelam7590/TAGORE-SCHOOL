@@ -1,19 +1,30 @@
 import { Router } from "express";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const router = Router();
 
 const RECIPIENT = "dtc1752@gmail.com";
-const SENDER = "Tagore Global School <onboarding@resend.dev>";
+const SENDER_NAME = "Tagore Global School";
+
+function createTransport() {
+  const user = process.env["GMAIL_USER"];
+  const pass = process.env["GMAIL_APP_PASSWORD"];
+  if (!user || !pass) return null;
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  });
+}
 
 async function sendEmail(subject: string, html: string) {
-  const apiKey = process.env["RESEND_API_KEY"];
-  if (!apiKey) {
-    return;
-  }
-  const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({ from: SENDER, to: RECIPIENT, subject, html });
-  if (error) throw new Error(error.message);
+  const transport = createTransport();
+  if (!transport) return;
+  await transport.sendMail({
+    from: `"${SENDER_NAME}" <${process.env["GMAIL_USER"]}>`,
+    to: RECIPIENT,
+    subject,
+    html,
+  });
 }
 
 async function saveToDb(data: Record<string, string | null>) {
