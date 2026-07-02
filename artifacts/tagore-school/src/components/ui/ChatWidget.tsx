@@ -140,113 +140,97 @@ export function ChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex flex-col bg-gray-50"
+            initial={{ opacity: 0, y: 16, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300, damping: 26 }}
+            className="fixed bottom-48 right-6 z-[100] w-[340px] sm:w-[380px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/20"
+            style={{ maxHeight: "520px", boxShadow: "0 8px 40px rgba(15,76,129,0.28)" }}
           >
-            {/* Full-Screen Header */}
-            <div className="bg-[#0F4C81] px-4 sm:px-6 py-3 flex items-center justify-between shrink-0 shadow-lg">
-              <div className="flex items-center gap-3">
+            {/* Header */}
+            <div className="bg-[#0F4C81] px-4 py-3 flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <img src={robotImg} alt="AI Bot" className="h-12 w-12 object-contain drop-shadow-md" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
-                  <span className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-green-400 border-2 border-[#0F4C81]" />
+                  <img src={robotImg} alt="Bot" className="h-9 w-9 object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-[#0F4C81]" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-base leading-tight">Tagore Global School</p>
-                  <p className="text-green-300 text-xs flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" />AI Assistant — Online</p>
+                  <p className="text-white font-semibold text-sm leading-tight">Tagore Global School</p>
+                  <p className="text-green-300 text-xs flex items-center gap-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" />
+                    Online — Abhi jawab denge
+                  </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => { setTtsOn(!ttsOn); if (ttsOn) stop(); }}
-                  className="flex items-center gap-1.5 text-white/80 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-lg px-3 py-1.5 text-xs"
-                  title={ttsOn ? "TTS band karo" : "TTS chalu karo"}
+                  className="h-7 w-7 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                  title={ttsOn ? "Voice Off" : "Voice On"}
                 >
-                  {ttsOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
-                  <span className="hidden sm:inline">{ttsOn ? "Voice On" : "Voice Off"}</span>
+                  {ttsOn ? <Volume2 size={13} /> : <VolumeX size={13} />}
                 </button>
-                <a
-                  href="https://wa.me/919303350002"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1da851] text-white rounded-lg px-3 py-1.5 text-xs transition-colors"
-                >
-                  <SiWhatsapp size={13} />
-                  <span className="hidden sm:inline">WhatsApp</span>
-                </a>
                 <button
                   onClick={() => { setOpen(false); stop(); }}
-                  className="h-9 w-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                  className="h-7 w-7 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                 >
-                  <X size={18} />
+                  <X size={15} />
                 </button>
               </div>
             </div>
 
             {/* Tour progress bar */}
             {tourActive && tourStep !== null && (
-              <div className="bg-[#FFD700]/10 border-b border-[#FFD700]/30 px-4 py-2 flex items-center gap-3 shrink-0">
-                <MapPin size={14} className="text-[#0F4C81] shrink-0" />
-                <div className="flex-1">
+              <div className="bg-[#FFF8DC] border-b border-[#FFD700]/40 px-3 py-2 flex items-center gap-2 shrink-0">
+                <MapPin size={12} className="text-[#0F4C81] shrink-0" />
+                <div className="flex-1 min-w-0">
                   <div className="flex justify-between text-xs text-gray-600 mb-1">
-                    <span>Website Tour — Step {tourStep + 1} of {TOUR_STEPS.length}</span>
-                    <span>{TOUR_STEPS[tourStep]?.label}</span>
+                    <span className="truncate">Step {tourStep + 1}/{TOUR_STEPS.length}: {TOUR_STEPS[tourStep]?.label}</span>
                   </div>
-                  <div className="h-1.5 bg-gray-200 rounded-full">
-                    <div className="h-1.5 bg-[#0F4C81] rounded-full transition-all duration-500" style={{ width: `${((tourStep + 1) / TOUR_STEPS.length) * 100}%` }} />
+                  <div className="h-1 bg-gray-200 rounded-full">
+                    <div className="h-1 bg-[#0F4C81] rounded-full transition-all duration-500" style={{ width: `${((tourStep + 1) / TOUR_STEPS.length) * 100}%` }} />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-1 shrink-0">
                   {tourStep < TOUR_STEPS.length - 1 ? (
-                    <button onClick={nextTourStep} className="text-xs bg-[#0F4C81] text-white px-3 py-1 rounded-full hover:bg-[#0a3d6b] transition-colors">Agle Step →</button>
+                    <button onClick={nextTourStep} className="text-xs bg-[#0F4C81] text-white px-2 py-0.5 rounded-full">Next →</button>
                   ) : (
-                    <button onClick={() => runTourStep(TOUR_STEPS.length)} className="text-xs bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 transition-colors">Finish ✓</button>
+                    <button onClick={() => runTourStep(TOUR_STEPS.length)} className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">Done ✓</button>
                   )}
-                  <button onClick={stopTour} className="text-xs bg-red-100 text-red-600 px-3 py-1 rounded-full hover:bg-red-200 transition-colors">Rok do</button>
+                  <button onClick={stopTour} className="text-xs text-red-500 px-1">✕</button>
                 </div>
               </div>
             )}
 
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 flex flex-col gap-3 max-w-3xl w-full mx-auto">
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto px-3 py-3 flex flex-col gap-2 bg-gray-50">
               {messages.map((msg, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"} gap-2`}
-                >
+                <div key={i} className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"} gap-2`}>
                   {msg.from === "bot" && (
-                    <div className="h-8 w-8 rounded-full bg-[#0F4C81] flex items-center justify-center shrink-0 mt-1">
-                      <Bot size={16} className="text-white" />
+                    <div className="h-6 w-6 rounded-full bg-[#0F4C81] flex items-center justify-center shrink-0 mt-1">
+                      <Bot size={12} className="text-white" />
                     </div>
                   )}
-                  <div className={`max-w-[75%] rounded-2xl px-4 py-3 text-sm whitespace-pre-line leading-relaxed shadow-sm ${
+                  <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm whitespace-pre-line leading-relaxed shadow-sm ${
                     msg.from === "user"
                       ? "bg-[#0F4C81] text-white rounded-br-sm"
                       : "bg-white text-gray-800 rounded-bl-sm border border-gray-100"
                   }`}>
                     {msg.text}
                   </div>
-                  {msg.from === "user" && (
-                    <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0 mt-1 text-xs font-bold text-gray-500">
-                      You
-                    </div>
-                  )}
-                </motion.div>
+                </div>
               ))}
 
               {loading && (
                 <div className="flex justify-start gap-2">
-                  <div className="h-8 w-8 rounded-full bg-[#0F4C81] flex items-center justify-center shrink-0 mt-1">
-                    <Bot size={16} className="text-white" />
+                  <div className="h-6 w-6 rounded-full bg-[#0F4C81] flex items-center justify-center shrink-0 mt-1">
+                    <Bot size={12} className="text-white" />
                   </div>
-                  <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 border border-gray-100 shadow-sm">
-                    <div className="flex gap-1 items-center h-5">
-                      <span className="h-2 w-2 rounded-full bg-[#0F4C81] animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="h-2 w-2 rounded-full bg-[#0F4C81] animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="h-2 w-2 rounded-full bg-[#0F4C81] animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <div className="bg-white rounded-2xl rounded-bl-sm px-3 py-2 border border-gray-100 shadow-sm">
+                    <div className="flex gap-1 items-center h-4">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#0F4C81] animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#0F4C81] animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#0F4C81] animate-bounce" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
                 </div>
@@ -256,59 +240,66 @@ export function ChatWidget() {
 
             {/* Quick Questions */}
             {showQuickButtons && (
-              <div className="px-4 sm:px-6 pb-2 max-w-3xl w-full mx-auto">
-                <p className="text-xs text-gray-400 mb-2">Jaldi poochhen ya tour shuru karein:</p>
-                <div className="flex flex-wrap gap-2">
+              <div className="bg-gray-50 px-3 pb-2 flex flex-col gap-1 border-t border-gray-100">
+                <p className="text-xs text-gray-400 pt-1.5 mb-0.5">Jaldi poochhen:</p>
+                <div className="flex flex-wrap gap-1">
                   {[
-                    "Admission process kya hai?",
+                    "Admission process?",
                     "Fees kitni hai?",
-                    "School timings batao",
-                    "Transport available hai?",
-                    "Class 11 mein admission kaise?",
+                    "School timings?",
+                    "Transport?",
                   ].map((q) => (
                     <button
                       key={q}
                       onClick={() => { setMessages((prev) => [...prev, { from: "user", text: q }]); sendToAI(q); }}
-                      className="flex items-center gap-1.5 text-xs text-[#0F4C81] bg-white border border-[#0F4C81]/25 rounded-full px-3 py-1.5 hover:bg-[#0F4C81] hover:text-white transition-colors shadow-sm"
+                      className="flex items-center gap-1 text-xs text-[#0F4C81] bg-white border border-[#0F4C81]/20 rounded-full px-2.5 py-1 hover:bg-[#0F4C81] hover:text-white transition-colors"
                     >
-                      <ChevronRight size={11} />
+                      <ChevronRight size={10} />
                       {q}
                     </button>
                   ))}
                   <button
                     onClick={startTour}
-                    className="flex items-center gap-1.5 text-xs text-white bg-[#FFD700] border border-[#FFD700] rounded-full px-3 py-1.5 hover:bg-[#FFC107] transition-colors shadow-sm font-semibold text-[#0F4C81]"
+                    className="flex items-center gap-1 text-xs bg-[#FFD700] text-[#0F4C81] rounded-full px-2.5 py-1 hover:bg-[#FFC107] transition-colors font-semibold"
                   >
-                    <MapPin size={11} />
-                    Website Tour Start Karo 🗺️
+                    <MapPin size={10} />
+                    Tour 🗺️
                   </button>
                 </div>
               </div>
             )}
 
-            {/* Input Area */}
-            <div className="bg-white border-t border-gray-100 px-4 sm:px-6 py-3 shrink-0">
-              <div className="max-w-3xl mx-auto flex gap-3 items-center">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-                  placeholder="Apna sawaal yahan likhein... (Hindi ya English mein)"
-                  disabled={loading}
-                  className="flex-1 text-sm outline-none text-gray-700 placeholder:text-gray-400 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-[#0F4C81] focus:bg-white transition-colors"
-                />
-                <button
-                  onClick={handleSend}
-                  disabled={loading || !input.trim()}
-                  className="h-11 w-11 rounded-xl bg-[#0F4C81] flex items-center justify-center text-white hover:bg-[#0a3d6b] disabled:opacity-40 transition-all shadow-md hover:shadow-lg"
-                >
-                  <Send size={17} />
-                </button>
-              </div>
-              <p className="text-center text-xs text-gray-400 mt-2">AI-powered • Powered by Tagore Global School</p>
+            {/* Input */}
+            <div className="bg-white border-t border-gray-100 px-3 py-2.5 flex gap-2 items-center shrink-0">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
+                placeholder="Kuch poochhen..."
+                disabled={loading}
+                className="flex-1 text-sm outline-none text-gray-700 placeholder:text-gray-400"
+              />
+              <button
+                onClick={handleSend}
+                disabled={loading || !input.trim()}
+                className="h-8 w-8 rounded-full bg-[#0F4C81] flex items-center justify-center text-white hover:bg-[#0a3d6b] disabled:opacity-40 transition-all"
+              >
+                <Send size={14} />
+              </button>
             </div>
+
+            {/* WhatsApp CTA */}
+            <a
+              href="https://wa.me/919303350002"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-[#25D366] text-white text-sm font-medium py-2 hover:bg-[#1da851] transition-colors shrink-0"
+            >
+              <SiWhatsapp size={15} />
+              WhatsApp par baat karein
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
