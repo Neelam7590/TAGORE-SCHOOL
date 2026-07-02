@@ -237,71 +237,95 @@ router.post("/admission-form", async (req, res) => {
   res.json({ success: true, message: "Application submitted successfully." });
 });
 
-const SCHOOL_SYSTEM_PROMPT = `You are a friendly and helpful AI assistant for Tagore Global School, a CBSE-affiliated school in India.
+type QA = { patterns: RegExp[]; reply: string };
 
-Key facts about the school:
-- CBSE Affiliation No: 531905
-- Phone: +91 93033 50002
-- Email: info@tagoreglobalschool.in
-- Admissions open for Session 2026-2027
-- Programs: Nursery, Primary (Class 1-5), Middle School (Class 6-8), Secondary (Class 9-10), Senior Secondary (Class 11-12 with Science/Commerce/Arts streams)
-- Timings: Monday to Saturday, 7:30 AM to 1:30 PM. Extra classes: 2:00 PM to 4:00 PM
-- Facilities: Science Labs, Computer Labs, Library, Sports Complex, Transport facility
-- Location: India (CBSE board school)
+const QA_DB: QA[] = [
+  {
+    patterns: [/admission/i, /apply/i, /enroll/i, /join/i, /daakhila/i, /dakhila/i, /pravedsh/i, /pravesh/i],
+    reply: "🎓 **Admissions 2026-2027 ke liye khule hain!**\n\nAdmission process:\n1️⃣ Website par online form fill karein\n2️⃣ Required documents submit karein (Birth Certificate, Previous Marksheet, Aadhar)\n3️⃣ School office mein visit karein\n4️⃣ Entrance assessment (Class 2 se upar)\n5️⃣ Fee payment aur confirmation\n\n📞 Call: +91 93033 50002\n📧 Email: info@tagoreglobalschool.in",
+  },
+  {
+    patterns: [/fee/i, /fees/i, /faiz/i, /charge/i, /cost/i, /kitna/i, /kitni/i, /paisa/i, /payment/i, /tuition/i],
+    reply: "💰 **Fees ke baare mein:**\n\nFees structure class ke anusaar alag-alag hai. Sahi aur updated fees ki jaankari ke liye:\n\n📞 Call karein: +91 93033 50002\n🏫 School office visit karein (Mon–Sat, 9 AM – 2 PM)\n📧 Email: info@tagoreglobalschool.in\n\nHum aapko poori detail denge! 😊",
+  },
+  {
+    patterns: [/timing/i, /time/i, /samay/i, /schedule/i, /baje/i, /hours/i, /open/i, /close/i, /school.*time/i],
+    reply: "🕐 **School Timings:**\n\n📅 Monday to Saturday\n🕖 7:30 AM – 1:30 PM (Regular Classes)\n📚 2:00 PM – 4:00 PM (Extra Classes / Activities)\n\n🏫 Office Timings: 9:00 AM – 3:00 PM\n\n(Sunday aur national holidays par school band rehta hai)",
+  },
+  {
+    patterns: [/transport/i, /bus/i, /pickup/i, /drop/i, /vehicle/i, /route/i, /gaadi/i, /van/i],
+    reply: "🚌 **Transport Facility:**\n\nHaan! School bus city ke sabhi major areas mein available hai.\n\n• Safe aur GPS-tracked vehicles\n• Experienced drivers aur attendants\n• Multiple routes covering the city\n\nRoute aur exact details ke liye:\n📞 +91 93033 50002 par call karein",
+  },
+  {
+    patterns: [/facilit/i, /lab/i, /library/i, /sport/i, /computer/i, /infrastructure/i, /suvidha/i],
+    reply: "🏫 **Hamari World-Class Facilities:**\n\n🔬 Well-equipped Science Labs (Physics, Chemistry, Biology)\n💻 Modern Computer Labs\n📚 Spacious Digital Library\n⚽ Indoor & Outdoor Sports Complex\n🎨 Art & Craft Room\n🎭 Multipurpose Hall\n🚌 Safe Transport\n🛡️ CCTV Security\n\nAur bhi bahut kuch! School visit karein aur khud dekhein. 😊",
+  },
+  {
+    patterns: [/class/i, /grade/i, /standard/i, /nursery/i, /kg/i, /kindergarten/i, /primary/i, /middle/i, /secondary/i, /11|12|xi|xii/i, /stream/i, /science|commerce|arts/i, /program/i, /curriculum/i],
+    reply: "📖 **Academic Programs:**\n\n🌱 **Pre-Primary:** Nursery, LKG, UKG\n📗 **Primary:** Class 1 – 5\n📘 **Middle School:** Class 6 – 8\n📙 **Secondary:** Class 9 – 10 (CBSE)\n📕 **Senior Secondary:** Class 11 – 12\n   • Science Stream\n   • Commerce Stream\n   • Arts Stream\n\nHamara curriculum CBSE guidelines follow karta hai with focus on holistic education. 🎓",
+  },
+  {
+    patterns: [/result/i, /marks/i, /percentage/i, /pass/i, /board/i, /toppers/i, /achievement/i],
+    reply: "🏆 **Academic Results:**\n\nTagore Global School ke students consistently excellent results laate hain!\n\n• Board exams mein top positions\n• 95%+ students distinction mein pass\n• Many students in top engineering & medical colleges\n\nDetailed results ke liye website ka Achievements section dekhein! 🌟",
+  },
+  {
+    patterns: [/contact/i, /address/i, /location/i, /where/i, /kahan/i, /map/i, /reach/i, /visit/i, /phone/i, /number/i, /call/i],
+    reply: "📍 **Contact & Location:**\n\n📞 Phone: +91 93033 50002\n📧 Email: info@tagoreglobalschool.in\n🌐 Website: tagoreglobalschool.in\n\n⏰ Office Hours:\nMonday – Saturday: 9:00 AM – 3:00 PM\n\n📱 WhatsApp par bhi message kar sakte hain: +91 93033 50002",
+  },
+  {
+    patterns: [/uniform/i, /dress/i, /kapda/i, /wardi/i],
+    reply: "👔 **School Uniform:**\n\nSchool uniform mandatory hai.\n\n• Uniform ke baare mein complete details school office se prapt karein\n• Admission ke baad uniform list provide ki jaayegi\n\n📞 More info: +91 93033 50002",
+  },
+  {
+    patterns: [/holiday/i, /vacation/i, /chutti/i, /break/i, /summer/i, /winter/i, /calendar/i],
+    reply: "📅 **School Calendar:**\n\n• **Summer Vacation:** May–June (approx.)\n• **Winter Break:** December–January\n• **Diwali Break:** October (as per CBSE)\n• **Holi & Other Festivals:** National holidays\n\nComplete academic calendar ke liye website par 'School Holidays' page dekhein ya call karein: 📞 +91 93033 50002",
+  },
+  {
+    patterns: [/teacher|faculty|staff|principal|director|sir|madam/i],
+    reply: "👩‍🏫 **Our Faculty:**\n\nTagore Global School mein experienced aur qualified teachers hain.\n\n• CBSE-trained educators\n• Subject specialists\n• Regular training & development\n• Dedicated Principal & Management team\n\nFaculty ke baare mein aur jaankari ke liye school visit karein! 🏫",
+  },
+  {
+    patterns: [/extra.?curricular|activity|activities|sports|cultural|music|dance|art/i, /hobby/i, /club/i],
+    reply: "🎨 **Extra-Curricular Activities:**\n\n⚽ Sports: Cricket, Football, Basketball, Badminton\n🎭 Cultural: Dance, Drama, Music\n🎨 Art & Craft\n🔬 Science Club\n📚 Debate & Quiz\n💻 Computer Club\n\nYe activities students ki overall development ke liye zaruri hain! 🌟",
+  },
+  {
+    patterns: [/hello|hi|namaste|namaskar|hey|good morning|good afternoon|salam/i, /^(hi|hello|hey|hii|helo)$/i],
+    reply: "Namaste! 🙏 Main Tagore Global School ka assistant hun.\n\nMain aapki in sawalon mein madad kar sakta hun:\n• 🎓 Admission process\n• 💰 Fees information\n• 🕐 School timings\n• 🚌 Transport\n• 🏫 Facilities\n• 📖 Academic programs\n\nKya poochna chahte hain? 😊",
+  },
+  {
+    patterns: [/thank|shukriya|dhanyawad|thanks/i],
+    reply: "Shukriya! 🙏 Aapka din shubh ho!\n\nKoi aur sawaal ho toh zaroor poochhen. Admissions ke liye:\n📞 +91 93033 50002\n📧 info@tagoreglobalschool.in",
+  },
+  {
+    patterns: [/affiliation|cbse|board|recognized/i, /531905/],
+    reply: "✅ **CBSE Affiliation:**\n\nTagore Global School CBSE (Central Board of Secondary Education) se affiliated hai.\n\n🔢 Affiliation Number: **531905**\n\nHamara school fully recognized aur accredited hai! 🏫",
+  },
+  {
+    patterns: [/document/i, /certificate/i, /required/i, /kya chahiye/i, /kya lagega/i, /paperwork/i],
+    reply: "📄 **Admission Documents Required:**\n\n1. Birth Certificate (Original + Copy)\n2. Previous School's Transfer Certificate (TC)\n3. Last Year's Marksheet / Report Card\n4. Aadhar Card (Student + Parents)\n5. Passport size photos (4-6)\n6. Residence proof\n7. Medical fitness certificate\n\nKisi document ke baare mein confusion ho toh:\n📞 +91 93033 50002",
+  },
+];
 
-Guidelines:
-- Be warm, friendly, and professional
-- Respond in the same language the user writes in (Hindi or English)
-- For specific fee details, always ask parents to contact the school directly
-- Always encourage parents to visit the school or call/WhatsApp for urgent queries
-- Keep answers concise but helpful (2-4 sentences usually)
-- For admission queries, mention the online form on the website and phone number
-- If you don't know something specific, suggest contacting the school`;
+function smartReply(message: string): string {
+  const msg = message.toLowerCase().trim();
+  for (const qa of QA_DB) {
+    if (qa.patterns.some((p) => p.test(msg))) {
+      return qa.reply;
+    }
+  }
+  return `Shukriya aapke sawaal ke liye! 🙏\n\nIs baare mein seedha humse baat karein:\n📞 **+91 93033 50002**\n📧 info@tagoreglobalschool.in\n💬 WhatsApp: +91 93033 50002\n\n🕐 Office Hours: Mon–Sat, 9 AM – 3 PM\n\nHum aapko poori jaankari denge! 😊`;
+}
 
 router.post("/chat", async (req, res) => {
-  const { message, history } = req.body as {
-    message?: string;
-    history?: Array<{ role: "user" | "assistant"; content: string }>;
-  };
+  const { message } = req.body as { message?: string };
 
   if (!message?.trim()) {
     res.status(400).json({ error: "Message is required." });
     return;
   }
 
-  const apiKey = process.env["OPENAI_API_KEY"];
-  if (!apiKey) {
-    res.json({
-      reply: "Maafi chahta hun! AI service abhi configure nahi hai. Seedha humse contact karein: 📞 +91 93033 50002 ya WhatsApp karein.",
-    });
-    return;
-  }
-
-  try {
-    const OpenAI = (await import("openai")).default;
-    const openai = new OpenAI({ apiKey });
-
-    const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
-      { role: "system", content: SCHOOL_SYSTEM_PROMPT },
-      ...(history ?? []).slice(-10),
-      { role: "user", content: message.trim() },
-    ];
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages,
-      max_tokens: 400,
-      temperature: 0.7,
-    });
-
-    const reply = completion.choices[0]?.message?.content?.trim() ?? "Shukriya! Koi aur sawaal ho toh zaroor poochhen.";
-    res.json({ reply });
-  } catch (err) {
-    req.log.error({ err }, "OpenAI chat error");
-    res.json({
-      reply: "Thodi dikkat aayi. Seedha humse baat karein: 📞 +91 93033 50002",
-    });
-  }
+  const reply = smartReply(message.trim());
+  res.json({ reply });
 });
 
 export default router;
