@@ -523,11 +523,13 @@ export function Header() {
             >
               <WhatsAppIcon size={14} />
             </a>
-            {/* Email button */}
+            {/* Gmail button */}
             <a
-              href="mailto:info@tagoreglobalschool.in"
-              title="Email: info@tagoreglobalschool.in"
-              className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=info@tagoreglobalschool.in&su=Inquiry%20-%20Tagore%20Global%20School"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Email via Gmail: info@tagoreglobalschool.in"
+              className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#EA4335] hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] transition-all duration-200"
             >
               <Mail size={14} />
             </a>
