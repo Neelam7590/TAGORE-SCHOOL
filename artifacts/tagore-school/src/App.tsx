@@ -44,7 +44,7 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 import { ChatWidget } from "@/components/ui/ChatWidget";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { AdmissionModalProvider } from "@/context/AdmissionModalContext";
+import { AdmissionModalProvider, useAdmissionModal } from "@/context/AdmissionModalContext";
 
 const queryClient = new QueryClient();
 
@@ -95,23 +95,30 @@ function Router() {
   );
 }
 
+function AppInner() {
+  const { admissionSubmitted } = useAdmissionModal();
+  return (
+    <div className="flex min-h-screen flex-col">
+      <ScrollToTop />
+      <Header />
+      <main className="flex-1">
+        <Router />
+      </main>
+      {!admissionSubmitted && <Footer />}
+      <BackToTop />
+      <ChatWidget />
+      <WhatsAppFloat />
+    </div>
+  );
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AdmissionModalProvider>
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <div className="flex min-h-screen flex-col">
-              <ScrollToTop />
-              <Header />
-              <main className="flex-1">
-                <Router />
-              </main>
-              <Footer />
-              <BackToTop />
-              <ChatWidget />
-              <WhatsAppFloat />
-            </div>
+            <AppInner />
           </WouterRouter>
           <Toaster />
         </AdmissionModalProvider>

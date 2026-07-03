@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useAdmissionModal } from "@/context/AdmissionModalContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -46,6 +47,7 @@ const sectionTitle = (icon: React.ReactNode, title: string) => (
 
 export default function Admissions() {
   const { toast } = useToast();
+  const { setAdmissionSubmitted } = useAdmissionModal();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -80,6 +82,7 @@ export default function Admissions() {
       });
       if (!res.ok) throw new Error("Failed");
       setSubmitted(true);
+      setAdmissionSubmitted(true);
       form.reset();
     } catch {
       toast({
@@ -188,16 +191,66 @@ export default function Admissions() {
             </div>
 
             {submitted ? (
-              <div className="bg-white rounded-2xl border border-green-100 shadow-sm p-12 text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle2 size={32} className="text-green-600" />
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-gray-900 mb-2">Application Received! 🎉</h3>
-                <p className="text-gray-500 mb-6">Thank you for applying to Tagore Global School. Our team will contact you within 2 working days.</p>
-                <Button onClick={() => setSubmitted(false)} className="bg-primary text-white hover:bg-primary/90 rounded-full px-8">
-                  Submit Another Application
-                </Button>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="flex flex-col items-center justify-center text-center py-20 px-8"
+              >
+                {/* Animated checkmark */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
+                  className="w-28 h-28 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-8 shadow-[0_0_60px_rgba(34,197,94,0.4)]"
+                >
+                  <CheckCircle2 size={56} className="text-white" />
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-green-100 border border-green-200 px-4 py-1.5 text-sm font-semibold text-green-700 mb-4">
+                    <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                    Application Submitted Successfully
+                  </div>
+                  <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#0F4C81] mb-4">
+                    🎉 Application Received!
+                  </h2>
+                  <p className="text-xl text-gray-600 mb-2 max-w-lg">
+                    Aapki application Tagore Global School ko mil gayi hai.
+                  </p>
+                  <p className="text-base text-gray-500 mb-10 max-w-lg">
+                    Hamari team <strong>2 working days</strong> mein aapko call ya email karegi. Koi sawaal ho toh seedha humse contact karein.
+                  </p>
+
+                  {/* Info cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 w-full max-w-xl">
+                    {[
+                      { emoji: "📞", label: "Call Us", value: "+91 93033 50002" },
+                      { emoji: "📧", label: "Email", value: "info@tagoreglobalschool.in" },
+                      { emoji: "⏰", label: "Office Hours", value: "Mon–Sat, 9AM–3PM" },
+                    ].map((item) => (
+                      <div key={item.label} className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm text-left">
+                        <div className="text-2xl mb-1">{item.emoji}</div>
+                        <div className="text-xs text-gray-400 font-medium">{item.label}</div>
+                        <div className="text-sm font-bold text-[#0F4C81]">{item.value}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Button
+                      onClick={() => { setSubmitted(false); setAdmissionSubmitted(false); }}
+                      variant="outline"
+                      className="border-[#0F4C81] text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white rounded-full px-8"
+                    >
+                      Doosra Form Bharein
+                    </Button>
+                    <a href="/" className="inline-flex items-center justify-center gap-2 bg-[#FFD700] text-[#0F4C81] font-bold rounded-full px-8 py-2 hover:bg-[#FFC107] transition-colors shadow-[0_0_30px_rgba(255,215,0,0.3)]">
+                      🏠 Home Jaayein
+                    </a>
+                  </div>
+                </motion.div>
+              </motion.div>
             ) : (
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

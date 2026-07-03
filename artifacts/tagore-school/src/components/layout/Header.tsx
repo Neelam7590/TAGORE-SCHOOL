@@ -96,9 +96,9 @@ const navLinks = [
   { href: "/admissions", label: "Admissions" },
 ];
 
-const loginItems: DropdownItem[] = [
+const loginItems: (DropdownItem & { external?: boolean })[] = [
   { href: "/staff-login", label: "Staff Login", emoji: "👨‍🏫" },
-  { href: "/parent-login", label: "Parent Login", emoji: "👨‍👩‍👧" },
+  { href: "https://student.okiedokiepay.com/auth/phone-login", label: "Parent Login", emoji: "👨‍👩‍👧", external: true },
 ];
 
 /* Social icons as inline SVGs */
@@ -275,17 +275,31 @@ function LoginDropdown() {
             transition={{ duration: 0.16 }}
             className="absolute top-full right-0 mt-2 w-52 rounded-2xl bg-white shadow-2xl border border-gray-100 p-2 z-50"
           >
-            {loginItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="group flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-gray-700 hover:bg-[#0F4C81] hover:text-white transition-all duration-200 font-medium"
-              >
-                {item.emoji && <span className="text-base w-6 text-center shrink-0">{item.emoji}</span>}
-                <span className="group-hover:translate-x-0.5 transition-transform duration-200">{item.label}</span>
-              </Link>
-            ))}
+            {loginItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-gray-700 hover:bg-[#0F4C81] hover:text-white transition-all duration-200 font-medium"
+                >
+                  {item.emoji && <span className="text-base w-6 text-center shrink-0">{item.emoji}</span>}
+                  <span className="group-hover:translate-x-0.5 transition-transform duration-200">{item.label}</span>
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-gray-700 hover:bg-[#0F4C81] hover:text-white transition-all duration-200 font-medium"
+                >
+                  {item.emoji && <span className="text-base w-6 text-center shrink-0">{item.emoji}</span>}
+                  <span className="group-hover:translate-x-0.5 transition-transform duration-200">{item.label}</span>
+                </Link>
+              )
+            )}
           </motion.div>
         )}
       </AnimatePresence>
