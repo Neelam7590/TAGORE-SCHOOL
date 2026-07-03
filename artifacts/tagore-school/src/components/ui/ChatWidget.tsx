@@ -1,28 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Volume2, VolumeX, MessageCircle, MapPin, Mic, ChevronRight, Bot } from "lucide-react";
+import { X, Send, Volume2, VolumeX, MessageCircle, MapPin, ChevronRight, Bot } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
+import { useLanguage } from "@/context/LanguageContext";
 
 const robotImg = `${import.meta.env.BASE_URL}chatbot-robot.png`;
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 type Message = { from: "bot" | "user"; text: string };
 
-const TOUR_STEPS = [
-  { label: "🏠 होम पेज", path: "/", speech: "Namaste! Tagore Global School ki website mein aapka swagat hai! 🙏 Yeh hai hamara ghar — jahaan aapko school ki saari jankari milegi. Yahan hero section mein Admissions badge, school ki photo, aur Apply Now button dikh raha hai. CBSE Affiliation Number 531905." },
-  { label: "🏫 हमारे बारे में", path: "/about", speech: "Is page mein Tagore Global School ka poora parichay hai. Hamari school ka itihas, hamare lakshya aur mission, aur hamare dedicated faculty ke baare mein yahan sab kuch milega. Ek premier school jo har student ki poori growth par dhyan deta hai." },
-  { label: "👨‍💼 Director ka Sandesh", path: "/director-message", speech: "Yahan hamare Director sahab ka khaas sandesh hai. Unka vision hai ki har bachche ko best education mile aur woh ek zimmedar nagarik bane. Unke prerak vichar zaroor padhen!" },
-  { label: "👩‍🏫 Principal ka Sandesh", path: "/principal-message", speech: "Hamari Principal ji ka sandesh yahan hai. Woh har student ki success ke liye personally committed hain. Unka mantra hai — academics ke saath character building bhi utni hi zaroori hai." },
-  { label: "📚 Academics", path: "/academics", speech: "Academic Programs section mein Nursery se Class 12 tak ke sabhi programs hain. CBSE curriculum follow kiya jaata hai. Class 11 aur 12 mein Science, Commerce aur Arts stream available hain. Practical aur conceptual dono par focus." },
-  { label: "🏫 Facilities", path: "/facilities", speech: "Hamari world-class facilities dekhiye! Modern Science Labs, Computer Labs, Digital Library, Indoor-Outdoor Sports Complex, Art Room, Multipurpose Hall, GPS-tracked Transport, aur 24-ghante CCTV Security. Sab kuch aapke bachche ke liye!" },
-  { label: "🖼️ Gallery", path: "/campus-life", speech: "Gallery mein hamari school ki sundar tasveerein hain — Campus Life, Events, Sports, aur Cultural Programs. Dekhiye ki hamare students kitne khush hain aur school ka mahaul kitna vibrant hai!" },
-  { label: "🏆 Achievements", path: "/board-results", speech: "Hamari school ke students ne board exams mein kamal ke results laye hain! 95 percent se zyada students distinction mein pass hote hain. Science, Commerce aur Arts teeno streams mein top ranks haasil ki hain. Hamein garv hai!" },
-  { label: "🕒 Student Corner", path: "/school-timings", speech: "Student Corner mein school ka poora schedule hai — timings, uniform guidelines, rules and regulations, attendance policy, academic calendar, aur exam schedule. Students ke liye ek complete guide!" },
-  { label: "📋 Admission Form", path: "/admissions", speech: "Session 2026-2027 ke liye Admissions abhi khule hain! Online form bharein, documents submit karein, aur Tagore Global School ka hissa banein. Kisi bhi sawaal ke liye call karein: plus 91 93033 50002. Apply Now!" },
-  { label: "📞 Contact", path: "/contact", speech: "Contact page par aap seedha humse baat kar sakte hain. Phone, Email ya WhatsApp — jaise chahein. Hamari team Monday se Saturday, subah 9 baje se dopahar 3 baje tak available hai. Aayiye miliye hamare office mein!" },
-];
-
-function useTTS() {
+function useTTS(lang: "en" | "hi") {
   const [ttsOn, setTtsOn] = useState(true);
   const utterRef = useRef<SpeechSynthesisUtterance | null>(null);
 
@@ -30,12 +17,22 @@ function useTTS() {
     if (!ttsOn || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = "en-IN";
-    utter.rate = 0.95;
+    // Set language for TTS
+    utter.lang = lang === "hi" ? "hi-IN" : "en-IN";
+    utter.rate = 0.92;
     utter.pitch = 1.05;
+
+    // Try to find a male voice for the selected language
+    const voices = window.speechSynthesis.getVoices();
+    const langCode = lang === "hi" ? "hi" : "en";
+    const maleVoice = voices.find(
+      (v) => v.lang.startsWith(langCode) && /male|man|guy/i.test(v.name)
+    ) || voices.find((v) => v.lang.startsWith(langCode));
+    if (maleVoice) utter.voice = maleVoice;
+
     utterRef.current = utter;
     window.speechSynthesis.speak(utter);
-  }, [ttsOn]);
+  }, [ttsOn, lang]);
 
   const stop = useCallback(() => {
     window.speechSynthesis?.cancel();
@@ -45,17 +42,32 @@ function useTTS() {
 }
 
 export function ChatWidget() {
+  const { lang, t } = useLanguage();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { from: "bot", text: "Namaste! 🙏 Main Tagore Global School ka AI assistant hun. Aap mujhse school ke baare mein kuch bhi pooch sakte hain — admissions, fees, facilities, timings ya kuch bhi!" },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [tourStep, setTourStep] = useState<number | null>(null);
   const [tourActive, setTourActive] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { ttsOn, setTtsOn, speak, stop } = useTTS();
+  const { ttsOn, setTtsOn, speak, stop } = useTTS(lang);
   const inputRef = useRef<HTMLInputElement>(null);
+  const prevLangRef = useRef(lang);
+
+  // Update initial message when language changes
+  useEffect(() => {
+    if (prevLangRef.current !== lang) {
+      prevLangRef.current = lang;
+      setMessages([{ from: "bot", text: t.chatGreeting }]);
+      if (tourActive) {
+        stop();
+        setTourActive(false);
+        setTourStep(null);
+      }
+    } else if (messages.length === 0) {
+      setMessages([{ from: "bot", text: t.chatGreeting }]);
+    }
+  }, [lang]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -70,6 +82,11 @@ export function ChatWidget() {
       stop();
     }
   }, [open]);
+
+  // Stop current speech when language changes
+  useEffect(() => {
+    stop();
+  }, [lang]);
 
   function addMessage(msg: Message) {
     setMessages((prev) => [...prev, msg]);
@@ -86,12 +103,22 @@ export function ChatWidget() {
       const res = await fetch(`${BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMsg, history }),
+        body: JSON.stringify({ message: userMsg, history, language: lang }),
       });
       const data = await res.json() as { reply?: string; error?: string };
-      addMessage({ from: "bot", text: data.reply ?? "Shukriya! Humse seedha contact karein: +91 93033 50002 📞" });
+      addMessage({
+        from: "bot",
+        text: data.reply ?? (lang === "hi"
+          ? "Shukriya! Humse seedha contact karein: +91 93033 50002 📞"
+          : "Thank you! Please contact us directly: +91 93033 50002 📞"),
+      });
     } catch {
-      addMessage({ from: "bot", text: "Maafi chahta hun, abhi thodi dikkat hai. Seedha call karein: +91 93033 50002 📞" });
+      addMessage({
+        from: "bot",
+        text: lang === "hi"
+          ? "Maafi chahta hun, abhi thodi dikkat hai. Seedha call karein: +91 93033 50002 📞"
+          : "Sorry, there's a temporary issue. Please call: +91 93033 50002 📞",
+      });
     } finally {
       setLoading(false);
     }
@@ -112,16 +139,19 @@ export function ChatWidget() {
   }
 
   function runTourStep(step: number) {
-    if (step >= TOUR_STEPS.length) {
+    const tourSteps = t.tourSteps;
+    if (step >= tourSteps.length) {
       setTourActive(false);
       setTourStep(null);
-      addMessage({ from: "bot", text: "🎉 Website tour complete ho gaya! Koi aur sawaal hai? Admissions ke liye 'Apply Now' button click karein ya humse call karein." });
+      addMessage({ from: "bot", text: t.tourComplete });
       return;
     }
-    const s = TOUR_STEPS[step]!;
-    const msg = `📍 Step ${step + 1}/${TOUR_STEPS.length}: ${s.label}\n\n${s.speech}`;
+    const s = tourSteps[step]!;
+    const msg = `📍 Step ${step + 1}/${tourSteps.length}: ${s.label}\n\n${s.speech}`;
     addMessage({ from: "bot", text: msg });
-    window.history.pushState({}, "", `${BASE}${s.path}`);
+    const paths = ["/", "/about", "/director-message", "/principal-message", "/academics", "/facilities", "/campus-life", "/board-results", "/school-timings", "/admissions", "/contact"];
+    const path = paths[step] ?? "/";
+    window.history.pushState({}, "", `${BASE}${path}`);
     window.dispatchEvent(new PopStateEvent("popstate"));
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -136,10 +166,11 @@ export function ChatWidget() {
     setTourActive(false);
     setTourStep(null);
     stop();
-    addMessage({ from: "bot", text: "Tour rok diya gaya. Koi aur madad chahiye?" });
+    addMessage({ from: "bot", text: t.tourStopped });
   }
 
   const showQuickButtons = messages.length <= 2 && !tourActive;
+  const tourSteps = t.tourSteps;
 
   return (
     <>
@@ -150,8 +181,8 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 26 }}
-            className="fixed bottom-48 right-6 z-[100] w-[340px] sm:w-[380px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/20"
-            style={{ maxHeight: "520px", boxShadow: "0 8px 40px rgba(15,76,129,0.28)" }}
+            className="fixed bottom-48 right-4 sm:right-6 z-[100] w-[calc(100vw-2rem)] sm:w-[340px] md:w-[380px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/20"
+            style={{ maxHeight: "clamp(400px, 70vh, 520px)", boxShadow: "0 8px 40px rgba(15,76,129,0.28)" }}
           >
             {/* Header */}
             <div className="bg-[#0F4C81] px-4 py-3 flex items-center justify-between shrink-0">
@@ -164,7 +195,7 @@ export function ChatWidget() {
                   <p className="text-white font-semibold text-sm leading-tight">Tagore Global School</p>
                   <p className="text-green-300 text-xs flex items-center gap-1">
                     <span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" />
-                    Online — Abhi jawab denge
+                    {t.chatOnline}
                   </p>
                 </div>
               </div>
@@ -191,17 +222,21 @@ export function ChatWidget() {
                 <MapPin size={12} className="text-[#0F4C81] shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between text-xs text-gray-600 mb-1">
-                    <span className="truncate">Step {tourStep + 1}/{TOUR_STEPS.length}: {TOUR_STEPS[tourStep]?.label}</span>
+                    <span className="truncate">Step {tourStep + 1}/{tourSteps.length}: {tourSteps[tourStep]?.label}</span>
                   </div>
                   <div className="h-1 bg-gray-200 rounded-full">
-                    <div className="h-1 bg-[#0F4C81] rounded-full transition-all duration-500" style={{ width: `${((tourStep + 1) / TOUR_STEPS.length) * 100}%` }} />
+                    <div className="h-1 bg-[#0F4C81] rounded-full transition-all duration-500" style={{ width: `${((tourStep + 1) / tourSteps.length) * 100}%` }} />
                   </div>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
-                  {tourStep < TOUR_STEPS.length - 1 ? (
-                    <button onClick={nextTourStep} className="text-xs bg-[#0F4C81] text-white px-2 py-0.5 rounded-full">Next →</button>
+                  {tourStep < tourSteps.length - 1 ? (
+                    <button onClick={nextTourStep} className="text-xs bg-[#0F4C81] text-white px-2 py-0.5 rounded-full">
+                      {lang === "hi" ? "अगला →" : "Next →"}
+                    </button>
                   ) : (
-                    <button onClick={() => runTourStep(TOUR_STEPS.length)} className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">Done ✓</button>
+                    <button onClick={() => runTourStep(tourSteps.length)} className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">
+                      {lang === "hi" ? "पूरा ✓" : "Done ✓"}
+                    </button>
                   )}
                   <button onClick={stopTour} className="text-xs text-red-500 px-1">✕</button>
                 </div>
@@ -247,14 +282,9 @@ export function ChatWidget() {
             {/* Quick Questions */}
             {showQuickButtons && (
               <div className="bg-gray-50 px-3 pb-2 flex flex-col gap-1 border-t border-gray-100">
-                <p className="text-xs text-gray-400 pt-1.5 mb-0.5">Jaldi poochhen:</p>
+                <p className="text-xs text-gray-400 pt-1.5 mb-0.5">{t.askQuickly}</p>
                 <div className="flex flex-wrap gap-1">
-                  {[
-                    "Admission process?",
-                    "Fees kitni hai?",
-                    "School timings?",
-                    "Transport?",
-                  ].map((q) => (
+                  {[t.admissionProcess2, t.feesQuestion, t.schoolTimingsQ, t.transportQ].map((q) => (
                     <button
                       key={q}
                       onClick={() => { setMessages((prev) => [...prev, { from: "user", text: q }]); sendToAI(q); }}
@@ -269,7 +299,7 @@ export function ChatWidget() {
                     className="flex items-center gap-1 text-xs bg-[#FFD700] text-[#0F4C81] rounded-full px-2.5 py-1 hover:bg-[#FFC107] transition-colors font-semibold"
                   >
                     <MapPin size={10} />
-                    Tour 🗺️
+                    {t.tourBtn}
                   </button>
                 </div>
               </div>
@@ -283,7 +313,7 @@ export function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
-                placeholder="Kuch poochhen..."
+                placeholder={t.chatPlaceholder}
                 disabled={loading}
                 className="flex-1 text-sm outline-none text-gray-700 placeholder:text-gray-400"
               />
@@ -304,14 +334,14 @@ export function ChatWidget() {
               className="flex items-center justify-center gap-2 bg-[#25D366] text-white text-sm font-medium py-2 hover:bg-[#1da851] transition-colors shrink-0"
             >
               <SiWhatsapp size={15} />
-              WhatsApp par baat karein
+              {t.whatsappBtn}
             </a>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Floating Robot Button — above WhatsApp */}
-      <div className="fixed bottom-24 right-6 z-50 flex flex-col items-end gap-2">
+      {/* Floating Robot Button */}
+      <div className="fixed bottom-24 right-4 sm:right-6 z-50 flex flex-col items-end gap-2">
         {!open && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -319,7 +349,7 @@ export function ChatWidget() {
             transition={{ delay: 2 }}
             className="bg-white text-[#0F4C81] text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg border border-gray-100 whitespace-nowrap"
           >
-            💬 Kuch poochhen?
+            {t.chatBubble}
           </motion.div>
         )}
         <motion.button
@@ -337,9 +367,9 @@ export function ChatWidget() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0F4C81] text-white shadow-2xl border-2 border-white"
+                className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-[#0F4C81] text-white shadow-2xl border-2 border-white"
               >
-                <X size={26} />
+                <X size={24} />
               </motion.span>
             ) : (
               <motion.div
@@ -352,7 +382,7 @@ export function ChatWidget() {
                 <img
                   src={robotImg}
                   alt="Chat"
-                  className="h-20 w-20 object-contain drop-shadow-xl"
+                  className="h-16 w-16 sm:h-20 sm:w-20 object-contain drop-shadow-xl"
                   onError={(e) => {
                     const el = e.target as HTMLImageElement;
                     el.style.display = "none";

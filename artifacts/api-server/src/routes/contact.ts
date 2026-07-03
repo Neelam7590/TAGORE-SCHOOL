@@ -1,10 +1,37 @@
 import { Router } from "express";
 import nodemailer from "nodemailer";
+import OpenAI from "openai";
 
 const router = Router();
 
 const RECIPIENT = "dtc1752@gmail.com";
 const SENDER_NAME = "Tagore Global School";
+
+// OpenAI client (used for /chat)
+const openai = process.env["OPENAI_API_KEY"]
+  ? new OpenAI({ apiKey: process.env["OPENAI_API_KEY"] })
+  : null;
+
+const SCHOOL_SYSTEM_PROMPT = `You are the official AI Virtual School Guide for Tagore Global School, a premier CBSE-affiliated school (Affiliation No. 531905) in India.
+
+Key Facts:
+- School: Tagore Global School
+- CBSE Affiliation: 531905
+- Phone: +91 93033 50002
+- Email: info@tagoreglobalschool.in
+- Admissions: Open for Session 2026-2027 (Pre-Nursery to Class XII)
+- Streams (Class 11-12): Science, Commerce, Arts
+- Timings: Monday–Saturday, 7:30 AM – 1:30 PM (classes), Office 9 AM – 3 PM
+- Transport: GPS-tracked school buses available
+- Facilities: Science Labs, Computer Labs, Digital Library, Sports Complex, Art Room, CCTV security
+
+Instructions:
+- Answer concisely and helpfully about school admissions, fees, academics, facilities, timings, transport, etc.
+- Use a warm, professional, and friendly tone.
+- If someone asks in Hindi or uses Hindi words, respond in Hindi (Hinglish is fine).
+- For specific fee amounts, direct them to call +91 93033 50002 or visit the school.
+- Keep responses focused and under 200 words unless more detail is needed.
+- Always mention the phone number +91 93033 50002 for urgent queries.`;
 
 function createTransport() {
   const user = process.env["GMAIL_USER"];
@@ -234,7 +261,26 @@ router.post("/admission-form", async (req, res) => {
   `
   ).catch(() => {});
 
-  res.json({ success: true, message: "Application submitted successfully." });
+  // Use OpenAI to generate a personalized acknowledgement message
+  let aiMessage = `Dear ${fatherName}, thank you for applying to Tagore Global School for ${studentName} (${classApplying}). Our admissions team will contact you within 2 working days at ${parentPhone}.`;
+
+  if (openai) {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: "You are the admissions officer at Tagore Global School. Write a warm, professional, and encouraging 2-sentence acknowledgement message for a new admission application. Keep it personal and welcoming." },
+          { role: "user", content: `Student: ${studentName}, Class: ${classApplying}, Father: ${fatherName}, Phone: ${parentPhone}` },
+        ],
+        max_tokens: 120,
+      });
+      aiMessage = completion.choices[0]?.message?.content ?? aiMessage;
+    } catch {
+      // fallback to default message
+    }
+  }
+
+  res.json({ success: true, message: "Application submitted successfully.", aiMessage });
 });
 
 type QA = { patterns: RegExp[]; reply: string };
@@ -313,19 +359,64 @@ function smartReply(message: string): string {
       return qa.reply;
     }
   }
-  return `Shukriya aapke sawaal ke liye! 🙏\n\nIs baare mein seedha humse baat karein:\n📞 **+91 93033 50002**\n📧 info@tagoreglobalschool.in\n💬 WhatsApp: +91 93033 50002\n\n🕐 Office Hours: Mon–Sat, 9 AM – 3 PM\n\nHum aapko poori jaankari denge! 😊`;
+  return "";
 }
 
 router.post("/chat", async (req, res) => {
-  const { message } = req.body as { message?: string };
+  const { message, history, language } = req.body as {
+    message?: string;
+    history?: Array<{ role: string; content: string }>;
+    language?: string;
+  };
 
   if (!message?.trim()) {
     res.status(400).json({ error: "Message is required." });
     return;
   }
 
-  const reply = smartReply(message.trim());
-  res.json({ reply });
+  // Try pattern-based reply first (fast)
+  const patternReply = smartReply(message.trim());
+  if (patternReply && !openai) {
+    res.json({ reply: patternReply });
+    return;
+  }
+
+  // Use OpenAI if available
+  if (openai) {
+    try {
+      const langNote = language === "hi"
+        ? " The user prefers Hindi — respond in Hindi (Hinglish is fine, mixing Hindi and English naturally)."
+        : " The user prefers English — respond in clear English.";
+
+      const safeHistory = (history ?? [])
+        .filter((m) => m.role === "user" || m.role === "assistant")
+        .slice(-8)
+        .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: SCHOOL_SYSTEM_PROMPT + langNote },
+          ...safeHistory,
+          { role: "user", content: message.trim() },
+        ],
+        max_tokens: 300,
+        temperature: 0.7,
+      });
+
+      const reply = completion.choices[0]?.message?.content?.trim();
+      if (reply) {
+        res.json({ reply });
+        return;
+      }
+    } catch (err) {
+      req.log.error({ err }, "OpenAI chat error, falling back to pattern reply");
+    }
+  }
+
+  // Fallback
+  const fallback = patternReply || `Shukriya aapke sawaal ke liye! 🙏\n\nIs baare mein seedha humse baat karein:\n📞 **+91 93033 50002**\n📧 info@tagoreglobalschool.in\n💬 WhatsApp: +91 93033 50002\n\n🕐 Office Hours: Mon–Sat, 9 AM – 3 PM`;
+  res.json({ reply: fallback });
 });
 
 export default router;

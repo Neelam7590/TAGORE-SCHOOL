@@ -45,6 +45,7 @@ import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 import { ChatWidget } from "@/components/ui/ChatWidget";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { AdmissionModalProvider, useAdmissionModal } from "@/context/AdmissionModalContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const queryClient = new QueryClient();
 
@@ -116,12 +117,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AdmissionModalProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <AppInner />
-          </WouterRouter>
-          <Toaster />
-        </AdmissionModalProvider>
+        <LanguageProvider>
+          <AdmissionModalProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <AppInner />
+            </WouterRouter>
+            <Toaster />
+          </AdmissionModalProvider>
+        </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

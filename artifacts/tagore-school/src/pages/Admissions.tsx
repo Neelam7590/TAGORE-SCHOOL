@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, FileText, CheckCircle2, UserCheck, GraduationCap, Building, User, School, Phone, Home } from "lucide-react";
+import { ChevronRight, FileText, CheckCircle2, UserCheck, GraduationCap, Building, User, School, Phone, Home, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useAdmissionModal } from "@/context/AdmissionModalContext";
+import { useLanguage } from "@/context/LanguageContext";
+
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -35,21 +38,24 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const sectionClass = "bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 space-y-5";
-const sectionTitle = (icon: React.ReactNode, title: string) => (
-  <div className="flex items-center gap-3 pb-2 border-b border-gray-100 mb-2">
-    <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center text-primary shrink-0">
-      {icon}
-    </div>
-    <h3 className="font-serif text-lg font-bold text-primary">{title}</h3>
-  </div>
-);
+const sectionClass = "bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6 md:p-8 space-y-5";
 
 export default function Admissions() {
   const { toast } = useToast();
   const { setAdmissionSubmitted } = useAdmissionModal();
+  const { t, lang } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [aiMessage, setAiMessage] = useState<string | null>(null);
+
+  const sectionTitle = (icon: React.ReactNode, title: string) => (
+    <div className="flex items-center gap-3 pb-2 border-b border-gray-100 mb-2">
+      <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center text-primary shrink-0">
+        {icon}
+      </div>
+      <h3 className="font-serif text-lg font-bold text-primary">{title}</h3>
+    </div>
+  );
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -64,7 +70,7 @@ export default function Admissions() {
   async function onSubmit(values: FormValues) {
     setLoading(true);
     try {
-      const res = await fetch("/api/admission-form", {
+      const res = await fetch(`${BASE}/api/admission-form`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,16 +86,22 @@ export default function Admissions() {
           howDidYouHear: "",
         }),
       });
-      if (!res.ok) throw new Error("Failed");
+      const data = await res.json() as { success?: boolean; aiMessage?: string; error?: string };
+      if (!res.ok) {
+        throw new Error(data.error ?? "Submission failed");
+      }
       setSubmitted(true);
       setAdmissionSubmitted(true);
+      if (data.aiMessage) setAiMessage(data.aiMessage);
       form.reset();
-    } catch {
+    } catch (err) {
       toast({
-        title: "Submission Failed",
-        description: "Something went wrong. Please try again or call us.",
+        title: lang === "hi" ? "सबमिशन विफल" : "Submission Failed",
+        description: lang === "hi"
+          ? "कुछ गड़बड़ हो गई। कृपया दोबारा कोशिश करें या हमें कॉल करें: +91 93033 50002"
+          : "Something went wrong. Please try again or call us at +91 93033 50002.",
         variant: "destructive",
-        duration: 5000,
+        duration: 6000,
       });
     } finally {
       setLoading(false);
@@ -97,11 +109,33 @@ export default function Admissions() {
   }
 
   const steps = [
-    { icon: FileText, title: "Fill Admission Form", desc: "Submit the online form below." },
-    { icon: CheckCircle2, title: "Document Verification", desc: "Submit documents at the school office." },
-    { icon: Building, title: "Entrance Assessment", desc: "Brief assessment for Class II onwards." },
-    { icon: UserCheck, title: "Interview", desc: "Interaction with Principal and teacher." },
-    { icon: GraduationCap, title: "Fee Payment & Enrollment", desc: "Pay fee to secure your child's seat." }
+    { icon: FileText, title: t.fillForm, desc: t.fillFormDesc },
+    { icon: CheckCircle2, title: t.documentVerification, desc: t.documentVerificationDesc },
+    { icon: Building, title: t.entranceAssessment, desc: t.entranceAssessmentDesc },
+    { icon: UserCheck, title: t.interview, desc: t.interviewDesc },
+    { icon: GraduationCap, title: t.feePayment, desc: t.feePaymentDesc },
+  ];
+
+  const docs = lang === "hi"
+    ? ["जन्म प्रमाणपत्र", "आधार कार्ड (छात्र और माता-पिता)", "पिछले 2 वर्षों की रिपोर्ट कार्ड", "स्थानांतरण प्रमाणपत्र", "4 पासपोर्ट साइज फोटो", "आवास प्रमाण"]
+    : ["Birth Certificate", "Aadhar Card (Student & Parents)", "Previous 2 years' Report Cards", "Transfer Certificate", "4 Passport size photographs", "Proof of Residence"];
+
+  const classes = [
+    { value: "Pre-Nursery", label: lang === "hi" ? "प्री-नर्सरी" : "Pre-Nursery" },
+    { value: "Nursery", label: lang === "hi" ? "नर्सरी" : "Nursery" },
+    { value: "KG", label: lang === "hi" ? "बालवाड़ी (KG)" : "Kindergarten (KG)" },
+    { value: "Class I", label: lang === "hi" ? "कक्षा I" : "Class I" },
+    { value: "Class II", label: lang === "hi" ? "कक्षा II" : "Class II" },
+    { value: "Class III", label: lang === "hi" ? "कक्षा III" : "Class III" },
+    { value: "Class IV", label: lang === "hi" ? "कक्षा IV" : "Class IV" },
+    { value: "Class V", label: lang === "hi" ? "कक्षा V" : "Class V" },
+    { value: "Class VI", label: lang === "hi" ? "कक्षा VI" : "Class VI" },
+    { value: "Class VII", label: lang === "hi" ? "कक्षा VII" : "Class VII" },
+    { value: "Class VIII", label: lang === "hi" ? "कक्षा VIII" : "Class VIII" },
+    { value: "Class IX", label: lang === "hi" ? "कक्षा IX" : "Class IX" },
+    { value: "Class XI – Science", label: lang === "hi" ? "कक्षा XI – विज्ञान" : "Class XI – Science" },
+    { value: "Class XI – Commerce", label: lang === "hi" ? "कक्षा XI – वाणिज्य" : "Class XI – Commerce" },
+    { value: "Class XI – Arts", label: lang === "hi" ? "कक्षा XI – कला" : "Class XI – Arts" },
   ];
 
   return (
@@ -112,27 +146,25 @@ export default function Admissions() {
       className="flex flex-col pb-24 bg-gray-50 min-h-screen"
     >
       {/* Hero */}
-      <section className="bg-primary py-16 text-white">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
+      <section className="bg-primary py-12 sm:py-16 text-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           <div className="flex items-center gap-2 text-sm text-blue-200 mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <Link href="/" className="hover:text-white transition-colors">{t.home}</Link>
             <ChevronRight size={14} />
-            <span className="text-secondary">Admissions</span>
+            <span className="text-secondary">{t.admissions}</span>
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold">Admissions Open 2026-2027</h1>
-          <p className="mt-4 max-w-2xl text-lg text-blue-100">
-            Join the Tagore Global family. Discover a world of opportunities for your child.
-          </p>
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold">{t.admissionsOpen}</h1>
+          <p className="mt-4 max-w-2xl text-base sm:text-lg text-blue-100">{t.admissionsSubtitle}</p>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 md:px-8 py-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-10 sm:py-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 lg:gap-12">
 
           {/* Left Col */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <motion.section variants={fadeUp}>
-              <h2 className="font-serif text-2xl font-bold text-primary mb-2">Admission Process</h2>
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary mb-2">{t.admissionProcess}</h2>
               <div className="w-14 h-1 bg-secondary mb-6" />
               <div className="relative border-l-2 border-gray-200 ml-5 space-y-6 pb-2">
                 {steps.map((step, idx) => (
@@ -140,24 +172,17 @@ export default function Admissions() {
                     <div className="absolute -left-[19px] top-1 w-9 h-9 bg-white border-2 border-secondary rounded-full flex items-center justify-center text-primary shadow-sm">
                       <step.icon size={16} />
                     </div>
-                    <h3 className="font-bold text-base text-gray-900 mb-0.5">Step {idx + 1}: {step.title}</h3>
+                    <h3 className="font-bold text-base text-gray-900 mb-0.5">{lang === "hi" ? `चरण ${idx + 1}:` : `Step ${idx + 1}:`} {step.title}</h3>
                     <p className="text-sm text-gray-500">{step.desc}</p>
                   </div>
                 ))}
               </div>
             </motion.section>
 
-            <motion.section variants={fadeUp} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-              <h2 className="font-serif text-xl font-bold text-primary mb-4">Required Documents</h2>
+            <motion.section variants={fadeUp} className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+              <h2 className="font-serif text-lg sm:text-xl font-bold text-primary mb-4">{t.requiredDocuments}</h2>
               <ul className="space-y-3">
-                {[
-                  "Birth Certificate",
-                  "Aadhar Card (Student & Parents)",
-                  "Previous 2 years' Report Cards",
-                  "Transfer Certificate",
-                  "4 Passport size photographs",
-                  "Proof of Residence"
-                ].map((doc, idx) => (
+                {docs.map((doc, idx) => (
                   <li key={idx} className="flex items-start gap-2.5">
                     <CheckCircle2 className="text-secondary shrink-0 mt-0.5" size={18} />
                     <span className="text-sm text-gray-700">{doc}</span>
@@ -166,9 +191,9 @@ export default function Admissions() {
               </ul>
             </motion.section>
 
-            <motion.section variants={fadeUp} className="bg-primary/5 border border-primary/10 rounded-2xl p-6">
-              <h3 className="font-bold text-primary mb-3">Need Help?</h3>
-              <p className="text-sm text-gray-600 mb-3">Call our admissions team:</p>
+            <motion.section variants={fadeUp} className="bg-primary/5 border border-primary/10 rounded-2xl p-5 sm:p-6">
+              <h3 className="font-bold text-primary mb-3">{t.needHelp}</h3>
+              <p className="text-sm text-gray-600 mb-3">{t.callAdmissions}</p>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2 text-gray-700"><Phone size={14} className="text-primary" /> +91 93033 50002</div>
               </div>
@@ -178,14 +203,18 @@ export default function Admissions() {
           {/* Right Col: Form */}
           <motion.div id="admission-form-section" variants={fadeUp} className="space-y-6">
 
-            <div className="bg-primary rounded-2xl px-8 py-6 text-white">
+            <div className="bg-primary rounded-2xl px-6 sm:px-8 py-5 sm:py-6 text-white">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center shrink-0">
                   <GraduationCap size={20} className="text-primary" />
                 </div>
                 <div>
-                  <h2 className="font-serif text-2xl font-bold">Admission Form</h2>
-                  <p className="text-blue-200 text-sm mt-0.5">Session 2026-2027 · Tagore Global School</p>
+                  <h2 className="font-serif text-xl sm:text-2xl font-bold">
+                    {lang === "hi" ? "प्रवेश फॉर्म" : "Admission Form"}
+                  </h2>
+                  <p className="text-blue-200 text-sm mt-0.5">
+                    {lang === "hi" ? "सत्र 2026-2027 · टैगोर ग्लोबल स्कूल" : "Session 2026-2027 · Tagore Global School"}
+                  </p>
                 </div>
               </div>
             </div>
@@ -195,39 +224,56 @@ export default function Admissions() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="flex flex-col items-center justify-center text-center py-20 px-8"
+                className="flex flex-col items-center justify-center text-center py-16 px-6 sm:px-8"
               >
-                {/* Animated checkmark */}
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
-                  className="w-28 h-28 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-8 shadow-[0_0_60px_rgba(34,197,94,0.4)]"
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-8 shadow-[0_0_60px_rgba(34,197,94,0.4)]"
                 >
-                  <CheckCircle2 size={56} className="text-white" />
+                  <CheckCircle2 size={48} className="text-white" />
                 </motion.div>
 
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
                   <div className="inline-flex items-center gap-2 rounded-full bg-green-100 border border-green-200 px-4 py-1.5 text-sm font-semibold text-green-700 mb-4">
                     <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                    Application Submitted Successfully
+                    {t.applicationSubmitted}
                   </div>
-                  <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#0F4C81] mb-4">
-                    🎉 Application Received!
+                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0F4C81] mb-4">
+                    🎉 {t.applicationReceived}
                   </h2>
-                  <p className="text-xl text-gray-600 mb-2 max-w-lg">
-                    Aapki application Tagore Global School ko mil gayi hai.
+                  <p className="text-lg sm:text-xl text-gray-600 mb-2 max-w-lg">
+                    {t.applicationSuccess}
                   </p>
-                  <p className="text-base text-gray-500 mb-10 max-w-lg">
-                    Hamari team <strong>2 working days</strong> mein aapko call ya email karegi. Koi sawaal ho toh seedha humse contact karein.
+                  <p className="text-sm sm:text-base text-gray-500 mb-6 max-w-lg">
+                    {t.teamWillCall}
                   </p>
 
+                  {/* AI personalized message */}
+                  {aiMessage && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                      className="mb-8 max-w-xl mx-auto bg-gradient-to-r from-[#0F4C81]/5 to-[#FFD700]/10 border border-[#FFD700]/30 rounded-2xl p-5 text-left"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles size={16} className="text-[#FFD700]" />
+                        <span className="text-xs font-semibold text-[#0F4C81] uppercase tracking-wide">
+                          {lang === "hi" ? "AI संदेश" : "AI Message from Admissions"}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-700 leading-relaxed italic">"{aiMessage}"</p>
+                    </motion.div>
+                  )}
+
                   {/* Info cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 w-full max-w-xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 w-full max-w-xl">
                     {[
-                      { emoji: "📞", label: "Call Us", value: "+91 93033 50002" },
-                      { emoji: "📧", label: "Email", value: "info@tagoreglobalschool.in" },
-                      { emoji: "⏰", label: "Office Hours", value: "Mon–Sat, 9AM–3PM" },
+                      { emoji: "📞", label: lang === "hi" ? "कॉल करें" : "Call Us", value: "+91 93033 50002" },
+                      { emoji: "📧", label: lang === "hi" ? "ईमेल" : "Email", value: "info@tagoreglobalschool.in" },
+                      { emoji: "⏰", label: lang === "hi" ? "कार्यालय समय" : "Office Hours", value: "Mon–Sat, 9AM–3PM" },
                     ].map((item) => (
                       <div key={item.label} className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm text-left">
                         <div className="text-2xl mb-1">{item.emoji}</div>
@@ -239,14 +285,14 @@ export default function Admissions() {
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Button
-                      onClick={() => { setSubmitted(false); setAdmissionSubmitted(false); }}
+                      onClick={() => { setSubmitted(false); setAdmissionSubmitted(false); setAiMessage(null); }}
                       variant="outline"
                       className="border-[#0F4C81] text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white rounded-full px-8"
                     >
-                      Doosra Form Bharein
+                      {t.submitAnother}
                     </Button>
                     <a href="/" className="inline-flex items-center justify-center gap-2 bg-[#FFD700] text-[#0F4C81] font-bold rounded-full px-8 py-2 hover:bg-[#FFC107] transition-colors shadow-[0_0_30px_rgba(255,215,0,0.3)]">
-                      🏠 Home Jaayein
+                      🏠 {t.goHome}
                     </a>
                   </div>
                 </motion.div>
@@ -257,34 +303,34 @@ export default function Admissions() {
 
                   {/* Student Details */}
                   <div className={sectionClass}>
-                    {sectionTitle(<User size={18} />, "Student Details")}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {sectionTitle(<User size={18} />, t.studentDetails)}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                       <FormField control={form.control} name="studentName" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Student's Full Name *</FormLabel>
+                          <FormLabel>{t.studentFullName} *</FormLabel>
                           <FormControl><Input placeholder="e.g. Arjun Sharma" className="bg-gray-50" {...field} /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="dob" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Date of Birth *</FormLabel>
+                          <FormLabel>{t.dateOfBirth} *</FormLabel>
                           <FormControl><Input type="date" className="bg-gray-50" {...field} /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                       <FormField control={form.control} name="gender" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Gender *</FormLabel>
+                          <FormLabel>{t.gender} *</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
+                            <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder={t.selectGender} /></SelectTrigger></FormControl>
                             <SelectContent>
-                              <SelectItem value="Male">Male</SelectItem>
-                              <SelectItem value="Female">Female</SelectItem>
-                              <SelectItem value="Other">Other</SelectItem>
+                              <SelectItem value="Male">{t.male}</SelectItem>
+                              <SelectItem value="Female">{t.female}</SelectItem>
+                              <SelectItem value="Other">{t.other}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -292,9 +338,9 @@ export default function Admissions() {
                       )} />
                       <FormField control={form.control} name="category" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Category *</FormLabel>
+                          <FormLabel>{t.category} *</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
+                            <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder={t.selectCategory} /></SelectTrigger></FormControl>
                             <SelectContent>
                               <SelectItem value="General">General</SelectItem>
                               <SelectItem value="OBC">OBC</SelectItem>
@@ -308,25 +354,13 @@ export default function Admissions() {
                       )} />
                       <FormField control={form.control} name="classApplying" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Class Applying For *</FormLabel>
+                          <FormLabel>{t.classApplyingFor} *</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
+                            <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder={t.selectClass} /></SelectTrigger></FormControl>
                             <SelectContent>
-                              <SelectItem value="Pre-Nursery">Pre-Nursery</SelectItem>
-                              <SelectItem value="Nursery">Nursery</SelectItem>
-                              <SelectItem value="KG">Kindergarten (KG)</SelectItem>
-                              <SelectItem value="Class I">Class I</SelectItem>
-                              <SelectItem value="Class II">Class II</SelectItem>
-                              <SelectItem value="Class III">Class III</SelectItem>
-                              <SelectItem value="Class IV">Class IV</SelectItem>
-                              <SelectItem value="Class V">Class V</SelectItem>
-                              <SelectItem value="Class VI">Class VI</SelectItem>
-                              <SelectItem value="Class VII">Class VII</SelectItem>
-                              <SelectItem value="Class VIII">Class VIII</SelectItem>
-                              <SelectItem value="Class IX">Class IX</SelectItem>
-                              <SelectItem value="Class XI – Science">Class XI – Science</SelectItem>
-                              <SelectItem value="Class XI – Commerce">Class XI – Commerce</SelectItem>
-                              <SelectItem value="Class XI – Arts">Class XI – Arts</SelectItem>
+                              {classes.map((c) => (
+                                <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
+                              ))}
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -337,11 +371,11 @@ export default function Admissions() {
 
                   {/* Previous School */}
                   <div className={sectionClass}>
-                    {sectionTitle(<School size={18} />, "Previous School (Optional)")}
-                    <p className="text-xs text-gray-400 -mt-2">Leave blank for Pre-Nursery / Nursery / KG</p>
+                    {sectionTitle(<School size={18} />, t.previousSchool)}
+                    <p className="text-xs text-gray-400 -mt-2">{t.previousSchoolHint}</p>
                     <FormField control={form.control} name="previousSchool" render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Previous School Name</FormLabel>
+                        <FormLabel>{t.previousSchoolName}</FormLabel>
                         <FormControl><Input placeholder="e.g. St. Mary's School" className="bg-gray-50" {...field} /></FormControl>
                         <FormMessage />
                       </FormItem>
@@ -350,18 +384,18 @@ export default function Admissions() {
 
                   {/* Parent Details */}
                   <div className={sectionClass}>
-                    {sectionTitle(<Home size={18} />, "Parent / Guardian Details")}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {sectionTitle(<Home size={18} />, t.parentGuardianDetails)}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                       <FormField control={form.control} name="fatherName" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Father's Full Name *</FormLabel>
+                          <FormLabel>{t.fatherFullName} *</FormLabel>
                           <FormControl><Input placeholder="e.g. Rajesh Sharma" className="bg-gray-50" {...field} /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="motherName" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Mother's Full Name *</FormLabel>
+                          <FormLabel>{t.motherFullName} *</FormLabel>
                           <FormControl><Input placeholder="e.g. Priya Sharma" className="bg-gray-50" {...field} /></FormControl>
                           <FormMessage />
                         </FormItem>
@@ -371,18 +405,18 @@ export default function Admissions() {
 
                   {/* Contact */}
                   <div className={sectionClass}>
-                    {sectionTitle(<Phone size={18} />, "Contact Information")}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {sectionTitle(<Phone size={18} />, t.contactInformation)}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                       <FormField control={form.control} name="parentPhone" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Mobile Number *</FormLabel>
+                          <FormLabel>{t.mobileNumber} *</FormLabel>
                           <FormControl><Input placeholder="+91 90000 00000" className="bg-gray-50" {...field} /></FormControl>
                           <FormMessage />
                         </FormItem>
                       )} />
                       <FormField control={form.control} name="email" render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address *</FormLabel>
+                          <FormLabel>{t.emailAddress} *</FormLabel>
                           <FormControl><Input type="email" placeholder="you@example.com" className="bg-gray-50" {...field} /></FormControl>
                           <FormMessage />
                         </FormItem>
@@ -390,7 +424,7 @@ export default function Admissions() {
                     </div>
                     <FormField control={form.control} name="address" render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Residential Address *</FormLabel>
+                        <FormLabel>{t.residentialAddress} *</FormLabel>
                         <FormControl>
                           <Textarea placeholder="Street, Area, City, PIN Code" className="bg-gray-50 min-h-[80px]" {...field} />
                         </FormControl>
@@ -399,12 +433,12 @@ export default function Admissions() {
                     )} />
                     <FormField control={form.control} name="transportRequired" render={({ field }) => (
                       <FormItem>
-                        <FormLabel>School Transport Required? *</FormLabel>
+                        <FormLabel>{t.transportRequired} *</FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
+                          <FormControl><SelectTrigger className="bg-gray-50"><SelectValue placeholder={t.selectGender} /></SelectTrigger></FormControl>
                           <SelectContent>
-                            <SelectItem value="Yes">Yes – School Bus Required</SelectItem>
-                            <SelectItem value="No">No – Self Arranged</SelectItem>
+                            <SelectItem value="Yes">{t.yesTransport}</SelectItem>
+                            <SelectItem value="No">{t.noTransport}</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -415,16 +449,16 @@ export default function Admissions() {
                   {/* Declaration */}
                   <div className="bg-primary/5 border border-primary/10 rounded-xl p-4">
                     <p className="text-xs text-gray-500 leading-relaxed">
-                      <strong className="text-primary">Declaration:</strong> I hereby declare that all information provided is true and correct. Any false information may result in cancellation of admission.
+                      <strong className="text-primary">{t.declaration}:</strong> {t.declarationText}
                     </p>
                   </div>
 
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="w-full h-14 bg-primary text-white hover:bg-primary/90 text-lg font-bold rounded-full shadow-lg transition-all"
+                    className="w-full h-12 sm:h-14 bg-primary text-white hover:bg-primary/90 text-base sm:text-lg font-bold rounded-full shadow-lg transition-all"
                   >
-                    {loading ? "Submitting..." : "Submit Admission Form"}
+                    {loading ? t.submitting : t.submitForm}
                   </Button>
                 </form>
               </Form>

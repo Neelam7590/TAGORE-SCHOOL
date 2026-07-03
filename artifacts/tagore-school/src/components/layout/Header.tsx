@@ -1,13 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Phone, Mail, Menu, X, ChevronDown, LogIn, MessageCircle } from "lucide-react";
+import { Phone, Mail, Menu, X, ChevronDown, LogIn, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdmissionModal } from "@/context/AdmissionModalContext";
+import { useLanguage } from "@/context/LanguageContext";
+import type { Lang } from "@/context/LanguageContext";
 
 type DropdownItem = { href: string; label: string; emoji?: string };
 
-const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
+const menuConfigEn: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
   About: {
     items: [
       { href: "/about", label: "About School", emoji: "🏫" },
@@ -76,7 +78,76 @@ const menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
   },
 };
 
-const navLabelHref: Record<string, string> = {
+const menuConfigHi: Record<string, { items: DropdownItem[]; mega?: boolean }> = {
+  "हमारे बारे में": {
+    items: [
+      { href: "/about", label: "स्कूल के बारे में", emoji: "🏫" },
+      { href: "/about#journey", label: "हमारी यात्रा", emoji: "📖" },
+      { href: "/director-message", label: "निदेशक का संदेश", emoji: "👨‍💼" },
+      { href: "/principal-message", label: "प्रधानाचार्या का संदेश", emoji: "👩‍🏫" },
+      { href: "/about#vision", label: "दृष्टि और मिशन", emoji: "🎯" },
+      { href: "/about#faculty", label: "हमारे शिक्षकों से मिलें", emoji: "👨‍🏫" },
+      { href: "/kindergarten", label: "बालवाड़ी", emoji: "🌱" },
+    ],
+  },
+  "शिक्षा": {
+    items: [
+      { href: "/academics", label: "पाठ्यक्रम", emoji: "📚" },
+      { href: "/academics#programs", label: "शैक्षणिक कार्यक्रम", emoji: "🎓" },
+      { href: "/academics#streams", label: "धाराएँ और विषय", emoji: "🧪" },
+      { href: "/academics#methodology", label: "शिक्षण पद्धति", emoji: "💡" },
+      { href: "/academics#assessment", label: "मूल्यांकन प्रणाली", emoji: "📝" },
+      { href: "/academics#achievements", label: "शैक्षणिक उपलब्धियाँ", emoji: "🏆" },
+    ],
+  },
+  "सुविधाएँ": {
+    items: [
+      { href: "/facilities", label: "सभी सुविधाएँ", emoji: "🏫" },
+      { href: "/facilities#labs", label: "विज्ञान प्रयोगशाला", emoji: "🧪" },
+      { href: "/facilities#computer", label: "कंप्यूटर लैब", emoji: "💻" },
+      { href: "/facilities#library", label: "पुस्तकालय", emoji: "📚" },
+      { href: "/facilities#sports", label: "खेल परिसर", emoji: "🏆" },
+      { href: "/facilities#transport", label: "परिवहन", emoji: "🚌" },
+      { href: "/facilities#safety", label: "सुरक्षा", emoji: "🛡️" },
+    ],
+  },
+  "गैलरी": {
+    mega: true,
+    items: [
+      { href: "/campus-life", label: "कैंपस जीवन", emoji: "📸" },
+      { href: "/achievements-gallery", label: "उपलब्धि गैलरी", emoji: "🏆" },
+      { href: "/events-activities", label: "कार्यक्रम और गतिविधियाँ", emoji: "🎨" },
+      { href: "/sports-gallery", label: "खेल गैलरी", emoji: "⚽" },
+      { href: "/cultural-programs", label: "सांस्कृतिक कार्यक्रम", emoji: "🎭" },
+    ],
+  },
+  "छात्र कॉर्नर": {
+    mega: true,
+    items: [
+      { href: "/school-timings", label: "स्कूल समय", emoji: "🕒" },
+      { href: "/school-uniform", label: "स्कूल वर्दी", emoji: "👔" },
+      { href: "/rules-regulations", label: "नियम और विनियम", emoji: "📜" },
+      { href: "/attendance-policy", label: "उपस्थिति नीति", emoji: "✅" },
+      { href: "/student-guidelines", label: "छात्र दिशानिर्देश", emoji: "🎓" },
+      { href: "/academic-calendar", label: "शैक्षणिक कैलेंडर", emoji: "📅" },
+      { href: "/school-holidays", label: "स्कूल की छुट्टियाँ", emoji: "🏖️" },
+      { href: "/examination-schedule", label: "परीक्षा अनुसूची", emoji: "📝" },
+      { href: "/activity-schedule", label: "गतिविधि अनुसूची", emoji: "🎨" },
+    ],
+  },
+  "उपलब्धियाँ": {
+    mega: true,
+    items: [
+      { href: "/board-results", label: "बोर्ड परिणाम", emoji: "🏆" },
+      { href: "/school-results", label: "स्कूल परिणाम", emoji: "🥇" },
+      { href: "/inter-school-competitions", label: "अंतर-विद्यालय प्रतियोगिताएँ", emoji: "🎖️" },
+      { href: "/sports-achievements", label: "खेल उपलब्धियाँ", emoji: "⚽" },
+      { href: "/student-success-stories", label: "सफलता की कहानियाँ", emoji: "🌟" },
+    ],
+  },
+};
+
+const navLabelHrefEn: Record<string, string> = {
   About: "/about",
   Academics: "/academics",
   Facilities: "/facilities",
@@ -85,21 +156,14 @@ const navLabelHref: Record<string, string> = {
   Achievements: "/board-results",
 };
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/academics", label: "Academics" },
-  { href: "/facilities", label: "Facilities" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/school-timings", label: "Student Corner" },
-  { href: "/board-results", label: "Achievements" },
-  { href: "/admissions", label: "Admissions" },
-];
-
-const loginItems: (DropdownItem & { external?: boolean })[] = [
-  { href: "/staff-login", label: "Staff Login", emoji: "👨‍🏫" },
-  { href: "https://student.okiedokiepay.com/auth/phone-login", label: "Parent Login", emoji: "👨‍👩‍👧", external: true },
-];
+const navLabelHrefHi: Record<string, string> = {
+  "हमारे बारे में": "/about",
+  "शिक्षा": "/academics",
+  "सुविधाएँ": "/facilities",
+  "गैलरी": "/gallery",
+  "छात्र कॉर्नर": "/school-timings",
+  "उपलब्धियाँ": "/board-results",
+};
 
 /* Social icons as inline SVGs */
 function InstagramIcon({ size = 14 }: { size?: number }) {
@@ -167,7 +231,12 @@ function DropdownMenu({ items, onClose, mega }: { items: DropdownItem[]; onClose
   );
 }
 
-function NavItem({ link, isActive }: { link: { href: string; label: string }; isActive: boolean }) {
+function NavItem({ link, isActive, menuConfig, navLabelHref }: {
+  link: { href: string; label: string };
+  isActive: boolean;
+  menuConfig: Record<string, { items: DropdownItem[]; mega?: boolean }>;
+  navLabelHref: Record<string, string>;
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -236,10 +305,21 @@ function NavItem({ link, isActive }: { link: { href: string; label: string }; is
   );
 }
 
-function LoginDropdown() {
+function LoginDropdown({ loginLabel }: { loginLabel: string }) {
+  const { lang } = useLanguage();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const loginItems = lang === "hi"
+    ? [
+        { href: "/staff-login", label: "स्टाफ लॉगिन", emoji: "👨‍🏫" },
+        { href: "https://student.okiedokiepay.com/auth/phone-login", label: "अभिभावक लॉगिन", emoji: "👨‍👩‍👧", external: true },
+      ]
+    : [
+        { href: "/staff-login", label: "Staff Login", emoji: "👨‍🏫" },
+        { href: "https://student.okiedokiepay.com/auth/phone-login", label: "Parent Login", emoji: "👨‍👩‍👧", external: true },
+      ];
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -263,7 +343,7 @@ function LoginDropdown() {
         className="border-[#0F4C81] text-[#0F4C81] font-semibold hover:bg-[#0F4C81] hover:text-white h-9 px-4 text-xs flex items-center gap-1.5 transition-all duration-200"
       >
         <LogIn size={13} />
-        Login
+        {loginLabel}
         <ChevronDown size={11} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </Button>
       <AnimatePresence>
@@ -307,10 +387,10 @@ function LoginDropdown() {
   );
 }
 
-function ContactDropdown() {
+function LanguageSwitcher() {
+  const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -320,82 +400,56 @@ function ContactDropdown() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const contactOptions = [
-    {
-      href: "tel:+919303350002",
-      icon: <Phone size={15} className="text-[#0F4C81]" />,
-      label: "Call Us",
-      sub: "+91 93033 50002",
-      bg: "hover:bg-blue-50",
-    },
-    {
-      href: "https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School.",
-      icon: <WhatsAppIcon size={15} />,
-      label: "WhatsApp",
-      sub: "+91 93033 50002",
-      bg: "hover:bg-green-50",
-      iconColor: "text-green-500",
-    },
-    {
-      href: "mailto:info@tagoreglobalschool.in",
-      icon: <Mail size={15} className="text-[#0F4C81]" />,
-      label: "Email Us",
-      sub: "info@tagoreglobalschool.in",
-      bg: "hover:bg-blue-50",
-    },
-    {
-      href: "/contact",
-      icon: <MessageCircle size={15} className="text-[#FFD700]" />,
-      label: "Contact Page",
-      sub: "Send us a message",
-      bg: "hover:bg-yellow-50",
-    },
-  ];
+  function selectLang(l: Lang) {
+    setLang(l);
+    setOpen(false);
+  }
 
   return (
-    <div
-      ref={ref}
-      className="relative"
-      onMouseEnter={() => { if (hoverTimeout.current) clearTimeout(hoverTimeout.current); setOpen(true); }}
-      onMouseLeave={() => { hoverTimeout.current = setTimeout(() => setOpen(false), 120); }}
-    >
-      <Button
-        variant="outline"
-        size="sm"
+    <div ref={ref} className="relative">
+      <button
         onClick={() => setOpen(!open)}
-        className="border-gray-300 text-gray-700 font-semibold hover:border-[#0F4C81] hover:text-[#0F4C81] h-9 px-4 text-xs flex items-center gap-1.5 transition-all duration-200"
+        className="flex items-center gap-1.5 h-9 px-3 rounded-lg border border-gray-200 text-gray-700 hover:border-[#0F4C81] hover:text-[#0F4C81] transition-all duration-200 text-xs font-semibold bg-white"
+        aria-label="Switch language"
       >
-        <Phone size={13} />
-        Contact
+        <Globe size={13} className="text-[#0F4C81]" />
+        <span>{lang === "en" ? "EN" : "हिं"}</span>
         <ChevronDown size={11} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-      </Button>
+      </button>
+
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.97 }}
+            initial={{ opacity: 0, y: 8, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.97 }}
-            transition={{ duration: 0.16 }}
-            className="absolute top-full right-0 mt-2 w-64 rounded-2xl bg-white shadow-2xl border border-gray-100 p-2 z-50"
+            exit={{ opacity: 0, y: 6, scale: 0.97 }}
+            transition={{ duration: 0.14 }}
+            className="absolute top-full right-0 mt-2 w-44 rounded-2xl bg-white/90 backdrop-blur-xl border border-gray-100 shadow-2xl p-1.5 z-50"
           >
-            {contactOptions.map((opt) => (
-              <a
-                key={opt.href}
-                href={opt.href}
-                target={opt.href.startsWith("http") ? "_blank" : undefined}
-                rel={opt.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                onClick={() => setOpen(false)}
-                className={`group flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${opt.bg}`}
-              >
-                <span className={`flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 shrink-0 ${opt.iconColor ?? ""}`}>
-                  {opt.icon}
-                </span>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold text-gray-800">{opt.label}</div>
-                  <div className="text-xs text-gray-500 truncate">{opt.sub}</div>
-                </div>
-              </a>
-            ))}
+            <button
+              onClick={() => selectLang("en")}
+              className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150 ${
+                lang === "en"
+                  ? "bg-[#0F4C81] text-white"
+                  : "text-gray-700 hover:bg-[#0F4C81]/8 hover:text-[#0F4C81]"
+              }`}
+            >
+              <span className="text-base">🇬🇧</span>
+              <span>English</span>
+              {lang === "en" && <span className="ml-auto text-[#FFD700] text-xs">✓</span>}
+            </button>
+            <button
+              onClick={() => selectLang("hi")}
+              className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150 ${
+                lang === "hi"
+                  ? "bg-[#0F4C81] text-white"
+                  : "text-gray-700 hover:bg-[#0F4C81]/8 hover:text-[#0F4C81]"
+              }`}
+            >
+              <span className="text-base">🇮🇳</span>
+              <span>हिंदी</span>
+              {lang === "hi" && <span className="ml-auto text-[#FFD700] text-xs">✓</span>}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -409,6 +463,42 @@ export function Header() {
   const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
   const [mobileLoginOpen, setMobileLoginOpen] = useState(false);
   const { openModal } = useAdmissionModal();
+  const { lang, t } = useLanguage();
+
+  const menuConfig = lang === "hi" ? menuConfigHi : menuConfigEn;
+  const navLabelHref = lang === "hi" ? navLabelHrefHi : navLabelHrefEn;
+
+  const navLinks = lang === "hi"
+    ? [
+        { href: "/", label: "होम" },
+        { href: "/about", label: "हमारे बारे में" },
+        { href: "/academics", label: "शिक्षा" },
+        { href: "/facilities", label: "सुविधाएँ" },
+        { href: "/gallery", label: "गैलरी" },
+        { href: "/school-timings", label: "छात्र कॉर्नर" },
+        { href: "/board-results", label: "उपलब्धियाँ" },
+        { href: "/admissions", label: "प्रवेश" },
+      ]
+    : [
+        { href: "/", label: "Home" },
+        { href: "/about", label: "About" },
+        { href: "/academics", label: "Academics" },
+        { href: "/facilities", label: "Facilities" },
+        { href: "/gallery", label: "Gallery" },
+        { href: "/school-timings", label: "Student Corner" },
+        { href: "/board-results", label: "Achievements" },
+        { href: "/admissions", label: "Admissions" },
+      ];
+
+  const loginItems = lang === "hi"
+    ? [
+        { href: "/staff-login", label: "स्टाफ लॉगिन", emoji: "👨‍🏫" },
+        { href: "https://student.okiedokiepay.com/auth/phone-login", label: "अभिभावक लॉगिन", emoji: "👨‍👩‍👧", external: true },
+      ]
+    : [
+        { href: "/staff-login", label: "Staff Login", emoji: "👨‍🏫" },
+        { href: "https://student.okiedokiepay.com/auth/phone-login", label: "Parent Login", emoji: "👨‍👩‍👧", external: true },
+      ];
 
   const isActive = (link: { href: string; label: string }) => {
     if (link.href === "/") return location === "/";
@@ -418,7 +508,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full flex flex-col bg-white">
       {/* Top Bar */}
-      <div className="bg-[#0F4C81] px-4 py-1.5 text-xs font-medium text-white md:px-6">
+      <div className="bg-[#0F4C81] px-3 sm:px-4 py-1.5 text-xs font-medium text-white md:px-6">
         <div className="flex items-center justify-between gap-2">
           {/* Left: Phone + Email */}
           <div className="flex items-center gap-3 sm:gap-4 min-w-0">
@@ -440,51 +530,20 @@ export function Header() {
               Affiliation No. 531905
             </span>
             <span className="hidden sm:inline text-white/30">|</span>
-            {/* Social Icons */}
             <div className="flex items-center gap-2">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#E1306C] text-white transition-all duration-200 hover:scale-110"
-              >
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#E1306C] text-white transition-all duration-200 hover:scale-110">
                 <InstagramIcon size={12} />
               </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000] text-white transition-all duration-200 hover:scale-110"
-              >
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000] text-white transition-all duration-200 hover:scale-110">
                 <YoutubeIcon size={12} />
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter / X"
-                className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-black text-white transition-all duration-200 hover:scale-110"
-              >
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-black text-white transition-all duration-200 hover:scale-110">
                 <TwitterIcon size={12} />
               </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#1877F2] text-white transition-all duration-200 hover:scale-110"
-              >
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#1877F2] text-white transition-all duration-200 hover:scale-110">
                 <FacebookIcon size={12} />
               </a>
-              <a
-                href="https://wa.me/919303350002"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#25D366] text-white transition-all duration-200 hover:scale-110"
-              >
+              <a href="https://wa.me/919303350002" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#25D366] text-white transition-all duration-200 hover:scale-110">
                 <WhatsAppIcon size={12} />
               </a>
             </div>
@@ -494,70 +553,58 @@ export function Header() {
 
       {/* Main Header */}
       <div className="border-b shadow-sm bg-white">
-        <div className="flex h-[64px] sm:h-[68px] items-center gap-0 px-3 sm:px-4 md:px-6">
+        <div className="flex h-[60px] sm:h-[68px] items-center gap-0 px-3 sm:px-4 md:px-6">
 
-          {/* Logo + Name — Left aligned */}
+          {/* Logo + Name */}
           <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <img src="/logo.png" alt="TGS Logo" className="h-9 w-9 sm:h-10 sm:w-10 object-contain transition-transform group-hover:scale-105" />
-            <span className="font-serif text-base sm:text-lg font-bold tracking-tight text-[#0F4C81] whitespace-nowrap hidden sm:block">
+            <img src="/logo.png" alt="TGS Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform group-hover:scale-105" />
+            <span className="font-serif text-sm sm:text-lg font-bold tracking-tight text-[#0F4C81] whitespace-nowrap hidden sm:block">
               Tagore Global School
             </span>
           </Link>
 
-          {/* Divider between logo and nav */}
           <div className="hidden xl:block h-10 w-px bg-gray-200 mx-4 shrink-0" />
 
-          {/* Desktop Nav — centered with dividers on both sides */}
-          <nav className="hidden xl:flex items-center justify-center flex-1 gap-x-5 px-2">
+          {/* Desktop Nav */}
+          <nav className="hidden xl:flex items-center justify-center flex-1 gap-x-4 px-2">
             {navLinks.map((link) => (
-              <NavItem key={link.label} link={link} isActive={isActive(link)} />
+              <NavItem
+                key={link.href + link.label}
+                link={link}
+                isActive={isActive(link)}
+                menuConfig={menuConfig}
+                navLabelHref={navLabelHref}
+              />
             ))}
           </nav>
 
-          {/* Divider between nav and CTAs */}
-          <div className="hidden xl:block h-10 w-px bg-gray-200 mx-4 shrink-0" />
+          <div className="hidden xl:block h-10 w-px bg-gray-200 mx-3 shrink-0" />
 
-          {/* Desktop CTAs — icon buttons for contact, save space */}
+          {/* Desktop CTAs */}
           <div className="hidden xl:flex items-center gap-1.5 shrink-0">
-            {/* Call button */}
-            <a
-              href="tel:+919303350002"
-              title="Call: +91 93033 50002"
-              className="group flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200"
-            >
+            <a href="tel:+919303350002" title="Call: +91 93033 50002" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200">
               <Phone size={14} />
             </a>
-            {/* WhatsApp button */}
-            <a
-              href="https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School."
-              target="_blank"
-              rel="noopener noreferrer"
-              title="WhatsApp: +91 93033 50002"
-              className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-green-600 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-200"
-            >
+            <a href="https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School." target="_blank" rel="noopener noreferrer" title="WhatsApp" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-green-600 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-200">
               <WhatsAppIcon size={14} />
             </a>
-            {/* Gmail button */}
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=info@tagoreglobalschool.in&su=Inquiry%20-%20Tagore%20Global%20School"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Email via Gmail: info@tagoreglobalschool.in"
-              className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#EA4335] hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] transition-all duration-200"
-            >
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@tagoreglobalschool.in" target="_blank" rel="noopener noreferrer" title="Email" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#EA4335] hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] transition-all duration-200">
               <Mail size={14} />
             </a>
             <div className="w-px h-6 bg-gray-200 mx-0.5" />
-            <LoginDropdown />
-            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-5 text-xs">
-              Apply Now
+            <LanguageSwitcher />
+            <div className="w-px h-6 bg-gray-200 mx-0.5" />
+            <LoginDropdown loginLabel={t.login} />
+            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-4 text-xs">
+              {t.applyNow}
             </Button>
           </div>
 
-          {/* Mobile: Apply + Toggle */}
-          <div className="xl:hidden ml-auto flex items-center gap-2">
+          {/* Mobile: Language + Apply + Hamburger */}
+          <div className="xl:hidden ml-auto flex items-center gap-1.5">
+            <LanguageSwitcher />
             <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full h-8 px-3 text-xs">
-              Apply
+              {t.apply}
             </Button>
             <button
               className="flex h-9 w-9 items-center justify-center rounded-md text-[#0F4C81] hover:bg-gray-100 transition-colors"
@@ -600,7 +647,7 @@ export function Header() {
                       {hasDropdown && (
                         <button
                           onClick={() => setMobileDropdown(isOpen ? null : link.label)}
-                          className="p-2 text-gray-400 hover:text-[#0F4C81] transition-colors"
+                          className="p-2 text-gray-400 hover:text-[#0F4C81] transition-colors min-w-[40px]"
                         >
                           <ChevronDown size={16} className={`transition-transform duration-200 ${isOpen ? "rotate-180 text-[#0F4C81]" : ""}`} />
                         </button>
@@ -615,7 +662,7 @@ export function Header() {
                           transition={{ duration: 0.2 }}
                           className="overflow-hidden bg-gray-50 rounded-xl mb-2"
                         >
-                          {config.items.map((item) => (
+                          {config!.items.map((item) => (
                             <Link
                               key={item.href}
                               href={item.href}
@@ -641,11 +688,11 @@ export function Header() {
                     className="flex-1 py-3 text-sm font-bold flex items-center gap-2 text-gray-700 text-left"
                   >
                     <LogIn size={15} className="text-[#0F4C81]" />
-                    Login
+                    {t.login}
                   </button>
                   <button
                     onClick={() => setMobileLoginOpen(!mobileLoginOpen)}
-                    className="p-2 text-gray-400 hover:text-[#0F4C81] transition-colors"
+                    className="p-2 text-gray-400 hover:text-[#0F4C81] transition-colors min-w-[40px]"
                   >
                     <ChevronDown size={16} className={`transition-transform duration-200 ${mobileLoginOpen ? "rotate-180 text-[#0F4C81]" : ""}`} />
                   </button>
@@ -677,21 +724,21 @@ export function Header() {
 
               {/* Mobile Contact Links */}
               <div className="mt-3 flex flex-col gap-2 border-b border-gray-100 pb-3">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide px-1">Contact</p>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide px-1">{t.contact}</p>
                 <a href="tel:+919303350002" className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-blue-50 text-sm font-medium text-[#0F4C81]">
-                  <Phone size={15} /> Call: +91 93033 50002
+                  <Phone size={15} /> +91 93033 50002
                 </a>
-                <a href="https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School." target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-green-50 text-sm font-medium text-green-700">
-                  <span className="text-green-500"><WhatsAppIcon size={15} /></span> WhatsApp Us
+                <a href="https://wa.me/919303350002" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-green-50 text-sm font-medium text-green-700">
+                  <span className="text-green-500"><WhatsAppIcon size={15} /></span> WhatsApp
                 </a>
                 <a href="mailto:info@tagoreglobalschool.in" className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-blue-50 text-sm font-medium text-[#0F4C81]">
-                  <Mail size={15} /> Email Us
+                  <Mail size={15} /> info@tagoreglobalschool.in
                 </a>
               </div>
 
               <div className="mt-4 pb-2">
                 <Button className="w-full bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFD700]/90 rounded-full" onClick={() => { setMobileMenuOpen(false); openModal(); }}>
-                  Apply Now
+                  {t.applyNow}
                 </Button>
               </div>
             </nav>
