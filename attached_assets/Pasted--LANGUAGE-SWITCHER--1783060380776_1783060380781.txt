@@ -1,0 +1,132 @@
+================================================
+LANGUAGE SWITCHER
+================================================
+
+Add a professional Language Switch option in the website header and inside the AI Virtual School Guide.
+
+Languages Supported:
+
+🇮🇳 Hindi
+
+🇬🇧 English
+
+Display a language toggle button in the top-right corner of the navigation bar.
+
+Example:
+
+🌐 Language
+
+▼
+
+English
+
+Hindi
+
+OR
+
+🌐 EN | हिंदी
+
+================================================
+LANGUAGE SWITCH FUNCTIONALITY
+================================================
+
+When the visitor selects English:
+
+• Entire website content should change to English.
+• Navigation Menu should switch to English.
+• AI Virtual Guide should speak in a natural English Male Voice.
+• All buttons, forms, alerts, tooltips, and messages should appear in English.
+
+When the visitor selects Hindi:
+
+• Entire website content should switch to Hindi.
+• Navigation Menu should switch to Hindi.
+• AI Virtual Guide should automatically switch to a natural Hindi Male Voice.
+• All buttons, forms, alerts, tooltips, and messages should appear in Hindi.
+
+The language preference should be saved in Local Storage, so when the visitor returns to the website, the previously selected language remains active automatically.
+
+================================================
+AI GUIDE LANGUAGE DETECTION
+================================================
+
+The AI Virtual School Guide should automatically detect the currently selected website language.
+
+If English is selected:
+• Speak in Natural English Male Voice.
+
+If Hindi is selected:
+• Speak in Natural Hindi Male Voice.
+
+The guided website tour should also automatically switch to the selected language.
+
+================================================
+TOUR LANGUAGE SUPPORT
+================================================
+
+When English is selected:
+
+Example Welcome Message:
+
+"Welcome to the Official Website of Tagore Global School.
+I am your AI Virtual School Guide.
+Would you like to take a guided tour of our website?"
+
+When Hindi is selected:
+
+"नमस्कार!
+Tagore Global School की Official Website पर आपका स्वागत है।
+मैं आपका Virtual School Guide हूँ।
+क्या आप हमारी Website का Guided Tour लेना चाहेंगे?"
+
+================================================
+VOICE SETTINGS
+================================================
+
+English:
+Natural AI Male Voice
+
+Hindi:
+Natural AI Male Voice
+
+Speech should sound friendly, professional, clear, and human-like.
+
+Automatically switch voice based on the selected language.
+
+================================================
+SMOOTH LANGUAGE TRANSITION
+================================================
+
+When switching languages:
+
+• Use a smooth fade transition.
+• Do not reload the page.
+• Maintain the current scroll position.
+• If the AI Guide is speaking, stop the current narration and restart it in the newly selected language.
+
+================================================
+DESIGN
+================================================
+
+The Language Switcher should match the website theme:
+
+Royal Blue (#0F4C81)
+
+Gold (#FFD700)
+
+White (#FFFFFF)
+
+Use:
+
+• Rounded Toggle Button
+• Globe Icon (🌐)
+• Smooth Hover Animation
+• Premium Dropdown
+• Glassmorphism Effect
+• Responsive Design
+
+================================================
+FINAL GOAL
+================================================
+
+The Language Switch feature should provide a seamless bilingual experience, allowing visitors to switch between English and Hindi instantly while keeping the AI Virtual School Guide, website content, navigation, forms, and voice narration fully synchronized with the selected language.
