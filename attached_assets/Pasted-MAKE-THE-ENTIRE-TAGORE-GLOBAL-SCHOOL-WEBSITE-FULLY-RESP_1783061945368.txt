@@ -1,0 +1,321 @@
+MAKE THE ENTIRE TAGORE GLOBAL SCHOOL WEBSITE FULLY RESPONSIVE AND MOBILE-FRIENDLY WITHOUT CHANGING THE EXISTING DESIGN OR CONTENT.
+
+The website should automatically adapt to all screen sizes while maintaining a premium, modern, and professional appearance.
+
+================================================
+RESPONSIVE DESIGN REQUIREMENTS
+================================================
+
+Optimize the website for the following screen sizes:
+
+• Large Desktop (1920px+)
+• Desktop (1440px)
+• Laptop (1024px)
+• Tablet Landscape (992px)
+• Tablet Portrait (768px)
+• Mobile Large (480px)
+• Mobile Medium (390px)
+• Mobile Small (320px)
+
+The layout should adjust automatically without breaking any section.
+
+================================================
+HEADER & NAVIGATION
+================================================
+
+• Convert the desktop navigation into a modern responsive hamburger menu on tablets and mobile devices.
+• Keep the school logo clearly visible.
+• Maintain the Login, Admissions, and Language Switch buttons.
+• Dropdown menus should become expandable accordion menus on mobile.
+• Navigation should open with a smooth slide-in animation.
+• Close automatically when a menu item is selected.
+• Keep the header sticky while scrolling.
+
+================================================
+HERO SECTION
+================================================
+
+• Resize the hero image proportionally.
+• Keep text fully visible on all screen sizes.
+• Adjust heading and paragraph font sizes.
+• Stack CTA buttons vertically on mobile.
+• Ensure buttons are easy to tap.
+• Keep animations smooth without overlapping content.
+
+================================================
+COUNTERS
+================================================
+
+• Display counters in four columns on desktop.
+• Two columns on tablets.
+• One column on small mobile devices.
+• Keep count-up animations working on all devices.
+
+================================================
+CONTENT SECTIONS
+================================================
+
+Apply responsive layouts to every section:
+
+• Welcome to Tagore Global School
+• Principal's Message
+• Director's Message
+• Academic Programs
+• Kindergarten
+• Facilities
+• Gallery
+• Achievements
+• Student Corner
+• School Calendar
+• Testimonials
+• Contact
+• Footer
+
+Desktop:
+Image and text side by side.
+
+Tablet:
+Balanced two-column layout.
+
+Mobile:
+Image above, content below.
+
+================================================
+CARDS
+================================================
+
+All cards should:
+
+• Automatically resize.
+• Maintain equal spacing.
+• Wrap correctly.
+• Never overlap.
+• Have responsive padding and margins.
+
+================================================
+IMAGES
+================================================
+
+All images should:
+
+• Scale automatically.
+• Maintain aspect ratio.
+• Never stretch or crop important content.
+• Use lazy loading for better performance.
+• Display smoothly on Retina displays.
+
+================================================
+TYPOGRAPHY
+================================================
+
+Adjust font sizes automatically.
+
+Desktop:
+
+Heading:
+48–60px
+
+Subheading:
+28–36px
+
+Body:
+18–20px
+
+Tablet:
+
+Heading:
+38–46px
+
+Body:
+16–18px
+
+Mobile:
+
+Heading:
+28–34px
+
+Body:
+15–16px
+
+Maintain proper line spacing and readability.
+
+================================================
+BUTTONS
+================================================
+
+Buttons should:
+
+• Be full width on small mobile screens where appropriate.
+• Maintain consistent spacing.
+• Have touch-friendly size (minimum 44px height).
+• Preserve hover effects on desktop and active effects on touch devices.
+
+================================================
+FORMS
+================================================
+
+Admission Form
+
+Contact Form
+
+Login Forms
+
+Parent Login
+
+Staff Login
+
+All forms should:
+
+• Display one field per row on mobile.
+• Maintain proper spacing.
+• Use responsive validation messages.
+• Keep labels clearly visible.
+• Ensure upload buttons work on mobile.
+
+================================================
+TABLES
+================================================
+
+Academic Calendar
+
+School Timetable
+
+Results
+
+Convert large tables into responsive cards or allow horizontal scrolling on small screens.
+
+================================================
+GALLERY
+================================================
+
+Desktop:
+
+4 columns
+
+Tablet:
+
+2 columns
+
+Mobile:
+
+1 column
+
+Maintain animations and lightbox functionality.
+
+================================================
+AI VIRTUAL SCHOOL GUIDE
+================================================
+
+The AI Guide should be fully responsive.
+
+• Floating assistant remains fixed at the bottom-right corner.
+• Automatically resize on smaller screens.
+• Voice controls remain accessible.
+• Guided Tour works smoothly on mobile.
+• Auto-scroll synchronizes with narration.
+• Tour controls adapt to touch interactions.
+
+================================================
+FOOTER
+================================================
+
+Desktop:
+
+4-column layout.
+
+Tablet:
+
+2-column layout.
+
+Mobile:
+
+Single-column stacked layout.
+
+Keep:
+
+• Logo
+• Contact Information
+• Quick Links
+• Social Media
+• Google Map
+• Newsletter Subscription
+
+fully responsive.
+
+================================================
+PERFORMANCE OPTIMIZATION
+================================================
+
+• Compress images.
+• Enable lazy loading.
+• Minify CSS and JavaScript.
+• Reduce layout shifts.
+• Optimize animations.
+• Ensure fast loading on 4G and mobile networks.
+
+================================================
+ACCESSIBILITY
+================================================
+
+• Touch-friendly buttons.
+• High contrast text.
+• Keyboard navigation.
+• Screen reader support.
+• Proper ARIA labels.
+• Visible focus indicators.
+
+================================================
+RESPONSIVE BREAKPOINTS
+================================================
+
+Use modern breakpoints:
+
+320px
+
+375px
+
+480px
+
+576px
+
+768px
+
+992px
+
+1200px
+
+1400px
+
+1920px
+
+================================================
+TESTING
+================================================
+
+Ensure the website displays perfectly on:
+
+• Android Phones
+• iPhone
+• iPad
+• Android Tablets
+• Windows Laptop
+• MacBook
+• Desktop Monitors
+
+No horizontal scrolling.
+
+No overlapping elements.
+
+No broken layouts.
+
+No hidden content.
+
+No cut-off text.
+
+No cropped buttons.
+
+================================================
+FINAL GOAL
+================================================
+
+Transform the website into a fully responsive, premium international school website that delivers a seamless experience across all devices while preserving the existing design, animations, color theme (Royal Blue, Gold, and White), and functionality.
