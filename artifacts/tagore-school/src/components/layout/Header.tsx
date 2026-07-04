@@ -556,11 +556,14 @@ export function Header() {
         <div className="flex h-[60px] sm:h-[68px] items-center gap-0 px-3 sm:px-4 md:px-6">
 
           {/* Logo + Name */}
-          <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <img src="/logo.png" alt="TGS Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform group-hover:scale-105" />
-            <span className="font-serif text-sm sm:text-lg font-bold tracking-tight text-[#0F4C81] whitespace-nowrap hidden sm:block">
-              Tagore Global School
-            </span>
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group shrink-0 min-w-0">
+            <img src="/logo.png" alt="TGS Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform group-hover:scale-105 shrink-0" />
+            <div className="min-w-0">
+              <span className="font-serif font-bold tracking-tight text-[#0F4C81] whitespace-nowrap text-[11px] xs:text-sm sm:text-base md:text-lg block leading-tight">
+                Tagore Global School
+              </span>
+              <span className="text-[9px] xs:text-[10px] text-gray-400 font-medium hidden xs:block leading-tight">CBSE · Affiliation 531905</span>
+            </div>
           </Link>
 
           <div className="hidden xl:block h-10 w-px bg-gray-200 mx-4 shrink-0" />
@@ -600,12 +603,9 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile: Language + Apply + Hamburger */}
-          <div className="xl:hidden ml-auto flex items-center gap-1.5">
+          {/* Mobile: Language + Hamburger only (Apply moved to menu) */}
+          <div className="xl:hidden ml-auto flex items-center gap-1 sm:gap-1.5 shrink-0">
             <LanguageSwitcher />
-            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] rounded-full h-8 px-3 text-xs">
-              {t.apply}
-            </Button>
             <button
               className="flex h-9 w-9 items-center justify-center rounded-md text-[#0F4C81] hover:bg-gray-100 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

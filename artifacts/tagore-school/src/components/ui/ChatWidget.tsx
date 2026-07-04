@@ -181,8 +181,8 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 26 }}
-            className="fixed bottom-48 right-4 sm:right-6 z-[100] w-[calc(100vw-2rem)] sm:w-[340px] md:w-[380px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/20"
-            style={{ maxHeight: "clamp(400px, 70vh, 520px)", boxShadow: "0 8px 40px rgba(15,76,129,0.28)" }}
+            className="fixed bottom-[152px] sm:bottom-48 right-2 sm:right-6 z-[100] w-[calc(100vw-1rem)] sm:w-[340px] md:w-[380px] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/20"
+            style={{ maxHeight: "clamp(360px, 60vh, 520px)", boxShadow: "0 8px 40px rgba(15,76,129,0.28)" }}
           >
             {/* Header */}
             <div className="bg-[#0F4C81] px-4 py-3 flex items-center justify-between shrink-0">
@@ -341,7 +341,7 @@ export function ChatWidget() {
       </AnimatePresence>
 
       {/* Floating Robot Button */}
-      <div className="fixed bottom-24 right-4 sm:right-6 z-50 flex flex-col items-end gap-2">
+      <div className="fixed bottom-[72px] sm:bottom-24 right-3 sm:right-6 z-50 flex flex-col items-end gap-2">
         {!open && (
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -382,7 +382,7 @@ export function ChatWidget() {
                 <img
                   src={robotImg}
                   alt="Chat"
-                  className="h-16 w-16 sm:h-20 sm:w-20 object-contain drop-shadow-xl"
+                  className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 object-contain drop-shadow-xl"
                   onError={(e) => {
                     const el = e.target as HTMLImageElement;
                     el.style.display = "none";
