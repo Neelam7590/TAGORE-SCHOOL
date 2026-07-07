@@ -1,0 +1,142 @@
+AI VIRTUAL SCHOOL GUIDE
+================================================
+
+The AI Guide should remain responsive.
+
+Desktop:
+
+Bottom Right
+
+Mobile:
+
+Bottom Right with smaller size.
+
+Do not block content.
+
+Tour controls should be touch-friendly.
+
+================================================
+FOOTER
+================================================
+
+Desktop:
+
+4 Columns
+
+Tablet:
+
+2 Columns
+
+Mobile:
+
+Single Column
+
+Keep:
+
+Logo
+
+School Name
+
+Quick Links
+
+Contact Information
+
+Social Media
+
+Google Map
+
+Newsletter
+
+fully responsive.
+
+================================================
+LANGUAGE SWITCH
+================================================
+
+Keep Language Switch visible.
+
+Desktop:
+
+Top Navigation.
+
+Mobile:
+
+Inside Hamburger Menu.
+
+================================================
+ANIMATIONS
+================================================
+
+Keep all existing animations.
+
+Optimize animations for mobile.
+
+Reduce heavy animations on low-performance devices.
+
+Maintain smooth scrolling.
+
+================================================
+PERFORMANCE
+================================================
+
+Optimize:
+
+Images
+
+CSS
+
+JavaScript
+
+Fonts
+
+Animations
+
+Enable lazy loading.
+
+Reduce CLS.
+
+Improve Page Speed.
+
+================================================
+ACCESSIBILITY
+================================================
+
+Touch Friendly Buttons.
+
+Keyboard Navigation.
+
+ARIA Labels.
+
+Proper Focus States.
+
+High Contrast.
+
+================================================
+REMOVE HORIZONTAL SCROLL
+================================================
+
+Ensure:
+
+No element exceeds viewport width.
+
+No unnecessary margins.
+
+No overflow-x issues.
+
+Apply overflow-x:hidden only where appropriate.
+
+Every container, section, image, card, and component must stay within the screen width.
+
+The user should NEVER need to scroll horizontally.
+
+================================================
+FINAL GOAL
+================================================
+
+Transform the website into a premium international school website with a completely responsive, adaptive, and pixel-perfect layout.
+
+The website should look equally beautiful and functional on Desktop, Laptop, Tablet, Android Phones, iPhones, and all modern browsers.
+
+Do NOT change the existing UI design, colors, animations, or content.
+
+Only optimize the layout, responsiveness, spacing, typography, navigation, images, forms, cards, and overall user experience.

@@ -1,0 +1,411 @@
+MAKE THE ENTIRE TAGORE GLOBAL SCHOOL WEBSITE 100% RESPONSIVE, ADAPTIVE, AND PIXEL-PERFECT FOR ALL SCREEN SIZES WITHOUT CHANGING THE EXISTING DESIGN, CONTENT, COLORS, OR FUNCTIONALITY.
+
+The website should automatically adjust its layout based on the screen size and provide the best possible user experience on Desktop, Laptop, Tablet, and Mobile devices.
+
+================================================
+GLOBAL RESPONSIVE LAYOUT
+================================================
+
+• Remove all layout issues.
+• Remove all horizontal scrolling.
+• Ensure no content overflows outside the screen.
+• Every section should fit perfectly within the viewport.
+• Maintain proper spacing and alignment.
+• No broken layouts.
+• No overlapping text.
+• No overlapping images.
+• No cut-off buttons.
+• No cropped content.
+• No unnecessary white spaces.
+• All content should automatically resize according to the device width.
+
+================================================
+RESPONSIVE BREAKPOINTS
+================================================
+
+Optimize the website for:
+
+• 1920px+
+• 1600px
+• 1440px
+• 1366px
+• 1280px
+• 1024px
+• 992px
+• 768px
+• 576px
+• 480px
+• 390px
+• 375px
+• 360px
+• 320px
+
+Every screen size should have a perfectly optimized layout.
+
+================================================
+HEADER & NAVIGATION
+================================================
+
+Desktop (1024px and above):
+
+• Display the full navigation bar.
+• Keep the school logo on the left.
+• Display "Tagore Global School" in bold with proper spacing.
+• Keep all navigation links visible.
+• Display dropdown menus on hover.
+• Keep Login and Language Switch buttons visible.
+• Keep Apply Now button highlighted.
+• Header should remain sticky.
+
+Tablet:
+
+• Slightly reduce spacing.
+• Keep menu readable.
+• Maintain dropdown functionality.
+
+Mobile:
+
+• Replace the navigation links with a modern Hamburger Menu (☰).
+• Keep the school logo visible.
+• Display "Tagore Global School" in bold beside the logo.
+• Navigation should slide in from the left.
+• Use an Accordion Menu for dropdowns.
+• Keep Login, Apply Now, and Language Switch inside the mobile menu.
+• Automatically close the menu after selecting any option.
+
+================================================
+HAMBURGER MENU
+================================================
+
+Use a premium animated hamburger icon.
+
+Click:
+
+☰ → ✖
+
+Animation:
+
+Smooth Slide
+
+Fade
+
+Blur Background
+
+Glassmorphism Panel
+
+================================================
+SECTION RESPONSIVENESS
+================================================
+
+Apply responsive layouts to every section.
+
+Desktop:
+
+Image and text side by side.
+
+Tablet:
+
+Balanced two-column layout.
+
+Mobile:
+
+Image on top.
+
+Content below.
+
+Center aligned.
+
+Apply this to:
+
+• Hero Section
+• Welcome Section
+• Principal Message
+• Director Message
+• Academic Programs
+• Kindergarten
+• Facilities
+• Achievements
+• Gallery
+• Testimonials
+• Contact
+• Footer
+
+================================================
+TYPOGRAPHY
+================================================
+
+Automatically adjust font sizes.
+
+Desktop:
+
+Heading
+
+52px
+
+Subheading
+
+32px
+
+Body
+
+18px
+
+Tablet:
+
+Heading
+
+40px
+
+Body
+
+17px
+
+Mobile:
+
+Heading
+
+28px
+
+Body
+
+15px
+
+Maintain perfect readability.
+
+================================================
+BUTTONS
+================================================
+
+Buttons should automatically resize.
+
+Desktop:
+
+Normal Width.
+
+Tablet:
+
+Medium Width.
+
+Mobile:
+
+Full Width where required.
+
+Minimum Touch Size:
+
+44px Height
+
+================================================
+CARDS
+================================================
+
+Cards should automatically wrap.
+
+Desktop:
+
+4 Cards
+
+Tablet:
+
+2 Cards
+
+Mobile:
+
+1 Card
+
+Cards must never overlap.
+
+================================================
+IMAGES
+================================================
+
+All images should:
+
+Automatically resize.
+
+Maintain aspect ratio.
+
+Never overflow.
+
+Never stretch.
+
+Never lose quality.
+
+Lazy Load images for better performance.
+
+================================================
+FORMS
+================================================
+
+Admission Form
+
+Contact Form
+
+Parent Login
+
+Staff Login
+
+All forms should:
+
+Display fields in one column on mobile.
+
+Maintain proper spacing.
+
+Keep labels readable.
+
+Upload buttons must work properly.
+
+================================================
+TABLES
+================================================
+
+Convert large tables into responsive cards.
+
+If necessary,
+
+Enable horizontal scrolling only inside the table container.
+
+Never create horizontal scrolling for the whole page.
+
+================================================
+AI VIRTUAL SCHOOL GUIDE
+================================================
+
+The AI Guide should remain responsive.
+
+Desktop:
+
+Bottom Right
+
+Mobile:
+
+Bottom Right with smaller size.
+
+Do not block content.
+
+Tour controls should be touch-friendly.
+
+================================================
+FOOTER
+================================================
+
+Desktop:
+
+4 Columns
+
+Tablet:
+
+2 Columns
+
+Mobile:
+
+Single Column
+
+Keep:
+
+Logo
+
+School Name
+
+Quick Links
+
+Contact Information
+
+Social Media
+
+Google Map
+
+Newsletter
+
+fully responsive.
+
+================================================
+LANGUAGE SWITCH
+================================================
+
+Keep Language Switch visible.
+
+Desktop:
+
+Top Navigation.
+
+Mobile:
+
+Inside Hamburger Menu.
+
+================================================
+ANIMATIONS
+================================================
+
+Keep all existing animations.
+
+Optimize animations for mobile.
+
+Reduce heavy animations on low-performance devices.
+
+Maintain smooth scrolling.
+
+================================================
+PERFORMANCE
+================================================
+
+Optimize:
+
+Images
+
+CSS
+
+JavaScript
+
+Fonts
+
+Animations
+
+Enable lazy loading.
+
+Reduce CLS.
+
+Improve Page Speed.
+
+================================================
+ACCESSIBILITY
+================================================
+
+Touch Friendly Buttons.
+
+Keyboard Navigation.
+
+ARIA Labels.
+
+Proper Focus States.
+
+High Contrast.
+
+================================================
+REMOVE HORIZONTAL SCROLL
+================================================
+
+Ensure:
+
+No element exceeds viewport width.
+
+No unnecessary margins.
+
+No overflow-x issues.
+
+Apply overflow-x:hidden only where appropriate.
+
+Every container, section, image, card, and component must stay within the screen width.
+
+The user should NEVER need to scroll horizontally.
+
+================================================
+FINAL GOAL
+================================================
+
+Transform the website into a premium international school website with a completely responsive, adaptive, and pixel-perfect layout.
+
+The website should look equally beautiful and functional on Desktop, Laptop, Tablet, Android Phones, iPhones, and all modern browsers.
+
+Do NOT change the existing UI design, colors, animations, or content.
+
+Only optimize the layout, responsiveness, spacing, typography, navigation, images, forms, cards, and overall user experience.

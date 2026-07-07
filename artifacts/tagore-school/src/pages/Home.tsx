@@ -63,7 +63,7 @@ export default function Home() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col">
 
       {/* S1 — HERO: Royal Blue Gradient */}
-      <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-[#0F4C81] px-4 py-24 text-center md:px-8">
+      <section className="relative flex min-h-[85svh] sm:min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-[#0F4C81] px-4 py-16 sm:py-24 text-center md:px-8">
         <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat" />
         <div className="absolute inset-0 z-0 bg-[#0F4C81]/40" />
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -77,11 +77,11 @@ export default function Home() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0F4C81]" />
             </span>
           </motion.div>
-          <motion.h1 variants={fadeUp} className="font-serif text-5xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl drop-shadow-lg">
+          <motion.h1 variants={fadeUp} className="font-serif text-[2rem] xs:text-4xl sm:text-5xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl drop-shadow-lg">
             Nurturing Minds, <br className="hidden sm:block" />
             <span className="text-[#FFD700]">Shaping Futures</span>
           </motion.h1>
-          <motion.p variants={fadeUp} className="max-w-2xl text-lg text-white/90 md:text-xl drop-shadow-md">
+          <motion.p variants={fadeUp} className="max-w-2xl text-sm sm:text-lg text-white/90 md:text-xl drop-shadow-md">
             Empowering students with knowledge, values, creativity, and confidence to thrive in a rapidly evolving world.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-4 flex flex-col gap-4 sm:flex-row">
@@ -253,8 +253,8 @@ export default function Home() {
               <div className="aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl border-2 border-[#FFD700]/30">
                 <img src="/kindergarten2.png" alt="Kindergarten at TGS" className="h-full w-full object-cover" />
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-[#FFD700] text-[#0F4C81] px-6 py-3 rounded-xl font-bold shadow-lg flex items-center gap-2">
-                <Sparkles size={18} fill="currentColor" /><span>Pre-Nursery to UKG</span>
+              <div className="absolute bottom-2 right-2 sm:-bottom-4 sm:-right-4 bg-[#FFD700] text-[#0F4C81] px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold shadow-lg flex items-center gap-1.5 sm:gap-2 text-xs sm:text-base z-10">
+                <Sparkles size={14} fill="currentColor" /><span>Pre-Nursery to UKG</span>
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
@@ -373,7 +373,7 @@ export default function Home() {
             </motion.h2>
             <div className="mx-auto mt-4 h-1 w-24 bg-[#FFD700] rounded-full" />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 auto-rows-[160px] sm:auto-rows-[200px]">
             {[
               { url: "/campus-life.jpg", title: "Campus Life", span: "col-span-2 row-span-2" },
               { url: "https://picsum.photos/seed/sports/600/400", title: "Sports Activities", span: "col-span-1 row-span-1" },
@@ -476,8 +476,8 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/20 border border-[#FFD700]/30 px-5 py-2 text-sm font-semibold text-[#FFD700] mb-6">
               <GraduationCap size={14} /> Admissions Open 2026–2027
             </div>
-            <h2 className="mb-6 font-serif text-4xl font-bold md:text-5xl">Shape Your Child's Future with Excellence</h2>
-            <p className="mb-10 text-xl text-blue-100">Admissions are now open. Join a learning community where every child is inspired to grow, achieve, and succeed.</p>
+            <h2 className="mb-6 font-serif text-2xl sm:text-4xl font-bold md:text-5xl">Shape Your Child's Future with Excellence</h2>
+            <p className="mb-8 sm:mb-10 text-base sm:text-xl text-blue-100">Admissions are now open. Join a learning community where every child is inspired to grow, achieve, and succeed.</p>
             <div className="flex flex-col gap-4 sm:flex-row justify-center">
               <motion.div whileHover={{ scale: 1.08, y: -3 }} whileTap={{ scale: 0.95 }}>
                 <Button size="lg" onClick={openModal} className="h-14 bg-[#FFD700] px-10 text-lg font-bold text-[#0F4C81] hover:bg-[#FFC107] shadow-[0_0_30px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] transition-all duration-300 rounded-full">

@@ -235,11 +235,11 @@ export default function Kindergarten() {
               </div>
 
               {/* quick stats */}
-              <div className="mt-12 grid grid-cols-3 gap-4">
+              <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-4">
                 {[["Pre-Nursery to UKG", "Programs"], ["25+", "Years Experience"], ["200+", "Happy Learners"]].map(([val, label], i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/15 text-center">
-                    <div className="font-serif text-xl font-bold text-[#FFD700]">{val}</div>
-                    <div className="text-xs text-blue-100/70 mt-1">{label}</div>
+                  <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-2.5 sm:p-4 border border-white/15 text-center">
+                    <div className="font-serif text-sm sm:text-xl font-bold text-[#FFD700] leading-tight">{val}</div>
+                    <div className="text-[11px] sm:text-xs text-blue-100/70 mt-0.5 sm:mt-1 leading-tight">{label}</div>
                   </div>
                 ))}
               </div>
@@ -256,10 +256,10 @@ export default function Kindergarten() {
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-5 -right-5 bg-[#FFD700] text-[#0F4C81] rounded-2xl px-5 py-3 font-bold shadow-xl text-sm"
+                  className="absolute top-2 right-2 sm:-top-5 sm:-right-5 bg-[#FFD700] text-[#0F4C81] rounded-xl sm:rounded-2xl px-2 sm:px-5 py-1.5 sm:py-3 font-bold shadow-xl text-[11px] sm:text-sm z-10"
                 >
-                  <div className="flex items-center gap-2">
-                    <Star size={16} fill="currentColor" />
+                  <div className="flex items-center gap-1">
+                    <Star size={11} fill="currentColor" className="shrink-0" />
                     <span>Pre-Nursery to UKG</span>
                   </div>
                 </motion.div>
@@ -267,7 +267,7 @@ export default function Kindergarten() {
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute -bottom-5 -left-5 bg-white text-[#0F4C81] rounded-2xl px-5 py-3 shadow-xl text-sm font-bold"
+                  className="absolute bottom-2 left-2 sm:-bottom-5 sm:-left-5 bg-white text-[#0F4C81] rounded-xl sm:rounded-2xl px-3 sm:px-5 py-1.5 sm:py-3 shadow-xl text-xs sm:text-sm font-bold z-10"
                 >
                   <div className="flex items-center gap-2">
                     <Heart size={16} className="text-red-500" fill="currentColor" />

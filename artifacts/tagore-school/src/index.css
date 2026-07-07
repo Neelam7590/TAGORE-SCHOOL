@@ -274,13 +274,37 @@
   }
 }
 
-/* xs breakpoint (below 480px) */
+/* xs breakpoint (480px) — used for very small mobile tweaks */
 @media (min-width: 480px) {
-  .xs\:inline { display: inline; }
-  .xs\:hidden { display: none; }
-  .xs\:flex { display: flex; }
-  .xs\:block { display: block; }
+  .xs\:inline { display: inline !important; }
+  .xs\:hidden { display: none !important; }
+  .xs\:flex { display: flex !important; }
+  .xs\:block { display: block !important; }
+  .xs\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .xs\:text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .xs\:text-base { font-size: 1rem; line-height: 1.5rem; }
 }
+
+/* Clamp-based fluid type for hero headings */
+.fluid-hero {
+  font-size: clamp(1.75rem, 5vw + 1rem, 4.5rem);
+}
+.fluid-section-title {
+  font-size: clamp(1.5rem, 3vw + 0.75rem, 3rem);
+}
+
+/* Safe minimum touch target — 44px per WCAG 2.5.5 */
+button, a[href], [role="button"] {
+  min-height: 44px;
+}
+
+/* Prevent replaced/media elements from overflowing their containers */
+img, video, canvas, audio, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+/* Allow fixed-size containers to be bigger than their parent (e.g. dropdowns, modals) */
+.overflow-visible, .absolute, .fixed { max-width: none !important; }
 
 /* Prevent horizontal overflow on content sections (NOT header/nav — dropdowns must escape) */
 section, footer, main {

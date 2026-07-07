@@ -269,7 +269,7 @@ export default function Admissions() {
                   )}
 
                   {/* Info cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 w-full max-w-xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 w-full max-w-xl">
                     {[
                       { emoji: "📞", label: lang === "hi" ? "कॉल करें" : "Call Us", value: "+91 93033 50002" },
                       { emoji: "📧", label: lang === "hi" ? "ईमेल" : "Email", value: "info@tagoreglobalschool.in" },

@@ -339,8 +339,8 @@ export default function Facilities() {
                   <img src="/school-building2.jpg" alt="Campus" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
                 </div>
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-[#0F4C81] text-white rounded-2xl px-5 py-4 shadow-xl">
-                <div className="text-xl font-bold text-[#FFD700]">GPS Tracked</div>
+              <div className="absolute bottom-2 left-2 sm:-bottom-4 sm:-left-4 bg-[#0F4C81] text-white rounded-xl sm:rounded-2xl px-3 sm:px-5 py-2 sm:py-4 shadow-xl z-10">
+                <div className="text-base sm:text-xl font-bold text-[#FFD700]">GPS Tracked</div>
                 <div className="text-xs text-blue-200">All routes monitored live</div>
               </div>
             </motion.div>
@@ -437,7 +437,7 @@ export default function Facilities() {
 
           {/* Achievement stats bar */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-5 bg-gradient-to-br from-[#0F4C81] to-[#1a6bb5] rounded-3xl p-8 text-white"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 bg-gradient-to-br from-[#0F4C81] to-[#1a6bb5] rounded-2xl sm:rounded-3xl p-5 sm:p-8 text-white"
           >
             {[
               { val: 15, suf: "+", label: "Acres Campus", icon: School },
@@ -516,7 +516,7 @@ export default function Facilities() {
             </motion.div>
 
             {/* Photo gallery grid */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-3 gap-4">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="col-span-2 aspect-video overflow-hidden rounded-3xl shadow-xl">
                 <img src="/school-building2.jpg" alt="Campus Main" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>

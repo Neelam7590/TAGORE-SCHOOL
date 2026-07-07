@@ -116,8 +116,8 @@ export default function PremiumInfoPage({
                       {section.emoji && <span>{section.emoji}</span>}
                       {section.title}
                     </h2>
-                    <div className="overflow-hidden rounded-2xl border border-[#0F4C81]/10 shadow-lg">
-                      <table className="w-full">
+                    <div className="overflow-x-auto rounded-2xl border border-[#0F4C81]/10 shadow-lg -mx-1">
+                      <table className="w-full min-w-[420px]">
                         <tbody>
                           {section.items.map((row, j) => (
                             <tr key={j} className={j % 2 === 0 ? "bg-white" : "bg-[#0F4C81]/3"}>
@@ -130,7 +130,7 @@ export default function PremiumInfoPage({
                     </div>
                   </div>
                 ) : section.type === "list" ? (
-                  <div className="bg-gradient-to-br from-[#0F4C81]/3 to-transparent rounded-2xl p-8 border border-[#0F4C81]/10">
+                  <div className="bg-gradient-to-br from-[#0F4C81]/3 to-transparent rounded-2xl p-5 sm:p-8 border border-[#0F4C81]/10">
                     <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#0F4C81] mb-6 flex items-center gap-3">
                       {section.emoji && <span>{section.emoji}</span>}
                       {section.title}
@@ -165,7 +165,7 @@ export default function PremiumInfoPage({
 
           {ctaText && ctaLink && (
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-16 text-center">
-              <div className="inline-block rounded-3xl bg-gradient-to-br from-[#0F4C81] to-[#0A3260] p-10 text-white shadow-2xl">
+              <div className="w-full sm:inline-block rounded-3xl bg-gradient-to-br from-[#0F4C81] to-[#0A3260] p-6 sm:p-10 text-white shadow-2xl text-center">
                 <h3 className="font-serif text-2xl font-bold mb-3">Ready to Join TGS?</h3>
                 <p className="text-blue-100/80 mb-6">Take the first step towards a world-class education.</p>
                 <Button

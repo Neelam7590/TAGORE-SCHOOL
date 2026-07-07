@@ -118,7 +118,7 @@ export default function About() {
                   <Link href="/contact">Contact Us</Link>
                 </Button>
               </div>
-              <div className="mt-10 flex gap-8">
+              <div className="mt-8 sm:mt-10 flex flex-wrap gap-6 sm:gap-8">
                 {[{ val: "25+", label: "Years of Excellence" }, { val: "CBSE", label: "Affiliated" }, { val: "1000+", label: "Students" }].map((s, i) => (
                   <div key={i} className="text-center">
                     <div className="text-2xl font-bold text-[#FFD700]">{s.val}</div>
@@ -135,7 +135,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F4C81]/40 to-transparent" />
               </div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
-                className="absolute -bottom-6 -left-6 rounded-2xl bg-white px-6 py-4 shadow-2xl"
+                className="absolute -bottom-6 -left-6 rounded-2xl bg-white px-6 py-4 shadow-2xl hidden sm:block"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#0F4C81] flex items-center justify-center">
@@ -154,18 +154,19 @@ export default function About() {
       </section>
 
       {/* About School — Detail */}
-      <section className="bg-white py-24">
+      <section className="bg-white py-16 sm:py-24 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative mt-4 sm:mt-0">
               <div className="absolute -inset-2 rounded-3xl bg-[#0F4C81]/5 blur-xl" />
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
                 <img src="/school-building.jpg" alt="School Building" className="h-full w-full object-cover" />
               </div>
-              <div className="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-[#FFD700] flex items-center justify-center shadow-xl">
-                <GraduationCap size={32} className="text-[#0F4C81]" />
+              <div className="absolute top-2 right-2 sm:-top-4 sm:-right-4 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-[#FFD700] flex items-center justify-center shadow-xl z-10">
+                <GraduationCap size={24} className="sm:hidden text-[#0F4C81]" />
+                <GraduationCap size={32} className="hidden sm:block text-[#0F4C81]" />
               </div>
-              <div className="absolute -bottom-6 left-8 rounded-2xl bg-[#0F4C81] px-6 py-4 shadow-xl text-white">
+              <div className="absolute -bottom-6 left-4 sm:left-8 rounded-2xl bg-[#0F4C81] px-4 sm:px-6 py-3 sm:py-4 shadow-xl text-white hidden sm:block">
                 <div className="text-2xl font-bold text-[#FFD700]">Est. 2001</div>
                 <div className="text-xs text-blue-200">25+ Years of Learning</div>
               </div>
@@ -206,7 +207,7 @@ export default function About() {
       {/* ══════════════════════════════════════════
           2. OUR JOURNEY
       ══════════════════════════════════════════ */}
-      <section id="journey" className="bg-gray-50 py-20 relative overflow-hidden scroll-mt-24">
+      <section id="journey" className="bg-gray-50 py-14 sm:py-20 relative overflow-hidden scroll-mt-24">
         <div className="absolute top-0 left-0 w-64 h-64 bg-[#0F4C81]/4 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#FFD700]/5 rounded-full blur-3xl" />
 

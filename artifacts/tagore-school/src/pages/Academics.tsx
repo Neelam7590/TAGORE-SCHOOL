@@ -164,10 +164,10 @@ export default function Academics() {
               <div className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/15 border border-[#FFD700]/25 px-5 py-2 text-sm font-semibold text-[#FFD700] mb-6">
                 <GraduationCap size={14} /> Academic Excellence
               </div>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
                 Academic<br /><span className="text-[#FFD700]">Excellence</span>
               </h1>
-              <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-lg">
+              <p className="text-base sm:text-lg text-blue-100 leading-relaxed mb-8 max-w-lg">
                 Empowering students through knowledge, innovation, and lifelong learning.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -180,14 +180,14 @@ export default function Academics() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="grid grid-cols-2 gap-4">
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="grid grid-cols-2 gap-3 sm:gap-4 mt-8 lg:mt-0">
               {[
                 { val: "98%", label: "Board Results", icon: Trophy },
                 { val: "50+", label: "Olympiad Medals", icon: Medal },
                 { val: "200+", label: "Competitions Won", icon: Star },
                 { val: "1000+", label: "Students Strong", icon: Users },
               ].map((s, i) => (
-                <motion.div key={i} whileHover={{ scale: 1.05, y: -4 }} className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15 text-center cursor-default">
+                <motion.div key={i} whileHover={{ scale: 1.05, y: -4 }} className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-white/15 text-center cursor-default">
                   <s.icon size={22} className="text-[#FFD700] mx-auto mb-2" />
                   <div className="text-2xl font-bold text-[#FFD700]">{s.val}</div>
                   <div className="text-xs text-blue-200 mt-0.5">{s.label}</div>
@@ -280,7 +280,7 @@ export default function Academics() {
             <div className="mx-auto h-1 w-20 bg-[#FFD700] rounded-full" />
           </motion.div>
 
-          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 lg:grid-cols-5 gap-5">
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
             {[
               { end: 98, suffix: "%", label: "Board Results", sublabel: "Average Pass Rate", icon: GraduationCap, color: "from-[#0F4C81] to-blue-600" },
               { end: 50, suffix: "+", label: "Olympiad Medals", sublabel: "Science & Math", icon: Medal, color: "from-amber-500 to-[#DAA520]" },
@@ -289,13 +289,14 @@ export default function Academics() {
               { end: 25, suffix: "+", label: "Years Excellence", sublabel: "Since 2001", icon: Star, color: "from-rose-500 to-pink-600" },
             ].map((s, i) => (
               <motion.div key={i} variants={fadeUp} whileHover={{ y: -8, scale: 1.03 }}
-                className="group relative overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-300 p-7 text-center"
+                className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-300 p-4 sm:p-7 text-center"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${s.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <s.icon size={26} className="text-white" />
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <s.icon size={20} className="sm:hidden text-white" />
+                  <s.icon size={26} className="hidden sm:block text-white" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-[#0F4C81] mb-1">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0F4C81] mb-1">
                   <AnimatedCounter end={s.end} suffix={s.suffix} />
                 </div>
                 <div className="font-bold text-gray-800 text-sm mb-0.5">{s.label}</div>
