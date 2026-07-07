@@ -566,10 +566,10 @@ export function Header() {
             </div>
           </Link>
 
-          <div className="hidden xl:block h-10 w-px bg-gray-200 mx-4 shrink-0" />
+          <div className="hidden lg:block h-10 w-px bg-gray-200 mx-3 shrink-0" />
 
           {/* Desktop Nav */}
-          <nav className="hidden xl:flex items-center justify-center flex-1 gap-x-4 px-2">
+          <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-2 xl:gap-x-4 px-1">
             {navLinks.map((link) => (
               <NavItem
                 key={link.href + link.label}
@@ -581,10 +581,10 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden xl:block h-10 w-px bg-gray-200 mx-3 shrink-0" />
+          <div className="hidden lg:block h-10 w-px bg-gray-200 mx-2 shrink-0" />
 
           {/* Desktop CTAs */}
-          <div className="hidden xl:flex items-center gap-1.5 shrink-0">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 shrink-0">
             <a href="tel:+919303350002" title="Call: +91 93033 50002" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200">
               <Phone size={14} />
             </a>
@@ -604,7 +604,7 @@ export function Header() {
           </div>
 
           {/* Mobile: Language + Hamburger only (Apply moved to menu) */}
-          <div className="xl:hidden ml-auto flex items-center gap-1 sm:gap-1.5 shrink-0">
+          <div className="lg:hidden ml-auto flex items-center gap-1 sm:gap-1.5 shrink-0">
             <LanguageSwitcher />
             <button
               className="flex h-9 w-9 items-center justify-center rounded-md text-[#0F4C81] hover:bg-gray-100 transition-colors"
@@ -625,7 +625,7 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b bg-white xl:hidden shadow-lg"
+            className="overflow-hidden border-b bg-white lg:hidden shadow-lg"
           >
             <nav className="flex flex-col px-4 py-3 max-h-[75vh] overflow-y-auto">
               {navLinks.map((link) => {
