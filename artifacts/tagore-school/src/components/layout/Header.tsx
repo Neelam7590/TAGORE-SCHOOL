@@ -553,7 +553,9 @@ export function Header() {
 
       {/* Main Header */}
       <div className="border-b shadow-sm bg-white">
-        <div className="flex h-[60px] sm:h-[68px] items-center gap-0 px-3 sm:px-4 md:px-6">
+
+        {/* ── Row 1: Logo + right-side controls ── */}
+        <div className="flex h-[60px] sm:h-[68px] items-center px-3 sm:px-4 md:px-6">
 
           {/* Logo + Name */}
           <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group shrink-0 min-w-0">
@@ -566,9 +568,8 @@ export function Header() {
             </div>
           </Link>
 
+          {/* ── LARGE DESKTOP (1024px+): inline nav between logo and CTAs ── */}
           <div className="hidden lg:block h-10 w-px bg-gray-200 mx-3 shrink-0" />
-
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-2 xl:gap-x-4 px-1">
             {navLinks.map((link) => (
               <NavItem
@@ -580,12 +581,11 @@ export function Header() {
               />
             ))}
           </nav>
-
           <div className="hidden lg:block h-10 w-px bg-gray-200 mx-2 shrink-0" />
 
-          {/* Desktop CTAs */}
+          {/* ── LARGE DESKTOP CTAs (1024px+) ── */}
           <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 shrink-0">
-            <a href="tel:+919303350002" title="Call: +91 93033 50002" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200">
+            <a href="tel:+919303350002" title="Call" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200">
               <Phone size={14} />
             </a>
             <a href="https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School." target="_blank" rel="noopener noreferrer" title="WhatsApp" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-green-600 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-200">
@@ -603,8 +603,18 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile: Language + Hamburger only (Apply moved to menu) */}
-          <div className="lg:hidden ml-auto flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* ── MEDIUM DESKTOP CTAs (900px–1023px): compact, right-aligned ── */}
+          <div className="hidden min-[900px]:flex lg:hidden items-center gap-1.5 ml-auto shrink-0">
+            <LanguageSwitcher />
+            <div className="w-px h-6 bg-gray-200" />
+            <LoginDropdown loginLabel={t.login} />
+            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] transition-all duration-300 rounded-full h-8 px-3 text-xs">
+              {t.applyNow}
+            </Button>
+          </div>
+
+          {/* ── MOBILE: Language + Hamburger ── */}
+          <div className="min-[900px]:hidden ml-auto flex items-center gap-1 sm:gap-1.5 shrink-0">
             <LanguageSwitcher />
             <button
               className="flex h-9 w-9 items-center justify-center rounded-md text-[#0F4C81] hover:bg-gray-100 transition-colors"
@@ -615,6 +625,22 @@ export function Header() {
             </button>
           </div>
         </div>
+
+        {/* ── Row 2: Nav bar – only on medium desktop (900px–1023px) ── */}
+        <div className="hidden min-[900px]:flex lg:hidden border-t border-gray-100 bg-white px-4 overflow-x-auto">
+          <nav className="flex items-center gap-x-1 py-2 w-full">
+            {navLinks.map((link) => (
+              <NavItem
+                key={link.href + link.label}
+                link={link}
+                isActive={isActive(link)}
+                menuConfig={menuConfig}
+                navLabelHref={navLabelHref}
+              />
+            ))}
+          </nav>
+        </div>
+
       </div>
 
       {/* Mobile Nav */}
@@ -625,7 +651,7 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b bg-white lg:hidden shadow-lg"
+            className="overflow-hidden border-b bg-white min-[900px]:hidden shadow-lg"
           >
             <nav className="flex flex-col px-4 py-3 max-h-[75vh] overflow-y-auto">
               {navLinks.map((link) => {

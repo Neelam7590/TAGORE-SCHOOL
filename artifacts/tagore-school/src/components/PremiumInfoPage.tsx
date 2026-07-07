@@ -117,7 +117,7 @@ export default function PremiumInfoPage({
                       {section.title}
                     </h2>
                     <div className="overflow-x-auto rounded-2xl border border-[#0F4C81]/10 shadow-lg -mx-1">
-                      <table className="w-full min-w-[420px]">
+                      <table className="w-full min-w-[280px]">
                         <tbody>
                           {section.items.map((row, j) => (
                             <tr key={j} className={j % 2 === 0 ? "bg-white" : "bg-[#0F4C81]/3"}>
