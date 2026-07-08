@@ -1,3 +1,4 @@
 - [Navigation mega menu](nav-mega-menu.md) — menuConfig object in Header.tsx drives all dropdowns; mega=true items use MegaDropdown (w-80), others use SimpleDropdown.
 - [Sub-page template](sub-page-template.md) — PremiumInfoPage.tsx at src/components/PremiumInfoPage.tsx handles text/list/cards/table section types for all info pages.
 - [Home color flow](home-color-flow.md) — 11-section alternating color system; S1 Royal Blue, S2 White, S3 Light Blue, S4 Royal Blue, S5 Gold Tint, S6 White, S7 Light Blue, S8 Royal Blue, S9 White, S10 Light Blue, S11 Royal Blue CTA.
+- [Nav item height parity bug](nav-item-height-parity.md) — items without a trailing icon can silently render shorter than sibling items with one; use invisible placeholder icons to force identical height.
