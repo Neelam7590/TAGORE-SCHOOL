@@ -457,7 +457,7 @@ export function Header() {
             </span>
             <span className="hidden sm:inline text-white/30">|</span>
             <div className="flex items-center gap-2">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#E1306C] text-white transition-all duration-200 hover:scale-110">
+              <a href="https://www.instagram.com/tgskkr18/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#E1306C] text-white transition-all duration-200 hover:scale-110">
                 <InstagramIcon size={12} />
               </a>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000] text-white transition-all duration-200 hover:scale-110">
@@ -466,7 +466,7 @@ export function Header() {
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-black text-white transition-all duration-200 hover:scale-110">
                 <TwitterIcon size={12} />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#1877F2] text-white transition-all duration-200 hover:scale-110">
+              <a href="https://www.facebook.com/tgskkr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#1877F2] text-white transition-all duration-200 hover:scale-110">
                 <FacebookIcon size={12} />
               </a>
             </div>

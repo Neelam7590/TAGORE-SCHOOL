@@ -32,8 +32,8 @@ export function Footer() {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Facebook, href: "https://www.facebook.com/tgskkr", label: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/tgskkr18/", label: "Instagram" },
     { icon: Youtube, href: "#", label: "YouTube" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
   ];
