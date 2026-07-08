@@ -36,7 +36,9 @@ Key Facts:
 Instructions:
 - Answer concisely and helpfully about school admissions, fees, academics, facilities, timings, transport, etc.
 - Use a warm, professional, and friendly tone.
-- If someone asks in Hindi or uses Hindi words, respond in Hindi (Hinglish is fine).
+- If someone asks in Hindi or uses Hindi words, respond in natural, everyday Hinglish (mix Hindi and English the way real Indian parents speak) — write Hindi words in Roman/Latin script, not Devanagari.
+- In Hinglish replies, keep words that simply sound more natural in English in English — e.g. "admission", "school", "fees", "class", "timings", "campus", "form", "documents", "transport", "facilities" — don't force-translate these into Hindi.
+- Do not overdo Hindi grammar; keep sentences short, warm, and conversational, like a friendly school staff member texting a parent.
 - For specific fee amounts, direct them to call +91 93033 50002 or visit the school.
 - Keep responses focused and under 200 words unless more detail is needed.
 - Always mention the phone number +91 93033 50002 for urgent queries.`;
@@ -358,7 +360,7 @@ router.post("/chat", async (req, res) => {
   if (openai) {
     try {
       const langNote = language === "hi"
-        ? " The user prefers Hindi — respond in Hindi (Hinglish is fine)."
+        ? " The user prefers Hindi — respond in natural spoken Hinglish (Roman script), mixing Hindi and English the way real Indian parents speak, keeping words like admission/school/fees/class/timings/campus in English."
         : " The user prefers English.";
 
       const safeHistory = (history ?? [])
@@ -389,6 +391,69 @@ router.post("/chat", async (req, res) => {
 
   const fallback = patternReply || `Shukriya aapke sawaal ke liye! 🙏\n\nSeedha humse baat karein:\n📞 **+91 93033 50002**\n📧 info@tagoreglobalschool.in\n\n🕐 Office Hours: Mon–Sat, 9 AM – 3 PM`;
   res.json({ reply: fallback });
+});
+
+/* ── Text-to-Speech (Cartesia) ────────────────────────────────────────────── */
+const CARTESIA_API_KEY = process.env["CARTESIA_API_KEY"];
+const CARTESIA_VOICE_ID = process.env["CARTESIA_VOICE_ID"];
+
+// Strip markdown/emoji so TTS doesn't read out symbols like "**", "•", "📞"
+function cleanForSpeech(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/[*_`#>~]/g, "")
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "")
+    .replace(/^[•\-]\s*/gm, "")
+    .replace(/\n{2,}/g, ". ")
+    .replace(/\n/g, ". ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+router.post("/tts", async (req, res) => {
+  const { text, language } = req.body as { text?: string; language?: string };
+
+  if (!text?.trim()) {
+    res.status(400).json({ error: "Text is required." });
+    return;
+  }
+  if (!CARTESIA_API_KEY || !CARTESIA_VOICE_ID) {
+    res.status(503).json({ error: "TTS is not configured." });
+    return;
+  }
+
+  try {
+    const response = await fetch("https://api.cartesia.ai/tts/bytes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": CARTESIA_API_KEY,
+        "Cartesia-Version": "2024-06-10",
+      },
+      body: JSON.stringify({
+        model_id: "sonic-turbo",
+        transcript: cleanForSpeech(text).slice(0, 1000),
+        voice: { mode: "id", id: CARTESIA_VOICE_ID },
+        output_format: { container: "mp3", bit_rate: 128000, sample_rate: 44100 },
+        language: language === "hi" ? "hi" : "en",
+      }),
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      req.log.error({ status: response.status, errText }, "Cartesia TTS request failed");
+      res.status(502).json({ error: "TTS generation failed." });
+      return;
+    }
+
+    const audioBuffer = Buffer.from(await response.arrayBuffer());
+    res.setHeader("Content-Type", "audio/mpeg");
+    res.setHeader("Cache-Control", "no-store");
+    res.send(audioBuffer);
+  } catch (err) {
+    req.log.error({ err }, "Cartesia TTS error");
+    res.status(500).json({ error: "TTS generation failed." });
+  }
 });
 
 export default router;

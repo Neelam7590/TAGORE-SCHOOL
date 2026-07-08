@@ -11,32 +11,56 @@ type Message = { from: "bot" | "user"; text: string };
 
 function useTTS(lang: "en" | "hi") {
   const [ttsOn, setTtsOn] = useState(true);
-  const utterRef = useRef<SpeechSynthesisUtterance | null>(null);
-
-  const speak = useCallback((text: string) => {
-    if (!ttsOn || !window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    // Set language for TTS
-    utter.lang = lang === "hi" ? "hi-IN" : "en-IN";
-    utter.rate = 0.92;
-    utter.pitch = 1.05;
-
-    // Try to find a male voice for the selected language
-    const voices = window.speechSynthesis.getVoices();
-    const langCode = lang === "hi" ? "hi" : "en";
-    const maleVoice = voices.find(
-      (v) => v.lang.startsWith(langCode) && /male|man|guy/i.test(v.name)
-    ) || voices.find((v) => v.lang.startsWith(langCode));
-    if (maleVoice) utter.voice = maleVoice;
-
-    utterRef.current = utter;
-    window.speechSynthesis.speak(utter);
-  }, [ttsOn, lang]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const requestIdRef = useRef(0);
 
   const stop = useCallback(() => {
+    requestIdRef.current += 1;
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = "";
+      audioRef.current = null;
+    }
     window.speechSynthesis?.cancel();
   }, []);
+
+  const speak = useCallback((text: string) => {
+    if (!ttsOn || !text?.trim()) return;
+    const myId = ++requestIdRef.current;
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+
+    fetch(`${BASE}/api/tts`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, language: lang }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("tts_failed");
+        return res.blob();
+      })
+      .then((blob) => {
+        if (myId !== requestIdRef.current) return; // superseded by a newer message
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audioRef.current = audio;
+        audio.play().catch(() => {});
+        audio.onended = () => URL.revokeObjectURL(url);
+      })
+      .catch(() => {
+        // Fallback to browser's built-in speech synthesis if Cartesia TTS is unavailable
+        if (myId !== requestIdRef.current || !window.speechSynthesis) return;
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = lang === "hi" ? "hi-IN" : "en-IN";
+        utter.rate = 0.92;
+        utter.pitch = 1.05;
+        window.speechSynthesis.speak(utter);
+      });
+  }, [ttsOn, lang]);
 
   return { ttsOn, setTtsOn, speak, stop };
 }
