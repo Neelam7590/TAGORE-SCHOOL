@@ -74,4 +74,4 @@ channel = "stable-25_05"
 [userenv]
 
 [userenv.shared]
-CARTESIA_VOICE_ID = "393dd459-f8d8-4c3e-a86b-ec43a1113d0b"
+CARTESIA_VOICE_ID = "791d5162-d5eb-40f0-8189-f19db44611d8"
