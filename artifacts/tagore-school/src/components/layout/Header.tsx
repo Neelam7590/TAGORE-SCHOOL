@@ -387,7 +387,7 @@ function LoginDropdown({ loginLabel }: { loginLabel: string }) {
   );
 }
 
-function LanguageSwitcher() {
+function LanguageSwitcher({ variant = "light" }: { variant?: "light" | "dark" }) {
   const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -409,10 +409,14 @@ function LanguageSwitcher() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 h-9 px-3 rounded-lg border border-gray-200 text-gray-700 hover:border-[#0F4C81] hover:text-[#0F4C81] transition-all duration-200 text-xs font-semibold bg-white"
+        className={
+          variant === "dark"
+            ? "flex items-center gap-1.5 h-6 px-2.5 rounded-full border border-white/20 text-white hover:bg-white/10 transition-all duration-200 text-xs font-semibold bg-white/5"
+            : "flex items-center gap-1.5 h-9 px-3 rounded-lg border border-gray-200 text-gray-700 hover:border-[#0F4C81] hover:text-[#0F4C81] transition-all duration-200 text-xs font-semibold bg-white"
+        }
         aria-label="Switch language"
       >
-        <Globe size={13} className="text-[#0F4C81]" />
+        <Globe size={12} className={variant === "dark" ? "text-[#FFD700]" : "text-[#0F4C81]"} />
         <span>{lang === "en" ? "EN" : "हिं"}</span>
         <ChevronDown size={11} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
@@ -524,7 +528,7 @@ export function Header() {
             </a>
           </div>
 
-          {/* Right: Affiliation + Social Media */}
+          {/* Right: Affiliation + Language + Social Media */}
           <div className="flex items-center gap-3 shrink-0">
             <span className="font-semibold tracking-wide text-[#FFD700] text-xs hidden sm:inline">
               Affiliation No. 531905
@@ -546,6 +550,10 @@ export function Header() {
               <a href="https://wa.me/919303350002" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 hover:bg-[#25D366] text-white transition-all duration-200 hover:scale-110">
                 <WhatsAppIcon size={12} />
               </a>
+            </div>
+            <span className="hidden sm:inline text-white/30">|</span>
+            <div className="hidden sm:block">
+              <LanguageSwitcher variant="dark" />
             </div>
           </div>
         </div>
@@ -569,8 +577,8 @@ export function Header() {
           </Link>
 
           {/* ── LARGE DESKTOP (1024px+): inline nav between logo and CTAs ── */}
-          <div className="hidden lg:block h-10 w-px bg-gray-200 mx-3 shrink-0" />
-          <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-2 xl:gap-x-4 px-1">
+          <div className="hidden lg:block h-9 w-px bg-gray-200 mx-5 shrink-0" />
+          <nav className="hidden lg:flex items-center justify-center flex-1 gap-x-3 xl:gap-x-5 px-1">
             {navLinks.map((link) => (
               <NavItem
                 key={link.href + link.label}
@@ -581,41 +589,26 @@ export function Header() {
               />
             ))}
           </nav>
-          <div className="hidden lg:block h-10 w-px bg-gray-200 mx-2 shrink-0" />
+          <div className="hidden lg:block h-9 w-px bg-gray-200 mx-5 shrink-0" />
 
           {/* ── LARGE DESKTOP CTAs (1024px+) ── */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 shrink-0">
-            <a href="tel:+919303350002" title="Call" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white hover:border-[#0F4C81] transition-all duration-200">
-              <Phone size={14} />
-            </a>
-            <a href="https://wa.me/919303350002?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20Tagore%20Global%20School." target="_blank" rel="noopener noreferrer" title="WhatsApp" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-green-600 hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-200">
-              <WhatsAppIcon size={14} />
-            </a>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@tagoreglobalschool.in" target="_blank" rel="noopener noreferrer" title="Email" className="flex items-center justify-center h-9 w-9 rounded-lg border border-gray-200 text-[#EA4335] hover:bg-[#EA4335] hover:text-white hover:border-[#EA4335] transition-all duration-200">
-              <Mail size={14} />
-            </a>
-            <div className="w-px h-6 bg-gray-200 mx-0.5" />
-            <LanguageSwitcher />
-            <div className="w-px h-6 bg-gray-200 mx-0.5" />
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
             <LoginDropdown loginLabel={t.login} />
-            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-4 text-xs">
+            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-5 text-xs">
               {t.applyNow}
             </Button>
           </div>
 
           {/* ── MEDIUM DESKTOP CTAs (900px–1023px): compact, right-aligned ── */}
-          <div className="hidden min-[900px]:flex lg:hidden items-center gap-1.5 ml-auto shrink-0">
-            <LanguageSwitcher />
-            <div className="w-px h-6 bg-gray-200" />
+          <div className="hidden min-[900px]:flex lg:hidden items-center gap-2.5 ml-auto shrink-0">
             <LoginDropdown loginLabel={t.login} />
-            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] transition-all duration-300 rounded-full h-8 px-3 text-xs">
+            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] transition-all duration-300 rounded-full h-8 px-4 text-xs">
               {t.applyNow}
             </Button>
           </div>
 
-          {/* ── MOBILE: Language + Hamburger ── */}
-          <div className="min-[900px]:hidden ml-auto flex items-center gap-1 sm:gap-1.5 shrink-0">
-            <LanguageSwitcher />
+          {/* ── MOBILE: Hamburger ── */}
+          <div className="min-[900px]:hidden ml-auto flex items-center shrink-0">
             <button
               className="flex h-9 w-9 items-center justify-center rounded-md text-[#0F4C81] hover:bg-gray-100 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -628,7 +621,7 @@ export function Header() {
 
         {/* ── Row 2: Nav bar – only on medium desktop (900px–1023px) ── */}
         <div className="hidden min-[900px]:flex lg:hidden border-t border-gray-100 bg-white px-4 overflow-x-auto">
-          <nav className="flex items-center gap-x-1 py-2 w-full">
+          <nav className="flex items-center gap-x-2 py-2 w-full">
             {navLinks.map((link) => (
               <NavItem
                 key={link.href + link.label}
