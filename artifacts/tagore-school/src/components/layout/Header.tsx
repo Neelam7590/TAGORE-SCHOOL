@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown, LogIn } from "lucide-react";
+import { Phone, Mail, Menu, X, ChevronDown, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdmissionModal } from "@/context/AdmissionModalContext";
@@ -435,8 +435,22 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full flex flex-col bg-white">
       {/* Top Bar */}
       <div className="bg-[#0F4C81] px-3 sm:px-4 py-1.5 text-xs font-medium text-white md:px-6">
-        <div className="flex items-center justify-end gap-2">
-          {/* Affiliation + Social Media */}
+        <div className="flex items-center justify-between gap-2">
+          {/* Left: Phone + Email */}
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+            <a href="tel:+919303350002" className="flex items-center gap-1.5 hover:text-[#FFD700] transition-colors shrink-0">
+              <Phone size={11} className="text-[#FFD700]" />
+              <span className="hidden xs:inline">+91 93033 50002</span>
+              <span className="xs:hidden">Call</span>
+            </a>
+            <span className="hidden sm:inline text-white/30">|</span>
+            <a href="mailto:info@tagoreglobalschool.in" className="hidden md:flex items-center gap-1.5 hover:text-[#FFD700] transition-colors min-w-0">
+              <Mail size={11} className="text-[#FFD700] shrink-0" />
+              <span className="truncate">info@tagoreglobalschool.in</span>
+            </a>
+          </div>
+
+          {/* Right: Affiliation + Social Media */}
           <div className="flex items-center gap-3 shrink-0">
             <span className="font-semibold tracking-wide text-[#FFD700] text-xs hidden sm:inline">
               Affiliation No. 531905
