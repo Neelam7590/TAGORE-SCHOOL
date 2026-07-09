@@ -505,7 +505,7 @@ export function Header() {
           <div className="hidden min-[900px]:block h-8 w-px bg-gray-200 mx-3 xl:mx-4 shrink-0" />
 
           {/* Nav items inline (900px+) */}
-          <nav className="hidden min-[900px]:flex flex-nowrap items-center flex-1 gap-x-1.5 xl:gap-x-3 px-0 min-w-0 overflow-hidden">
+          <nav className="hidden min-[900px]:flex flex-nowrap items-center flex-1 gap-x-1.5 xl:gap-x-3 px-0 min-w-0 overflow-visible">
             {navLinks.map((link) => (
               <NavItem
                 key={link.href + link.label}

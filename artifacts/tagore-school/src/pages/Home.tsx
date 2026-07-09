@@ -138,8 +138,8 @@ export default function Home() {
               </Button>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-xl">
-                <img src="/school-building2.jpg" alt="School Campus" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div className="h-[360px] md:h-[460px] w-full overflow-hidden rounded-2xl shadow-xl">
+                <img src="/school-building2.jpg" alt="School Campus" className="h-full w-full object-fill transition-transform duration-700 hover:scale-105" />
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-xl bg-[#0F4C81] p-6 shadow-xl hidden md:block">
                 <div className="flex items-center gap-4">
@@ -163,8 +163,8 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
               <div className="relative mx-auto max-w-md">
-                <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
-                  <img src="/principal2.png" alt="Principal Ms. Shalini Malhotra" className="h-full w-full object-cover" />
+                <div className="h-[460px] md:h-[540px] w-full overflow-hidden rounded-2xl shadow-2xl bg-white">
+                  <img src="/principal2.png" alt="Principal Ms. Shalini Malhotra" className="h-full w-full object-fill" />
                 </div>
                 <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#FFD700] px-6 py-3 shadow-lg">
                   <div className="text-center">
