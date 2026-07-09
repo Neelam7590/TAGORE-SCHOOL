@@ -480,15 +480,24 @@ export function Header() {
         <div className="flex h-[60px] sm:h-[68px] items-center px-3 sm:px-4 md:px-6">
 
           {/* Logo + Name */}
-          <Link href="/" className="flex items-center gap-2 group shrink-0 min-w-0">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0 min-w-0">
             <div className="relative shrink-0">
-              <img src="/logo.png" alt="TGS Logo" className="h-10 w-10 sm:h-11 sm:w-11 object-contain transition-transform group-hover:scale-105 drop-shadow-sm" />
+              <img
+                src="/logo.png"
+                alt="TGS Logo"
+                className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform group-hover:scale-105 drop-shadow-md"
+              />
             </div>
             <div className="min-w-0">
-              <span className="font-black tracking-tight text-[#0F4C81] whitespace-nowrap text-sm sm:text-base min-[900px]:text-[15px] block leading-tight">
+              <span
+                className="font-black tracking-tight text-[#0F4C81] whitespace-nowrap text-lg sm:text-xl min-[900px]:text-[15px] block leading-none"
+                style={{ textShadow: "0 1px 2px rgba(15,76,129,0.12)" }}
+              >
                 Tagore Global School
               </span>
-              <span className="text-[9px] sm:text-[10px] text-gray-500 font-semibold hidden sm:block leading-tight">CBSE · Affiliation 531905</span>
+              <span className="text-[10px] sm:text-xs text-gray-500 font-bold block leading-none mt-0.5">
+                CBSE · Affiliation 531905
+              </span>
             </div>
           </Link>
 
