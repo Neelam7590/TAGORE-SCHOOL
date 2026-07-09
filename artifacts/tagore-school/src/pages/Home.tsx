@@ -376,12 +376,12 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 auto-rows-[160px] sm:auto-rows-[200px]">
             {[
               { url: "/campus-life.jpg", title: "Campus Life", span: "col-span-2 row-span-2" },
-              { url: "https://picsum.photos/seed/sports/600/400", title: "Sports Activities", span: "col-span-1 row-span-1" },
-              { url: "https://picsum.photos/seed/cultural/600/400", title: "Cultural Events", span: "col-span-1 row-span-1" },
-              { url: "https://picsum.photos/seed/classroom/600/400", title: "Classroom Learning", span: "col-span-1 row-span-1" },
-              { url: "https://picsum.photos/seed/celebration/600/800", title: "Celebrations", span: "col-span-1 row-span-2" },
-              { url: "https://picsum.photos/seed/achieve/600/400", title: "Student Achievements", span: "col-span-2 row-span-1" },
-              { url: "https://picsum.photos/seed/tgsmoment/600/400", title: "School Events", span: "col-span-1 row-span-1" },
+              { url: "/sport_1.jpg", title: "Sports Activities", span: "col-span-1 row-span-1" },
+              { url: "/activity_1.jpg", title: "Cultural Events", span: "col-span-1 row-span-1" },
+              { url: "/smart_class.jpg", title: "Classroom Learning", span: "col-span-1 row-span-1" },
+              { url: "/activity_2.jpg", title: "Celebrations", span: "col-span-1 row-span-2" },
+              { url: "/sport_2.jpg", title: "Student Achievements", span: "col-span-2 row-span-1" },
+              { url: "/activity_3.jpg", title: "School Events", span: "col-span-1 row-span-1" },
             ].map((img, i) => (
               <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5 }} whileHover={{ scale: 1.02 }}
                 className={`group relative overflow-hidden rounded-xl cursor-pointer ${img.span}`}>

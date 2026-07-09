@@ -37,6 +37,7 @@ import EventsActivities from "@/pages/EventsActivities";
 import SportsGallery from "@/pages/SportsGallery";
 import CulturalPrograms from "@/pages/CulturalPrograms";
 import AnnualFunctions from "@/pages/AnnualFunctions";
+import DirectorMessage from "@/pages/DirectorMessage";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -56,6 +57,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/principal-message" component={PrincipalMessage} />
+        <Route path="/director-message" component={DirectorMessage} />
         <Route path="/academics" component={Academics} />
         <Route path="/facilities" component={Facilities} />
         <Route path="/gallery" component={Gallery} />

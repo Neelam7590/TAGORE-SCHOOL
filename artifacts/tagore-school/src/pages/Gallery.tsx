@@ -5,26 +5,35 @@ import { Link } from "wouter";
 
 const categories = ["All", "Campus", "Events", "Sports", "Celebrations", "Activities"];
 
-const generateImages = () => {
-  const images = [];
-  const cats = ["Campus", "Events", "Sports", "Celebrations", "Activities"];
-  for (let i = 1; i <= 24; i++) {
-    const category = cats[i % cats.length];
-    // Create varying aspect ratios for masonry look
-    const width = 800;
-    const height = i % 3 === 0 ? 1200 : i % 5 === 0 ? 600 : 800;
-    
-    images.push({
-      id: i,
-      url: `https://picsum.photos/seed/school-gal-${i}/${width}/${height}`,
-      category,
-      alt: `${category} photo ${i}`
-    });
-  }
-  return images;
-};
+// Real school photos — cycling through available assets
+const realPhotos = [
+  { src: "/sport_1.jpg",       category: "Sports",        alt: "Sports on campus" },
+  { src: "/activity_1.jpg",    category: "Events",        alt: "School activity" },
+  { src: "/campus-life.jpg",   category: "Campus",        alt: "Campus life" },
+  { src: "/activity_2.jpg",    category: "Celebrations",  alt: "School celebration" },
+  { src: "/lab_1.jpg",         category: "Activities",    alt: "Science lab" },
+  { src: "/sport_2.jpg",       category: "Sports",        alt: "Sports day" },
+  { src: "/com_lab_1.jpg",     category: "Campus",        alt: "Computer lab" },
+  { src: "/activity_3.jpg",    category: "Events",        alt: "School event" },
+  { src: "/school-building.jpg", category: "Campus",      alt: "School building" },
+  { src: "/sport_3.jpg",       category: "Sports",        alt: "Athletics" },
+  { src: "/lab_2.jpg",         category: "Activities",    alt: "Lab work" },
+  { src: "/smart_class.jpg",   category: "Campus",        alt: "Smart classroom" },
+  { src: "/com_lab_2.jpg",     category: "Activities",    alt: "Computer class" },
+  { src: "/school-building2.jpg", category: "Campus",     alt: "School campus" },
+  { src: "/lab_3.jpg",         category: "Activities",    alt: "Lab experiment" },
+  { src: "/activity_1.jpg",    category: "Celebrations",  alt: "Annual function" },
+  { src: "/sport_1.jpg",       category: "Events",        alt: "Sports meet" },
+  { src: "/com_lab_3.jpg",     category: "Activities",    alt: "Digital learning" },
+  { src: "/activity_2.jpg",    category: "Sports",        alt: "Outdoor activity" },
+  { src: "/kindergarten2.png", category: "Events",        alt: "Kindergarten" },
+  { src: "/activity_3.jpg",    category: "Campus",        alt: "Campus activity" },
+  { src: "/lab_1.jpg",         category: "Sports",        alt: "Science sports" },
+  { src: "/smart_class.jpg",   category: "Events",        alt: "Classroom" },
+  { src: "/sport_2.jpg",       category: "Celebrations",  alt: "Prize distribution" },
+];
 
-const allImages = generateImages();
+const allImages = realPhotos.map((p, i) => ({ id: i + 1, url: p.src, category: p.category, alt: p.alt }));
 
 export default function Gallery() {
   const [activeTab, setActiveTab] = useState("All");

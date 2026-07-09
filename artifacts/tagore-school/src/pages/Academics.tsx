@@ -185,7 +185,7 @@ export default function Academics() {
                 { val: "98%", label: "Board Results", icon: Trophy },
                 { val: "50+", label: "Olympiad Medals", icon: Medal },
                 { val: "200+", label: "Competitions Won", icon: Star },
-                { val: "1000+", label: "Students Strong", icon: Users },
+                { val: "5000+", label: "Students Strong", icon: Users },
               ].map((s, i) => (
                 <motion.div key={i} whileHover={{ scale: 1.05, y: -4 }} className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-white/15 text-center cursor-default">
                   <s.icon size={22} className="text-[#FFD700] mx-auto mb-2" />

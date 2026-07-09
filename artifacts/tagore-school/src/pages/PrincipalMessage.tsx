@@ -35,9 +35,9 @@ export default function PrincipalMessage() {
             <motion.div variants={fadeUp} className="flex flex-col items-center text-center">
               <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-secondary shadow-xl mb-6">
                 <img 
-                  src="https://picsum.photos/seed/principal/400/400" 
+                  src="/principal2.png" 
                   alt="Ms. Shalini Malhotra, Principal" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               <h3 className="font-serif text-2xl font-bold text-primary">Ms. Shalini Malhotra</h3>
@@ -66,9 +66,14 @@ export default function PrincipalMessage() {
                 As you navigate through our website, I hope you gain a sense of the vibrant and dynamic environment that makes Tagore Global School special. I look forward to welcoming you to our campus and working together to shape the bright futures of our students.
               </p>
 
-              <div className="pt-8">
-                <img src="https://picsum.photos/seed/signature/200/80" alt="Signature" className="h-16 opacity-80 mix-blend-multiply" />
-                <p className="mt-2 font-bold text-primary">Ms. Shalini Malhotra</p>
+              <div className="pt-8 flex items-center gap-4">
+                <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-secondary shadow">
+                  <img src="/principal2.png" alt="Ms. Shalini Malhotra" className="w-full h-full object-cover object-top" />
+                </div>
+                <div>
+                  <p className="font-bold text-primary">Ms. Shalini Malhotra</p>
+                  <p className="text-sm text-gray-500">Principal, Tagore Global School</p>
+                </div>
               </div>
             </motion.div>
 

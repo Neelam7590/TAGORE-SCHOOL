@@ -249,7 +249,7 @@ export default function Kindergarten() {
             <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative">
               <div className="relative">
                 <div className="aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] border border-white/20">
-                  <img src="https://picsum.photos/seed/kghero/900/675" alt="Happy kindergarten children learning" className="w-full h-full object-cover" />
+                  <img src="/kindergarten2.png" alt="Tagore Global School Kindergarten" className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0F4C81]/30 to-transparent" />
                 </div>
                 {/* floating badge top-right */}

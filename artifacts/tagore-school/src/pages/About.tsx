@@ -60,7 +60,7 @@ const coreValues = [
 ];
 
 const strengths = [
-  { end: 1000, suffix: "+", label: "Students", icon: Users },
+  { end: 5000, suffix: "+", label: "Students", icon: Users },
   { end: 50, suffix: "+", label: "Educators", icon: GraduationCap },
   { end: 25, suffix: "+", label: "Classrooms", icon: School },
   { end: 100, suffix: "%", label: "Commitment", icon: Trophy },
@@ -119,7 +119,7 @@ export default function About() {
                 </Button>
               </div>
               <div className="mt-8 sm:mt-10 flex flex-wrap gap-6 sm:gap-8">
-                {[{ val: "25+", label: "Years of Excellence" }, { val: "CBSE", label: "Affiliated" }, { val: "1000+", label: "Students" }].map((s, i) => (
+                {[{ val: "25+", label: "Years of Excellence" }, { val: "CBSE", label: "Affiliated" }, { val: "5000+", label: "Students" }].map((s, i) => (
                   <div key={i} className="text-center">
                     <div className="text-2xl font-bold text-[#FFD700]">{s.val}</div>
                     <div className="text-xs text-blue-200 mt-1">{s.label}</div>

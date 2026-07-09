@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { useAdmissionModal } from "@/context/AdmissionModalContext";
 
 const stories = [
-  { name: "Ananya Sharma", batch: "Class XII 2024", achievement: "IIT-JEE Advanced AIR 342 | Now studying Computer Science at IIT Bombay", emoji: "💡", img: "https://picsum.photos/seed/ananya/200/200", quote: "TGS gave me the foundation, discipline, and confidence to achieve my dream. The faculty's dedication and extra classes made all the difference." },
-  { name: "Rahul Verma", batch: "Class XII 2023", achievement: "NEET AIR 512 | Pursuing MBBS at AIIMS New Delhi", emoji: "🏥", img: "https://picsum.photos/seed/rahul/200/200", quote: "The science labs and the biology faculty at TGS were truly exceptional. I couldn't have cracked NEET without the rigorous preparation here." },
-  { name: "Priya Gupta", batch: "Class XII 2024", achievement: "National Science Olympiad Gold Medalist | Stanford University Scholarship", emoji: "🌍", img: "https://picsum.photos/seed/priya/200/200", quote: "TGS nurtured my love for science and research. The opportunities and the teachers here were world-class." },
-  { name: "Arjun Mehta", batch: "Class X 2022", achievement: "CBSE All-India Topper in Mathematics | Currently pursuing IIT preparation", emoji: "🔢", img: "https://picsum.photos/seed/arjun/200/200", quote: "The mathematics faculty at TGS pushed me beyond my limits. Scoring 100/100 in boards was a dream come true." },
-  { name: "Sneha Agarwal", batch: "Class XII 2023", achievement: "National Debate Champion | Law student at National Law School Bangalore", emoji: "🎤", img: "https://picsum.photos/seed/sneha/200/200", quote: "The debate club and communication skills programme at TGS shaped my future. I owe my success to TGS." },
-  { name: "Karan Singh", batch: "Class X 2024", achievement: "State Athletics Champion | Selected for National Youth Athletics Team", emoji: "🏃", img: "https://picsum.photos/seed/karan/200/200", quote: "TGS believed in my sporting talent and gave me every opportunity to train and compete at the highest level." },
+  { name: "Ananya Sharma", batch: "Class XII 2024", achievement: "IIT-JEE Advanced AIR 342 | Now studying Computer Science at IIT Bombay", emoji: "💡", color: "#0F4C81", quote: "TGS gave me the foundation, discipline, and confidence to achieve my dream. The faculty's dedication and extra classes made all the difference." },
+  { name: "Rahul Verma", batch: "Class XII 2023", achievement: "NEET AIR 512 | Pursuing MBBS at AIIMS New Delhi", emoji: "🏥", color: "#1a6bb5", quote: "The science labs and the biology faculty at TGS were truly exceptional. I couldn't have cracked NEET without the rigorous preparation here." },
+  { name: "Priya Gupta", batch: "Class XII 2024", achievement: "National Science Olympiad Gold Medalist | Stanford University Scholarship", emoji: "🌍", color: "#0F4C81", quote: "TGS nurtured my love for science and research. The opportunities and the teachers here were world-class." },
+  { name: "Arjun Mehta", batch: "Class X 2022", achievement: "CBSE All-India Topper in Mathematics | Currently pursuing IIT preparation", emoji: "🔢", color: "#1a6bb5", quote: "The mathematics faculty at TGS pushed me beyond my limits. Scoring 100/100 in boards was a dream come true." },
+  { name: "Sneha Agarwal", batch: "Class XII 2023", achievement: "National Debate Champion | Law student at National Law School Bangalore", emoji: "🎤", color: "#0F4C81", quote: "The debate club and communication skills programme at TGS shaped my future. I owe my success to TGS." },
+  { name: "Karan Singh", batch: "Class X 2024", achievement: "State Athletics Champion | Selected for National Youth Athletics Team", emoji: "🏃", color: "#1a6bb5", quote: "TGS believed in my sporting talent and gave me every opportunity to train and compete at the highest level." },
 ];
 
 export default function StudentSuccessStories() {
@@ -44,8 +44,11 @@ export default function StudentSuccessStories() {
                 className="group bg-white border border-[#0F4C81]/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:border-[#FFD700]/40 transition-all duration-300 flex flex-col">
                 <div className="flex items-center gap-4 mb-5">
                   <div className="relative">
-                    <img src={s.img} alt={s.name} className="w-16 h-16 rounded-full object-cover border-2 border-[#FFD700]" />
-                    <div className="absolute -bottom-1 -right-1 text-xl">{s.emoji}</div>
+                    <div className="w-16 h-16 rounded-full border-2 border-[#FFD700] flex items-center justify-center text-white text-2xl font-bold shrink-0"
+                      style={{ background: s.color }}>
+                      {s.name.charAt(0)}
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 text-xl leading-none">{s.emoji}</div>
                   </div>
                   <div>
                     <h3 className="font-serif font-bold text-[#0F4C81]">{s.name}</h3>

@@ -231,6 +231,7 @@ function NavItem({ link, isActive, menuConfig, navLabelHref }: {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [, navigate] = useLocation();
   const config = menuConfig[link.label];
   const hasDropdown = !!config;
 
@@ -274,18 +275,20 @@ function NavItem({ link, isActive, menuConfig, navLabelHref }: {
 
   return (
     <div ref={ref} className="relative flex items-center h-9 box-border" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Link
-        href={labelHref}
-        onClick={() => setOpen(false)}
-        className={`relative flex items-center h-full text-xs font-bold transition-colors hover:text-[#0F4C81] whitespace-nowrap leading-none ${isActive ? "text-[#0F4C81]" : "text-gray-700"}`}
+      {/* Single-click: toggle dropdown. Double-click: navigate to full page. */}
+      <button
+        onClick={() => setOpen((o) => !o)}
+        onDoubleClick={() => { setOpen(false); navigate(labelHref); }}
+        title={`Click to expand · Double-click to open ${link.label}`}
+        className={`relative flex items-center h-full text-xs font-bold transition-colors hover:text-[#0F4C81] whitespace-nowrap leading-none select-none ${isActive ? "text-[#0F4C81]" : "text-gray-700"}`}
       >
         {link.label}
         {isActive && (
           <motion.div layoutId="navbar-indicator" className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#FFD700]" transition={{ type: "spring", stiffness: 300, damping: 30 }} />
         )}
-      </Link>
+      </button>
       <button
-        onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
+        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
         aria-label={`Open ${link.label} menu`}
         className={`ml-0.5 flex items-center justify-center p-0.5 rounded transition-colors hover:text-[#0F4C81] ${open ? "text-[#0F4C81]" : "text-gray-400"}`}
       >
