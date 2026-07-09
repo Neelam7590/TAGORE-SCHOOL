@@ -29,24 +29,22 @@ name = "Tagore School"
 author = "agent"
 
 [workflows.workflow.metadata]
-outputType = "webview"
+outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PORT=22306 BASE_PATH=/ pnpm --filter @workspace/tagore-school run dev"
-waitForPort = 22306
+args = "echo 'Frontend is served by artifacts/tagore-school workflow'"
 
 [[workflows.workflow]]
 name = "API Server"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "PORT=8080 OPENAI_API_KEY=$OPENAI_API_KEY pnpm --filter @workspace/api-server run start"
-waitForPort = 8080
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo 'API is served by artifacts/api-server workflow'"
 
 [agent]
 stack = "PNPM_WORKSPACE"
