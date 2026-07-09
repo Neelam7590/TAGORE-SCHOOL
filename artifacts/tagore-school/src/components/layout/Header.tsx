@@ -440,8 +440,7 @@ export function Header() {
           <div className="flex items-center gap-3 sm:gap-4 min-w-0">
             <a href="tel:+919303350002" className="flex items-center gap-1.5 hover:text-[#FFD700] transition-colors shrink-0">
               <Phone size={11} className="text-[#FFD700]" />
-              <span className="hidden xs:inline">+91 93033 50002</span>
-              <span className="xs:hidden">Call</span>
+              <span>+91 93033 50002</span>
             </a>
             <span className="hidden sm:inline text-white/30">|</span>
             <a href="mailto:info@tagoreglobalschool.in" className="hidden md:flex items-center gap-1.5 hover:text-[#FFD700] transition-colors min-w-0">
@@ -481,19 +480,23 @@ export function Header() {
         <div className="flex h-[60px] sm:h-[68px] items-center px-3 sm:px-4 md:px-6">
 
           {/* Logo + Name */}
-          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group shrink-0 min-w-0">
-            <img src="/logo.png" alt="TGS Logo" className="h-8 w-8 sm:h-10 sm:w-10 object-contain transition-transform group-hover:scale-105 shrink-0" />
+          <Link href="/" className="flex items-center gap-2 group shrink-0 min-w-0">
+            <div className="relative shrink-0">
+              <img src="/logo.png" alt="TGS Logo" className="h-10 w-10 sm:h-11 sm:w-11 object-contain transition-transform group-hover:scale-105 drop-shadow-sm" />
+            </div>
             <div className="min-w-0">
-              <span className="font-serif font-bold tracking-tight text-[#0F4C81] whitespace-nowrap text-[11px] xs:text-sm sm:text-base md:text-lg block leading-tight">
+              <span className="font-black tracking-tight text-[#0F4C81] whitespace-nowrap text-sm sm:text-base min-[900px]:text-[15px] block leading-tight">
                 Tagore Global School
               </span>
-              <span className="text-[9px] xs:text-[10px] text-gray-400 font-medium hidden xs:block leading-tight">CBSE · Affiliation 531905</span>
+              <span className="text-[9px] sm:text-[10px] text-gray-500 font-semibold hidden sm:block leading-tight">CBSE · Affiliation 531905</span>
             </div>
           </Link>
 
-          {/* ── LARGE DESKTOP (1024px+): inline nav between logo and CTAs ── */}
-          <div className="hidden lg:block h-9 w-px bg-gray-200 mx-5 shrink-0" />
-          <nav className="hidden lg:flex flex-nowrap items-center justify-center flex-1 gap-x-3 xl:gap-x-5 px-1 min-w-0">
+          {/* Divider: logo → nav (900px+) */}
+          <div className="hidden min-[900px]:block h-8 w-px bg-gray-200 mx-3 xl:mx-4 shrink-0" />
+
+          {/* Nav items inline (900px+) */}
+          <nav className="hidden min-[900px]:flex flex-nowrap items-center flex-1 gap-x-1.5 xl:gap-x-3 px-0 min-w-0 overflow-hidden">
             {navLinks.map((link) => (
               <NavItem
                 key={link.href + link.label}
@@ -504,20 +507,14 @@ export function Header() {
               />
             ))}
           </nav>
-          <div className="hidden lg:block h-9 w-px bg-gray-200 mx-5 shrink-0" />
 
-          {/* ── LARGE DESKTOP CTAs (1024px+) ── */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <LoginDropdown loginLabel={t.login} />
-            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-5 text-xs">
-              {t.applyNow}
-            </Button>
-          </div>
+          {/* Divider: nav → CTAs (900px+) */}
+          <div className="hidden min-[900px]:block h-8 w-px bg-gray-200 mx-3 xl:mx-4 shrink-0" />
 
-          {/* ── MEDIUM DESKTOP CTAs (900px–1023px): compact, right-aligned ── */}
-          <div className="hidden min-[900px]:flex lg:hidden items-center gap-2.5 ml-auto shrink-0">
+          {/* CTAs (900px+) */}
+          <div className="hidden min-[900px]:flex items-center gap-2 shrink-0">
             <LoginDropdown loginLabel={t.login} />
-            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] transition-all duration-300 rounded-full h-8 px-4 text-xs">
+            <Button size="sm" onClick={openModal} className="bg-[#FFD700] text-[#0F4C81] font-bold hover:bg-[#FFC107] hover:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all duration-300 rounded-full h-9 px-4 xl:px-5 text-xs">
               {t.applyNow}
             </Button>
           </div>
@@ -534,20 +531,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* ── Row 2: Nav bar – only on medium desktop (900px–1023px) ── */}
-        <div className="hidden min-[900px]:flex lg:hidden border-t border-gray-100 bg-white px-4 overflow-x-auto">
-          <nav className="flex items-center gap-x-2 py-2 w-full">
-            {navLinks.map((link) => (
-              <NavItem
-                key={link.href + link.label}
-                link={link}
-                isActive={isActive(link)}
-                menuConfig={menuConfig}
-                navLabelHref={navLabelHref}
-              />
-            ))}
-          </nav>
-        </div>
 
       </div>
 
