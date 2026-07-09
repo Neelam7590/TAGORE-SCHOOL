@@ -1,4 +1,4 @@
-import "dotenv/config";
+// env loaded via node --env-file flag in package.json start script
 import app from "./app";
 import { logger } from "./lib/logger";
 

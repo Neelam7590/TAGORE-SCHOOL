@@ -11,11 +11,20 @@ type Message = { from: "bot" | "user"; text: string };
 
 function useTTS(lang: "en" | "hi") {
   const [ttsOn, setTtsOn] = useState(true);
+  const [ttsLoading, setTtsLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const requestIdRef = useRef(0);
+  // Pending reveal callback — called by stop() so message is never lost
+  const pendingRevealRef = useRef<(() => void) | null>(null);
 
   const stop = useCallback(() => {
     requestIdRef.current += 1;
+    setTtsLoading(false);
+    // Flush any pending reveal so the queued message still appears
+    if (pendingRevealRef.current) {
+      pendingRevealRef.current();
+      pendingRevealRef.current = null;
+    }
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = "";
@@ -24,9 +33,29 @@ function useTTS(lang: "en" | "hi") {
     window.speechSynthesis?.cancel();
   }, []);
 
-  const speak = useCallback((text: string) => {
-    if (!ttsOn || !text?.trim()) return;
+  /**
+   * speak(text, onReady?)
+   *  - If onReady is provided: text is NOT yet visible; onReady() is called right
+   *    before audio starts so both appear at the same time (voice-sync mode).
+   *  - If onReady is omitted: behaves like before — just plays audio for text
+   *    that is already on screen (e.g. the greeting).
+   *  - If ttsOn is false: calls onReady() immediately so text is revealed instantly.
+   */
+  const speak = useCallback((text: string, onReady?: () => void) => {
+    if (!text?.trim()) { onReady?.(); return; }
+
+    if (!ttsOn) {
+      // TTS is off — reveal text immediately, no audio
+      onReady?.();
+      return;
+    }
+
     const myId = ++requestIdRef.current;
+
+    if (onReady) {
+      setTtsLoading(true);
+      pendingRevealRef.current = onReady;
+    }
 
     if (audioRef.current) {
       audioRef.current.pause();
@@ -43,15 +72,29 @@ function useTTS(lang: "en" | "hi") {
         return res.blob();
       })
       .then((blob) => {
-        if (myId !== requestIdRef.current) return; // superseded by a newer message
+        if (myId !== requestIdRef.current) {
+          setTtsLoading(false);
+          return;
+        }
         const url = URL.createObjectURL(blob);
         const audio = new Audio(url);
         audioRef.current = audio;
+        // Reveal text and start audio at the same moment
+        setTtsLoading(false);
+        if (pendingRevealRef.current) {
+          pendingRevealRef.current();
+          pendingRevealRef.current = null;
+        }
         audio.play().catch(() => {});
         audio.onended = () => URL.revokeObjectURL(url);
       })
       .catch(() => {
-        // Fallback to browser's built-in speech synthesis if Cartesia TTS is unavailable
+        // TTS failed — reveal immediately, fallback to browser speech
+        setTtsLoading(false);
+        if (pendingRevealRef.current) {
+          pendingRevealRef.current();
+          pendingRevealRef.current = null;
+        }
         if (myId !== requestIdRef.current || !window.speechSynthesis) return;
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
@@ -62,7 +105,7 @@ function useTTS(lang: "en" | "hi") {
       });
   }, [ttsOn, lang]);
 
-  return { ttsOn, setTtsOn, speak, stop };
+  return { ttsOn, setTtsOn, ttsLoading, speak, stop };
 }
 
 export function ChatWidget() {
@@ -74,7 +117,7 @@ export function ChatWidget() {
   const [tourStep, setTourStep] = useState<number | null>(null);
   const [tourActive, setTourActive] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { ttsOn, setTtsOn, speak, stop } = useTTS(lang);
+  const { ttsOn, setTtsOn, ttsLoading, speak, stop } = useTTS(lang);
   const inputRef = useRef<HTMLInputElement>(null);
   const prevLangRef = useRef(lang);
 
@@ -100,6 +143,7 @@ export function ChatWidget() {
   useEffect(() => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 300);
+      // Greeting is already visible — just play audio (no onReady needed)
       const greeting = messages[0]?.text;
       if (greeting) speak(greeting);
     } else {
@@ -112,9 +156,19 @@ export function ChatWidget() {
     stop();
   }, [lang]);
 
+  /**
+   * addMessage — for bot messages, text is held back until TTS audio is ready.
+   * This syncs text appearance with voice so they start at the same time.
+   */
   function addMessage(msg: Message) {
-    setMessages((prev) => [...prev, msg]);
-    if (msg.from === "bot") speak(msg.text);
+    if (msg.from === "bot") {
+      // Reveal text only when audio is ready (or immediately if TTS off / fails)
+      speak(msg.text, () => {
+        setMessages((prev) => [...prev, msg]);
+      });
+    } else {
+      setMessages((prev) => [...prev, msg]);
+    }
   }
 
   async function sendToAI(userMsg: string) {
@@ -172,12 +226,16 @@ export function ChatWidget() {
     }
     const s = tourSteps[step]!;
     const msg = `📍 Step ${step + 1}/${tourSteps.length}: ${s.label}\n\n${s.speech}`;
-    addMessage({ from: "bot", text: msg });
     const paths = ["/", "/about", "/director-message", "/principal-message", "/academics", "/facilities", "/campus-life", "/board-results", "/school-timings", "/admissions", "/contact"];
     const path = paths[step] ?? "/";
+
+    // Navigate and scroll first
     window.history.pushState({}, "", `${BASE}${path}`);
     window.dispatchEvent(new PopStateEvent("popstate"));
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Then reveal message text in sync with audio
+    addMessage({ from: "bot", text: msg });
   }
 
   function nextTourStep() {
@@ -286,7 +344,8 @@ export function ChatWidget() {
                 </div>
               ))}
 
-              {loading && (
+              {/* Typing indicator — shown while AI is thinking OR while TTS audio is loading */}
+              {(loading || ttsLoading) && (
                 <div className="flex justify-start gap-2">
                   <div className="h-6 w-6 rounded-full bg-[#0F4C81] flex items-center justify-center shrink-0 mt-1">
                     <Bot size={12} className="text-white" />

@@ -38,3 +38,4 @@ channel = "stable-25_05"
 [userenv.shared]
 CARTESIA_VOICE_ID = "791d5162-d5eb-40f0-8189-f19db44611d8"
 BASE_PATH = "/"
+GMAIL_USER = "dtc1752@gmail.com"
