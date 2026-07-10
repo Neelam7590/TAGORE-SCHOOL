@@ -16,7 +16,7 @@ export default function PrincipalMessage() {
       className="flex flex-col pb-24"
     >
       {/* Hero */}
-      <section className="bg-primary py-16 text-white">
+      <section id="principal-hero" className="bg-primary py-16 text-white">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="flex items-center gap-2 text-sm text-blue-200 mb-4">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
@@ -28,7 +28,7 @@ export default function PrincipalMessage() {
       </section>
 
       {/* Content */}
-      <section className="py-20">
+      <section id="principal-content" className="py-20 scroll-mt-20">
         <div className="mx-auto max-w-5xl px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-start">
             

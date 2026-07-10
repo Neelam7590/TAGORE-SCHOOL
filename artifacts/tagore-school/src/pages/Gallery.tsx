@@ -83,7 +83,7 @@ export default function Gallery() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="py-8 bg-gray-50 border-b border-gray-200 sticky top-20 z-30">
+      <section id="gallery-filter" className="py-8 bg-gray-50 border-b border-gray-200 sticky top-20 z-30">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="flex flex-wrap gap-2 md:gap-4 justify-center">
             {categories.map((cat) => (
@@ -104,7 +104,7 @@ export default function Gallery() {
       </section>
 
       {/* Masonry Grid */}
-      <section className="py-12">
+      <section id="gallery-grid" className="py-12 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <motion.div layout className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
             <AnimatePresence>

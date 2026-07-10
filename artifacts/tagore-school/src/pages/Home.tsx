@@ -63,7 +63,7 @@ export default function Home() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col">
 
       {/* S1 — HERO: Royal Blue Gradient */}
-      <section className="relative flex min-h-[85svh] sm:min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-[#0F4C81] px-4 py-16 sm:py-24 text-center md:px-8">
+      <section id="hero" className="relative flex min-h-[85svh] sm:min-h-[90vh] flex-col items-center justify-center overflow-hidden bg-[#0F4C81] px-4 py-16 sm:py-24 text-center md:px-8">
         <div className="absolute inset-0 z-0 bg-[url('/school-building.jpg')] bg-cover bg-center bg-no-repeat" />
         <div className="absolute inset-0 z-0 bg-[#0F4C81]/40" />
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -108,7 +108,7 @@ export default function Home() {
       </section>
 
       {/* S2 — WELCOME: Pure White */}
-      <section className="bg-white pt-24 pb-44" style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
+      <section id="about-intro" className="bg-white pt-24 pb-44 scroll-mt-20" style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -158,7 +158,7 @@ export default function Home() {
       </section>
 
       {/* S3 — PRINCIPAL MESSAGE: Very Light Blue Gradient */}
-      <section className="bg-gradient-to-br from-[#EEF4FF] via-[#F0F6FF] to-[#F5F9FF] pt-24 pb-44" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
+      <section id="principal-preview" className="bg-gradient-to-br from-[#EEF4FF] via-[#F0F6FF] to-[#F5F9FF] pt-24 pb-44 scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
@@ -198,7 +198,7 @@ export default function Home() {
       </section>
 
       {/* S4 — ACADEMIC PROGRAMS: Royal Blue (keep brand identity) */}
-      <section className="overflow-hidden bg-[#0F4C81] pt-24 pb-44 text-white" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
+      <section id="programs-preview" className="overflow-hidden bg-[#0F4C81] pt-24 pb-44 text-white scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-flex items-center gap-2 rounded-full bg-[#FFD700]/20 px-4 py-1.5 text-sm font-medium text-[#FFD700] mb-4">
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* S5 — KINDERGARTEN: Soft Gold Tint */}
-      <section className="relative pt-24 pb-44 overflow-hidden" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)", background: "linear-gradient(135deg, #FFFBEE 0%, #FFF8E1 50%, #FFFDF0 100%)" }}>
+      <section id="kindergarten-preview" className="relative pt-24 pb-44 overflow-hidden scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)", background: "linear-gradient(135deg, #FFFBEE 0%, #FFF8E1 50%, #FFFDF0 100%)" }}>
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#FFD700]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#FFD700]/8 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
@@ -277,7 +277,7 @@ export default function Home() {
       </section>
 
       {/* S6 — WHY CHOOSE US: White with Premium Cards */}
-      <section className="bg-white pt-24 pb-44 overflow-hidden" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
+      <section id="why-choose" className="bg-white pt-24 pb-44 overflow-hidden scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-sm font-medium text-[#0F4C81] mb-4">
@@ -318,7 +318,7 @@ export default function Home() {
       </section>
 
       {/* S7 — FACILITIES PREVIEW: Light Blue Gradient */}
-      <section className="relative pt-24 pb-44 overflow-hidden" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)", background: "linear-gradient(135deg, #EEF4FF 0%, #E8F0FE 50%, #F0F6FF 100%)" }}>
+      <section id="facilities-preview" className="relative pt-24 pb-44 overflow-hidden scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)", background: "linear-gradient(135deg, #EEF4FF 0%, #E8F0FE 50%, #F0F6FF 100%)" }}>
         <div className="absolute top-0 left-0 w-80 h-80 bg-[#0F4C81]/8 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#FFD700]/8 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
@@ -360,7 +360,7 @@ export default function Home() {
       </section>
 
       {/* S8 — GALLERY PREVIEW: Royal Blue */}
-      <section className="relative bg-[#0F4C81] pt-24 pb-44 overflow-hidden" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
+      <section id="gallery-preview" className="relative bg-[#0F4C81] pt-24 pb-44 overflow-hidden scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
         <div className="absolute top-20 left-1/4 w-64 h-64 bg-[#FFD700]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-[#FFD700]/10 rounded-full blur-3xl" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
@@ -402,7 +402,7 @@ export default function Home() {
       </section>
 
       {/* S9 — TESTIMONIALS: White with Glassmorphism */}
-      <section className="relative overflow-hidden bg-white pt-24 pb-44" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
+      <section id="testimonials" className="relative overflow-hidden bg-white pt-24 pb-44 scroll-mt-20" style={{ marginTop: "-80px", clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%)" }}>
         <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-16 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="space-y-4">
@@ -468,7 +468,7 @@ export default function Home() {
       </section>
 
       {/* S11 — CTA: Royal Blue Gradient */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0F4C81] via-[#0F4C81] to-[#0A3A66] pt-24 pb-24 text-center text-white" style={{ marginTop: "-80px" }}>
+      <section id="admission-cta" className="relative overflow-hidden bg-gradient-to-br from-[#0F4C81] via-[#0F4C81] to-[#0A3A66] pt-24 pb-24 text-center text-white scroll-mt-20" style={{ marginTop: "-80px" }}>
         <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#FFD700]/20 blur-3xl" />
         <div className="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-[#FFD700]/20 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-3xl px-4">

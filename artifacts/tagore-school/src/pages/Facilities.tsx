@@ -162,7 +162,7 @@ export default function Facilities() {
       </AnimatePresence>
 
       {/* ─── HERO ─── */}
-      <section className="relative overflow-hidden bg-[#0F4C81] pt-24 pb-28 text-white">
+      <section id="facilities-hero" className="relative overflow-hidden bg-[#0F4C81] pt-24 pb-28 text-white">
         <div className="absolute inset-0">
           <img src="/school-building2.jpg" alt="Facilities" className="h-full w-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0F4C81]/95 via-[#0F4C81]/90 to-[#1a6bb5]/85" />
@@ -228,7 +228,7 @@ export default function Facilities() {
       </section>
 
       {/* ─── PREMIUM LEARNING FACILITIES ─── */}
-      <section className="bg-white py-24 relative overflow-hidden">
+      <section id="facilities-list" className="bg-white py-24 relative overflow-hidden scroll-mt-20">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#0F4C81]/3 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FFD700]/4 rounded-full blur-3xl" />
 

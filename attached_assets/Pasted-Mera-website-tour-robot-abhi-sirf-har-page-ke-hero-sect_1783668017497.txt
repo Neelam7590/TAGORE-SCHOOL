@@ -1,0 +1,107 @@
+Mera website tour robot abhi sirf har page ke hero section ko explain karke 
+ruk ja raha hai. Mujhe chahiye ki wo puri website ke har section, har page, 
+aur har important detail ko cover kare. Is tarah fix karo:
+
+1. Sabse pehle, puri website ka ek complete "Tour Map" banao — har page ke 
+   har section ko list karo (na sirf hero). Jaise example ke liye:
+
+   HOME PAGE:
+   - Hero/Banner section
+   - About School intro (short)
+   - Why Choose Us / Features
+   - Courses/Programs offered
+   - Chairman/Director message
+   - Achievements/Stats (student count, years, results)
+   - Testimonials
+   - Gallery preview
+   - Latest Blog/News
+   - Contact/Admission CTA
+   - Footer (address, social links, contact info)
+
+   ABOUT US PAGE:
+   - School history
+   - Vision & Mission
+   - Infrastructure/facilities
+   - Faculty/Leadership team
+
+   COURSES PAGE:
+   - Har course ka naam, duration, aur short description alag-alag step me
+
+   BRANCHES PAGE:
+   - Har branch ki location aur details
+
+   GALLERY PAGE:
+   - Photos/videos overview
+
+   CONTACT PAGE:
+   - Address, phone, email, map location, enquiry form
+
+   (Mujhe apni actual website ke real sections ke hisaab se ye list update 
+   karni hai — upar sirf example hai)
+
+2. Ab tour steps ka JavaScript/config array is tarah restructure karo ki 
+   HAR SECTION ka apna alag step ho, sirf hero ka ek step nahi. Format:
+
+   const tourSteps = [
+     { page: "/", section: "#hero", text: "Welcome text yahan..." },
+     { page: "/", section: "#features", text: "Yahan hum apni khaasiyat 
+       dikhate hain..." },
+     { page: "/", section: "#courses-preview", text: "Ye rahe hamare 
+       courses..." },
+     { page: "/", section: "#chairman-message", text: "Ab milte hain 
+       Chairman se..." },
+     { page: "/", section: "#achievements", text: "Ye hain hamari 
+       achievements..." },
+     { page: "/", section: "#testimonials", text: "Students kya kehte 
+       hain hamare baare me..." },
+     { page: "/", section: "#gallery-preview", text: "Ye hai hamari 
+       gallery ki jhalak..." },
+     { page: "/", section: "#footer", text: "Yahan se aap humse contact 
+       kar sakte hain..." },
+     { page: "/about", section: "#about-hero", text: "Ye raha About Us 
+       page..." },
+     { page: "/about", section: "#history", text: "Hamari history ye 
+       rahi..." },
+     { page: "/about", section: "#vision-mission", text: "Hamara vision 
+       aur mission..." },
+     { page: "/courses", section: "#course-list", text: "Yahan hain 
+       hamare saare courses detail me..." },
+     { page: "/branches", section: "#branch-list", text: "Ye hain hamari 
+       branches..." },
+     { page: "/gallery", section: "#gallery-grid", text: "Ye hamari 
+       poori gallery hai..." },
+     { page: "/contact", section: "#contact-form", text: "Yahan se aap 
+       admission ke liye enquiry kar sakte hain..." }
+   ];
+
+3. Agar website multi-page hai (alag-alag URLs par pages), to "Next" click 
+   karne par agar agla step doosre page par hai, to robot automatically 
+   us page par navigate (redirect) kare, page load hone ka wait kare, 
+   phir us section tak scroll karke apna text dikhaye. Iske liye 
+   sessionStorage/localStorage me current tour step number save karo taaki 
+   naye page par load hone ke baad tour wahi se continue ho jahan chhoda tha.
+
+4. Har section ko highlight karte waqt (blue border/glow ya spotlight 
+   overlay effect se), scroll smooth ho aur box ka text us specific section 
+   ke real content ke hisaab se accurate aur detailed ho — generic na ho.
+
+5. Progress dikhane ke liye box me ek chota progress indicator bhi add 
+   karo, jaise "Step 3 of 15" ya dots indicator, taaki user ko pata rahe 
+   tour kitna baaki hai.
+
+6. "Next" button ke saath ek "Previous/Back" button bhi add karo taaki 
+   user peeche bhi ja sake agar wo kuch dobara sunna/padhna chahe.
+
+7. Sabse aakhri step ke baad "Next" button "Finish Tour" ban jaye, click 
+   karne par tour band ho jaye aur robot wapas minimized state me chala 
+   jaye.
+
+8. Sabse important: tour steps ka text content ek alag, easily-editable 
+   config file/array me rakho (jaise tourConfig.js), taaki main baad me 
+   sirf naye sections add karke ya text edit karke poora tour update kar 
+   sakoon bina baaki logic/code chhede.
+
+Is puri functionality ko current tour code ke andar hi implement karo, 
+taaki robot ka design, position, aur styling same rahe — bas iski 
+"intelligence" itni badha do ki wo pura website cover kare, sirf hero 
+section pe na ruke.

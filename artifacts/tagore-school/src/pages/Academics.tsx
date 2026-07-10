@@ -144,7 +144,7 @@ export default function Academics() {
       </AnimatePresence>
 
       {/* ─── HERO ─── */}
-      <section className="relative overflow-hidden bg-[#0F4C81] pt-24 pb-28 text-white">
+      <section id="academics-hero" className="relative overflow-hidden bg-[#0F4C81] pt-24 pb-28 text-white">
         <div className="absolute inset-0">
           <img src="/school-building2.jpg" alt="Academics" className="h-full w-full object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#0F4C81] via-[#0F4C81]/95 to-[#1a6bb5]/80" />
