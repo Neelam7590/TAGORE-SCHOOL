@@ -7,7 +7,7 @@
 //   page     — route path, e.g. "/" or "/about"
 //   section  — element ID to scroll to (without #). Omit to scroll to page top.
 //   speech   — robot voice text (English)
-//   speechHi — robot voice text (Hindi)
+//   speechHi — robot voice text (Hinglish)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type TourStep = {
@@ -23,319 +23,319 @@ export const TOUR_STEPS: TourStep[] = [
   // ── HOME PAGE ──────────────────────────────────────────────────────────────
   {
     label: "🏠 Home – Welcome",
-    labelHi: "🏠 होम – स्वागत",
+    labelHi: "🏠 Home – Swagat",
     page: "/",
     section: "hero",
     speech:
       "Welcome to the Official Website of Tagore Global School! This is our home page hero section. You can see the Admissions Open badge for Session 2026-2027, our beautiful school building, and the Apply Now button. Our CBSE Affiliation Number is 531905.",
     speechHi:
-      "Tagore Global School की Official Website पर आपका स्वागत है! यह हमारा Home Page का Hero Section है। यहाँ Session 2026-2027 के Admissions Open badge, school building, और Apply Now button दिख रहे हैं। CBSE Affiliation Number 531905 है।",
+      "Tagore Global School ki official website par aapka swagat hai! Yeh hai hamara home page. Yahan aapko Session 2026-2027 ke liye Admissions Open ka badge, school building, aur Apply Now button dikh raha hai. Hamara CBSE Affiliation Number 531905 hai.",
   },
   {
     label: "🏫 School Overview",
-    labelHi: "🏫 स्कूल का परिचय",
+    labelHi: "🏫 School ka Parichay",
     page: "/",
     section: "about-intro",
     speech:
       "This section gives you a quick introduction to Tagore Global School. We have over 5000 students, more than 150 experienced teachers, and a modern campus. Excellence in academics, sports, and values is our commitment.",
     speechHi:
-      "इस section में Tagore Global School का संक्षिप्त परिचय है। हमारे 5000 से अधिक students, 150 से अधिक अनुभवी teachers, और एक modern campus है। Academics, sports, और मूल्यों में उत्कृष्टता हमारी प्रतिबद्धता है।",
+      "Is section mein school ka ek quick parichay hai. Hamare 5000 se zyada students hain, 150 se zyada experienced teachers hain, aur ek modern campus hai. Academics, sports, aur values — teeno mein hum best dete hain.",
   },
   {
     label: "👩‍🏫 Principal Preview",
-    labelHi: "👩‍🏫 प्रधानाचार्या की झलक",
+    labelHi: "👩‍🏫 Principal ki Jhalak",
     page: "/",
     section: "principal-preview",
     speech:
       "Here is a preview of our Principal's message. Ms. Shalini Malhotra personally leads every student's academic journey. Her motto is that strong academics and strong character go hand in hand.",
     speechHi:
-      "यहाँ हमारी Principal का एक preview है। Ms. Shalini Malhotra हर student की academic journey को personally guide करती हैं। उनका मानना है कि अच्छी academics और अच्छा character साथ-साथ चलते हैं।",
+      "Yahan hamare Principal ka ek preview hai. Ms. Shalini Malhotra personally har student ki academic journey ko guide karti hain. Unka maanna hai ki achhi academics aur achha character saath saath chalte hain.",
   },
   {
     label: "📚 Academic Programs",
-    labelHi: "📚 शैक्षणिक कार्यक्रम",
+    labelHi: "📚 Academic Programs",
     page: "/",
     section: "programs-preview",
     speech:
       "This section shows our complete range of academic programs — from Pre-Nursery and Kindergarten all the way to Class 12. We follow the CBSE curriculum and offer Science, Commerce, and Arts streams in senior secondary.",
     speechHi:
-      "यह section Pre-Nursery और Kindergarten से लेकर Class 12 तक के सभी academic programs दिखाता है। हम CBSE curriculum follow करते हैं और Senior Secondary में Science, Commerce, और Arts streams available हैं।",
+      "Yeh section Pre-Nursery aur Kindergarten se lekar Class 12 tak ke saare academic programs dikhata hai. Hum CBSE curriculum follow karte hain aur Senior Secondary mein Science, Commerce, aur Arts teeno streams available hain.",
   },
   {
     label: "🧒 Kindergarten",
-    labelHi: "🧒 बालवाड़ी",
+    labelHi: "🧒 Kindergarten",
     page: "/",
     section: "kindergarten-preview",
     speech:
       "Tagore Global School has a dedicated Kindergarten wing with a play-based learning environment. Our tiny tots get a nurturing, joyful start to their educational journey in a safe and colourful space.",
     speechHi:
-      "Tagore Global School में एक dedicated Kindergarten wing है जहाँ play-based learning environment है। हमारे छोटे बच्चों को एक सुरक्षित और रंगीन माहौल में शिक्षा की खुशनुमा शुरुआत मिलती है।",
+      "Hamare school mein ek dedicated Kindergarten wing hai jahan play-based learning environment hai. Chhote bacchon ko ek safe aur colorful jagah mein padhai ki khushnauma shuruaat milti hai.",
   },
   {
     label: "⭐ Why Choose TGS",
-    labelHi: "⭐ TGS क्यों चुनें",
+    labelHi: "⭐ TGS Kyun Chunen",
     page: "/",
     section: "why-choose",
     speech:
       "Why choose Tagore Global School? We offer a CBSE curriculum, experienced and caring teachers, state-of-the-art infrastructure, strong extracurricular activities, and a proven record of board exam excellence. Every child's potential is nurtured here.",
     speechHi:
-      "Tagore Global School क्यों चुनें? हम CBSE curriculum, अनुभवी teachers, modern infrastructure, strong extracurricular activities, और excellent board results प्रदान करते हैं। यहाँ हर बच्चे की प्रतिभा को निखारा जाता है।",
+      "TGS kyun chunen? Kyunki yahan CBSE curriculum hai, caring teachers hain, modern infrastructure hai, strong extracurricular activities hain, aur board exams mein hamare results kaafi achhe hain. Har bachche ki talent ko yahan nikhara jaata hai.",
   },
   {
     label: "🏗️ Facilities Preview",
-    labelHi: "🏗️ सुविधाओं की झलक",
+    labelHi: "🏗️ Facilities ki Jhalak",
     page: "/",
     section: "facilities-preview",
     speech:
       "Here is a preview of our world-class facilities — Science labs, computer labs, library, sports complex, art room, and a GPS-tracked school bus fleet. All designed to give your child the best learning environment.",
     speechHi:
-      "यहाँ हमारी world-class facilities की झलक है — Science labs, computer labs, library, sports complex, art room, और GPS-tracked buses। सब कुछ आपके बच्चे को best learning environment देने के लिए है।",
+      "Yahan hamare world-class facilities ki ek jhalak hai — Science labs, computer labs, library, sports complex, art room, aur GPS-tracked school buses. Sab kuch aapke bachche ko best environment dene ke liye hai.",
   },
   {
     label: "🖼️ Gallery Preview",
-    labelHi: "🖼️ गैलरी की झलक",
+    labelHi: "🖼️ Gallery ki Jhalak",
     page: "/",
     section: "gallery-preview",
     speech:
       "This gallery preview shows beautiful moments from school life — sports day, annual functions, science exhibitions, and cultural programs. Our school is a vibrant, joyful community!",
     speechHi:
-      "Gallery preview में school जीवन के खूबसूरत पल हैं — Sports Day, Annual Functions, Science Exhibitions, और cultural programs। हमारा school एक जीवंत और खुशनुमा community है!",
+      "Gallery preview mein school life ke khoobsoorat pal hain — Sports Day, Annual Functions, Science Exhibitions, aur cultural programs. Hamara school ek bahut hi zindadil aur khush community hai!",
   },
   {
     label: "💬 Testimonials",
-    labelHi: "💬 छात्रों के अनुभव",
+    labelHi: "💬 Students ke Anubhav",
     page: "/",
     section: "testimonials",
     speech:
       "Read what our students and parents say! Our alumni have cracked IIT-JEE, NEET, and won national-level competitions. Their words reflect the transformative education Tagore Global School delivers.",
     speechHi:
-      "हमारे students और parents क्या कहते हैं पढ़िए! हमारे alumni ने IIT-JEE, NEET crack किया है और national-level competitions जीते हैं। उनके शब्द TGS की transformative education को दर्शाते हैं।",
+      "Padhen hamare students aur parents kya kehte hain! Hamare alumni ne IIT-JEE, NEET crack kiya hai aur national-level competitions jeete hain. Unke words batate hain ki TGS education kitni kamal ki hai.",
   },
   // ── ABOUT PAGE ─────────────────────────────────────────────────────────────
   {
     label: "📖 About – Overview",
-    labelHi: "📖 हमारे बारे में",
+    labelHi: "📖 Hamare Baare Mein",
     page: "/about",
     section: "about-hero",
     speech:
       "Welcome to the About page! Here you will find a complete introduction to Tagore Global School — our founding story, leadership, mission, and what makes us one of the top CBSE schools in the region.",
     speechHi:
-      "About page पर आपका स्वागत है! यहाँ Tagore Global School का पूरा परिचय मिलेगा — हमारी स्थापना की कहानी, leadership, mission, और क्या हमें इस क्षेत्र के top CBSE schools में से एक बनाती है।",
+      "About page par aapka swagat hai! Yahan Tagore Global School ka poora parichay milega — school ki shuruaat ki kahani, leadership, mission, aur kya cheez humein is area ke top CBSE schools mein shaamil karti hai.",
   },
   {
     label: "🕰️ Our Journey",
-    labelHi: "🕰️ हमारी यात्रा",
+    labelHi: "🕰️ Hamara Safar",
     page: "/about",
     section: "journey",
     speech:
       "The Our Journey section traces the history of Tagore Global School — from its humble beginnings to an institution with over 5000 students. Each milestone reflects our commitment to quality education.",
     speechHi:
-      "Our Journey section में Tagore Global School का इतिहास है — शुरुआत से लेकर 5000 से अधिक students वाली institution बनने का सफर। हर milestone quality education की प्रतिबद्धता को दर्शाता है।",
+      "Our Journey section mein school ka poora safar hai — shuru se lekar 5000 se zyada students wali badi institution banne tak. Har milestone quality education ke liye hamare commitment ko dikhata hai.",
   },
   {
     label: "🎯 Vision & Mission",
-    labelHi: "🎯 दृष्टि और मिशन",
+    labelHi: "🎯 Vision aur Mission",
     page: "/about",
     section: "vision",
     speech:
       "Our Vision is to be a globally recognised institution that nurtures young minds into responsible world citizens. Our Mission is to provide quality, value-based education through innovative teaching and a student-centric approach.",
     speechHi:
-      "हमारा Vision है कि हम एक globally recognised institution बनें जो युवा minds को जिम्मेदार world citizens बनाए। हमारा Mission innovative teaching और student-centric approach के through quality, value-based education provide करना है।",
+      "Hamara Vision hai ek globally recognised institution banana jo young minds ko zimmedaar world citizens banaye. Hamara Mission hai innovative teaching aur student-centric approach se quality, value-based education dena.",
   },
   {
     label: "💎 Core Values",
-    labelHi: "💎 मूल मूल्य",
+    labelHi: "💎 Core Values",
     page: "/about",
     section: "values",
     speech:
       "Our core values — Integrity, Excellence, Compassion, Innovation, and Community — guide every lesson and every decision at Tagore Global School. These values shape students into well-rounded individuals.",
     speechHi:
-      "हमारे core values — Integrity, Excellence, Compassion, Innovation, और Community — हर lesson और हर decision को guide करते हैं। ये values students को well-rounded individuals बनाते हैं।",
+      "Hamare core values hain — Integrity, Excellence, Compassion, Innovation, aur Community. Yeh values har lesson aur har decision mein kaam aate hain. Inhi se students ek well-rounded insaan bante hain.",
   },
   {
     label: "👨‍🏫 Our Faculty",
-    labelHi: "👨‍🏫 हमारे शिक्षकगण",
+    labelHi: "👨‍🏫 Hamare Teachers",
     page: "/about",
     section: "faculty",
     speech:
       "Meet our dedicated faculty! All teachers are highly qualified, with many holding postgraduate degrees. They bring passion, patience, and expertise to every class, ensuring each student reaches their full potential.",
     speechHi:
-      "हमारे dedicated faculty से मिलें! सभी teachers highly qualified हैं, जिनमें से कई postgraduate degree holders हैं। वे हर class में passion, patience, और expertise लाते हैं।",
+      "Miliye hamare dedicated teachers se! Saare teachers highly qualified hain, aur kaafi postgraduate degree holders hain. Wo har class mein passion, patience, aur expertise laate hain taaki har student apni poori capacity tak pahunche.",
   },
   // ── DIRECTOR'S MESSAGE ─────────────────────────────────────────────────────
   {
     label: "👔 Director – Hero",
-    labelHi: "👔 निदेशक – परिचय",
+    labelHi: "👔 Director – Parichay",
     page: "/director-message",
     section: "director-hero",
     speech:
       "This is the Director's Message page. Our Director, Mr. K. L. Watta, personally shares his vision. His motto — Happy Learning — shapes the school's culture from curriculum design to student engagement.",
     speechHi:
-      "यह Director's Message page है। हमारे Director, श्री K. L. Watta, personally अपना vision share करते हैं। उनका motto — Happy Learning — curriculum design से लेकर student engagement तक school की culture shape करता है।",
+      "Yeh hai Director's Message page. Hamare Director, Mr. K. L. Watta, personally apna vision share karte hain. Unka motto hai — Happy Learning — aur yahi motto curriculum se lekar students ki engagement tak school ki poori culture ko shape karta hai.",
   },
   {
     label: "📜 Director's Message",
-    labelHi: "📜 निदेशक का संदेश",
+    labelHi: "📜 Director ka Sandesh",
     page: "/director-message",
     section: "director-content",
     speech:
       "In his message, the Director emphasises that every child is unique and deserves education that respects their individuality. Inspired by legends like Kalpana Chawla, he motivates students to dream big and work hard.",
     speechHi:
-      "Director अपने संदेश में कहते हैं कि हर बच्चा unique है और उसे ऐसी education मिलनी चाहिए जो उसकी individuality का सम्मान करे। Kalpana Chawla जैसे legends से प्रेरित होकर वे students को बड़े सपने देखने के लिए motivate करते हैं।",
+      "Director apne sandesh mein kehte hain ki har bachcha unique hai aur use aise education milni chahiye jo uski individuality ka samman kare. Kalpana Chawla jaise legends se inspired hokar wo students ko bade sapne dekhne aur mehnat karne ke liye motivate karte hain.",
   },
   // ── PRINCIPAL'S MESSAGE ────────────────────────────────────────────────────
   {
     label: "👩‍💼 Principal – Hero",
-    labelHi: "👩‍💼 प्रधानाचार्या – परिचय",
+    labelHi: "👩‍💼 Principal – Parichay",
     page: "/principal-message",
     section: "principal-hero",
     speech:
       "Welcome to the Principal's Message page. Ms. Shalini Malhotra personally leads the school's academic vision. Her dedication is evident in the school's outstanding board results year after year.",
     speechHi:
-      "Principal's Message page पर आपका स्वागत है। Ms. Shalini Malhotra personally school के academic vision का नेतृत्व करती हैं। हर साल के outstanding board results में उनकी dedication दिखती है।",
+      "Principal's Message page par swagat hai. Ms. Shalini Malhotra personally school ke academic vision ka netritva karti hain. Har saal ke outstanding board results mein unki dedication saaf dikhai deti hai.",
   },
   {
     label: "💌 Principal's Message",
-    labelHi: "💌 प्रधानाचार्या का संदेश",
+    labelHi: "💌 Principal ka Sandesh",
     page: "/principal-message",
     section: "principal-content",
     speech:
       "Ms. Malhotra's message emphasises that academics alone do not define a student. Character building, sports, arts, and life skills are equally important. She personally monitors student progress and is always available to parents.",
     speechHi:
-      "Ms. Malhotra का संदेश बताता है कि academics अकेले student को define नहीं करती। Character building, sports, arts, और life skills उतने ही ज़रूरी हैं। वे personally student progress monitor करती हैं।",
+      "Ms. Malhotra ka sandesh batata hai ki sirf academics se student define nahi hota. Character building, sports, arts, aur life skills utne hi zaroori hain. Wo personally student progress monitor karti hain aur parents ke liye hamesha available rehti hain.",
   },
   // ── ACADEMICS ──────────────────────────────────────────────────────────────
   {
     label: "🎓 Academics – Overview",
-    labelHi: "🎓 शिक्षा – परिचय",
+    labelHi: "🎓 Academics – Parichay",
     page: "/academics",
     section: "academics-hero",
     speech:
       "This is the Academics page — the heart of Tagore Global School! Here you will learn about our comprehensive CBSE curriculum, teaching methods, assessment system, and the outstanding results our students achieve every year.",
     speechHi:
-      "यह Academics page है — Tagore Global School का दिल! यहाँ आप हमारे comprehensive CBSE curriculum, teaching methods, assessment system, और students के outstanding results के बारे में जानेंगे।",
+      "Yeh hai Academics page — Tagore Global School ka dil! Yahan aap hamare CBSE curriculum, teaching methods, assessment system, aur har saal students ke outstanding results ke baare mein jaanenge.",
   },
   {
     label: "📋 Curriculum Programs",
-    labelHi: "📋 पाठ्यक्रम",
+    labelHi: "📋 Curriculum Programs",
     page: "/academics",
     section: "programs",
     speech:
       "Our curriculum covers five stages — Early Years from Pre-Nursery to KG, Primary Classes 1 to 5, Middle School Classes 6 to 8, Secondary Classes 9 and 10, and Senior Secondary Classes 11 and 12 with Science, Commerce, and Arts streams.",
     speechHi:
-      "हमारा curriculum पाँच stages cover करता है — Early Years Pre-Nursery से KG, Primary Classes 1 से 5, Middle School Classes 6 से 8, Secondary Classes 9 और 10, और Senior Secondary में Science, Commerce, और Arts streams।",
+      "Hamara curriculum paanch stages cover karta hai — Early Years yaani Pre-Nursery se KG, Primary Classes 1 se 5, Middle School Classes 6 se 8, Secondary Classes 9 aur 10, aur Senior Secondary mein Science, Commerce, aur Arts streams.",
   },
   {
     label: "🔬 Streams & Subjects",
-    labelHi: "🔬 धाराएँ और विषय",
+    labelHi: "🔬 Streams aur Subjects",
     page: "/academics",
     section: "streams",
     speech:
       "In Classes 11 and 12, students choose from three streams. Science includes Physics, Chemistry, Maths, Biology, and Computer Science. Commerce includes Accountancy, Business Studies, and Economics. Arts includes History, Geography, Political Science, and fine arts.",
     speechHi:
-      "Classes 11 और 12 में students तीन streams में से choose करते हैं। Science में Physics, Chemistry, Maths, Biology, और Computer Science। Commerce में Accountancy, Business Studies, और Economics। Arts में History, Geography, और fine arts।",
+      "Classes 11 aur 12 mein students teen streams mein se choose karte hain. Science mein Physics, Chemistry, Maths, Biology, aur Computer Science hai. Commerce mein Accountancy, Business Studies, aur Economics. Aur Arts mein History, Geography, aur fine arts.",
   },
   {
     label: "✏️ Teaching Methodology",
-    labelHi: "✏️ शिक्षण पद्धति",
+    labelHi: "✏️ Padhane ka Tarika",
     page: "/academics",
     section: "methodology",
     speech:
       "Our teaching methodology combines smart classroom technology with hands-on learning — activity-based learning, collaborative projects, flipped classrooms, and regular doubt-clearing sessions to ensure deep understanding for every student.",
     speechHi:
-      "हमारी teaching methodology smart classroom technology को hands-on learning के साथ combine करती है — activity-based learning, collaborative projects, flipped classrooms, और regular doubt sessions।",
+      "Hamari teaching methodology smart classroom technology ko hands-on learning ke saath milati hai — activity-based learning, collaborative projects, flipped classrooms, aur regular doubt-clearing sessions. Isse har student deeply samajh paata hai.",
   },
   {
     label: "🏆 Academic Achievements",
-    labelHi: "🏆 शैक्षणिक उपलब्धियाँ",
+    labelHi: "🏆 Academic Achievements",
     page: "/academics",
     section: "achievements",
     speech:
       "Over 95 percent of students pass board exams with distinction. Multiple students score 100 out of 100 in Mathematics and Science every year. Our IIT-JEE and NEET success rate is among the best in the entire region!",
     speechHi:
-      "95 percent से अधिक students board exams में distinction के साथ pass होते हैं। हर साल multiple students Mathematics और Science में 100 में से 100 score करते हैं। IIT-JEE और NEET success rate region में best है!",
+      "95 percent se zyada students board exams mein distinction ke saath pass hote hain. Har saal kai students Mathematics aur Science mein 100 mein se 100 score karte hain. IIT-JEE aur NEET mein bhi hamara success rate is poore region mein best hai!",
   },
   // ── FACILITIES ─────────────────────────────────────────────────────────────
   {
     label: "🏛️ Facilities – Overview",
-    labelHi: "🏛️ सुविधाएँ – परिचय",
+    labelHi: "🏛️ Facilities – Parichay",
     page: "/facilities",
     section: "facilities-hero",
     speech:
       "Welcome to our Facilities page! Tagore Global School has truly world-class infrastructure. Every facility is designed with the student's learning and safety in mind. Let us take you through each one.",
     speechHi:
-      "Facilities page पर आपका स्वागत है! Tagore Global School में world-class infrastructure है। हर facility student की learning और safety को ध्यान में रखकर design की गई है।",
+      "Facilities page par swagat hai! Tagore Global School mein sachchi world-class infrastructure hai. Har facility student ki learning aur safety ko dhyaan mein rakhkar design ki gayi hai. Chaliye ek ek karke dekhte hain.",
   },
   {
     label: "🔬 Labs & Smart Classes",
-    labelHi: "🔬 लैब्स और स्मार्ट क्लासरूम",
+    labelHi: "🔬 Labs aur Smart Classes",
     page: "/facilities",
     section: "facilities-list",
     speech:
       "Our premium facilities include Physics, Chemistry, and Biology labs, a modern computer lab with high-speed internet, a digital library, a dedicated art and music room, and smart classrooms with interactive boards in every section.",
     speechHi:
-      "हमारी premium facilities में Physics, Chemistry, और Biology labs, high-speed internet वाला computer lab, digital library, dedicated art और music room, और हर section में smart classrooms हैं।",
+      "Hamare premium facilities mein hain — Physics, Chemistry, aur Biology labs, high-speed internet wala computer lab, digital library, dedicated art aur music room, aur har section mein interactive boards wali smart classrooms.",
   },
   {
     label: "🚌 Transport",
-    labelHi: "🚌 परिवहन",
+    labelHi: "🚌 Transport",
     page: "/facilities",
     section: "transport",
     speech:
       "Our transport facility covers all major areas of the city with modern GPS-tracked buses, trained drivers, and lady attendants on every route. Parents can track their child's bus in real-time for complete peace of mind.",
     speechHi:
-      "हमारी transport facility city के सभी major areas cover करती है। GPS-tracked buses, trained drivers, और हर route पर lady attendants हैं। Parents real-time में bus track कर सकते हैं।",
+      "Hamari transport facility city ke saare major areas cover karti hai. GPS-tracked modern buses hain, trained drivers hain, aur har route par lady attendants bhi hain. Parents real-time mein apne bachche ki bus track kar sakte hain — bilkul tension free!",
   },
   {
     label: "🔒 Safety & Security",
-    labelHi: "🔒 सुरक्षा",
+    labelHi: "🔒 Safety aur Security",
     page: "/facilities",
     section: "safety",
     speech:
       "Student safety is our top priority. The entire campus is under 24-hour CCTV surveillance with over 50 cameras, security personnel at all entry and exit points, a visitor management system, and regular safety drills.",
     speechHi:
-      "Student safety हमारी सबसे बड़ी priority है। पूरा campus 50 से अधिक cameras के साथ 24 घंटे CCTV में है, सभी gates पर security personnel, visitor management system, और regular safety drills हैं।",
+      "Student safety hamari sabse badi priority hai. Poora campus 50 se zyada cameras ke saath 24 ghante CCTV mein hai. Saare gates par security personnel hain, visitor management system hai, aur regular safety drills bhi hote hain.",
   },
   // ── GALLERY ────────────────────────────────────────────────────────────────
   {
     label: "📷 Photo Gallery",
-    labelHi: "📷 फोटो गैलरी",
+    labelHi: "📷 Photo Gallery",
     page: "/gallery",
     section: "gallery-grid",
     speech:
       "Welcome to our Photo Gallery! Browse hundreds of photos from campus life, sports events, cultural programs, science exhibitions, and annual functions. Each photo captures the spirit and joy of being a student at Tagore Global School.",
     speechHi:
-      "हमारी Photo Gallery में आपका स्वागत है! Campus life, sports events, cultural programs, science exhibitions, और annual functions की सैकड़ों photos देखें। हर photo TGS के student होने की खुशी को capture करती है।",
+      "Hamari Photo Gallery mein aapka swagat hai! Campus life, sports events, cultural programs, science exhibitions, aur annual functions ki hundreds of photos dekhein. Har photo mein TGS ka student hone ki khushi jhalakti hai.",
   },
   // ── ADMISSIONS ─────────────────────────────────────────────────────────────
   {
     label: "📋 Admissions Open",
-    labelHi: "📋 प्रवेश खुले हैं",
+    labelHi: "📋 Admissions Khule Hain",
     page: "/admissions",
     speech:
       "Great news — Admissions for Session 2026-2027 are now open! The process has 5 simple steps: fill the online form, document verification, entrance assessment for Class 2 onwards, Principal interaction, and fee payment. Apply today!",
     speechHi:
-      "खुशखबरी — Session 2026-2027 के लिए Admissions खुले हैं! Process में 5 simple steps हैं: online form भरें, document verification, Class 2 से ऊपर entrance assessment, Principal interaction, और fee payment।",
+      "Khushkhabri — Session 2026-2027 ke liye Admissions khul gaye hain! Process mein sirf 5 simple steps hain: online form bharein, document verification, Class 2 se upar entrance assessment, Principal se milein, aur fee payment. Aaj hi apply karein!",
   },
   {
     label: "📝 Admission Form",
-    labelHi: "📝 प्रवेश फॉर्म",
+    labelHi: "📝 Admission Form",
     page: "/admissions",
     section: "admission-form-section",
     speech:
       "Here is the Admission Form! Fill in your child's details, parent information, and contact details, then submit online. Our admissions team will contact you within 2 working days. For urgent queries call plus 91 93033 50002.",
     speechHi:
-      "यह है Admission Form! यहाँ बच्चे की details, parent information, और contact details भरें और online submit करें। हमारी admissions team 2 working days में contact करेगी। Urgent queries: +91 93033 50002।",
+      "Yeh hai Admission Form! Yahan bachche ki details, parent information, aur contact details bharein aur online submit karein. Hamari admissions team 2 working days ke andar aapse contact karegi. Urgent query ke liye call karein +91 93033 50002 par.",
   },
   // ── CONTACT ────────────────────────────────────────────────────────────────
   {
     label: "📞 Contact Us",
-    labelHi: "📞 संपर्क करें",
+    labelHi: "📞 Humse Sampark Karein",
     page: "/contact",
     section: "contact-section",
     speech:
       "And finally — the Contact page! Call us at plus 91 93033 50002, email info at tagoreglobalschool dot in, or visit us in person. Office hours are Monday to Saturday, 9 AM to 3 PM. We would love to meet you and your child!",
     speechHi:
-      "और अंत में — Contact page! Phone: +91 93033 50002, Email: info@tagoreglobalschool.in, या personally आएँ। Office Monday से Saturday, सुबह 9 से दोपहर 3 बजे। हम आपसे और आपके बच्चे से मिलकर खुश होंगे!",
+      "Aur aakhir mein — Contact page! Phone karein +91 93033 50002 par, email karein info@tagoreglobalschool.in par, ya personally aakar milein. Office Monday se Saturday, subah 9 se dopahar 3 baje tak khula rehta hai. Hum aapse aur aapke bachche se milke khush honge!",
   },
 ];

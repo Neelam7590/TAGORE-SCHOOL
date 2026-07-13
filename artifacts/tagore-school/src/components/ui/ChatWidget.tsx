@@ -340,7 +340,7 @@ export function ChatWidget() {
       addMessage({
         from: "bot",
         text: lang === "hi"
-          ? "🎉 Website का पूरा Tour हो गया! कोई सवाल हो तो पूछें, या Apply Now दबाकर admission शुरू करें।"
+          ? "🎉 Bas! Poora website tour ho gaya! Koi sawaal ho toh poochhen, ya Apply Now dabake admission shuru karein. Hum aapka intezaar kar rahe hain! 😊"
           : "🎉 Website tour complete! Any questions? Or click Apply Now to begin your admission.",
       });
       return;
@@ -349,7 +349,7 @@ export function ChatWidget() {
     const s = TOUR_STEPS[step]!;
     const speech = lang === "hi" ? s.speechHi : s.speech;
     const label = lang === "hi" ? s.labelHi : s.label;
-    const msg = `📍 Step ${step + 1} of ${TOUR_STEPS.length}: ${label}\n\n${speech}`;
+    const msg = `📍 ${label}\n\n${speech}`;
 
     // Navigate if on a different page
     const targetPath = `${BASE}${s.page === "/" ? "" : s.page}`;
