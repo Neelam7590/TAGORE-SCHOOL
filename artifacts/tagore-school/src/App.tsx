@@ -104,7 +104,7 @@ function AppInner() {
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 pt-[90px] sm:pt-[98px]">
         <Router />
       </main>
       {!admissionSubmitted && <Footer />}

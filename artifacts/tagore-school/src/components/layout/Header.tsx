@@ -435,7 +435,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full flex flex-col bg-white">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full flex flex-col bg-white">
       {/* Top Bar */}
       <div className="bg-[#0F4C81] px-3 sm:px-4 py-1.5 text-xs font-medium text-white md:px-6">
         <div className="flex items-center justify-between gap-2">
