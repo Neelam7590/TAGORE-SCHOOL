@@ -1,0 +1,33 @@
+Mera project ek school website hai jisme frontend (React/Vite) aur backend (Node/Express) dono ek hi Replit project me hain. 
+Mujhe isko is tarah restructure karna hai ki main GitHub par push karke:
+- Backend ko Render par host kar sakoon
+- Frontend ko Vercel par host kar sakoon
+
+Please ye changes karo:
+
+1. Project ko do clear top-level folders me organize karo: 
+   /frontend  → poora React/Vite code
+   /backend   → poora Node/Express (ya jo bhi backend hai) code
+
+2. Backend ke liye:
+   - package.json me proper "start" script ho (e.g. "start": "node server.js" ya jo bhi entry file hai)
+   - PORT environment variable se aana chahiye: process.env.PORT || 5000
+   - Sari secrets (DB URL, JWT secret, API keys etc.) .env file se load ho, hardcoded na ho
+   - .env.example file banao jisme sirf variable names ho, values empty
+   - CORS setup karo jisme frontend ka Vercel URL allow ho (abhi ke liye ek FRONTEND_URL env variable se le lo aur origin me use karo)
+   - render.yaml file banao root of /backend me, jisme build aur start command specify ho
+
+3. Frontend ke liye:
+   - Saare API calls me backend URL ko environment variable se lo (e.g. import.meta.env.VITE_API_URL for Vite), kahin bhi hardcoded localhost ya Replit URL na ho
+   - .env.example file banao frontend me bhi (VITE_API_URL=)
+   - vercel.json banao agar routing/rewrites ki zarurat ho (SPA routing ke liye rewrites add karo taaki refresh karne par 404 na aaye)
+
+4. Replit-specific configs (.replit, replit.nix) ko backend/frontend ke andar mat rakho, unhe root me hi rehne do ya separate rakho taaki Render/Vercel confuse na ho
+
+5. Root me ek README.md banao jisme likha ho:
+   - Backend deploy karne ke steps Render par (build command, start command, env variables kaunsi set karni hain)
+   - Frontend deploy karne ke steps Vercel par (root directory = frontend, env variables kaunsi set karni hain)
+
+6. .gitignore properly set karo taaki node_modules aur .env files GitHub par push na ho
+
+Sab changes karne ke baad mujhe bata dena ki GitHub par push karne se pehle kya kya check karna hai, aur Render + Vercel par exact settings (root directory, build command, start command, env variables) kya dalni hongi.
