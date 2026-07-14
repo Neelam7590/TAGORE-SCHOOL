@@ -393,15 +393,26 @@ router.post("/chat", async (req, res) => {
   res.json({ reply: fallback });
 });
 
-/* ── Text-to-Speech (Cartesia) ────────────────────────────────────────────── */
-const CARTESIA_API_KEY = process.env["CARTESIA_API_KEY"];
+/* ── Text-to-Speech (Cartesia) — Multi-key rotation ──────────────────────── */
 
 // Default voice IDs — sonic-2 supports Hindi natively
-// "Anjali" — warm Indian English/Hinglish female voice
-const DEFAULT_VOICE_EN = "694f9389-aac1-45b6-b726-9d9369183238"; // Sarah (English fallback)
+const DEFAULT_VOICE_EN = "694f9389-aac1-45b6-b726-9d9369183238"; // Sarah (English)
 const DEFAULT_VOICE_HI = "2b568345-1d48-4047-b25f-7baccf842eb0"; // Indian Hindi voice
 
-// Strip markdown/emoji so TTS doesn't read out symbols like "**", "•", "📞"
+/** Returns all configured Cartesia API keys in priority order.
+ *  Keys: CARTESIA_API_KEY, CARTESIA_API_KEY_1 … CARTESIA_API_KEY_6 */
+function getCartesiaKeys(): string[] {
+  const keys: string[] = [];
+  const base = process.env["CARTESIA_API_KEY"];
+  if (base) keys.push(base);
+  for (let i = 1; i <= 6; i++) {
+    const k = process.env[`CARTESIA_API_KEY_${i}`];
+    if (k) keys.push(k);
+  }
+  return keys;
+}
+
+// Strip markdown/emoji so TTS doesn't read symbols like "**", "•", "📞"
 function cleanForSpeech(text: string): string {
   return text
     .replace(/\*\*(.*?)\*\*/g, "$1")
@@ -444,7 +455,9 @@ router.post("/tts", async (req, res) => {
     res.status(400).json({ error: "Text is required." });
     return;
   }
-  if (!CARTESIA_API_KEY) {
+
+  const keys = getCartesiaKeys();
+  if (keys.length === 0) {
     res.status(503).json({ error: "TTS not configured." });
     return;
   }
@@ -454,30 +467,46 @@ router.post("/tts", async (req, res) => {
   const voiceId = process.env["CARTESIA_VOICE_ID"] ?? (isHindi ? DEFAULT_VOICE_HI : DEFAULT_VOICE_EN);
   const lang = isHindi ? "hi" : "en";
 
-  try {
-    let response = await callCartesia(CARTESIA_API_KEY, transcript, voiceId, lang);
+  // Try each key in order; move to next on 402 (out of credits)
+  for (let ki = 0; ki < keys.length; ki++) {
+    const apiKey = keys[ki]!;
+    try {
+      let response = await callCartesia(apiKey, transcript, voiceId, lang);
 
-    // If Hindi voice fails, retry with English voice (Hinglish text is Roman script)
-    if (!response.ok && isHindi) {
-      req.log.error({ status: response.status }, "Hindi voice failed, retrying with English voice");
-      response = await callCartesia(CARTESIA_API_KEY, transcript, DEFAULT_VOICE_EN, "en");
-    }
+      // If Hindi voice failed on this key, retry same key with English voice
+      if (!response.ok && isHindi && response.status !== 402) {
+        req.log.error({ status: response.status, keyIndex: ki }, "Hindi voice failed, retrying with English voice");
+        response = await callCartesia(apiKey, transcript, DEFAULT_VOICE_EN, "en");
+      }
 
-    if (!response.ok) {
-      const errText = await response.text();
-      req.log.error({ status: response.status, errText }, "Cartesia TTS failed");
-      res.status(502).json({ error: "TTS generation failed." });
+      if (response.status === 402) {
+        // Out of credits — try next key
+        req.log.error({ keyIndex: ki }, "Cartesia key out of credits, trying next key");
+        continue;
+      }
+
+      if (!response.ok) {
+        const errText = await response.text();
+        req.log.error({ status: response.status, errText, keyIndex: ki }, "Cartesia TTS failed");
+        res.status(502).json({ error: "TTS generation failed." });
+        return;
+      }
+
+      const audioBuffer = Buffer.from(await response.arrayBuffer());
+      res.setHeader("Content-Type", "audio/mpeg");
+      res.setHeader("Cache-Control", "no-store");
+      res.send(audioBuffer);
       return;
-    }
 
-    const audioBuffer = Buffer.from(await response.arrayBuffer());
-    res.setHeader("Content-Type", "audio/mpeg");
-    res.setHeader("Cache-Control", "no-store");
-    res.send(audioBuffer);
-  } catch (err) {
-    req.log.error({ err }, "Cartesia TTS error");
-    res.status(500).json({ error: "TTS generation failed." });
+    } catch (err) {
+      req.log.error({ err, keyIndex: ki }, "Cartesia TTS error on key, trying next");
+      continue;
+    }
   }
+
+  // All keys exhausted
+  req.log.error("All Cartesia API keys exhausted or out of credits");
+  res.status(502).json({ error: "TTS unavailable — all keys out of credits." });
 });
 
 export default router;
