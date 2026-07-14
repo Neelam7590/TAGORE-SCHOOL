@@ -416,102 +416,8 @@ export function ChatWidget() {
   const isLastStep = tourStep !== null && tourStep === TOUR_STEPS.length - 1;
   const showQuickButtons = messages.length <= 2 && !tourActive;
 
-  // ── Greeting popup state ────────────────────────────────────────────────────
-  const [showGreeting, setShowGreeting] = useState(false);
-  const greetingShownRef = useRef(false);
-
-  useEffect(() => {
-    // Only show greeting if tour is not already being restored from sessionStorage
-    if (sessionStorage.getItem("tgs-tour-active") === "1") return;
-    const t = setTimeout(() => {
-      if (!greetingShownRef.current) {
-        greetingShownRef.current = true;
-        setShowGreeting(true);
-      }
-    }, 1800);
-    return () => clearTimeout(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function handleStartTour() {
-    setShowGreeting(false);
-    setOpen(true);
-    setTimeout(() => startTour(), 300);
-  }
-
-  function handleNoThanks() {
-    setShowGreeting(false);
-  }
-
-  function handleFloatClick() {
-    if (open) {
-      setOpen(false);
-      stop();
-      clearHighlight();
-    } else {
-      setShowGreeting(false);
-      setOpen(true);
-    }
-  }
-
   return (
     <>
-      {/* ── Greeting Popup Overlay ── */}
-      <AnimatePresence>
-        {showGreeting && !open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-4"
-            style={{ background: "rgba(0,0,0,0.45)", backdropFilter: "blur(3px)" }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 60, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 40, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 280, damping: 26 }}
-              className="w-full sm:max-w-[340px] rounded-t-3xl sm:rounded-3xl overflow-hidden flex flex-col"
-              style={{ background: "#f3f4f6" }}
-            >
-              {/* Robot area */}
-              <div className="flex flex-col items-center justify-end pt-6 pb-0 px-4" style={{ background: "#e5e7eb", minHeight: 210 }}>
-                <img
-                  src={robotImg}
-                  alt="Virtual Assistant"
-                  className="object-contain select-none"
-                  style={{ height: 170, width: 170, marginBottom: -8 }}
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                />
-              </div>
-              {/* Card */}
-              <div className="bg-white rounded-t-3xl px-6 pt-5 pb-6 flex flex-col items-center text-center gap-5 shadow-2xl">
-                <p className="text-gray-800 text-base leading-relaxed font-medium">
-                  {lang === "hi"
-                    ? "Tagore Global School mein aapka swagat hai! 🎓 Main aapka virtual assistant hoon. Kya aap chahte hain ki main aapko humari website ka complete tour karwaun?"
-                    : "Welcome to Tagore Global School! 🎓 I'm your virtual assistant. Would you like me to give you a complete tour of our website?"}
-                </p>
-                <div className="flex items-center gap-3 w-full">
-                  <button
-                    onClick={handleStartTour}
-                    className="flex-1 flex items-center justify-center gap-2 bg-[#1a56db] hover:bg-[#1648c8] text-white font-semibold text-sm rounded-full py-3 px-5 transition-all shadow-md hover:shadow-lg"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-                    {lang === "hi" ? "Start Tour" : "Start Tour"}
-                  </button>
-                  <button
-                    onClick={handleNoThanks}
-                    className="flex-1 text-gray-700 font-semibold text-sm rounded-full py-3 px-5 border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all"
-                  >
-                    {lang === "hi" ? "No, thanks" : "No, thanks"}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <AnimatePresence>
         {open && (
           <motion.div
@@ -544,7 +450,7 @@ export function ChatWidget() {
                   title={ttsOn ? "Voice Off" : "Voice On"}>
                   {ttsOn ? <Volume2 size={13} /> : <VolumeX size={13} />}
                 </button>
-                <button onClick={() => { setOpen(false); stop(); clearHighlight(); setShowGreeting(false); }}
+                <button onClick={() => { setOpen(false); stop(); clearHighlight(); }}
                   className="h-7 w-7 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
                   <X size={15} />
                 </button>
@@ -701,7 +607,7 @@ export function ChatWidget() {
         )}
         <motion.button initial={{ scale: 0 }} animate={{ scale: 1 }}
           transition={{ delay: 1.2, type: "spring" }}
-          onClick={handleFloatClick}
+          onClick={() => setOpen(!open)}
           className="relative focus:outline-none hover:scale-110 transition-transform"
           aria-label="Open AI chat">
           <AnimatePresence mode="wait">
