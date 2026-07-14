@@ -395,7 +395,11 @@ router.post("/chat", async (req, res) => {
 
 /* ── Text-to-Speech (Cartesia) ────────────────────────────────────────────── */
 const CARTESIA_API_KEY = process.env["CARTESIA_API_KEY"];
-const CARTESIA_VOICE_ID = process.env["CARTESIA_VOICE_ID"];
+
+// Default voice IDs — sonic-2 supports Hindi natively
+// "Anjali" — warm Indian English/Hinglish female voice
+const DEFAULT_VOICE_EN = "694f9389-aac1-45b6-b726-9d9369183238"; // Sarah (English fallback)
+const DEFAULT_VOICE_HI = "2b568345-1d48-4047-b25f-7baccf842eb0"; // Indian Hindi voice
 
 // Strip markdown/emoji so TTS doesn't read out symbols like "**", "•", "📞"
 function cleanForSpeech(text: string): string {
@@ -410,6 +414,29 @@ function cleanForSpeech(text: string): string {
     .trim();
 }
 
+async function callCartesia(
+  apiKey: string,
+  transcript: string,
+  voiceId: string,
+  lang: string,
+): Promise<Response> {
+  return fetch("https://api.cartesia.ai/tts/bytes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": apiKey,
+      "Cartesia-Version": "2024-06-10",
+    },
+    body: JSON.stringify({
+      model_id: "sonic-2",
+      transcript,
+      voice: { mode: "id", id: voiceId },
+      output_format: { container: "mp3", encoding: "mp3", sample_rate: 44100 },
+      language: lang,
+    }),
+  });
+}
+
 router.post("/tts", async (req, res) => {
   const { text, language } = req.body as { text?: string; language?: string };
 
@@ -417,31 +444,28 @@ router.post("/tts", async (req, res) => {
     res.status(400).json({ error: "Text is required." });
     return;
   }
-  if (!CARTESIA_API_KEY || !CARTESIA_VOICE_ID) {
-    res.status(503).json({ error: "TTS is not configured." });
+  if (!CARTESIA_API_KEY) {
+    res.status(503).json({ error: "TTS not configured." });
     return;
   }
 
+  const isHindi = language === "hi";
+  const transcript = cleanForSpeech(text).slice(0, 1000);
+  const voiceId = process.env["CARTESIA_VOICE_ID"] ?? (isHindi ? DEFAULT_VOICE_HI : DEFAULT_VOICE_EN);
+  const lang = isHindi ? "hi" : "en";
+
   try {
-    const response = await fetch("https://api.cartesia.ai/tts/bytes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": CARTESIA_API_KEY,
-        "Cartesia-Version": "2024-06-10",
-      },
-      body: JSON.stringify({
-        model_id: "sonic-turbo",
-        transcript: cleanForSpeech(text).slice(0, 1000),
-        voice: { mode: "id", id: CARTESIA_VOICE_ID },
-        output_format: { container: "mp3", bit_rate: 128000, sample_rate: 44100 },
-        language: language === "hi" ? "hi" : "en",
-      }),
-    });
+    let response = await callCartesia(CARTESIA_API_KEY, transcript, voiceId, lang);
+
+    // If Hindi voice fails, retry with English voice (Hinglish text is Roman script)
+    if (!response.ok && isHindi) {
+      req.log.error({ status: response.status }, "Hindi voice failed, retrying with English voice");
+      response = await callCartesia(CARTESIA_API_KEY, transcript, DEFAULT_VOICE_EN, "en");
+    }
 
     if (!response.ok) {
       const errText = await response.text();
-      req.log.error({ status: response.status, errText }, "Cartesia TTS request failed");
+      req.log.error({ status: response.status, errText }, "Cartesia TTS failed");
       res.status(502).json({ error: "TTS generation failed." });
       return;
     }
