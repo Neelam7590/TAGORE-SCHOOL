@@ -6,9 +6,9 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { TOUR_STEPS } from "@/config/tourConfig";
+import { API_URL } from "@/lib/apiUrl";
 
 const robotImg = `${import.meta.env.BASE_URL}chatbot-robot.png`;
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 type Message = { from: "bot" | "user"; text: string };
 
@@ -142,7 +142,7 @@ function useTTS(lang: "en" | "hi") {
         }, 1200);
       };
 
-      fetch(`${BASE}/api/tts`, {
+      fetch(`${API_URL}/api/tts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, language: lang }),
@@ -286,7 +286,7 @@ export function ChatWidget() {
         role: m.from === "user" ? "user" : "assistant",
         content: m.text,
       }));
-      const res = await fetch(`${BASE}/api/chat`, {
+      const res = await fetch(`${API_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userMsg, history, language: lang }),

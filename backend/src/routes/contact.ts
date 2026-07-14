@@ -73,11 +73,14 @@ async function sendEmail(subject: string, html: string, log?: PinoLog) {
   }
 }
 
-async function saveToDb(data: Record<string, string | null>) {
+async function saveToDb(data: Record<string, string | null>, log?: PinoLog) {
   const dbUrl = process.env["DATABASE_URL"];
-  if (!dbUrl) return;
+  if (!dbUrl) {
+    log?.error({ reason: "DATABASE_URL not set" }, "saveToDb: skipping — DATABASE_URL is not configured");
+    return;
+  }
   try {
-    const { db, admissionSubmissionsTable } = await import("@workspace/db");
+    const { db, admissionSubmissionsTable } = await import("../db/index.js");
     await db.insert(admissionSubmissionsTable).values({
       studentName: data["studentName"]!,
       dob: data["dob"]!,
@@ -101,8 +104,10 @@ async function saveToDb(data: Record<string, string | null>) {
       medicalConditions: data["medicalConditions"] ?? null,
       howDidYouHear: data["howDidYouHear"] ?? null,
     });
-  } catch {
-    // DB not available — skip silently
+    log?.info({ studentName: data["studentName"] }, "saveToDb: admission saved to database");
+  } catch (err) {
+    log?.error({ err }, "saveToDb: failed to save admission to database");
+    throw err;
   }
 }
 
@@ -192,19 +197,25 @@ router.post("/admission-form", async (req, res) => {
   const row = (label: string, value?: string) =>
     value ? `<tr><td style="padding:9px 0;border-bottom:1px solid #f0f0f0;font-weight:bold;color:#0F4C81;width:200px;vertical-align:top">${label}</td><td style="padding:9px 0;border-bottom:1px solid #f0f0f0;color:#333">${value}</td></tr>` : "";
 
-  // Save to DB (no-op if no DATABASE_URL)
-  await saveToDb({
-    studentName: studentName ?? null, dob: dob ?? null, gender: gender ?? null,
-    nationality: nationality ?? null, category: category ?? null, classApplying: classApplying ?? null,
-    previousSchool: previousSchool ?? null, lastClassAttended: lastClassAttended ?? null,
-    lastBoard: lastBoard ?? null, lastPercentage: lastPercentage ?? null,
-    fatherName: fatherName ?? null, motherName: motherName ?? null,
-    fatherOccupation: fatherOccupation ?? null, motherOccupation: motherOccupation ?? null,
-    parentPhone: parentPhone ?? null, alternatePhone: alternatePhone ?? null,
-    email: email ?? null, address: address ?? null,
-    transportRequired: transportRequired ?? null, medicalConditions: medicalConditions ?? null,
-    howDidYouHear: howDidYouHear ?? null,
-  });
+  // Save to DB — logs and throws on failure so callers can surface DB errors
+  try {
+    await saveToDb({
+      studentName: studentName ?? null, dob: dob ?? null, gender: gender ?? null,
+      nationality: nationality ?? null, category: category ?? null, classApplying: classApplying ?? null,
+      previousSchool: previousSchool ?? null, lastClassAttended: lastClassAttended ?? null,
+      lastBoard: lastBoard ?? null, lastPercentage: lastPercentage ?? null,
+      fatherName: fatherName ?? null, motherName: motherName ?? null,
+      fatherOccupation: fatherOccupation ?? null, motherOccupation: motherOccupation ?? null,
+      parentPhone: parentPhone ?? null, alternatePhone: alternatePhone ?? null,
+      email: email ?? null, address: address ?? null,
+      transportRequired: transportRequired ?? null, medicalConditions: medicalConditions ?? null,
+      howDidYouHear: howDidYouHear ?? null,
+    }, req.log);
+  } catch (err) {
+    req.log.error({ err }, "Admission form: database save failed");
+    res.status(500).json({ error: "Failed to save submission. Please try again." });
+    return;
+  }
 
   // Send email (fire-and-forget with logging)
   const emailHtml = `<div style="font-family:Arial,sans-serif;max-width:650px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden">

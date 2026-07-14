@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: tagore-school-api
+    env: node
+    region: singapore
+    plan: free
+    # NODE_ENV is intentionally NOT set during build so devDependencies
+    # (esbuild, TypeScript, esbuild-plugin-pino) are available to the build step.
+    # NODE_ENV=production is set only at runtime via the envVars block below.
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CARTESIA_API_KEY
+        sync: false
+      - key: CARTESIA_VOICE_ID
+        sync: false

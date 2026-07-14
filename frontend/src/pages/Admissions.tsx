@@ -13,8 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { useAdmissionModal } from "@/context/AdmissionModalContext";
 import { useLanguage } from "@/context/LanguageContext";
-
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+import { API_URL } from "@/lib/apiUrl";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -70,7 +69,7 @@ export default function Admissions() {
   async function onSubmit(values: FormValues) {
     setLoading(true);
     try {
-      const res = await fetch(`${BASE}/api/admission-form`, {
+      const res = await fetch(`${API_URL}/api/admission-form`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

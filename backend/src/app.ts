@@ -25,22 +25,16 @@ app.use(
     },
   }),
 );
-const allowedOrigins = process.env["FRONTEND_URL"]
-  ? [process.env["FRONTEND_URL"]]
-  : ["http://localhost:5173", "http://localhost:3000"];
 
+// Allow requests from FRONTEND_URL (set in .env), or all origins if not set
+const frontendUrl = process.env["FRONTEND_URL"];
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.some((o) => origin.startsWith(o))) {
-        callback(null, true);
-      } else {
-        callback(new Error(`CORS: ${origin} not allowed`));
-      }
-    },
+    origin: frontendUrl ? frontendUrl : true,
     credentials: true,
   }),
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
