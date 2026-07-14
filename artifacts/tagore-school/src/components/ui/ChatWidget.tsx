@@ -449,7 +449,8 @@ export function ChatWidget() {
       stop();
       clearHighlight();
     } else {
-      setShowGreeting(true);
+      setShowGreeting(false);
+      setOpen(true);
     }
   }
 
