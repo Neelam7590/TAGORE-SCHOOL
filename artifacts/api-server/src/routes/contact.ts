@@ -49,7 +49,13 @@ function createTransport() {
   const user = process.env["GMAIL_USER"];
   const pass = process.env["GMAIL_APP_PASSWORD"];
   if (!user || !pass) return null;
-  return nodemailer.createTransport({ service: "gmail", auth: { user, pass } });
+  return nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: { user, pass },
+    family: 4, // Force IPv4 — fixes ENETUNREACH on Render (IPv6 not reachable)
+  });
 }
 
 async function sendEmail(subject: string, html: string, log?: PinoLog) {
