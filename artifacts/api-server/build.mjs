@@ -100,6 +100,9 @@ async function buildAll() {
       "puppeteer",
       "puppeteer-core",
       "electron",
+      "react",
+      "react/jsx-runtime",
+      "react-dom/server",
     ],
     sourcemap: "linked",
     plugins: [
