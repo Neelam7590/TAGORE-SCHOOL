@@ -1,6 +1,9 @@
 import { Router } from "express";
 import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import OpenAI from "openai";
+
+const resend = new Resend(process.env["RESEND_API_KEY"]);
 
 const router = Router();
 
@@ -261,12 +264,16 @@ router.post("/admission-form", async (req, res) => {
     </div>
   </div>`;
 
-  sendEmail(
-    `[Admission Form] ${studentName} – ${classApplying} (2026-2027)`,
-    emailHtml,
-    req.log,
-  ).catch((err: unknown) => {
-    req.log.error({ err }, "Admission form email failed — check Gmail credentials/App Password");
+  // Send admission form email via Resend (avoids Gmail SMTP ETIMEDOUT on Render)
+  resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: process.env["GMAIL_USER"] ?? "",
+    subject: `[Admission Form] ${studentName} – ${classApplying} (2026-2027)`,
+    html: emailHtml,
+  }).then((result) => {
+    req.log.info({ id: result.data?.id }, "Admission form email sent via Resend");
+  }).catch((err: unknown) => {
+    req.log.error({ err }, "Admission form email failed via Resend");
   });
 
   // AI-generated acknowledgement
