@@ -8,6 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { TOUR_STEPS } from "@/config/tourConfig";
 import { API_URL } from "@/lib/apiUrl";
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 const robotImg = `${import.meta.env.BASE_URL}chatbot-robot.png`;
 
 type Message = { from: "bot" | "user"; text: string };

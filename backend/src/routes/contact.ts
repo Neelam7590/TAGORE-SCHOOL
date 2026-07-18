@@ -3,7 +3,12 @@ import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import OpenAI from "openai";
 
-const resend = new Resend(process.env["RESEND_API_KEY"]);
+// Lazy — only instantiated when a key is present, so missing key doesn't crash startup
+function getResend(): Resend | null {
+  const key = process.env["RESEND_API_KEY"];
+  if (!key) return null;
+  return new Resend(key);
+}
 
 const router = Router();
 
@@ -276,16 +281,21 @@ router.post("/admission-form", async (req, res) => {
   </div>`;
 
   // Send admission form email via Resend (avoids Gmail SMTP ETIMEDOUT on Render)
-  resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: process.env["GMAIL_USER"] ?? "",
-    subject: `[Admission Form] ${studentName} – ${classApplying} (2026-2027)`,
-    html: emailHtml,
-  }).then((result) => {
-    req.log.info({ id: result.data?.id }, "Admission form email sent via Resend");
-  }).catch((err: unknown) => {
-    req.log.error({ err }, "Admission form email failed via Resend");
-  });
+  const resendClient = getResend();
+  if (resendClient) {
+    resendClient.emails.send({
+      from: "onboarding@resend.dev",
+      to: process.env["GMAIL_USER"] ?? "",
+      subject: `[Admission Form] ${studentName} – ${classApplying} (2026-2027)`,
+      html: emailHtml,
+    }).then((result) => {
+      req.log.info({ id: result.data?.id }, "Admission form email sent via Resend");
+    }).catch((err: unknown) => {
+      req.log.error({ err }, "Admission form email failed via Resend");
+    });
+  } else {
+    req.log.error({ reason: "RESEND_API_KEY not set" }, "Admission form email skipped — Resend not configured");
+  }
 
   // AI-generated acknowledgement
   let aiMessage = `Dear ${fatherName}, thank you for applying to Tagore Global School for ${studentName} (${classApplying}). Our admissions team will contact you within 2 working days at ${parentPhone}.`;
